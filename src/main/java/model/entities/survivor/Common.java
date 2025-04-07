@@ -1,7 +1,11 @@
 package model.entities.survivor;
 
+import javax.swing.text.Utilities;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
+import model.entities.PairUtils;
 
 public class Common implements Survivor{
 
@@ -9,7 +13,6 @@ public class Common implements Survivor{
     private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
-
 
     public Common(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel) {
         this.live = live;
@@ -36,13 +39,17 @@ public class Common implements Survivor{
 
     @Override
     public void updateState(int dt) {
+        this.pos = PairUtils.sum(this.pos,nextPos(dt));
+    }
+
+    private Pair<Double,Double> nextPos(final int dt){
+        return PairUtils.mul(this.vel,dt);
     }
 
     @Override
     public Pair<Double, Double> getCurrentPos() {
         return this.pos;
     }
-
 
     @Override
     public Pair<Double, Double> getCurrentVel() {
@@ -63,7 +70,6 @@ public class Common implements Survivor{
         return result;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -79,7 +85,4 @@ public class Common implements Survivor{
             return false;
         return true;
     }
-
- 
-    
 }
