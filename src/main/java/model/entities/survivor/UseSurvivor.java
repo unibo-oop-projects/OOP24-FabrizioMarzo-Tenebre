@@ -5,9 +5,10 @@ import org.apache.commons.lang3.tuple.Pair;
 public class UseSurvivor {
 
     public static void main(String[] args) {
-        Survivor su1 = new Common(Pair.of(0.0,0.0), Pair.of(0.0,0.0), 2000, 10);
+        SurvivorFactory suFac = new SurvivorFactory();
+        Survivor su1 = suFac.createCommon(1000, 30, Pair.of(0.0,0.0), Pair.of(0.0,0.0));
         System.out.println(su1.getLive());
-        su1.damage(100);
+        su1.damageSuffer(100);
         System.out.println(su1.getLive());
         System.out.println(su1.getCurrentPos());
     }

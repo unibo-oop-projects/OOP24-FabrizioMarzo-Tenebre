@@ -11,7 +11,7 @@ public class Common implements Survivor{
     private Pair<Double,Double> vel;
 
 
-    public Common(final Pair<Double,Double> pos, final Pair<Double,Double> vel, final int live,final int attack) {
+    public Common(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel) {
         this.live = live;
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
@@ -19,17 +19,17 @@ public class Common implements Survivor{
 
     }
 
-
     @Override
     public int attack() {
         return this.attack;
     }
 
     @Override
-    public void damage(final int dm) {
+    public void damageSuffer(final int dm) {
         this.live = this.live-dm;
     }
 
+    @Override
     public int getLive() {
         return this.live;
     }
@@ -48,5 +48,38 @@ public class Common implements Survivor{
     public Pair<Double, Double> getCurrentVel() {
         return this.vel;
     }
+
+    @Override
+    public void setVelocity(Pair<Double, Double> vel) {
+        this.vel = vel; 
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + live;
+        result = prime * result + attack;
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Common other = (Common) obj;
+        if (live != other.live)
+            return false;
+        if (attack != other.attack)
+            return false;
+        return true;
+    }
+
+ 
     
 }
