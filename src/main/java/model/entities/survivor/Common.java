@@ -36,7 +36,7 @@ public class Common implements Survivor{
     }
 
     @Override
-    public void updateState(int dt) {
+    public void updateState(final int dt) {
         this.pos = PairUtils.sum(this.getCurrentPos(),nextPos(dt));
     }
 
@@ -55,7 +55,7 @@ public class Common implements Survivor{
     }
 
     @Override
-    public void setVelocity(Pair<Double, Double> vel) {
+    public void setVelocity(final Pair<Double, Double> vel) {
         this.vel = vel; 
     }
 
