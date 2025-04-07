@@ -1,7 +1,5 @@
 package model.entities.survivor;
 
-import javax.swing.text.Utilities;
-
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -39,7 +37,7 @@ public class Common implements Survivor{
 
     @Override
     public void updateState(int dt) {
-        this.pos = PairUtils.sum(this.pos,nextPos(dt));
+        this.pos = PairUtils.sum(this.getCurrentPos(),nextPos(dt));
     }
 
     private Pair<Double,Double> nextPos(final int dt){
