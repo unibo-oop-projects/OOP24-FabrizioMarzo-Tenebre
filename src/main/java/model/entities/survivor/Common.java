@@ -37,7 +37,7 @@ public class Common implements Survivor{
 
     @Override
     public void updateState(final int dt) {
-        this.pos = PairUtils.sum(this.getCurrentPos(),nextPos(dt));
+        this.pos = PairUtils.sum(getCurrentPos(),nextPos(dt));
     }
 
     private Pair<Double,Double> nextPos(final int dt){
