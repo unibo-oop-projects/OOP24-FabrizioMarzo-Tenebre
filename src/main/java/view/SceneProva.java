@@ -13,9 +13,8 @@ public class SceneProva {
         frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(false);
-        panel = new SceneProvaPanel();
+        panel = new SceneProvaPanel(w,h);
         frame.getContentPane().add(panel);
-
         frame.pack();
         frame.setVisible(true);
     }
