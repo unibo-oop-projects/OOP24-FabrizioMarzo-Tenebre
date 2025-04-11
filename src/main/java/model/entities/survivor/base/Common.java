@@ -1,4 +1,4 @@
-package model.entities.survivor;
+package model.entities.survivor.base;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;

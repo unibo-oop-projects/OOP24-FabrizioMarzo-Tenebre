@@ -2,6 +2,8 @@ package model.entities.survivor;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.entities.survivor.base.Survivor;
+
 public class UseSurvivor {
 
     public static void main(String[] args) {

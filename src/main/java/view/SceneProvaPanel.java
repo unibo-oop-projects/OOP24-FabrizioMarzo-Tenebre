@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
+import model.entities.survivor.base.Survivor;
 
 public class SceneProvaPanel extends JPanel {
     private int centerX;
@@ -34,6 +34,7 @@ public class SceneProvaPanel extends JPanel {
         int x = (int) Math.round(su1.getCurrentPos().getLeft());
         int y = (int) Math.round(su1.getCurrentPos().getRight());
 
+        // I want this on a Method named draw on SurvivorGame class
         g2d.setColor(Color.BLUE);
         g2d.setStroke(base);
         g2d.drawOval(x,y, 40, 40);
