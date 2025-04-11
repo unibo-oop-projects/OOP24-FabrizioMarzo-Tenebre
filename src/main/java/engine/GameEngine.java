@@ -1,6 +1,6 @@
 package engine;
 
-import view.SceneProva;
+import view.scene.SceneProva;
 
 public class GameEngine {
     private long period = 20;

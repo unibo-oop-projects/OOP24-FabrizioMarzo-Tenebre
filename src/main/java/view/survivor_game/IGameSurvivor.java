@@ -1,4 +1,4 @@
-package view;
+package view.survivor_game;
 
 import java.awt.Graphics2D;
 

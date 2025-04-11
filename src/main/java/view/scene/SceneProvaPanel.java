@@ -1,17 +1,15 @@
-package view;
+package view.scene;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 
 import javax.swing.JPanel;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities.survivor.SurvivorFactory;
-import model.entities.survivor.base.Survivor;
+import view.FactorySurvivorGame;
+import view.survivor_game.IGameSurvivor;
+
 
 public class SceneProvaPanel extends JPanel {
     private int centerX;

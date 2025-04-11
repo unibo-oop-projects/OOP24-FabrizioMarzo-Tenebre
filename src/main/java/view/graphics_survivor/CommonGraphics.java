@@ -1,11 +1,11 @@
-package view;
+package view.graphics_survivor;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
-public class ImgCommon implements ImgSurvivor {
+public class CommonGraphics implements GraphicsSurvivor {
 
     @Override
     public void drawSurvivor(Graphics2D g2d) {

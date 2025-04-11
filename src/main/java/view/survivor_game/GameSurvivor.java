@@ -1,14 +1,15 @@
-package view;
+package view.survivor_game;
 
 import java.awt.Graphics2D;
 
 import model.entities.survivor.base.Survivor;
+import view.graphics_survivor.GraphicsSurvivor;
 
 public class GameSurvivor implements IGameSurvivor{
     private Survivor sur;
-    private ImgSurvivor imgSur;
+    private GraphicsSurvivor imgSur;
 
-    public GameSurvivor(final Survivor sur,final ImgSurvivor imgS ){
+    public GameSurvivor(final Survivor sur,final GraphicsSurvivor imgS ){
         this.sur = sur;
         this.imgSur = imgS;
     }
