@@ -6,12 +6,9 @@ public class GameEngine {
     private long period = 20;
     private SceneProva view ;
 
-
     public void setup(){
         view = new SceneProva(600, 600);
     }
-
-
 
     public void mainLoop(){
         long lastTime = System.currentTimeMillis();
@@ -42,13 +39,11 @@ public class GameEngine {
     }
 
     protected void updateGame(final int elapsed){
-        System.out.println("Tempo passato "+elapsed);
+        System.out.println("Time Passed "+elapsed);
     }
 
     protected void render(){
         view.render();
     }
-
-
 
 }
