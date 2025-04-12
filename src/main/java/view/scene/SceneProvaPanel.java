@@ -39,6 +39,8 @@ public class SceneProvaPanel extends JPanel {
         //g2d.setColor(Color.BLUE);
         //g2d.setStroke(base);
         //g2d.drawOval(x,y, 40, 40);
+        //gamSur.getSurvivor().getClass();
+        System.out.println("Sto per disegnare un: "+gamSur.getSurvivor().getClass());
         gamSur.updateGraphics(g2d);
     }
 }
