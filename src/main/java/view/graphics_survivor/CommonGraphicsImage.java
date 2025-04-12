@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 
 public class CommonGraphicsImage implements GraphicsSurvivor {
     private BufferedImage img;
-    //private BufferedImage[] idleAni;
     private List<BufferedImage> idleAni;
     private int aniIndex,aniTick,aniSpeed = 5;
     private int totalFrames;
@@ -21,7 +20,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     }
 
      private void importImg(){
-        InputStream is = getClass().getResourceAsStream("/Idle.png");
+        InputStream is = getClass().getResourceAsStream("/Common.png");
         try {
             img = ImageIO.read(is);
         } catch (Exception e) {
