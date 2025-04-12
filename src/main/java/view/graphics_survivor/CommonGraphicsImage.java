@@ -3,13 +3,17 @@ package view.graphics_survivor;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 public class CommonGraphicsImage implements GraphicsSurvivor {
     private BufferedImage img;
-    private BufferedImage[] idleAni;
-    private int aniIndex,aniTick,aniSpeed = 15;
+    //private BufferedImage[] idleAni;
+    private List<BufferedImage> idleAni;
+    private int aniIndex,aniTick,aniSpeed = 5;
+    private int totalFrames;
 
     public CommonGraphicsImage(){
         importImg();
@@ -33,9 +37,20 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
 
     private void loadAnimations(){
         System.out.println("Carico idle");
-        idleAni = new BufferedImage[8];
-        for(int i=0 ;i < idleAni.length ;i++ ){
-            idleAni[i] = img.getSubimage(i*48,5*64, 48, 64);
+
+        if (img == null) {
+            System.err.println("Error: Image don't loaded correctly!");
+            return;
+        }
+
+        if (img.getWidth() % 48 != 0 || img.getHeight() % 64 != 0) {
+            System.err.println("Attencion: image width and height not compatible with frames of 48px");
+        }
+
+        this.totalFrames = img.getWidth() / 48;
+        idleAni = new ArrayList<>(totalFrames);
+        for(int i=0 ;i < totalFrames ;i++ ){
+            idleAni.add(img.getSubimage(i*48,5*64, 48, 64));
         }
     }
 
@@ -44,7 +59,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
         if(aniTick >= aniSpeed ){
             aniTick=0;
             aniIndex++;
-            if (aniIndex >= idleAni.length){
+            if (aniIndex >= idleAni.size()){
                 aniIndex = 0;
             }
         }
@@ -54,7 +69,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     public void drawSurvivor(Graphics2D g2d) {
 
         updateAnimations();
-        g2d.drawImage(idleAni[aniIndex],0,0,80*5,128*5,null);
+        g2d.drawImage(idleAni.get(aniIndex),0,0,80*5,128*5,null);
         System.out.println("I am painting !!");
     }
     
