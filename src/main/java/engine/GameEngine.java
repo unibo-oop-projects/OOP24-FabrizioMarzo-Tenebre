@@ -7,7 +7,7 @@ public class GameEngine {
     private SceneProva view ;
 
     public void setup(){
-        view = new SceneProva(600, 600);
+        view = new SceneProva(1200, 800);
     }
 
     public void mainLoop(){
