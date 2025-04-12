@@ -1,5 +1,6 @@
 package view.scene;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -12,17 +13,28 @@ import view.survivor_game.IGameSurvivor;
 
 
 public class SceneProvaPanel extends JPanel {
-    private int centerX;
-    private int centerY;
-    
+    //private int centerX;
+    //private int centerY;
+    private int w;
+    private int h;
     // After i want SurvivorGameFactory.....
     //private SurvivorFactory surF = new SurvivorFactory();
     private FactorySurvivorGame facSur = new FactorySurvivorGame();
 
     public SceneProvaPanel(final int w, final int h){
-        setSize(w,h);
-        centerX = w/2;
-        centerY = h/2;
+        //setSize(w,h); //Must to modify 
+        //centerX = w/2;
+        //centerY = h/2;
+        this.w = w;
+        this.h = h;
+        setPanelSize();
+    }
+
+    public void setPanelSize(){
+        Dimension size = new Dimension(w,h);
+        setMinimumSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
     }
 
     public void paintComponent(Graphics g){

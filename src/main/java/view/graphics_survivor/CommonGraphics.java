@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
+
 public class CommonGraphics implements GraphicsSurvivor {
 
     @Override
@@ -15,5 +16,5 @@ public class CommonGraphics implements GraphicsSurvivor {
         g2d.drawOval(100,100, 40, 40);
         System.out.println("I am painting !!");
     }
-    
+
 }
