@@ -29,7 +29,7 @@ public class GameEngine {
                 try {
                     Thread.sleep(period-dt);
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    e.fillInStackTrace();
                 }
         }
     }
