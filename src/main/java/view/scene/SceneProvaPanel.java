@@ -34,9 +34,7 @@ public class SceneProvaPanel extends JPanel {
 
     public void setPanelSize(){
         Dimension size = new Dimension(w,h);
-        setMinimumSize(size);
         setPreferredSize(size);
-        setMaximumSize(size);
     }
 
     public void paintComponent(Graphics g){
@@ -53,7 +51,7 @@ public class SceneProvaPanel extends JPanel {
         //g2d.setStroke(base);
         //g2d.drawOval(x,y, 40, 40);
         //gamSur.getSurvivor().getClass();
-        System.out.println("Sto per disegnare un: "+gamSur.getSurvivor().getClass());
+        System.out.println("Sto per disegnare un: "+gamSur.getSurvivor().getClass().getSimpleName());
         gamSur.updateGraphics(g2d);
     }
 }

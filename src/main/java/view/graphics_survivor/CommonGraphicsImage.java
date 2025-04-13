@@ -2,11 +2,9 @@ package view.graphics_survivor;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 
 public class CommonGraphicsImage implements GraphicsSurvivor {
     private BufferedImage img;
@@ -14,24 +12,10 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     private int aniIndex,aniTick,aniSpeed = 5;
     private int totalFrames;
 
-    public CommonGraphicsImage(){
-        importImg();
+    public CommonGraphicsImage(final String nameClass){
+        System.err.println("Importo l'immagine");
+        this.img = UtilGraphics.importImg(nameClass);
         loadAnimations();
-    }
-
-     private void importImg(){
-        InputStream is = getClass().getResourceAsStream("/Common.png");
-        try {
-            img = ImageIO.read(is);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            try {
-                is.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void loadAnimations(){
@@ -68,7 +52,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     public void drawSurvivor(Graphics2D g2d) {
 
         updateAnimations();
-        g2d.drawImage(idleAni.get(aniIndex),0,0,80*5,128*5,null);
+        g2d.drawImage(idleAni.get(aniIndex),0,0,80,128,null);
         System.out.println("I am painting !!");
     }
     
