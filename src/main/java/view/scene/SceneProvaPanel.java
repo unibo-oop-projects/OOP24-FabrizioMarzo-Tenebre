@@ -20,13 +20,14 @@ public class SceneProvaPanel extends JPanel {
     // After i want SurvivorGameFactory.....
     //private SurvivorFactory surF = new SurvivorFactory();
     private FactorySurvivorGame facSur = new FactorySurvivorGame();
-    private IGameSurvivor gamSur;
+    private IGameSurvivor gamSur,gamSur2;
 
     public SceneProvaPanel(final int w, final int h){
         //setSize(w,h); //Must to modify 
         //centerX = w/2;
         //centerY = h/2;
-        this.gamSur = facSur.gameSurvivorCommon(1000,20, Pair.of(30.0,40.0),Pair.of(5.0,2.0));
+        this.gamSur = facSur.gameSurvivorCommon(1000,20, Pair.of(390.0,40.0),Pair.of(5.0,2.0));
+        this.gamSur2 = facSur.gameSurvivorCommon(1000,20, Pair.of(0.0,0.0),Pair.of(5.0,2.0));
         this.w = w;
         this.h = h;
         setPanelSize();
@@ -42,16 +43,9 @@ public class SceneProvaPanel extends JPanel {
         
         Graphics2D g2d = (Graphics2D) g ;
 
-        //Stroke base = new BasicStroke(4f);
-        //int x = (int) Math.round(gamSur.getSurvivor().getCurrentPos().getLeft());
-        //int y = (int) Math.round(gamSur.getSurvivor().getCurrentPos().getRight());
-
-        // I want this on a Method named draw on SurvivorGame class
-        //g2d.setColor(Color.BLUE);
-        //g2d.setStroke(base);
-        //g2d.drawOval(x,y, 40, 40);
-        //gamSur.getSurvivor().getClass();
+        
         System.out.println("Sto per disegnare un: "+gamSur.getSurvivor().getClass().getSimpleName());
         gamSur.updateGraphics(g2d);
+        gamSur2.updateGraphics(g2d);
     }
 }

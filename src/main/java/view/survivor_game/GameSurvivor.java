@@ -21,7 +21,7 @@ public class GameSurvivor implements IGameSurvivor{
 
     @Override
     public void updateGraphics(final Graphics2D g2d) {
-        imgSur.drawSurvivor(g2d);
+        imgSur.drawSurvivor(this.getSurvivor(),g2d);
     }
 
 }

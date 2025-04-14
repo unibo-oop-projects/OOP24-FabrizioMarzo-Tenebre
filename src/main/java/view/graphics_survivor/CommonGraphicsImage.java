@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.entities.survivor.base.Survivor;
+
 
 public class CommonGraphicsImage implements GraphicsSurvivor {
     private BufferedImage img;
@@ -34,6 +36,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
         idleAni = new ArrayList<>(totalFrames);
         for(int i=0 ;i < totalFrames ;i++ ){
             idleAni.add(img.getSubimage(i*48,5*64, 48, 64));
+            //idleAni.add(img.getSubimage(i*48,5*64, 48, 64));
         }
     }
 
@@ -49,10 +52,12 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     }
 
     @Override
-    public void drawSurvivor(Graphics2D g2d) {
+    public void drawSurvivor(final Survivor sur,final Graphics2D g2d) {
 
+        int x = sur.getCurrentPos().getLeft().intValue();
+        int y = sur.getCurrentPos().getRight().intValue();
         updateAnimations();
-        g2d.drawImage(idleAni.get(aniIndex),0,0,80,128,null);
+        g2d.drawImage(idleAni.get(aniIndex),x,y,80,128,null);
         System.out.println("I am painting !!");
     }
     

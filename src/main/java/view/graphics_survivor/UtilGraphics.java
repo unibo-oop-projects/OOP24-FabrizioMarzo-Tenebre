@@ -13,6 +13,7 @@ public class UtilGraphics {
     public static BufferedImage importImg(final String nameClass) {
 
         if (cache.containsKey(nameClass)) {
+            System.out.println("Prendo dalla cache, non spreco memoria");
             return cache.get(nameClass);
         }
 
