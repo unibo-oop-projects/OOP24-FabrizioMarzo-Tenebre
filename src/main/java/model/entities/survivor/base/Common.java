@@ -17,7 +17,6 @@ public class Common implements Survivor{
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
         this.vel = new MutablePair<>(vel.getLeft(),vel.getRight());
-
     }
 
     @Override
@@ -42,7 +41,7 @@ public class Common implements Survivor{
     }
 
     private Pair<Double,Double> nextPos(final int dt){
-        return PairUtils.mul(this.vel,dt);
+        return PairUtils.mul(this.vel,0.001*dt);
     }
 
     @Override

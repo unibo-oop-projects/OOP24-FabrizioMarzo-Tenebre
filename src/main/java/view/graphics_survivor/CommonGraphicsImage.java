@@ -11,7 +11,7 @@ import model.entities.survivor.base.Survivor;
 public class CommonGraphicsImage implements GraphicsSurvivor {
     private BufferedImage img;
     private List<BufferedImage> idleAni;
-    private int aniIndex,aniTick,aniSpeed = 5;
+    private int aniIndex,aniTick,aniSpeed = 15;
     private int totalFrames;
 
     public CommonGraphicsImage(final String nameClass){

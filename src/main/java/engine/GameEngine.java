@@ -1,13 +1,16 @@
 package engine;
 
+import model.level.TutoriaLevel;
 import view.scene.SceneProva;
 
 public class GameEngine {
     private long period = 20;
     private SceneProva view ;
+    private TutoriaLevel tutLevel; 
 
     public void setup(){
-        view = new SceneProva(1200, 800);
+        tutLevel = new TutoriaLevel();
+        view = new SceneProva(tutLevel,1200, 800);
     }
 
     public void mainLoop(){
@@ -39,7 +42,8 @@ public class GameEngine {
     }
 
     protected void updateGame(final int elapsed){
-        System.out.println("Time Passed "+elapsed);
+        System.out.println("Tempo passato: "+elapsed);
+        tutLevel.updateState(elapsed);
     }
 
     protected void render(){
