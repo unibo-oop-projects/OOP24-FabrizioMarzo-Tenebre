@@ -5,18 +5,24 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import input.Controller;
 import model.level.Level;
 
-public class SceneProva {
+public class SceneTutorial {
     private JFrame frame;
-    private SceneProvaPanel panel;
+    private SceneTutorialPanel panel;
+    private Controller contrl;
 
-    public SceneProva(final Level tutlevel,final int w, final int h){
+    public SceneTutorial(final Level tutlevel,final int w, final int h,final Controller controller){
+
         frame = new JFrame("L'armata delle Tenebre");
         frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(false);
-        panel = new SceneProvaPanel(tutlevel,w,h);
+
+        this.contrl = controller;
+        panel = new SceneTutorialPanel(tutlevel,w,h,contrl);
+        
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
@@ -30,6 +36,10 @@ public class SceneProva {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setInputController(Controller contrl){
+        this.contrl = contrl;
     }
 
 }
