@@ -3,7 +3,7 @@ package model.entities.survivor.base;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities.PairUtils;
+import model.PairUtils;
 
 public class Common implements Survivor{
 

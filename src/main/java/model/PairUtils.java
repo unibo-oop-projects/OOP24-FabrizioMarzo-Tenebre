@@ -1,4 +1,4 @@
-package model.entities;
+package model;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -15,4 +15,10 @@ public class PairUtils {
         double y = pair.getRight() * value;
         return Pair.of(x, y);
     } 
+
+    public static Double module(final Pair<Double,Double> vel){
+        Double x = vel.getLeft();
+        Double y = vel.getRight();
+        return Math.sqrt(x*x+y*y);
+    }
 }

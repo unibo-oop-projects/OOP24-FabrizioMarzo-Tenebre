@@ -14,7 +14,7 @@ public class TutorialLevel implements Level {
         this.survivorCommon = fact.gameSurvivorCommon(1000,20, Pair.of(390.0,40.0),Pair.of(30.0,0.0));
     }
 
-    public IGameSurvivor getSurvivor(){
+    public IGameSurvivor getSurvivorOnLevel(){
             return this.survivorCommon;
     }
 

@@ -4,7 +4,7 @@ import view.survivor_game.IGameSurvivor;
 
 public interface Level {
 
-    public IGameSurvivor getSurvivor(); 
+    public IGameSurvivor getSurvivorOnLevel(); 
 
     public void updateState(final int dt);
     

@@ -33,7 +33,7 @@ public class SceneProvaPanel extends JPanel {
         
         Graphics2D g2d = (Graphics2D) g ;
 
-        gamSur = tutLevel.getSurvivor();
+        gamSur = tutLevel.getSurvivorOnLevel();
         System.out.println("Sto per disegnare un: "+gamSur.getSurvivor().getClass().getSimpleName());
         gamSur.updateGraphics(g2d);
     }
