@@ -1,25 +1,20 @@
 package engine;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-
-import input.Command;
-import input.Controller;
+import input.input_survivor.InputController;
+import input.input_survivor.KeyboardInputController;
 import model.level.Level;
 import model.level.TutorialLevel;
 import view.scene.SceneTutorial;
 
-public class GameEngine  implements Controller{
+public class GameEngine{
     private long period = 25;
     private SceneTutorial view ;
-    private Level tutLevel; 
-    private BlockingQueue<Command> cmdQueue;
+    private Level tutLevel;
+    private KeyboardInputController contrl = new KeyboardInputController();
 
     public void setup(){
-        cmdQueue = new ArrayBlockingQueue<>(100);
         tutLevel = new TutorialLevel();
-        System.out.println("Creo la scena e dico che io sono il suo Controller");
-        view = new SceneTutorial(tutLevel,1200, 800,this);
+        view = new SceneTutorial(tutLevel,1200, 800, contrl);
     }
 
     public void mainLoop(){
@@ -47,11 +42,7 @@ public class GameEngine  implements Controller{
     }
 
     protected void processInput(){
-        System.out.println("Controllo un comando..");
-        Command cmd = cmdQueue.poll();
-        if (cmd != null){
-            cmd.execute(tutLevel);
-        }
+        tutLevel.getSurvivorOnLevel().updateInput(contrl);
     }
 
     protected void updateGame(final int elapsed){
@@ -60,11 +51,6 @@ public class GameEngine  implements Controller{
 
     protected void render(){
         view.render();
-    }
-
-    @Override
-    public void notifyCommand(Command cmd) {
-        cmdQueue.add(cmd);    
     }
 
 }

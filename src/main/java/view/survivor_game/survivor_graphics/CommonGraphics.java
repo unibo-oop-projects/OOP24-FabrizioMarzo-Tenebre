@@ -13,9 +13,11 @@ public class CommonGraphics implements GraphicsSurvivor {
     @Override
     public void drawSurvivor(final Survivor sur,final Graphics2D g2d) {
         Stroke base = new BasicStroke(4f);
+        int x = sur.getCurrentPos().getLeft().intValue();
+        int y = sur.getCurrentPos().getRight().intValue();
         g2d.setColor(Color.BLUE);
         g2d.setStroke(base);
-        g2d.drawOval(100,100, 40, 40);
+        g2d.drawOval(x,y, 40, 40);
         System.out.println("I am painting !!");
     }
 

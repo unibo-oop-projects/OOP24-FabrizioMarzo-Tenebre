@@ -8,11 +8,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import input.Controller;
-import input.MoveDown;
-import input.MoveLeft;
-import input.MoveRight;
-import input.MoveUp;
+import input.input_survivor.KeyboardInputController;
 import model.level.Level;
 import view.survivor_game.IGameSurvivor;
 
@@ -22,9 +18,9 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
     private int h;
     private IGameSurvivor gamSur;
     private Level tutLevel;
-    private Controller controller;
+    private KeyboardInputController controller;
 
-    public SceneTutorialPanel(final Level tutlevel,final int w, final int h, final Controller c){
+    public SceneTutorialPanel(final Level tutlevel,final int w, final int h, final KeyboardInputController c){
         this.w = w;
         this.h = h;
         this.tutLevel = tutlevel;
@@ -52,21 +48,31 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("Tasto schiacciato..");
-        if(e.getKeyCode() == 38){
-            controller.notifyCommand(new MoveUp());
-        } else if (e.getKeyCode() == 40){
-            controller.notifyCommand(new MoveDown());
-        } else if (e.getKeyCode() == 39){
-            controller.notifyCommand(new MoveRight());
-        } else if (e.getKeyCode() == 37){
-            controller.notifyCommand(new MoveLeft());
-        }
-    }
+	public void keyPressed(KeyEvent e) {
+	    if (e.getKeyCode() == 38){
+	     	controller.notifyMoveUp();
+	    } else if (e.getKeyCode() == 40){
+	     	controller.notifyMoveDown();
+	    } else if (e.getKeyCode() == 39){
+	     	controller.notifyMoveRight();
+	    } else if (e.getKeyCode() == 37){
+	     	controller.notifyMoveLeft();
+	    }
+	}
+
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == 38){
+            controller.notifyNoMoreMoveUp();
+        } else if (e.getKeyCode() == 40){
+            controller.notifyNoMoreMoveDown();
+        } else if (e.getKeyCode() == 39){
+            controller.notifyNoMoreMoveRight();
+        } else if (e.getKeyCode() == 37){
+            controller.notifyNoMoreMoveLeft();
+        }
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {}

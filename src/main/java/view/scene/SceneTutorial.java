@@ -5,24 +5,22 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import input.Controller;
+import input.input_survivor.KeyboardInputController;
 import model.level.Level;
 
 public class SceneTutorial {
     private JFrame frame;
     private SceneTutorialPanel panel;
-    private Controller controller;
 
-    public SceneTutorial(final Level tutlevel,final int w, final int h,final Controller c){
+    public SceneTutorial(final Level tutlevel,final int w, final int h,final KeyboardInputController c){
 
         frame = new JFrame("L'armata delle Tenebre");
         frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(false);
 
-        this.controller = c;
         System.out.println("Sto dicendo al Panel che il controller è il GameEngine");
-        panel = new SceneTutorialPanel(tutlevel,w,h,controller);
+        panel = new SceneTutorialPanel(tutlevel,w,h,c);
         
         frame.getContentPane().add(panel);
         frame.pack();

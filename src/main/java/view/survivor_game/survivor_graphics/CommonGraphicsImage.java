@@ -56,7 +56,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
         int x = sur.getCurrentPos().getLeft().intValue();
         int y = sur.getCurrentPos().getRight().intValue();
         updateAnimations();
-        g2d.drawImage(idleAni.get(aniIndex),x,y,80,128,null);
+        g2d.drawImage(idleAni.get(aniIndex),x,y,80*5,128*5,null);
         System.out.println("I am painting !!");
     }
     
