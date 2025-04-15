@@ -6,10 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import model.level.TutoriaLevel;
-import view.survivor_game.FactorySurvivorGame;
 import view.survivor_game.IGameSurvivor;
 
 
