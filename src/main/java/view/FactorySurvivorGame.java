@@ -4,10 +4,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.base.Survivor;
-// import view.graphics_survivor.CommonGraphics;
-import view.graphics_survivor.CommonGraphicsImage;
 import view.survivor_game.GameSurvivor;
 import view.survivor_game.IGameSurvivor;
+import view.survivor_game.survivor_graphics.CommonGraphicsImage;
 
 public class FactorySurvivorGame {
     private SurvivorFactory sur = new SurvivorFactory();

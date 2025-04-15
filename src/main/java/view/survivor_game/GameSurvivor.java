@@ -3,7 +3,7 @@ package view.survivor_game;
 import java.awt.Graphics2D;
 
 import model.entities.survivor.base.Survivor;
-import view.graphics_survivor.GraphicsSurvivor;
+import view.survivor_game.survivor_graphics.GraphicsSurvivor;
 
 public class GameSurvivor implements IGameSurvivor{
     private Survivor sur;
