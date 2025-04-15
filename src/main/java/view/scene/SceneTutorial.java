@@ -11,17 +11,18 @@ import model.level.Level;
 public class SceneTutorial {
     private JFrame frame;
     private SceneTutorialPanel panel;
-    private Controller contrl;
+    private Controller controller;
 
-    public SceneTutorial(final Level tutlevel,final int w, final int h,final Controller controller){
+    public SceneTutorial(final Level tutlevel,final int w, final int h,final Controller c){
 
         frame = new JFrame("L'armata delle Tenebre");
         frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(false);
 
-        this.contrl = controller;
-        panel = new SceneTutorialPanel(tutlevel,w,h,contrl);
+        this.controller = c;
+        System.out.println("Sto dicendo al Panel che il controller è il GameEngine");
+        panel = new SceneTutorialPanel(tutlevel,w,h,controller);
         
         frame.getContentPane().add(panel);
         frame.pack();
@@ -36,10 +37,6 @@ public class SceneTutorial {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setInputController(Controller contrl){
-        this.contrl = contrl;
     }
 
 }

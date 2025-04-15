@@ -12,7 +12,7 @@ public class MoveDown implements Command {
     public void execute(Level level) {
         Survivor sur = level.getSurvivorOnLevel().getSurvivor();
         double speed = PairUtils.module(sur.getCurrentVel());
-        sur.setVelocity(PairUtils.mul(Pair.of(0.0,-1.0), speed));
+        sur.setVelocity(PairUtils.mul(Pair.of(0.0,1.0), speed));
     }
     
 }
