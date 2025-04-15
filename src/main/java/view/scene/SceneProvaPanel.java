@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import model.level.TutoriaLevel;
+import model.level.Level;
 import view.survivor_game.IGameSurvivor;
 
 
@@ -14,9 +14,9 @@ public class SceneProvaPanel extends JPanel {
     private int w;
     private int h;
     private IGameSurvivor gamSur;
-    private TutoriaLevel tutLevel;
+    private Level tutLevel;
 
-    public SceneProvaPanel(final TutoriaLevel tutlevel,final int w, final int h){
+    public SceneProvaPanel(final Level tutlevel,final int w, final int h){
         this.w = w;
         this.h = h;
         this.tutLevel = tutlevel;

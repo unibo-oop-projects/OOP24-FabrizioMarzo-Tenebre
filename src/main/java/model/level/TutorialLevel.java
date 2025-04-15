@@ -5,12 +5,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import view.survivor_game.FactorySurvivorGame;
 import view.survivor_game.IGameSurvivor;
 
-public class TutoriaLevel {
+public class TutorialLevel implements Level {
     private FactorySurvivorGame fact = new FactorySurvivorGame(); 
     private IGameSurvivor survivorCommon;
 
 
-    public TutoriaLevel(){
+    public TutorialLevel(){
         this.survivorCommon = fact.gameSurvivorCommon(1000,20, Pair.of(390.0,40.0),Pair.of(30.0,0.0));
     }
 

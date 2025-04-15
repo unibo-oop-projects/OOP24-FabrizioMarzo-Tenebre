@@ -1,15 +1,16 @@
 package engine;
 
-import model.level.TutoriaLevel;
+import model.level.Level;
+import model.level.TutorialLevel;
 import view.scene.SceneProva;
 
 public class GameEngine {
     private long period = 20;
     private SceneProva view ;
-    private TutoriaLevel tutLevel; 
+    private Level tutLevel; 
 
     public void setup(){
-        tutLevel = new TutoriaLevel();
+        tutLevel = new TutorialLevel();
         view = new SceneProva(tutLevel,1200, 800);
     }
 
