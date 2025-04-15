@@ -15,7 +15,7 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
     private int totalFrames;
 
     public CommonGraphicsImage(final String nameClass){
-        System.err.println("Importo l'immagine");
+        System.err.println("Import the Image");
         this.img = UtilGraphics.importImg(nameClass);
         loadAnimations();
     }
@@ -36,7 +36,6 @@ public class CommonGraphicsImage implements GraphicsSurvivor {
         idleAni = new ArrayList<>(totalFrames);
         for(int i=0 ;i < totalFrames ;i++ ){
             idleAni.add(img.getSubimage(i*48,5*64, 48, 64));
-            //idleAni.add(img.getSubimage(i*48,5*64, 48, 64));
         }
     }
 

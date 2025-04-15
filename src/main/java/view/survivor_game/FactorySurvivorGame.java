@@ -1,11 +1,9 @@
-package view;
+package view.survivor_game;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.base.Survivor;
-import view.survivor_game.GameSurvivor;
-import view.survivor_game.IGameSurvivor;
 import view.survivor_game.survivor_graphics.CommonGraphicsImage;
 
 public class FactorySurvivorGame {
