@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import input.input_survivor.KeyboardInputController;
+import input.input_controller.KeyboardInputController;
 import model.level.Level;
 import view.survivor_game.IGameSurvivor;
 

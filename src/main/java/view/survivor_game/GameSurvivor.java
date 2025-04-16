@@ -2,7 +2,7 @@ package view.survivor_game;
 
 import java.awt.Graphics2D;
 
-import input.input_survivor.InputController;
+import input.input_controller.InputController;
 import input.input_survivor.InputComponent;
 import model.entities.survivor.base.Survivor;
 import view.survivor_game.survivor_graphics.GraphicsSurvivor;

@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import input.input_survivor.KeyboardInputController;
+import input.input_controller.KeyboardInputController;
 import model.level.Level;
 
 public class SceneTutorial {

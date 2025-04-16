@@ -1,7 +1,7 @@
 package engine;
 
-import input.input_survivor.InputController;
-import input.input_survivor.KeyboardInputController;
+import input.input_controller.InputController;
+import input.input_controller.KeyboardInputController;
 import model.level.Level;
 import model.level.TutorialLevel;
 import view.scene.SceneTutorial;

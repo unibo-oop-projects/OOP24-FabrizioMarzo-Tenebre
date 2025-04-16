@@ -1,4 +1,4 @@
-package input.input_survivor;
+package input.input_controller;
 
 public interface InputController {
     boolean isMoveUp();
