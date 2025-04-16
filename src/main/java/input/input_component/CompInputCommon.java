@@ -7,7 +7,7 @@ import model.entities.survivor.base.Survivor;
 import input.command.CommandSurvivor;
 import input.input_controller.InputController;
 
-public class CompInputCommon implements CompIntputSurvivor{
+public class CompInputCommon implements CompInputSurvivor{
 
     @Override
     public void update(final Survivor sur ,final InputController ctrl) {
