@@ -1,4 +1,4 @@
-package input.input_survivor;
+package input.input_component;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -7,7 +7,7 @@ import model.entities.survivor.base.Survivor;
 import input.command.CommandSurvivor;
 import input.input_controller.InputController;
 
-public class CommonInput implements InputComponent{
+public class CompInputCommon implements CompIntputSurvivor{
 
     @Override
     public void update(final Survivor sur ,final InputController ctrl) {

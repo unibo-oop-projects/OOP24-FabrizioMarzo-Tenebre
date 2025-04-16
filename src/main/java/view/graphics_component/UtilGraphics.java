@@ -1,4 +1,4 @@
-package view.survivor_game.survivor_graphics;
+package view.graphics_component;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;

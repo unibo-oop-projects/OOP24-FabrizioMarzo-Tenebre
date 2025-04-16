@@ -1,6 +1,5 @@
 package engine;
 
-import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
 import model.level.Level;
 import model.level.TutorialLevel;

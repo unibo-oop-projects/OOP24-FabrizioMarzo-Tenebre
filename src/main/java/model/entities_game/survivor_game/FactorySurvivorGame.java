@@ -1,11 +1,11 @@
-package view.survivor_game;
+package model.entities_game.survivor_game;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import input.input_survivor.CommonInput;
+import input.input_component.CompInputCommon;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.base.Survivor;
-import view.survivor_game.survivor_graphics.CommonGraphicsImage;
+import view.graphics_component.CommonGraphicsComponent;
 
 public class FactorySurvivorGame {
     private SurvivorFactory sur = new SurvivorFactory();
@@ -13,7 +13,7 @@ public class FactorySurvivorGame {
     public IGameSurvivor gameSurvivorCommon(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
         Survivor common = sur.createCommon(live, attack, pos, vel);
         return new GameSurvivor(common,
-                     new CommonGraphicsImage(common.getClass().getSimpleName()),
-                     new CommonInput());
+                     new CommonGraphicsComponent(common.getClass().getSimpleName()),
+                     new CompInputCommon());
     }
 }

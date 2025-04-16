@@ -2,8 +2,8 @@ package model.level;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import view.survivor_game.FactorySurvivorGame;
-import view.survivor_game.IGameSurvivor;
+import model.entities_game.survivor_game.FactorySurvivorGame;
+import model.entities_game.survivor_game.IGameSurvivor;
 
 public class TutorialLevel implements Level {
     private FactorySurvivorGame fact = new FactorySurvivorGame(); 

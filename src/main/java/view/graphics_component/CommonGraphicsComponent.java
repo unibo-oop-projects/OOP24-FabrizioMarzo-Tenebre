@@ -1,4 +1,4 @@
-package view.survivor_game.survivor_graphics;
+package view.graphics_component;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,13 +8,13 @@ import java.util.List;
 import model.entities.survivor.base.Survivor;
 
 
-public class CommonGraphicsImage implements GraphicsSurvivor {
+public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
     private BufferedImage img;
     private List<BufferedImage> idleAni;
     private int aniIndex,aniTick,aniSpeed = 15;
     private int totalFrames;
 
-    public CommonGraphicsImage(final String nameClass){
+    public CommonGraphicsComponent(final String nameClass){
         System.err.println("Import the Image");
         this.img = UtilGraphics.importImg(nameClass);
         loadAnimations();

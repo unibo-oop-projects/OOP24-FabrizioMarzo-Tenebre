@@ -1,6 +1,6 @@
 package model.level;
 
-import view.survivor_game.IGameSurvivor;
+import model.entities_game.survivor_game.IGameSurvivor;
 
 public interface Level {
 

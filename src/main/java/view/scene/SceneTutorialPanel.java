@@ -9,8 +9,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 import input.input_controller.KeyboardInputController;
+import model.entities_game.survivor_game.IGameSurvivor;
 import model.level.Level;
-import view.survivor_game.IGameSurvivor;
 
 
 public class SceneTutorialPanel extends JPanel implements KeyListener {
