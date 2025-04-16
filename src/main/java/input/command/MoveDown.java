@@ -9,8 +9,9 @@ public class MoveDown implements Command {
 
     @Override
     public void execute(final Survivor sur) {
-        double speed = PairUtils.module(sur.getCurrentVel());
-        sur.setVelocity(PairUtils.mul(Pair.of(0.0,-1.0), speed));
+        //double speed = PairUtils.module(sur.getCurrentVel());
+        sur.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(sur.getCurrentVel())));
+
     }
     
 }

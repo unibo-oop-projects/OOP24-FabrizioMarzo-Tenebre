@@ -1,7 +1,7 @@
 package input.input_survivor;
 
-import input.command.Command;
+import model.entities.survivor.base.Survivor;
 
 public interface InputComponent {
-    Command update(final InputController c);
+    void update(final Survivor sur,final InputController c);
 }

@@ -3,7 +3,6 @@ package view.survivor_game;
 import java.awt.Graphics2D;
 
 import input.input_survivor.InputController;
-import input.command.Command;
 import input.input_survivor.InputComponent;
 import model.entities.survivor.base.Survivor;
 import view.survivor_game.survivor_graphics.GraphicsSurvivor;
@@ -32,10 +31,7 @@ public class GameSurvivor implements IGameSurvivor{
 
     @Override
     public void updateInput(InputController c) {
-        Command cmd = inpSur.update(c);
-    if (cmd != null) {
-        cmd.execute(this.getSurvivor());
-    }
+        inpSur.update(this.getSurvivor(),c);
     }
 
 }
