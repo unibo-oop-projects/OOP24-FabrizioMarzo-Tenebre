@@ -7,12 +7,15 @@ import model.entities.survivor.SurvivorState;
 public interface Survivor {
     public int attack();
     public void damageSuffer(final int dm);
-    public int getLive();
-
+    
     public void updateState(final int dt);
+    
     public Pair<Double,Double> getCurrentPos();
     public Pair<Double,Double> getCurrentVel();
-    public void setVelocity(final Pair<Double,Double> vel);
+    public Pair<Double,Double> getBaseSurvivorVel();
     public SurvivorState getState();
+    public int getLive();
+
+    public void setVelocity(final Pair<Double,Double> vel);
     public void setState(final SurvivorState newState);
 }

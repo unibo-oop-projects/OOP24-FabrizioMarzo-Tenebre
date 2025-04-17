@@ -14,6 +14,11 @@ public class CompInputCommon implements CompInputSurvivor{
     @Override
     public void update(final Survivor sur ,final InputController ctrl) {
 
+
+        if (sur.getCurrentVel().equals(Pair.of(0d, 0d))){
+            sur.setVelocity(sur.getBaseSurvivorVel());
+        }
+
         if (ctrl.getDirections().equals(Directions.UP)) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));

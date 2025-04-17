@@ -12,6 +12,7 @@ public class Common implements Survivor{
     private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
+    private final Pair<Double,Double> velBase;
     private SurvivorState state;
 
     public Common(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel) {
@@ -19,6 +20,7 @@ public class Common implements Survivor{
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
         this.vel = new MutablePair<>(vel.getLeft(),vel.getRight());
+        this.velBase = vel;
         this.state = SurvivorState.IDLE;
     }
 
@@ -33,11 +35,6 @@ public class Common implements Survivor{
     }
 
     @Override
-    public int getLive() {
-        return this.live;
-    }
-
-    @Override
     public void updateState(final int dt) {
         this.pos = PairUtils.sum(getCurrentPos(),nextPos(dt));
         System.out.println("I am modifing my state");
@@ -45,6 +42,11 @@ public class Common implements Survivor{
 
     private Pair<Double,Double> nextPos(final int dt){
         return PairUtils.mul(this.vel,0.001*dt);
+    }
+
+    @Override
+    public int getLive() {
+        return this.live;
     }
 
     @Override
@@ -58,10 +60,25 @@ public class Common implements Survivor{
     }
 
     @Override
+    public SurvivorState getState() {
+        return this.state;
+    }
+
+    @Override
+    public Pair<Double, Double> getBaseSurvivorVel() {
+        return this.velBase;
+    }
+
+    @Override
     public void setVelocity(final Pair<Double, Double> vel) {
         this.vel = vel; 
     }
 
+    @Override
+    public void setState(final SurvivorState newState) {
+        this.state = newState;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -85,15 +102,5 @@ public class Common implements Survivor{
         if (attack != other.attack)
             return false;
         return true;
-    }
-
-    @Override
-    public SurvivorState getState() {
-        return this.state;
-    }
-
-    @Override
-    public void setState(final SurvivorState newState) {
-        this.state = newState;
     }
 }
