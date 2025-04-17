@@ -21,5 +21,8 @@ public class CompInputCommon implements CompInputSurvivor{
             CommandSurvivor.issue(sur, (s)->s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel()))));
         }
     }
+
+
+    
     }
     
