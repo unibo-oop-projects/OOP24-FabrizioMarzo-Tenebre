@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.PairUtils;
+import model.entities.survivor.SurvivorState;
 
 public class Common implements Survivor{
 
@@ -11,12 +12,14 @@ public class Common implements Survivor{
     private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
+    private SurvivorState state;
 
     public Common(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel) {
         this.live = live;
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
         this.vel = new MutablePair<>(vel.getLeft(),vel.getRight());
+        this.state = SurvivorState.IDLE;
     }
 
     @Override
@@ -82,5 +85,15 @@ public class Common implements Survivor{
         if (attack != other.attack)
             return false;
         return true;
+    }
+
+    @Override
+    public SurvivorState getState() {
+        return this.state;
+    }
+
+    @Override
+    public void setState(final SurvivorState newState) {
+        this.state = newState;
     }
 }

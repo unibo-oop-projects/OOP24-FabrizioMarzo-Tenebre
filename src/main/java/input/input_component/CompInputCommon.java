@@ -3,6 +3,7 @@ package input.input_component;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.PairUtils;
+import model.entities.survivor.SurvivorState;
 import model.entities.survivor.base.Survivor;
 import input.command.CommandSurvivor;
 import input.input_controller.InputController;
@@ -11,14 +12,27 @@ public class CompInputCommon implements CompInputSurvivor{
 
     @Override
     public void update(final Survivor sur ,final InputController ctrl) {
+
         if (ctrl.isMoveUp()) {
-            CommandSurvivor.issue(sur, (s)-> s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel()))));
+            CommandSurvivor.issue(sur, (s)-> {
+                s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
+                s.setState(SurvivorState.MOVE_UP);
+            });
         } else if (ctrl.isMoveDown()) {
-            CommandSurvivor.issue(sur, (s)->s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel()))));
+            CommandSurvivor.issue(sur, (s)-> {
+                s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
+                s.setState(SurvivorState.MOVE_DOWN);
+            });
         } else if (ctrl.isMoveLeft()) {
-            CommandSurvivor.issue(sur, (s)->s.setVelocity(PairUtils.mul(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel()))));
+            CommandSurvivor.issue(sur, (s)-> {
+                s.setVelocity(PairUtils.mul(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel())));
+                s.setState(SurvivorState.MOVE_LEFT);
+            });
         } else if (ctrl.isMoveRight()) {
-            CommandSurvivor.issue(sur, (s)->s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel()))));
+            CommandSurvivor.issue(sur, (s)-> {
+                s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
+                s.setState(SurvivorState.MOVE_RIGHT);
+            });
         }
     }
 

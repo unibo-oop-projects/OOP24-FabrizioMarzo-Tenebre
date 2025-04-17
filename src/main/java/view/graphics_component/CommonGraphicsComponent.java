@@ -50,8 +50,9 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
 
         int surPosX = sur.getCurrentPos().getLeft().intValue();
         int surPosY = sur.getCurrentPos().getRight().intValue();
+        int surState = sur.getState().getIndex();
         updateAnimations();
-        g2d.drawImage(annimations.get(3).get(aniIndex),surPosX,surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
+        g2d.drawImage(annimations.get(surState).get(aniIndex),surPosX,surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
         System.out.println("I am painting !!");
     }
     
