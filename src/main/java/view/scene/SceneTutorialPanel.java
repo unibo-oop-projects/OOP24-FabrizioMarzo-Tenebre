@@ -64,13 +64,13 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == 38){
-            controller.notifyNoMoreMoveUp();
+            controller.notifyNoMoreMove();
         } else if (e.getKeyCode() == 40){
-            controller.notifyNoMoreMoveDown();
+            controller.notifyNoMoreMove();
         } else if (e.getKeyCode() == 39){
-            controller.notifyNoMoreMoveRight();
+            controller.notifyNoMoreMove();
         } else if (e.getKeyCode() == 37){
-            controller.notifyNoMoreMoveLeft();
+            controller.notifyNoMoreMove();
         }
     }
 

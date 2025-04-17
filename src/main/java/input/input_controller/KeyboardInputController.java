@@ -1,61 +1,58 @@
 package input.input_controller;
 
 public class KeyboardInputController implements InputController {    
-	private boolean isMoveUp;
-	private boolean isMoveDown;
-	private boolean isMoveLeft;
-	private boolean isMoveRight;
 	
+	private Directions direction = Directions.NONE;
+
 	@Override
-	public boolean isMoveUp() {
-		return isMoveUp;
+	public void isMoveUp() {
+		this.direction = Directions.UP;
 	}
 
 	@Override
-	public boolean isMoveDown() {
-		return isMoveDown;
+	public void isMoveDown() {
+		this.direction = Directions.DOWN;
 	}
 
 	@Override
-	public boolean isMoveLeft() {
-		return isMoveLeft;
+	public void isMoveLeft() {
+		this.direction = Directions.LEFT;
 	}
 
 	@Override
-	public boolean isMoveRight() {
-		return isMoveRight;
+	public void isMoveRight() {
+		this.direction = Directions.RIGHT;
 	}
 
+	@Override
+	public void isMoveNone() {
+		this.direction = Directions.NONE;
+	}
+
+	@Override
+	public Directions getDirections(){
+		return this.direction;
+	}
+	
 	public void notifyMoveUp() {
-		isMoveUp = true;
+		isMoveUp();
 	}
 
-	public void notifyNoMoreMoveUp() {
-		isMoveUp = false;
-	}
-	
 	public void notifyMoveDown() {
-		isMoveDown = true;
-	}
-
-	public void notifyNoMoreMoveDown() {
-		isMoveDown = false;
+		isMoveDown();
 	}
 	
 	public void notifyMoveLeft() {
-		isMoveLeft = true;
-	}
-
-	public void notifyNoMoreMoveLeft() {
-		isMoveLeft = false;
+		isMoveLeft();
 	}
 
 	public void notifyMoveRight() {
-		isMoveRight = true;
+		isMoveRight();
 	}
 
-	public void notifyNoMoreMoveRight() {
-		isMoveRight = false;
+	public void notifyNoMoreMove() {
+		isMoveNone();
 	}
+	
 
 }
