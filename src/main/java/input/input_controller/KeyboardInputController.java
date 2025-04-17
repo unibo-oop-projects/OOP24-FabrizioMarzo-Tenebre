@@ -4,28 +4,23 @@ public class KeyboardInputController implements InputController {
 	
 	private Directions direction = Directions.NONE;
 
-	@Override
-	public void isMoveUp() {
+	private void isMoveUp() {
 		this.direction = Directions.UP;
 	}
 
-	@Override
-	public void isMoveDown() {
+	private void isMoveDown() {
 		this.direction = Directions.DOWN;
 	}
 
-	@Override
-	public void isMoveLeft() {
+	private void isMoveLeft() {
 		this.direction = Directions.LEFT;
 	}
 
-	@Override
-	public void isMoveRight() {
+	private void isMoveRight() {
 		this.direction = Directions.RIGHT;
 	}
 
-	@Override
-	public void isMoveNone() {
+	private void isMoveNone() {
 		this.direction = Directions.NONE;
 	}
 
@@ -34,25 +29,32 @@ public class KeyboardInputController implements InputController {
 		return this.direction;
 	}
 	
-	public void notifyMoveUp() {
-		isMoveUp();
+	@Override
+	public void notifyMove(final int keyCode){
+		switch (keyCode) {
+			case 37: 
+				isMoveLeft();
+				break;
+			case 38: 
+				isMoveUp();
+				break;
+			case 39: 
+				isMoveRight();
+				break;
+			case 40: 
+				isMoveDown();
+				break;
+			default:
+				isMoveNone(); 
+				break;
+		}
+
 	}
 
-	public void notifyMoveDown() {
-		isMoveDown();
-	}
-	
-	public void notifyMoveLeft() {
-		isMoveLeft();
-	}
-
-	public void notifyMoveRight() {
-		isMoveRight();
-	}
-
-	public void notifyNoMoreMove() {
+	@Override
+	public void notifyNoMove() {
 		isMoveNone();
 	}
-	
+
 
 }

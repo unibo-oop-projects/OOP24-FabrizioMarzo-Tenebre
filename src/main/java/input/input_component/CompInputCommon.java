@@ -34,6 +34,11 @@ public class CompInputCommon implements CompInputSurvivor{
                 s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_RIGHT);
             });
+        } else if (ctrl.getDirections().equals(Directions.NONE)){
+            CommandSurvivor.issue(sur, (s)-> {
+                s.setVelocity(Pair.of(0d,0d));
+                s.setState(SurvivorState.IDLE);
+            });
         }
     }
 

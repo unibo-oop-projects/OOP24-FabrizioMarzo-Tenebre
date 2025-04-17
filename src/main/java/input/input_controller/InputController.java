@@ -1,10 +1,7 @@
 package input.input_controller;
 
 public interface InputController {
-    void isMoveUp();
-    void isMoveDown();
-    void isMoveLeft();
-    void isMoveRight();
-    void isMoveNone();
+    public void notifyMove(final int keyCode);
+    public void notifyNoMove();
     public Directions getDirections();
 }
