@@ -11,8 +11,8 @@ import model.entities.survivor.base.Survivor;
 
 public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
 
-    private static final int WIDTH_IMAGE = 80*5;
-    private static final int HEIGHT_IMAGE = 128*5;
+    private static final int WIDTH_IMAGE = 80;
+    private static final int HEIGHT_IMAGE = 128;
     private static final int WIDTH_FRAME = 48;
     private static final int HEIGHT_FRAME = 64;
 
@@ -22,7 +22,7 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
     private Pair<Integer, Integer> grid;
     private int numGridCol, numGridRow;
     private List<List<BufferedImage>> annimations;
-    private int aniIndex,aniTick,aniSpeed = 15;
+    private int aniIndex,aniTick,aniSpeed = 5;
 
 
     public CommonGraphicsComponent(final String nameClass){
