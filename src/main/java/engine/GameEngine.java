@@ -5,17 +5,36 @@ import model.level.Level;
 import model.level.TutorialLevel;
 import view.scene.SceneTutorial;
 
+/**
+ * Core class responsible for initializing and running the game loop.
+ *
+ * <p>The {@code GameEngine} handles setup, input processing, game updates,
+ * rendering, and timing. It runs a fixed-timestep loop using a specified
+ * period (frame delay).</p>
+ */
 public class GameEngine{
     private long period = 25;
     private SceneTutorial view ;
     private Level tutLevel;
     private KeyboardInputController contrl = new KeyboardInputController();
 
+     /**
+     * Initializes the game level and view.
+     *
+     * <p>This method sets up the tutorial level and initializes the
+     * rendering view with specified screen dimensions and input controller.</p>
+     */
     public void setup(){
         tutLevel = new TutorialLevel();
         view = new SceneTutorial(tutLevel,1200, 800, contrl);
     }
 
+    /**
+     * Starts and runs the main game loop.
+     *
+     * <p>This loop continuously processes input, updates the game state,
+     * renders the view, and manages frame timing to ensure consistent updates.</p>
+     */
     public void mainLoop(){
         long lastTime = System.currentTimeMillis();
         while(true){
@@ -29,6 +48,12 @@ public class GameEngine{
         }
     }
 
+    /**
+     * Ensures a consistent frame rate by sleeping for the remaining time
+     * in the frame, if necessary.
+     *
+     * @param current the timestamp at the beginning of the current frame
+     */
     protected void waitForNextFrame(long current){
         long dt = System.currentTimeMillis() - current;
         if (dt < period){
@@ -40,14 +65,27 @@ public class GameEngine{
         }
     }
 
+    /**
+     * Processes player input for the current frame.
+     *
+     * <p>Delegates input handling to the Survivor object in the current level.</p>
+     */
     protected void processInput(){
         tutLevel.getSurvivorOnLevel().updateInput(contrl);
     }
 
+    /**
+     * Updates the game state based on the time elapsed since the last frame.
+     *
+     * @param elapsed the time elapsed since the previous update (in milliseconds)
+     */
     protected void updateGame(final int elapsed){
         tutLevel.updateState(elapsed);
     }
 
+    /**
+     * Renders the current game state to the screen.
+     */
     protected void render(){
         view.render();
     }
