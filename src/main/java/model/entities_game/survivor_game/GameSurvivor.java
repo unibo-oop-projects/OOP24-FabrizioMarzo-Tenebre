@@ -2,7 +2,7 @@ package model.entities_game.survivor_game;
 
 import java.awt.Graphics2D;
 
-import input.input_component.CompInputSurvivor;
+import input.input_component.ComponentInputSurvivor;
 import input.input_controller.InputController;
 import model.entities.survivor.base.Survivor;
 import view.graphics_component.GraphicsSurvivorComponent;
@@ -16,16 +16,16 @@ public class GameSurvivor implements IGameSurvivor{
 
     private Survivor sur;
     private GraphicsSurvivorComponent imgSur;
-    private CompInputSurvivor inpSur;
+    private ComponentInputSurvivor inpSur;
 
     /**
      * Constructs a {@link GameSurvivor} object with the given survivor, graphics component, and input component.
      *
      * @param sur    the {@link Survivor} object that represents the survivor
      * @param imgS   the {@link GraphicsSurvivorComponent} responsible for rendering the survivor's graphics
-     * @param inpSur the {@link CompInputSurvivor} component that handles input for the survivor
+     * @param inpSur the {@link ComponentInputSurvivor} component that handles input for the survivor
      */
-    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS, final CompInputSurvivor inpSur){
+    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS, final ComponentInputSurvivor inpSur){
         this.sur = sur;
         this.imgSur = imgS;
         this.inpSur = inpSur;
