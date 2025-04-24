@@ -9,8 +9,25 @@ import input.command.CommandSurvivor;
 import input.input_controller.Directions;
 import input.input_controller.InputController;
 
-public class CompInputCommon implements CompInputSurvivor{
+/**
+ * Common implementation of {@link ComponentInputSurvivor} that updates a {@link Survivor}'s
+ * movement and state based on directional input.
+ * 
+ * <p>This component interprets input from an {@link InputController} and applies
+ * corresponding changes to the Survivor's velocity and state using {@link CommandSurvivor}.</p>
+ */
+public class CompInputCommon implements ComponentInputSurvivor{
 
+    /**
+     * Updates the given {@link Survivor} based on directional input provided by the {@link InputController}.
+     *
+     * <p>If the Survivor's current velocity is zero, it resets it to the base velocity.
+     * Then, based on the current direction (UP, DOWN, LEFT, RIGHT, or NONE), it modifies
+     * the Survivor's velocity vector and updates the movement state accordingly.</p>
+     *
+     * @param sur the {@link Survivor} to be updated
+     * @param ctrl the {@link InputController} providing directional input
+     */
     @Override
     public void update(final Survivor sur ,final InputController ctrl) {
 
