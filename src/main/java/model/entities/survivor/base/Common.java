@@ -65,12 +65,6 @@ public class Common implements Survivor{
         System.out.println("I am modifing my state");
     }
 
-    /**
-     * Calculates the position based on velocity and time.
-     *
-     * @param dt time delta in milliseconds
-     * @return a pair (dx, dy) representing the new position
-     */
     private Pair<Double,Double> nextPos(final int dt){
         return PairUtils.mul(this.vel,0.001*dt);
     }

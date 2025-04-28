@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.entities.survivor.SurvivorState;
 
 /**
- * Interface representing a survivor in the game.
+ * Survivor interface representing a survivor in the game.
  * It defines the basic actions and state management for a survivor entity.
  */
 public interface Survivor {
@@ -60,9 +60,9 @@ public interface Survivor {
     public SurvivorState getState();
 
     /**
-     * Returns the number of remaining lives or health points of the survivor.
+     * Returns the number of remaining health of the survivor.
      *
-     * @return The current life/health value
+     * @return The current health value
      */
     public int getLive();
 
