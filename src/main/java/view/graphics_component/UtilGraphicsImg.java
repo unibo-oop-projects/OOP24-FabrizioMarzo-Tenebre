@@ -36,7 +36,7 @@ public class UtilGraphicsImg {
             return cache.get(nameClass);
         }
 
-        try (InputStream is = UtilGraphicsImg.class.getResourceAsStream("/" + nameClass + ".png")) {
+        try (InputStream is = UtilGraphicsImg.class.getResourceAsStream(nameClass + ".png")) {
             if (is == null) {
                 System.err.println("Imagine don't find: " + nameClass + ".png");
                 return null;

@@ -23,7 +23,7 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
 
 
 
-    private BufferedImage img;
+    private BufferedImage img,shadow;
     private Pair<Integer, Integer> grid;
     private int numGridCol, numGridRow;
     private List<List<BufferedImage>> annimations;
@@ -39,11 +39,12 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
      */
     public CommonGraphicsComponent(final String nameClass){
         System.err.println("Import the Image, and set all Animations");
-        this.img = UtilGraphicsImg.importImg(nameClass);
+        this.img = UtilGraphicsImg.importImg("/sprite_sheet/survivor/" + nameClass);
         this.grid = UtilGraphicsImg.numColRow(WIDTH_FRAME, HEIGHT_FRAME, img);
         this.numGridCol = grid.getLeft();
         this.numGridRow = grid.getRight();
         this.annimations = UtilGraphicsImg.loadAllAnimations(numGridCol, numGridRow, WIDTH_FRAME, HEIGHT_FRAME, img);
+        this.shadow = UtilGraphicsImg.importImg("/sprite_sheet/Shadow");
     }
 
     /**
@@ -75,6 +76,7 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
         int surPosY = sur.getCurrentPos().getRight().intValue();
         int surState = sur.getState().getIndex();
         updateAnimations();
+        g2d.drawImage(shadow, surPosX, surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
         g2d.drawImage(annimations.get(surState).get(aniIndex),surPosX,surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
         System.out.println("I am painting !!");
     }
