@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 import input.input_controller.KeyboardInputController;
+
 import model.entities_game.survivor_game.IGameSurvivor;
 import model.level.Level;
 
@@ -20,10 +21,13 @@ import model.level.Level;
  * movement direction of the survivor.</p>
  */
 public class SceneTutorialPanel extends JPanel implements KeyListener {
-    private int w;
-    private int h;
+    /** w, h are te weight and height of the panel on jframe */
+    private int w,h;
+    /** gamsur is the {@link IGameSurvivor} on the Scene */
     private IGameSurvivor gamSur;
+    /** tutLevel is the {@link Level} that this Scene representing */
     private Level tutLevel;
+    /** controller is the {@link KeyboardInputController} associated with the Scene */
     private KeyboardInputController controller;
 
     /**
