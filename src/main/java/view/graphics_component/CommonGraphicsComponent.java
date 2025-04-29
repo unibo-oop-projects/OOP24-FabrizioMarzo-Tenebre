@@ -4,9 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import model.entities.survivor.base.Survivor;
+import view.graphics_util.GraphicsEntities;
 
 /**
  * Graphical component for rendering a common type of {@link Survivor}.
@@ -21,11 +20,8 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
     private static final int WIDTH_FRAME = 48;
     private static final int HEIGHT_FRAME = 64;
 
-
-
-    private BufferedImage img,shadow;
-    private Pair<Integer, Integer> grid;
-    private int numGridCol, numGridRow;
+    private GraphicsEntities graphEnti = new GraphicsEntities();
+    private BufferedImage shadow;
     private List<List<BufferedImage>> annimations;
     private int aniIndex,aniTick,aniSpeed = 5;
 
@@ -39,28 +35,26 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
      */
     public CommonGraphicsComponent(final String nameClass){
         System.err.println("Import the Image, and set all Animations");
-        this.img = UtilGraphicsImg.importImg("/sprite_sheet/survivor/" + nameClass);
-        this.grid = UtilGraphicsImg.numColRow(WIDTH_FRAME, HEIGHT_FRAME, img);
-        this.numGridCol = grid.getLeft();
-        this.numGridRow = grid.getRight();
-        this.annimations = UtilGraphicsImg.loadAllAnimations(numGridCol, numGridRow, WIDTH_FRAME, HEIGHT_FRAME, img);
-        this.shadow = UtilGraphicsImg.importImg("/sprite_sheet/Shadow");
+        this.annimations = graphEnti.loadSurvivorAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
+        this.shadow = graphEnti.loadEntitiesShadow("Shadow");
     }
 
     /**
      * Updates the animation frame index over time based on {@code aniSpeed}.
      * Loops the animation when the last frame is reached.
      */
-    private void updateAnimations(){
+    private void updateAnimations(final int surState){
         aniTick++;
-        if(aniTick >= aniSpeed ){
-            aniTick=0;
+        if(aniTick >= aniSpeed){
+            aniTick = 0;
             aniIndex++;
-            if (aniIndex >= grid.getLeft()){
+            int currentStateSize = annimations.get(surState).size();
+            if (aniIndex >= currentStateSize){
                 aniIndex = 0;
             }
         }
     }
+    
 
     /**
      * Draws the current frame of the survivor's animation at the survivor's position.
@@ -75,10 +69,10 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
         int surPosX = sur.getCurrentPos().getLeft().intValue();
         int surPosY = sur.getCurrentPos().getRight().intValue();
         int surState = sur.getState().getIndex();
-        updateAnimations();
+        updateAnimations(surState);
         g2d.drawImage(shadow, surPosX, surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
         g2d.drawImage(annimations.get(surState).get(aniIndex),surPosX,surPosY,WIDTH_IMAGE,HEIGHT_IMAGE,null);
-        System.out.println("I am painting !!");
+        System.out.println("I am painting new mode!!");
     }
     
 }
