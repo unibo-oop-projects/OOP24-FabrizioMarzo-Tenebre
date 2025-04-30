@@ -26,10 +26,10 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent {
     private int aniIndex,aniTick,aniSpeed = 5;
 
     /**
-     * Constructs a {@code CommonGraphicsComponent} using the given class name.
+     * Constructs a {@code GraphicsCommonComponent} using the given class name.
      * <p>
-     * It imports the corresponding image, calculates the animation grid,
-     * and loads all animation frames for rendering.
+     * It loads the corresponding annimation frames for rendering, and load the shadow
+     * and loads all animation f
      *
      * @param nameClass the simple name of the survivor class used to load the sprite sheet
      */
@@ -42,6 +42,9 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent {
     /**
      * Updates the animation frame index over time based on {@code aniSpeed}.
      * Loops the animation when the last frame is reached.
+     * <p>
+     * 
+     * @param surState the state of survivor for update the specific animation
      */
     private void updateAnimations(final int surState){
         aniTick++;
