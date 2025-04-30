@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import input.input_component.CompInputCommon;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.base.Survivor;
-import view.graphics_component.CommonGraphicsComponent;
+import view.graphics_component.GraphicsCommonComponent;
 
 /**
  * Factory class responsible for creating instances of {@link IGameSurvivor} entities.
@@ -28,7 +28,7 @@ public class FactorySurvivorGame {
     public IGameSurvivor gameSurvivorCommon(final int health,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
         Survivor common = sur.createCommon(health, attack, pos, vel);
         return new GameSurvivor(common,
-                     new CommonGraphicsComponent(common.getClass().getSimpleName()),
+                     new GraphicsCommonComponent(common.getClass().getSimpleName()),
                      new CompInputCommon());
     }
 }

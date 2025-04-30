@@ -13,7 +13,7 @@ import view.graphics_util.GraphicsEntities;
  * This class loads and manages sprite sheet animations, and handles the logic to draw
  * the correct frame of the animation based on the survivor's current state.
  */
-public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
+public class GraphicsCommonComponent implements GraphicsSurvivorComponent {
 
     private static final int WIDTH_IMAGE = 80;
     private static final int HEIGHT_IMAGE = 128;
@@ -33,7 +33,7 @@ public class CommonGraphicsComponent implements GraphicsSurvivorComponent {
      *
      * @param nameClass the simple name of the survivor class used to load the sprite sheet
      */
-    public CommonGraphicsComponent(final String nameClass){
+    public GraphicsCommonComponent(final String nameClass){
         System.err.println("Import the Image, and set all Animations");
         this.annimations = graphEnti.loadSurvivorAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
         this.shadow = graphEnti.loadEntitiesShadow("Shadow");
