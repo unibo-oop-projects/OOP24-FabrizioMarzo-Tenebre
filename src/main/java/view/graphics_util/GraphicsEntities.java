@@ -11,7 +11,7 @@ public class GraphicsEntities {
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
-    private final ImportImage impImg = new ImportImage() ;
+    private final ImportImage impImg = new ImportImagePNG() ;
 
     public List<List<BufferedImage>> loadSurvivorAnimations(final String nameSurvivor,final int width_frame , final int height_frame){
         return loadAnimations(SURVIVOR_PATH, nameSurvivor, width_frame, height_frame);
