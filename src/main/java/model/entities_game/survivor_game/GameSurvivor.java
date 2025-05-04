@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import input.input_component.ComponentInputSurvivor;
 import input.input_controller.InputController;
 import model.entities.survivor.base.Survivor;
+import physics.physics_component.PhysicsSurvivorComponent;
 import view.graphics_component.GraphicsSurvivorComponent;
 
 /**
@@ -17,6 +18,7 @@ public class GameSurvivor implements IGameSurvivor{
     private Survivor sur;
     private GraphicsSurvivorComponent imgSur;
     private ComponentInputSurvivor inpSur;
+    private PhysicsSurvivorComponent phySur;
 
     /**
      * Constructs a {@link GameSurvivor} object with the given survivor, graphics component, and input component.
@@ -25,10 +27,12 @@ public class GameSurvivor implements IGameSurvivor{
      * @param imgS   the {@link GraphicsSurvivorComponent} responsible for rendering the survivor's graphics
      * @param inpSur the {@link ComponentInputSurvivor} component that handles input for the survivor
      */
-    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS, final ComponentInputSurvivor inpSur){
+    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS, 
+                        final ComponentInputSurvivor inpSur, final PhysicsSurvivorComponent phySur){
         this.sur = sur;
         this.imgSur = imgS;
         this.inpSur = inpSur;
+        this.phySur = phySur;
     }
 
 
@@ -65,8 +69,13 @@ public class GameSurvivor implements IGameSurvivor{
      * @param c the {@link InputController} used to capture user input
      */
     @Override
-    public void updateInput(InputController c) {
+    public void updateInput(final InputController c) {
         inpSur.update(this.getSurvivor(),c);
     }
+
+    @Override
+    public void updatePhysics(final int dt){
+		phySur.update(this.getSurvivor(), dt);
+	}
 
 }

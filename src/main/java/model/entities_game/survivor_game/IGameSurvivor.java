@@ -34,4 +34,6 @@ public interface IGameSurvivor {
      * @param g2d the {@link Graphics2D} object used for drawing the survivor's graphics
      */
     public void updateGraphics(final Graphics2D g2d);
+
+    public void updatePhysics(final int dt);
 }
