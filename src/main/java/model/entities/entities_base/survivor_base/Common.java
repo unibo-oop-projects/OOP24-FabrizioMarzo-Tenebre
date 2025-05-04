@@ -121,6 +121,17 @@ public class Common implements Survivor{
         this.state = newState;
     }
     
+    @Override
+    public BoundingBox getBBox() {
+        return this.bbox;
+    }
+
+    @Override
+    public void updateBBox(Pair<Double, Double> newPos) {
+        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
+        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
+    }
+    
     /**
      * Generates a hash code based on survivor's health and attack.
      *
@@ -158,9 +169,5 @@ public class Common implements Survivor{
         return true;
     }
 
-    @Override
-    public BoundingBox getBBox() {
-        return this.bbox;
-    }
 
 }

@@ -66,7 +66,7 @@ public interface Survivor {
      */
     public void setVelocity(final Pair<Double,Double> vel);
 
-    public void setPosition(Pair<Double, Double> pos);
+    public void setPosition(final Pair<Double, Double> pos);
 
     /**
      * Sets a new state for the survivor.
@@ -76,4 +76,6 @@ public interface Survivor {
     public void setState(final SurvivorState newState);
 
     public BoundingBox getBBox();
+
+    public void updateBBox(final Pair<Double,Double> newPos);
 }

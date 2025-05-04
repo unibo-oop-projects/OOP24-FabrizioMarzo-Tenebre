@@ -20,9 +20,13 @@ public class RectBoundingBox implements BoundingBox {
         return this.cornerBR;
     }
 
-    public void updateCorners(Pair<Double, Double> newUl, Pair<Double, Double> newBr){
-        this.cornerUl = newUl;
-        this.cornerBR = newBr;
+    
+    public void setUlcorner(Pair<Double, Double> cornerUl) {
+        this.cornerUl = cornerUl;
+    }
+    
+    public void setBRcorner(Pair<Double, Double> cornerBR) {
+        this.cornerBR = cornerBR;
     }
 
     @Override
@@ -45,5 +49,6 @@ public class RectBoundingBox implements BoundingBox {
 
         return !noOverlap;
     }
+
     
 }

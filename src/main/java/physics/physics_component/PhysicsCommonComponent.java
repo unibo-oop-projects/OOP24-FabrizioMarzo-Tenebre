@@ -10,6 +10,9 @@ public class PhysicsCommonComponent implements PhysicsSurvivorComponent {
     @Override
     public void update(final Survivor sur,final int dt) {
         sur.setPosition(PairUtils.sum(sur.getCurrentPos(),nextPos(dt,sur.getCurrentVel())));
+        sur.updateBBox(sur.getCurrentPos());
+        System.out.println("For the Survivor" + PairUtils.toIntPair(sur.getBBox().getULcorner()) +
+                           " and " + PairUtils.toIntPair(sur.getBBox().getBRcorner()));
         System.out.println("I am modifing my state with th PhsycsComponent");
     }
     
