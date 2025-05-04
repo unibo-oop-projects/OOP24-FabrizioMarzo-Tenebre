@@ -41,6 +41,6 @@ public class TutorialLevel implements Level {
      */
     @Override
     public void updateState(final int dt){
-        survivorCommon.getSurvivor().updateSurvivor(dt);
+        survivorCommon.updatePhysics(dt);
     }
 }
