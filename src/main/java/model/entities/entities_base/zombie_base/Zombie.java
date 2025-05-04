@@ -1,4 +1,4 @@
-package model.entities.zombie;
+package model.entities.entities_base.zombie_base;
 
 /**
  * Zombie interface representing a zombie in the game.

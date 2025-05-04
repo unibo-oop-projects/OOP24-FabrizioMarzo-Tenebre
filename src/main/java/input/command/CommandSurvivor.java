@@ -2,7 +2,7 @@ package input.command;
 
 import java.util.function.Consumer;
 
-import model.entities.survivor.base.Survivor;
+import model.entities.entities_base.survivor_base.Survivor;
 
 /**
  * Utility class to execute commands on a {@link Survivor} instance.

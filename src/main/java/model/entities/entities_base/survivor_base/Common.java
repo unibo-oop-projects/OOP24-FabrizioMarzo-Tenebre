@@ -1,10 +1,9 @@
-package model.entities.survivor.base;
+package model.entities.entities_base.survivor_base;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
-import model.entities.survivor.SurvivorState;
 
 
 /**

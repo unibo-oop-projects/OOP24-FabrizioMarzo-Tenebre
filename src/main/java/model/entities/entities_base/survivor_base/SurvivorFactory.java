@@ -1,9 +1,6 @@
-package model.entities.survivor;
+package model.entities.entities_base.survivor_base;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import model.entities.survivor.base.Common;
-import model.entities.survivor.base.Survivor;
 
 /**
  * Factory class responsible for creating instances of {@link Survivor} entities.

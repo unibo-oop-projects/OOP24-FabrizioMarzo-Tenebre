@@ -2,8 +2,8 @@ package model.level;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities_game.survivor_game.FactorySurvivorGame;
-import model.entities_game.survivor_game.IGameSurvivor;
+import model.entities.entities_game.survivor_game.FactorySurvivorGame;
+import model.entities.entities_game.survivor_game.IGameSurvivor;
 
 /**
  * Represents the tutorial level of the game.

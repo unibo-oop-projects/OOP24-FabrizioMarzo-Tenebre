@@ -2,7 +2,7 @@ package view.graphics_component;
 
 import java.awt.Graphics2D;
 
-import model.entities.survivor.base.Survivor;
+import model.entities.entities_base.survivor_base.Survivor;
 
 /**
  * Interface representing a graphical component responsible for rendering a {@link Survivor}.

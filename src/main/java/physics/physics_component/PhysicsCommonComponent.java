@@ -3,7 +3,7 @@ package physics.physics_component;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.PairUtils;
-import model.entities.survivor.base.Survivor;
+import model.entities.entities_base.survivor_base.Survivor;
 
 public class PhysicsCommonComponent implements PhysicsSurvivorComponent {
 

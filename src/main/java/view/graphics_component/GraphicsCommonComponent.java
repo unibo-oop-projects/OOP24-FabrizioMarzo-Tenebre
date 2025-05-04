@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import model.entities.survivor.base.Survivor;
+import model.entities.entities_base.survivor_base.Survivor;
 import view.graphics_util.GraphicsEntities;
 
 /**

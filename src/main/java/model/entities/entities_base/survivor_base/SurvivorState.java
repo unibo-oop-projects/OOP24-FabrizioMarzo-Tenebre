@@ -1,4 +1,4 @@
-package model.entities.survivor;
+package model.entities.entities_base.survivor_base;
 
 /**
  * Enum representing the possible states of a survivor.

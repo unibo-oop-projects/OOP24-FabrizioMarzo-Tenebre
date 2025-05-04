@@ -1,6 +1,6 @@
 package model.level;
 
-import model.entities_game.survivor_game.IGameSurvivor;
+import model.entities.entities_game.survivor_game.IGameSurvivor;
 
 /**
  * Interface representing a game level.

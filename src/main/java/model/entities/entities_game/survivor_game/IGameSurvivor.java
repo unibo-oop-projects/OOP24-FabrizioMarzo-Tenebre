@@ -1,9 +1,9 @@
-package model.entities_game.survivor_game;
+package model.entities.entities_game.survivor_game;
 
 import java.awt.Graphics2D;
 
 import input.input_controller.InputController;
-import model.entities.survivor.base.Survivor;
+import model.entities.entities_base.survivor_base.Survivor;
 
 /**
  * Interface that defines the behavior of a game survivor in the game.
