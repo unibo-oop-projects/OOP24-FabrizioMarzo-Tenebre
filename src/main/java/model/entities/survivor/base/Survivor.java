@@ -1,6 +1,8 @@
 package model.entities.survivor.base;
 
 import org.apache.commons.lang3.tuple.Pair;
+
+import model.bounding_box.BoundingBox;
 import model.entities.survivor.SurvivorState;
 
 /**
@@ -22,14 +24,6 @@ public interface Survivor {
      * @param dm The amount of damage taken
      */
     public void damageSuffer(final int dm);
-    
-    /**
-     * Updates the survivor’s internal logic, such as position,
-     * based on the time elapsed since the last update.
-     *
-     * @param dt Time delta (in milliseconds)
-     */
-    public void updateSurvivor(final int dt);
     
     /**
      * Returns the current position of the survivor.
@@ -73,10 +67,14 @@ public interface Survivor {
      */
     public void setVelocity(final Pair<Double,Double> vel);
 
+    public void setPosition(Pair<Double, Double> pos);
+
     /**
      * Sets a new state for the survivor.
      *
      * @param newState The new state to apply
      */
     public void setState(final SurvivorState newState);
+
+    public BoundingBox getBBox();
 }

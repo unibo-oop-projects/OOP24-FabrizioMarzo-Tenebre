@@ -2,7 +2,8 @@ package model.entities.survivor.base;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import model.PairUtils;
+import model.bounding_box.BoundingBox;
+import model.bounding_box.RectBoundingBox;
 import model.entities.survivor.SurvivorState;
 
 
@@ -16,6 +17,9 @@ public class Common implements Survivor{
 
     private int live;
     private int attack;
+    private final static int WIDTH=50;
+    private final static int HEIGHT=175;
+    private BoundingBox bbox;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
@@ -29,13 +33,16 @@ public class Common implements Survivor{
      * @param pos    initial position (x, y)
      * @param vel    initial velocity (vx, vy); also used as base velocity
      */
-    public Common(final int health,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel) {
+    public Common(final int health,final int attack, final Pair<Double,Double> pos, 
+                    final Pair<Double,Double> vel) {
         this.live = health;
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
         this.vel = new MutablePair<>(vel.getLeft(),vel.getRight());
         this.velBase = vel;
         this.state = SurvivorState.IDLE;
+        this.bbox = new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+HEIGHT),
+                                        Pair.of(pos.getLeft()+WIDTH ,pos.getRight()));
     }
 
     /**
@@ -52,21 +59,6 @@ public class Common implements Survivor{
     @Override
     public void damageSuffer(final int dm) {
         this.live = this.live-dm;
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * The position is updated based on the current velocity and time delta.
-     */
-    @Override
-    public void updateSurvivor(final int dt) {
-        this.pos = PairUtils.sum(getCurrentPos(),nextPos(dt));
-        System.out.println("I am modifing my state");
-    }
-
-    private Pair<Double,Double> nextPos(final int dt){
-        return PairUtils.mul(this.vel,0.001*dt);
     }
 
     /**
@@ -117,6 +109,11 @@ public class Common implements Survivor{
         this.vel = vel; 
     }
 
+    @Override
+    public void setPosition(Pair<Double, Double> pos) {
+        this.pos = pos;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -161,4 +158,10 @@ public class Common implements Survivor{
             return false;
         return true;
     }
+
+    @Override
+    public BoundingBox getBBox() {
+        return this.bbox;
+    }
+
 }

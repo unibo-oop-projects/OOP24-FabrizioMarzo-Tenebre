@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import input.input_component.CompInputCommon;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.base.Survivor;
+import physics.physics_component.PhysicsCommonComponent;
 import view.graphics_component.GraphicsCommonComponent;
 
 /**
@@ -29,6 +30,7 @@ public class FactorySurvivorGame {
         Survivor common = sur.createCommon(health, attack, pos, vel);
         return new GameSurvivor(common,
                      new GraphicsCommonComponent(common.getClass().getSimpleName()),
-                     new CompInputCommon());
+                     new CompInputCommon(),
+                     new PhysicsCommonComponent());
     }
 }
