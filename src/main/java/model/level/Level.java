@@ -1,5 +1,6 @@
 package model.level;
 
+import model.bounding_box.BoundingBox;
 import model.entities.entities_game.survivor_game.IGameSurvivor;
 
 /**
@@ -26,5 +27,7 @@ public interface Level {
      * @param dt the time delta in milliseconds since the last update
      */
     public void updateState(final int dt);
+
+    public BoundingBox getBBox();
     
 }
