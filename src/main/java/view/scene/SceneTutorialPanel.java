@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import input.input_controller.KeyboardInputController;
 import model.entities.entities_game.survivor_game.IGameSurvivor;
 import model.level.Level;
+import view.graphics_component.GraphicsSurvivor;
+import view.graphics_component.SwingGraphicsSurvivor;
 
 /**
  * Custom JPanel responsible for rendering the tutorial level and handling keyboard input.
@@ -28,6 +30,7 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
     private Level tutLevel;
     /** controller is the {@link KeyboardInputController} associated with the Scene */
     private KeyboardInputController controller;
+
 
     /**
      * Constructs a new {@code SceneTutorialPanel} with the given level, dimensions, and input controller.
@@ -64,12 +67,12 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
      * @param g the {@link Graphics} object used to paint the panel
      */
     public void paintComponent(Graphics g){
-
         
         Graphics2D g2d = (Graphics2D) g ;
+        GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d);
 
         gamSur = tutLevel.getSurvivorOnLevel();
-        gamSur.updateGraphics(g2d);
+        gamSur.updateGraphics(graphSur);
     }
 
     /**

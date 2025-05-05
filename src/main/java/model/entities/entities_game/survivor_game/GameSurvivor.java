@@ -6,6 +6,7 @@ import input.input_component.InputSurvivorComponent;
 import input.input_controller.InputController;
 import model.entities.entities_base.survivor_base.Survivor;
 import physics.physics_component.PhysicsSurvivorComponent;
+import view.graphics_component.GraphicsSurvivor;
 import view.graphics_component.GraphicsSurvivorComponent;
 
 /**
@@ -24,7 +25,7 @@ public class GameSurvivor implements IGameSurvivor{
      * Constructs a {@link GameSurvivor} object with the given survivor, graphics component, and input component.
      *
      * @param sur    the {@link Survivor} object that represents the survivor
-     * @param imgS   the {@link GraphicsSurvivorComponent} responsible for rendering the survivor's graphics
+     * @param imgS   the {@link GraphicsSurvivorComponents} responsible for rendering the survivor's graphics
      * @param inpSur the {@link InputSurvivorComponent} component that handles input for the survivor
      */
     public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS, 
@@ -56,8 +57,8 @@ public class GameSurvivor implements IGameSurvivor{
      * @param g2d the {@link Graphics2D} object used for rendering the survivor
      */
     @Override
-    public void updateGraphics(final Graphics2D g2d) {
-        imgSur.drawSurvivor(this.getSurvivor(),g2d);
+    public void updateGraphics(final GraphicsSurvivor graphicsSur) {
+        imgSur.update(this.getSurvivor(), graphicsSur);
     }
 
     /**

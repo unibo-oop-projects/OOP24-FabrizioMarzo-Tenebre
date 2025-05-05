@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import input.input_controller.InputController;
 import model.entities.entities_base.survivor_base.Survivor;
+import view.graphics_component.GraphicsSurvivor;
 
 /**
  * Interface that defines the behavior of a game survivor in the game.
@@ -33,7 +34,7 @@ public interface IGameSurvivor {
      *
      * @param g2d the {@link Graphics2D} object used for drawing the survivor's graphics
      */
-    public void updateGraphics(final Graphics2D g2d);
+    public void updateGraphics(final GraphicsSurvivor grapSur);
 
     public void updatePhysics(final int dt);
 }

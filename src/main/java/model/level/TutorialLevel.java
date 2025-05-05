@@ -2,6 +2,7 @@ package model.level;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.bounding_box.BoundingBox;
 import model.entities.entities_game.survivor_game.FactorySurvivorGame;
 import model.entities.entities_game.survivor_game.IGameSurvivor;
 
@@ -13,6 +14,12 @@ import model.entities.entities_game.survivor_game.IGameSurvivor;
  * It also handles updating the survivor's internal state over time.
  */
 public class TutorialLevel implements Level {
+
+    // 800×600 pixel (window)
+    private static final int TUTORIAL_LEVEL_WIDTH = 8000;   // 80 metries
+    private static final int TUTORIAL_LEVEL_HEIGHT = 2000;  // 20 metries
+
+    private BoundingBox bbox;
     private FactorySurvivorGame fact = new FactorySurvivorGame(); 
     private IGameSurvivor survivorCommon;
 
@@ -20,6 +27,7 @@ public class TutorialLevel implements Level {
      * Constructs the tutorial level with a preconfigured {@link IGameSurvivor}.
      */
     public TutorialLevel(){
+        
         this.survivorCommon = fact.gameSurvivorCommon(1000,20, Pair.of(390.0,40.0),Pair.of(50.0,0.0));
     }
 
