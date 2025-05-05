@@ -31,23 +31,22 @@ public class RectBoundingBox implements BoundingBox {
 
     @Override
     public boolean isColliding(final Pair<Double, Double> otherUL,final Pair<Double, Double> otherBR) {
-        final double thisLeft = this.cornerUl.getLeft();
-        final double thisTop = this.cornerUl.getRight();
-        final double thisRight = this.cornerBR.getLeft();
-        final double thisBottom = this.cornerBR.getRight();
+        final double tux = this.cornerUl.getLeft();
+        final double tuy = this.cornerUl.getRight();
+        final double tbx = this.cornerBR.getLeft();
+        final double tby = this.cornerBR.getRight();
 
-        final double otherLeft = otherUL.getLeft();
-        final double otherTop = otherUL.getRight();
-        final double otherRight = otherBR.getLeft();
-        final double otherBottom = otherBR.getRight();
+        final double oux = otherUL.getLeft();
+        final double ouy = otherUL.getRight();
+        final double obx = otherBR.getLeft();
+        final double oby = otherBR.getRight();
 
     
-        boolean noOverlap = thisRight < otherLeft || 
-                            thisLeft > otherRight ||  
-                            thisBottom < otherTop ||  
-                            thisTop > otherBottom;    
+        boolean overlapY = tuy > oby && tby < ouy ;
+        boolean overlapX = tux < obx && tbx > oux ; 
 
-        return !noOverlap;
+        System.out.println("overlapX " + overlapX + " overlapY " + overlapY);
+        return overlapX && overlapY;
     }
 
     
