@@ -1,4 +1,4 @@
-package model;
+package utils;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -46,5 +46,19 @@ public class PairUtils {
         Double x = vel.getLeft();
         Double y = vel.getRight();
         return Math.sqrt(x*x+y*y);
+    }
+
+    /**
+     * Converte un Pair<Double, Double> in un Pair<Integer, Integer> 
+     * troncando i decimali.
+     *
+     * @param doublePair il pair con valori double
+     * @return un nuovo pair con valori interi
+     */
+    public static Pair<Integer, Integer> toIntPair(final Pair<Double, Double> doublePair) {
+        return Pair.of(
+            doublePair.getLeft().intValue(),
+            doublePair.getRight().intValue()
+        );
     }
 }

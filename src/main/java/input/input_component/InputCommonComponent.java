@@ -2,9 +2,9 @@ package input.input_component;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.PairUtils;
 import model.entities.entities_base.survivor_base.Survivor;
 import model.entities.entities_base.survivor_base.SurvivorState;
+import utils.PairUtils;
 import input.command.CommandSurvivor;
 import input.input_controller.Directions;
 import input.input_controller.InputController;
