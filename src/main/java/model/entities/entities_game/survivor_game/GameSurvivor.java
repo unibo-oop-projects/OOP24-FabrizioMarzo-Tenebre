@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import input.input_component.InputSurvivorComponent;
 import input.input_controller.InputController;
 import model.entities.entities_base.survivor_base.Survivor;
+import model.level.Level;
 import physics.physics_component.PhysicsSurvivorComponent;
 import view.graphics_component.GraphicsSurvivor;
 import view.graphics_component.GraphicsSurvivorComponent;
@@ -35,7 +36,6 @@ public class GameSurvivor implements IGameSurvivor{
         this.inpSur = inpSur;
         this.phySur = phySur;
     }
-
 
     /**
      * {@inheritDoc}
@@ -75,8 +75,8 @@ public class GameSurvivor implements IGameSurvivor{
     }
 
     @Override
-    public void updatePhysics(final int dt){
-		phySur.update(this.getSurvivor(), dt);
+    public void updatePhysics(final int dt, final Level lvl){
+		phySur.update(this.getSurvivor(), dt,lvl);
 	}
 
 }

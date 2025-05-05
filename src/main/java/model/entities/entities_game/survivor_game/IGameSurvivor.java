@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import input.input_controller.InputController;
 import model.entities.entities_base.survivor_base.Survivor;
+import model.level.Level;
 import view.graphics_component.GraphicsSurvivor;
 
 /**
@@ -36,5 +37,5 @@ public interface IGameSurvivor {
      */
     public void updateGraphics(final GraphicsSurvivor grapSur);
 
-    public void updatePhysics(final int dt);
+    public void updatePhysics(final int dt, final Level lvl);
 }
