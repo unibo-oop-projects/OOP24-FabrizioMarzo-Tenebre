@@ -69,7 +69,7 @@ public class SceneTutorialPanel extends JPanel implements KeyListener {
     public void paintComponent(Graphics g){
         
         Graphics2D g2d = (Graphics2D) g ;
-        GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d);
+        GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,this.h);
 
         gamSur = tutLevel.getSurvivorOnLevel();
         gamSur.updateGraphics(graphSur);

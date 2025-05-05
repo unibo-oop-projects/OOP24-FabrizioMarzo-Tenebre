@@ -9,17 +9,18 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
     private Graphics2D g2d;
     private static final int WIDTH_IMAGE = 80;
     private static final int HEIGHT_IMAGE = 128;
-    
+    private int heightPixelPanel;
 
-    public SwingGraphicsSurvivor(final Graphics2D g2d) {
+    public SwingGraphicsSurvivor(final Graphics2D g2d, final int heightPixelPanel) {
         this.g2d = g2d;
+        this.heightPixelPanel = heightPixelPanel ;
     }
 
     @Override
     public void drawSurvivor(final Survivor sur, final BufferedImage image) {
 
         int surPosX = sur.getCurrentPos().getLeft().intValue();
-        int surPosY = sur.getCurrentPos().getRight().intValue();
+        int surPosY = heightPixelPanel-sur.getCurrentPos().getRight().intValue();
         g2d.drawImage(image, surPosX, surPosY, WIDTH_IMAGE, HEIGHT_IMAGE, null);
     }
     
