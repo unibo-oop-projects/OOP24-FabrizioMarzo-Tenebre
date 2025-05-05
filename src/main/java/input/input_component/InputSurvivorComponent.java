@@ -9,7 +9,7 @@ import model.entities.entities_base.survivor_base.Survivor;
  * <p>Implementations of this interface are responsible for updating a Survivor
  * based on input received through an {@link InputController}.</p>
  */
-public interface ComponentInputSurvivor {
+public interface InputSurvivorComponent {
 
     /**
      * Updates the given {@link Survivor} using the provided {@link InputController}.

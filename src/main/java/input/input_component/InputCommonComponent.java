@@ -10,13 +10,13 @@ import input.input_controller.Directions;
 import input.input_controller.InputController;
 
 /**
- * Common implementation of {@link ComponentInputSurvivor} that updates a {@link Survivor}'s
+ * Common implementation of {@link InputSurvivorComponent} that updates a {@link Survivor}'s
  * movement and state based on directional input.
  * 
  * <p>This component interprets input from an {@link InputController} and applies
  * corresponding changes to the Survivor's velocity and state using {@link CommandSurvivor}.</p>
  */
-public class CompInputCommon implements ComponentInputSurvivor{
+public class InputCommonComponent implements InputSurvivorComponent{
 
     /**
      * Updates the given {@link Survivor} based on directional input provided by the {@link InputController}.
