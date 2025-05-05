@@ -38,12 +38,12 @@ public class InputCommonComponent implements InputSurvivorComponent{
 
         if (ctrl.getDirections().equals(Directions.UP)) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_UP);
             });
         } else if (ctrl.getDirections().equals(Directions.DOWN)) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_DOWN);
             });
         } else if (ctrl.getDirections().equals(Directions.LEFT)) {
