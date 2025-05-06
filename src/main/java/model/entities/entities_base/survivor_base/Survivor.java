@@ -83,4 +83,6 @@ public interface Survivor {
 
     public  int getHeight();
 
+    public void updatePhysics(final int dt);
+
 }

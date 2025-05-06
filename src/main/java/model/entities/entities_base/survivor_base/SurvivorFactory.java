@@ -2,6 +2,8 @@ package model.entities.entities_base.survivor_base;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import physics.physics_component.PhysicsCommonComponent;
+
 /**
  * Factory class responsible for creating instances of {@link Survivor} entities.
  * This class provides methods to create different types of survivors.
@@ -18,7 +20,11 @@ public class SurvivorFactory {
      * @return a new {@link Survivor} instance of type {@link Common}
      */
     public Survivor createCommon(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-       return new Common(live, attack, pos, vel);
+       return new Common(live,
+                         attack,
+                         pos, 
+                         vel,
+                         new PhysicsCommonComponent());
     }
 
 }
