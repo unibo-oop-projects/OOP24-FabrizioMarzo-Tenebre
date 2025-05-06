@@ -174,11 +174,11 @@ public class Common implements Survivor{
     }
 
     public int getWidth() {
-        return this.WIDTH;
+        return Common.WIDTH;
     }
 
     public int getHeight() {
-        return this.HEIGHT;
+        return Common.HEIGHT;
     }
 
     public void updatePhysics(final int dt){

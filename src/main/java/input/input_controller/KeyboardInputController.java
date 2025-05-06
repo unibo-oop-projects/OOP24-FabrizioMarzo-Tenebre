@@ -5,7 +5,7 @@ package input.input_controller;
  * 
  * <p>This controller maps specific key codes to movement directions using
  * the {@link KeyCodes} enum. It updates its internal state based on
- * the key code received through {@link #notifyMove(int)}.</p>
+ * the key code received through {@link #notifyInput(int)}.</p>
  */
 public class KeyboardInputController implements InputController {    
 	
@@ -52,8 +52,8 @@ public class KeyboardInputController implements InputController {
      * @return the current {@link KeyCodes} value representing the movement direction
      */
 	@Override
-	public KeyCodes getDirections(){
-		return this.keyCode;
+	public int getInputCode(){
+		return this.keyCode.getKeyCode();
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class KeyboardInputController implements InputController {
      * @param keyCode the keyboard code for the movement direction
      */
 	@Override
-	public void notifyMove(final int keyCode){
+	public void notifyInput(final int keyCode){
 		switch (keyCode) {
 			case 37: 
 				isMoveLeft();
@@ -96,7 +96,7 @@ public class KeyboardInputController implements InputController {
      * Notifies the controller that no movement input is currently active.
      */
 	@Override
-	public void notifyNoMove() {
+	public void notifyNoInput() {
 		isMoveNone();
 	}
 

@@ -1,9 +1,6 @@
 package game.entities_game;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import input.input_component.InputCommonComponent;
-import model.entities.survivor.Common;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
 import view.graphics_component.GraphicsCommonComponent;

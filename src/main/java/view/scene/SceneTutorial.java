@@ -92,12 +92,12 @@ public class SceneTutorial {
 
         @Override
 	    public void keyPressed(KeyEvent e) {
-            inputContrl.notifyMove(e.getKeyCode());
+            inputContrl.notifyInput(e.getKeyCode());
 	    }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            inputContrl.notifyNoMove();
+            inputContrl.notifyNoInput();
         }
 
         @Override

@@ -11,15 +11,15 @@ public interface InputController {
     /**
      * Notifies the controller of a movement input based on a key code.
      *
-     * @param keyCode the key code corresponding to a movement direction
+     * @param inputIdentifier the key code corresponding to a movement direction
      *                (e.g., arrow keys or custom mappings)
      */
-    public void notifyMove(final int keyCode);
+    public void notifyInput(final int inputIdentifier);
 
     /**
      * Notifies the controller that there is no current movement input.
      */
-    public void notifyNoMove();
+    public void notifyNoInput();
 
     /**
      * Returns the current movement direction based on the latest input.
@@ -27,5 +27,5 @@ public interface InputController {
      * @return a {@link KeyCodes} enum value representing the current direction,
      *         or {@code Directions.NONE} if no input is active
      */
-    public KeyCodes getDirections();
+    public int getInputCode();
 }
