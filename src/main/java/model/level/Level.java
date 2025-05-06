@@ -1,6 +1,7 @@
 package model.level;
 
 import model.bounding_box.BoundingBox;
+import model.entities.entities_base.survivor_base.Survivor;
 import model.entities.entities_game.survivor_game.IGameSurvivor;
 
 /**
@@ -16,7 +17,7 @@ public interface Level {
      *
      * @return the {@link IGameSurvivor} present in the level
      */
-    public IGameSurvivor getSurvivorOnLevel(); 
+    public Survivor getSurvivorOnLevel(); 
 
     /**
      * Updates the state of the level.
@@ -28,6 +29,6 @@ public interface Level {
      */
     public void updateState(final int dt);
 
-    public BoundingBox getBBox();
+    public BoundingBox getLevelBBox();
     
 }
