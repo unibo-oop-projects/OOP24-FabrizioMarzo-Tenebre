@@ -1,5 +1,6 @@
 package game.engine;
 
+import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
 import model.level.Level;
 import model.level.TutorialLevel;
@@ -17,7 +18,7 @@ public class GameEngine{
     private long period = 25;
     private Scene view ;
     private Level tutLevel;
-    private KeyboardInputController contrl = new KeyboardInputController();
+    private InputController contrl;
 
      /**
      * Initializes the game level and view.
@@ -26,6 +27,7 @@ public class GameEngine{
      * rendering view with specified screen dimensions and input controller.</p>
      */
     public void setup(){
+        this.contrl = new KeyboardInputController();
         tutLevel = new TutorialLevel();
         view = new SwingSceneTutorial(tutLevel,1200, 800);
     }
