@@ -24,8 +24,8 @@ public interface InputController {
     /**
      * Returns the current movement direction based on the latest input.
      *
-     * @return a {@link Directions} enum value representing the current direction,
+     * @return a {@link KeyCodes} enum value representing the current direction,
      *         or {@code Directions.NONE} if no input is active
      */
-    public Directions getDirections();
+    public KeyCodes getDirections();
 }

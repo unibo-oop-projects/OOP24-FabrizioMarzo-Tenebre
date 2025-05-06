@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import utils.PairUtils;
 import input.command.CommandSurvivor;
-import input.input_controller.Directions;
+import input.input_controller.KeyCodes;
 import input.input_controller.InputController;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorState;
@@ -36,27 +36,27 @@ public class InputCommonComponent implements InputSurvivorComponent{
             sur.setVelocity(sur.getBaseSurvivorVel());
         }
 
-        if (ctrl.getDirections().equals(Directions.UP)) {
+        if (ctrl.getDirections().equals(KeyCodes.UP)) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_UP);
             });
-        } else if (ctrl.getDirections().equals(Directions.DOWN)) {
+        } else if (ctrl.getDirections().equals(KeyCodes.DOWN)) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_DOWN);
             });
-        } else if (ctrl.getDirections().equals(Directions.LEFT)) {
+        } else if (ctrl.getDirections().equals(KeyCodes.LEFT)) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mul(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_LEFT);
             });
-        } else if (ctrl.getDirections().equals(Directions.RIGHT)) {
+        } else if (ctrl.getDirections().equals(KeyCodes.RIGHT)) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(SurvivorState.MOVE_RIGHT);
             });
-        } else if (ctrl.getDirections().equals(Directions.NONE)){
+        } else if (ctrl.getDirections().equals(KeyCodes.NONE)){
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(Pair.of(0d,0d));
                 s.setState(SurvivorState.IDLE);

@@ -4,56 +4,56 @@ package input.input_controller;
  * Implementation of {@link InputController} that interprets keyboard input.
  * 
  * <p>This controller maps specific key codes to movement directions using
- * the {@link Directions} enum. It updates its internal state based on
+ * the {@link KeyCodes} enum. It updates its internal state based on
  * the key code received through {@link #notifyMove(int)}.</p>
  */
 public class KeyboardInputController implements InputController {    
 	
-	private Directions direction = Directions.NONE;
+	private KeyCodes keyCode = KeyCodes.NONE;
 
 	/**
      * Sets the current direction to UP.
      */
 	private void isMoveUp() {
-		this.direction = Directions.UP;
+		this.keyCode = KeyCodes.UP;
 	}
 
 	/**
      * Sets the current direction to DOWN.
      */
 	private void isMoveDown() {
-		this.direction = Directions.DOWN;
+		this.keyCode = KeyCodes.DOWN;
 	}
 
 	/**
      * Sets the current direction to LEFT.
      */
 	private void isMoveLeft() {
-		this.direction = Directions.LEFT;
+		this.keyCode = KeyCodes.LEFT;
 	}
 
 	/**
      * Sets the current direction to RIGHT.
      */
 	private void isMoveRight() {
-		this.direction = Directions.RIGHT;
+		this.keyCode = KeyCodes.RIGHT;
 	}
 
 	/**
      * Sets the current direction to NONE (no input).
      */
 	private void isMoveNone() {
-		this.direction = Directions.NONE;
+		this.keyCode = KeyCodes.NONE;
 	}
 
 	/**
      * Returns the current movement direction.
      *
-     * @return the current {@link Directions} value representing the movement direction
+     * @return the current {@link KeyCodes} value representing the movement direction
      */
 	@Override
-	public Directions getDirections(){
-		return this.direction;
+	public KeyCodes getDirections(){
+		return this.keyCode;
 	}
 	
 	/**

@@ -6,7 +6,7 @@ package input.input_controller;
  * <p>Each direction corresponds to an arrow key or a "no input" state,
  * identified by its associated key code.</p>
  */
-public enum Directions {
+public enum KeyCodes {
 
     /** Represents the left arrow key (key code 37). */
     LEFT(37),
@@ -30,7 +30,7 @@ public enum Directions {
      *
      * @param keyCode the key code associated with this direction
      */
-    Directions(int keyCode) {
+    KeyCodes(int keyCode) {
         this.keyCode = keyCode;
     }
     
