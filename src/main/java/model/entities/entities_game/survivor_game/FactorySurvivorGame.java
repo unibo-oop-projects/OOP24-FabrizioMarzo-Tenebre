@@ -27,10 +27,9 @@ public class FactorySurvivorGame {
      * @return a new {@link IGameSurvivor} instance, specifically a {@link GameSurvivor} with common attributes
      */
     public IGameSurvivor gameSurvivorCommon(final int health,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-        Survivor common = sur.createCommon(health, attack, pos, vel);
+        Survivor common = sur.createCommonSurvivor(health, attack, pos, vel);
         return new GameSurvivor(common,
                      new GraphicsCommonComponent(common.getClass().getSimpleName()),
-                     new InputCommonComponent(),
-                     new PhysicsCommonComponent());
+                     new InputCommonComponent());
     }
 }
