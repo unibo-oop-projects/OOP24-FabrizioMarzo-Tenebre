@@ -3,9 +3,9 @@ package game.entities_game;
 import org.apache.commons.lang3.tuple.Pair;
 
 import input.input_component.InputCommonComponent;
+import model.entities.survivor.Common;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
-import model.physics.physics_entities.PhysicsCommonComponent;
 import view.graphics_component.GraphicsCommonComponent;
 
 /**
@@ -14,20 +14,8 @@ import view.graphics_component.GraphicsCommonComponent;
  * with the necessary input and graphics components for the game.
  */
 public class FactorySurvivorGame {
-    private SurvivorFactory sur = new SurvivorFactory();
 
-    /**
-     * Creates a {@link GameSurvivor} object representing a common survivor with the given attributes.
-     * It also initializes the necessary graphics and input components for the survivor.
-     *
-     * @param health   the initial health of the survivor
-     * @param attack the attack strength of the survivor
-     * @param pos    the initial position of the survivor, represented as a pair of coordinates (x, y)
-     * @param vel    the initial velocity of the survivor, represented as a pair of velocity components (vx, vy)
-     * @return a new {@link IGameSurvivor} instance, specifically a {@link GameSurvivor} with common attributes
-     */
-    public IGameSurvivor gameSurvivorCommon(final int health,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-        Survivor common = sur.createCommonSurvivor(health, attack, pos, vel);
+    public IGameSurvivor gameSurvivorCommon(final Survivor common){
         return new GameSurvivor(common,
                      new GraphicsCommonComponent(common.getClass().getSimpleName()),
                      new InputCommonComponent());
