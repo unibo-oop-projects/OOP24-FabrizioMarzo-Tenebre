@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
+import physics.physics_component.PhysicsSurvivorComponent;
 
 
 /**
@@ -14,15 +15,16 @@ import model.bounding_box.RectBoundingBox;
  */
 public class Common implements Survivor{
 
-    private int live;
-    private int attack;
     private final static int WIDTH=50;
     private final static int HEIGHT=175;
-    private BoundingBox bbox;
+    private int live;
+    private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
     private SurvivorState state;
+    private BoundingBox bbox;
+    private PhysicsSurvivorComponent physicComp;
 
     /**
      * Constructs a new {@code Common} survivor with specified attributes.
@@ -33,7 +35,7 @@ public class Common implements Survivor{
      * @param vel    initial velocity (vx, vy); also used as base velocity
      */
     public Common(final int health,final int attack, final Pair<Double,Double> pos, 
-                    final Pair<Double,Double> vel) {
+                    final Pair<Double,Double> vel, final PhysicsSurvivorComponent physicComp) {
         this.live = health;
         this.attack = attack;
         this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
@@ -42,6 +44,7 @@ public class Common implements Survivor{
         this.state = SurvivorState.IDLE;
         this.bbox = new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+HEIGHT),
                                         Pair.of(pos.getLeft()+WIDTH ,pos.getRight()));
+        this.physicComp = physicComp; // Setting the Physic of the survivor....
     }
 
     /**
@@ -56,17 +59,18 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public void damageSuffer(final int dm) {
-        this.live = this.live-dm;
+    public int getLive() {
+        return this.live;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getLive() {
-        return this.live;
+    public void damageSuffer(final int dm) {
+        this.live = this.live-dm;
     }
+
 
     /**
      * {@inheritDoc}
@@ -169,5 +173,16 @@ public class Common implements Survivor{
         return true;
     }
 
+    public int getWidth() {
+        return this.WIDTH;
+    }
+
+    public int getHeight() {
+        return this.HEIGHT;
+    }
+
+    public void updatePhysics(final int dt){
+        physicComp.update(null, dt, null);
+    }
 
 }

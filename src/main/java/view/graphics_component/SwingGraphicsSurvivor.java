@@ -1,5 +1,6 @@
 package view.graphics_component;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import model.entities.entities_base.survivor_base.Survivor;
@@ -21,7 +22,26 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 
         int surPosX = sur.getCurrentPos().getLeft().intValue();
         int surPosY = heightPixelPanel-sur.getCurrentPos().getRight().intValue();
-        g2d.drawImage(image, surPosX, surPosY, WIDTH_IMAGE, HEIGHT_IMAGE, null);
+
+        
+        // Draw the Survivor
+        g2d.drawImage(image, surPosX, surPosY-sur.getHeight(), WIDTH_IMAGE, HEIGHT_IMAGE, null);
+
+        // Draw the BoundingBox
+        g2d.setColor(Color.red);
+        g2d.drawRect(surPosX, surPosY,WIDTH_IMAGE, HEIGHT_IMAGE);
+        
+        g2d.setColor(Color.red);
+        g2d.drawOval(surPosX, surPosY, 5, 5);
+        
+        int bboxUx = sur.getBBox().getULcorner().getLeft().intValue();
+        int bboxUy = heightPixelPanel - sur.getBBox().getULcorner().getRight().intValue();
+
+        g2d.setColor(Color.blue);
+        g2d.drawRect(bboxUx, bboxUy,sur.getWidth(), sur.getHeight());
+
+        g2d.setColor(Color.blue);
+        g2d.drawOval(bboxUx, bboxUy, 5, 5);
     }
     
 }

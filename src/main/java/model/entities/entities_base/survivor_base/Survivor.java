@@ -78,4 +78,9 @@ public interface Survivor {
     public BoundingBox getBBox();
 
     public void updateBBox(final Pair<Double,Double> newPos);
+
+    public  int getWidth();
+
+    public  int getHeight();
+
 }
