@@ -1,8 +1,8 @@
 package model.level;
 
+import game.entities_game.IGameSurvivor;
 import model.bounding_box.BoundingBox;
-import model.entities.entities_base.survivor_base.Survivor;
-import model.entities.entities_game.survivor_game.IGameSurvivor;
+import model.entities.survivor.Survivor;
 
 /**
  * Interface representing a game level.

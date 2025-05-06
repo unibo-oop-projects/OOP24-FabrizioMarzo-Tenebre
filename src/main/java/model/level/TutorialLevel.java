@@ -2,14 +2,14 @@ package model.level;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import game.entities_game.FactorySurvivorGame;
+import game.entities_game.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
-import model.entities.entities_base.survivor_base.Survivor;
-import model.entities.entities_base.survivor_base.SurvivorFactory;
-import model.entities.entities_game.survivor_game.FactorySurvivorGame;
-import model.entities.entities_game.survivor_game.IGameSurvivor;
-import physics.physics_component.PhysicsLevelComponent;
-import physics.physics_component.PhysicsLevelTutComponent;
+import model.entities.survivor.Survivor;
+import model.entities.survivor.SurvivorFactory;
+import model.physics.physics_level.PhysicsLevelComponent;
+import model.physics.physics_level.PhysicsLevelTutComponent;
 
 /**
  * Represents the tutorial level of the game.

@@ -1,6 +1,6 @@
-package physics.physics_component;
+package model.physics.physics_entities;
 
-import model.entities.entities_base.survivor_base.Survivor;
+import model.entities.survivor.Survivor;
 
 public interface PhysicsSurvivorComponent {
     public void updateSurvivor(final Survivor sur, final int dt);

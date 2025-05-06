@@ -1,4 +1,4 @@
-import engine.GameEngine;
+import game.engine.GameEngine;
 
 /**
  * Main class that launches the game.

@@ -1,4 +1,4 @@
-package physics.physics_component;
+package model.physics.physics_level;
 
 import model.level.Level;
 

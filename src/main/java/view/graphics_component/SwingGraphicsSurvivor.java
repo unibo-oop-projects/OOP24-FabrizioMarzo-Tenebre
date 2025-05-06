@@ -3,7 +3,8 @@ package view.graphics_component;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import model.entities.entities_base.survivor_base.Survivor;
+
+import model.entities.survivor.Survivor;
 
 public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 

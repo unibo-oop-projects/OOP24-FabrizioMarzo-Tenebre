@@ -1,6 +1,6 @@
 package view.graphics_component;
 
-import model.entities.entities_base.survivor_base.Survivor;
+import model.entities.survivor.Survivor;
 
 public interface GraphicsSurvivorComponent {
     void update(final Survivor sur,final GraphicsSurvivor grsy);

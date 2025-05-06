@@ -1,8 +1,8 @@
-package physics.physics_component;
+package model.physics.physics_entities;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities.entities_base.survivor_base.Survivor;
+import model.entities.survivor.Survivor;
 import utils.PairUtils;
 
 public class PhysicsCommonComponent implements PhysicsSurvivorComponent {

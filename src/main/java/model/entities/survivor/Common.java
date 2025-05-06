@@ -1,10 +1,10 @@
-package model.entities.entities_base.survivor_base;
+package model.entities.survivor;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
-import physics.physics_component.PhysicsSurvivorComponent;
+import model.physics.physics_entities.PhysicsSurvivorComponent;
 
 
 /**

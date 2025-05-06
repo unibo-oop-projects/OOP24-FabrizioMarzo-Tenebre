@@ -1,9 +1,11 @@
 package view.graphics_component;
 
 import java.util.List;
+
+import model.entities.survivor.Survivor;
+
 import java.awt.image.BufferedImage;
 
-import model.entities.entities_base.survivor_base.Survivor;
 import view.graphics_util.GraphicsEntities;
 
 public class GraphicsCommonComponent implements GraphicsSurvivorComponent{

@@ -1,7 +1,7 @@
 package input.input_component;
 
 import input.input_controller.InputController;
-import model.entities.entities_base.survivor_base.Survivor;
+import model.entities.survivor.Survivor;
 
 /**
  * Interface for components that handle input processing for a {@link Survivor}.

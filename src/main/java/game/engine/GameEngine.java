@@ -1,4 +1,4 @@
-package engine;
+package game.engine;
 
 import input.input_controller.KeyboardInputController;
 import model.level.Level;

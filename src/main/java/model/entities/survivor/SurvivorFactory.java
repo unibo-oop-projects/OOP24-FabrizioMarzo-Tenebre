@@ -1,8 +1,8 @@
-package model.entities.entities_base.survivor_base;
+package model.entities.survivor;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import physics.physics_component.PhysicsCommonComponent;
+import model.physics.physics_entities.PhysicsCommonComponent;
 
 /**
  * Factory class responsible for creating instances of {@link Survivor} entities.

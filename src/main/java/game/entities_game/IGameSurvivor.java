@@ -1,9 +1,9 @@
-package model.entities.entities_game.survivor_game;
+package game.entities_game;
 
 import java.awt.Graphics2D;
 
 import input.input_controller.InputController;
-import model.entities.entities_base.survivor_base.Survivor;
+import model.entities.survivor.Survivor;
 import view.graphics_component.GraphicsSurvivor;
 
 /**
