@@ -13,6 +13,8 @@ import game.entities_game.IGameSurvivor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import input.input_controller.InputController;
 import model.level.Level;
@@ -41,6 +43,16 @@ public class SwingSceneTutorial implements Scene {
 
         panel = new SceneTutorialPanel(w,h);
         frame.getContentPane().add(panel);
+        frame.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev){
+                                System.exit(0);
+                        }
+                        public void windowClosed(WindowEvent ev){
+                                System.exit(0);
+                        }
+
+
+                });
         frame.pack();
         frame.setVisible(true);
     }
