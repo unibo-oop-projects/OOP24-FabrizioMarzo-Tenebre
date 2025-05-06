@@ -182,7 +182,7 @@ public class Common implements Survivor{
     }
 
     public void updatePhysics(final int dt){
-        physicComp.update(this, dt);
+        physicComp.updateSurvivor(this, dt);
     }
 
 }
