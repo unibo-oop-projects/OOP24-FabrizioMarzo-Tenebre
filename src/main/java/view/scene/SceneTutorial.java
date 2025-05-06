@@ -1,52 +1,50 @@
 package view.scene;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import input.input_controller.KeyboardInputController;
-import model.level.Level;
+import game.entities_game.FactorySurvivorGame;
+import game.entities_game.IGameSurvivor;
 
-/**
- * Graphical scene responsible for rendering the tutorial level.
- * 
- * <p>{@code SceneTutorial} sets up the main game window using Swing, and 
- * integrates the game panel that handles rendering and user input.</p>
- */
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import input.input_controller.InputController;
+import model.level.Level;
+import view.graphics_component.GraphicsSurvivor;
+import view.graphics_component.SwingGraphicsSurvivor;
+
+
 public class SceneTutorial {
+
     private JFrame frame;
     private SceneTutorialPanel panel;
+    private Level tutLevel;
+    private IGameSurvivor gamSur;
+    private InputController inputContrl;
+    private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
 
-    /**
-     * Constructs the tutorial scene and initializes the window and rendering panel.
-     *
-     * @param tutlevel the tutorial level to be displayed
-     * @param w the width of the game window
-     * @param h the height of the game window
-     * @param c the keyboard input controller to handle user input
-     */
-    public SceneTutorial(final Level tutlevel,final int w, final int h,final KeyboardInputController c){
+    public SceneTutorial(final Level tutlevel,final int w, final int h){
 
         frame = new JFrame("L'armata delle Tenebre");
         frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(false);
 
-        System.out.println("Sto dicendo al Panel che il controller è il GameEngine");
-        panel = new SceneTutorialPanel(tutlevel,w,h,c);
-        
+        this.tutLevel = tutlevel;
+        gamSur = setGameSurvivor();
+
+        panel = new SceneTutorialPanel(w,h);
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
     }
 
-    /**
-     * Repaints the game window.
-     *
-     * <p>This method uses {@link SwingUtilities#invokeAndWait} to ensure
-     * that repainting happens on the Event Dispatch Thread.</p>
-     */
     public void render(){
         try {
             SwingUtilities.invokeAndWait(()->{
@@ -55,6 +53,56 @@ public class SceneTutorial {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private IGameSurvivor setGameSurvivor(){
+        return factSurGam.gameSurvivorCommon(tutLevel.getSurvivorOnLevel());
+    }
+
+    public void setInputController(InputController inputContl){
+        gamSur.updateInput(inputContl);
+        this.inputContrl = inputContl;
+    }
+
+    public class SceneTutorialPanel extends JPanel implements KeyListener {
+
+        private int w,h;
+
+        public SceneTutorialPanel(final int w, final int h){
+            this.w = w;
+            this.h = h;
+            setPanelSize();
+            this.addKeyListener(this);
+            setFocusable(true);
+            setFocusTraversalKeysEnabled(false);
+        }
+
+        public void setPanelSize(){
+            Dimension size = new Dimension(w,h);
+            setPreferredSize(size);
+        }
+
+        public void paintComponent(Graphics g){
+        
+            Graphics2D g2d = (Graphics2D) g ;
+            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,this.h);
+
+            gamSur.updateGraphics(graphSur);
+        }
+
+        @Override
+	    public void keyPressed(KeyEvent e) {
+            inputContrl.notifyMove(e.getKeyCode());
+	    }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            inputContrl.notifyNoMove();
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {}
+
     }
 
 }

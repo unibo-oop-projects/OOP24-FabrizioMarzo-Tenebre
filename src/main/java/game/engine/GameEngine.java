@@ -26,7 +26,7 @@ public class GameEngine{
      */
     public void setup(){
         tutLevel = new TutorialLevel();
-        view = new SceneTutorial(tutLevel,1200, 800, contrl);
+        view = new SceneTutorial(tutLevel,1200, 800);
     }
 
     /**
@@ -71,7 +71,8 @@ public class GameEngine{
      * <p>Delegates input handling to the Survivor object in the current level.</p>
      */
     protected void processInput(){
-        tutLevel.getSurvivorOnLevel().updateInput(contrl);
+        view.setInputController(contrl);
+        System.out.println("New controller");
     }
 
     /**

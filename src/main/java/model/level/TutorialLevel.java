@@ -2,7 +2,6 @@ package model.level;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import game.entities_game.FactorySurvivorGame;
 import game.entities_game.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
