@@ -50,8 +50,6 @@ public class SwingSceneTutorial implements Scene {
                         public void windowClosed(WindowEvent ev){
                                 System.exit(0);
                         }
-
-
                 });
         frame.pack();
         frame.setVisible(true);
