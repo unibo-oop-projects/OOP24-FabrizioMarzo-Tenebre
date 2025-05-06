@@ -3,7 +3,8 @@ package game.engine;
 import input.input_controller.KeyboardInputController;
 import model.level.Level;
 import model.level.TutorialLevel;
-import view.scene.SceneTutorial;
+import view.scene.Scene;
+import view.scene.SwingSceneTutorial;
 
 /**
  * Core class responsible for initializing and running the game loop.
@@ -14,7 +15,7 @@ import view.scene.SceneTutorial;
  */
 public class GameEngine{
     private long period = 25;
-    private SceneTutorial view ;
+    private Scene view ;
     private Level tutLevel;
     private KeyboardInputController contrl = new KeyboardInputController();
 
@@ -26,7 +27,7 @@ public class GameEngine{
      */
     public void setup(){
         tutLevel = new TutorialLevel();
-        view = new SceneTutorial(tutLevel,1200, 800);
+        view = new SwingSceneTutorial(tutLevel,1200, 800);
     }
 
     /**

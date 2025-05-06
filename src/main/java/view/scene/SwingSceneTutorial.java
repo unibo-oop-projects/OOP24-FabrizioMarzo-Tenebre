@@ -20,7 +20,7 @@ import view.graphics_component.GraphicsSurvivor;
 import view.graphics_component.SwingGraphicsSurvivor;
 
 
-public class SceneTutorial {
+public class SwingSceneTutorial implements Scene {
 
     private JFrame frame;
     private SceneTutorialPanel panel;
@@ -29,7 +29,7 @@ public class SceneTutorial {
     private InputController inputContrl;
     private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
 
-    public SceneTutorial(final Level tutlevel,final int w, final int h){
+    public SwingSceneTutorial(final Level tutlevel,final int w, final int h){
 
         frame = new JFrame("L'armata delle Tenebre");
         frame.setSize(w,h);
