@@ -6,9 +6,7 @@ import game.entities_game.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
 import model.entities.survivor.Survivor;
-import model.entities.survivor.SurvivorFactory;
 import model.physics.physics_level.PhysicsLevelComponent;
-import model.physics.physics_level.PhysicsLevelTutComponent;
 
 /**
  * Represents the tutorial level of the game.
@@ -20,25 +18,26 @@ import model.physics.physics_level.PhysicsLevelTutComponent;
 public class TutorialLevel implements Level {
 
     // Size of the Level
-    private static final double TUTORIAL_LEVEL_WIDTH = 8000;   // 80 meters
-    private static final double TUTORIAL_LEVEL_HEIGHT = 2000;  // 20 meters
+    private double lvlWidth;   // 80 meters
+    private double lvlHeight;  // 20 meters
 
     // Level Bouding Box
     private BoundingBox bbox;
-    // Factory for create all Survivor in th elevel
-    private SurvivorFactory fact = new SurvivorFactory(); 
+    
     // THe only Survivor on the Game
-    private Survivor survivorCommon;
+    private Survivor surLv;
     // The physic on lthe level 
     private PhysicsLevelComponent physicLvComp;
 
     /**
      * Constructs the tutorial level with a preconfigured {@link IGameSurvivor}.
      */
-    public TutorialLevel(){
-        this.bbox = new RectBoundingBox(Pair.of(0.0,TUTORIAL_LEVEL_HEIGHT), Pair.of(TUTORIAL_LEVEL_WIDTH,0.0));
-        this.survivorCommon = fact.createCommonSurvivor(1000,20, Pair.of(100.0,550.0),Pair.of(50.0,0.0));
-        this.physicLvComp = new PhysicsLevelTutComponent();
+    public TutorialLevel(final Survivor surLv,final double lvlWidth,final double lvlHeight, final PhysicsLevelComponent physcLevel){
+        this.lvlWidth = lvlWidth;
+        this.lvlHeight = lvlHeight;
+        this.surLv = surLv;
+        this.physicLvComp = physcLevel;
+        this.bbox = new RectBoundingBox(Pair.of(0.0,this.lvlHeight), Pair.of(this.lvlWidth,0.0));
     }
 
     /**
@@ -47,7 +46,7 @@ public class TutorialLevel implements Level {
      * @return the survivor entity present in this tutorial level
      */
     public Survivor getSurvivorOnLevel(){
-        return this.survivorCommon;
+        return this.surLv;
     }
 
     /**
@@ -59,7 +58,7 @@ public class TutorialLevel implements Level {
      */
     @Override
     public void updateState(final int dt){
-        this.survivorCommon.updatePhysics(dt);
+        this.surLv.updatePhysics(dt);
         physicLvComp.updateLevel(this, dt);
     }
 
@@ -69,10 +68,10 @@ public class TutorialLevel implements Level {
     }
 
     public double getTutorialLevelWidth() {
-        return TUTORIAL_LEVEL_WIDTH;
+        return this.lvlWidth;
     }
 
     public double getTutorialLevelHeight() {
-        return TUTORIAL_LEVEL_HEIGHT;
+        return this.lvlHeight;
     }
 }

@@ -3,7 +3,7 @@ package game.engine;
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
 import model.level.Level;
-import model.level.TutorialLevel;
+import model.level.LevelFactory;
 import view.scene.Scene;
 import view.scene.SwingSceneTutorial;
 
@@ -18,6 +18,7 @@ public class GameEngine{
     private long period = 25;
     private Scene view ;
     private Level tutLevel;
+    private LevelFactory lvlFact= new LevelFactory();
     private InputController contrl;
 
      /**
@@ -28,7 +29,7 @@ public class GameEngine{
      */
     public void setup(){
         this.contrl = new KeyboardInputController();
-        tutLevel = new TutorialLevel();
+        tutLevel = lvlFact.createTutorialLevel();
         view = new SwingSceneTutorial(tutLevel,1200, 800);
     }
 
