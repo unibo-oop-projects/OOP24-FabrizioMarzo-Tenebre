@@ -18,7 +18,7 @@ public interface IGameSurvivor {
      *
      * @return the {@link Survivor} object representing the game survivor
      */
-    public Survivor getSurvivor();
+    Survivor getSurvivor();
 
     /**
      * Updates the survivor based on input from the controller.
@@ -26,7 +26,7 @@ public interface IGameSurvivor {
      *
      * @param controller the {@link InputController} that handles user input
      */
-    public void updateInput(final InputController controller);
+    void updateInput(final InputController controller);
 
     /**
      * Updates the graphics of the survivor.
@@ -34,6 +34,6 @@ public interface IGameSurvivor {
      *
      * @param g2d the {@link Graphics2D} object used for drawing the survivor's graphics
      */
-    public void updateGraphics(final GraphicsSurvivor grapSur);
+    void updateGraphics(final GraphicsSurvivor grapSur);
 
 }
