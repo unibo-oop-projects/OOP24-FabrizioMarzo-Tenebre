@@ -18,8 +18,8 @@ import model.physics.physics_level.PhysicsLevelComponent;
 public class TutorialLevel implements Level {
 
     // Size of the Level
-    private double lvlWidth;   // 80 meters
-    private double lvlHeight;  // 20 meters
+    private double lvlWidth;   
+    private double lvlHeight;  
 
     // Level Bouding Box
     private BoundingBox bbox;
