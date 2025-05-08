@@ -1,7 +1,9 @@
 package model.entities.survivor;
 
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.bounding_box.RectBoundingBox;
 import model.physics.physics_entities.PhysicsCommonComponent;
 
 /**
@@ -20,11 +22,15 @@ public class SurvivorFactory {
      * @return a new {@link Survivor} instance of type {@link Common}
      */
     public Survivor createCommonSurvivor(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-       return new Common(live,
-                         attack,
-                         pos, 
-                         vel,
-                         new PhysicsCommonComponent());
+        final int width = 50;
+        final int height = 175;
+       return new Common(live,attack,
+                         width,height,
+                         new MutablePair<>(pos.getLeft(),pos.getRight()),
+                         new MutablePair<>(vel.getLeft(),vel.getRight()),
+                         new PhysicsCommonComponent(),
+                         new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+height),
+                                             Pair.of(pos.getLeft()+width ,pos.getRight())));
     }
 
 }

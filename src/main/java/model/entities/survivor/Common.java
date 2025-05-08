@@ -1,11 +1,8 @@
 package model.entities.survivor;
 
-import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.BoundingBox;
-import model.bounding_box.RectBoundingBox;
 import model.physics.physics_entities.PhysicsSurvivorComponent;
-
 
 /**
  * Implementation of the {@link Survivor} interface.
@@ -17,6 +14,9 @@ public class Common implements Survivor{
 
     private final static int WIDTH=50;
     private final static int HEIGHT=175;
+
+    private int width;
+    private int height;
     private int live;
     private int attack;
     private Pair<Double,Double> pos;
@@ -34,17 +34,20 @@ public class Common implements Survivor{
      * @param pos    initial position (x, y)
      * @param vel    initial velocity (vx, vy); also used as base velocity
      */
-    public Common(final int health,final int attack, final Pair<Double,Double> pos, 
-                    final Pair<Double,Double> vel, final PhysicsSurvivorComponent physicComp) {
+    public Common(final int health,final int attack, 
+                 final int width, final int height,
+                 final Pair<Double,Double> pos,final Pair<Double,Double> vel,
+                 final PhysicsSurvivorComponent physicComp,
+                 final BoundingBox bbox) {
+
         this.live = health;
         this.attack = attack;
-        this.pos = new MutablePair<>(pos.getLeft(),pos.getRight());
-        this.vel = new MutablePair<>(vel.getLeft(),vel.getRight());
+        this.pos = pos;
+        this.vel = vel;
         this.velBase = vel;
         this.state = SurvivorState.IDLE;
-        this.bbox = new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+HEIGHT),
-                                        Pair.of(pos.getLeft()+WIDTH ,pos.getRight()));
-        this.physicComp = physicComp; // Setting the Physic of the survivor....
+        this.bbox = bbox;
+        this.physicComp = physicComp; 
     }
 
     /**
@@ -59,18 +62,60 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public int getLive() {
-        return this.live;
+    public void damageSuffer(final int dm) {
+        this.live = this.live-dm;
+    }
+    
+    @Override
+    public void updatePhysics(final int dt){
+        physicComp.updateSurvivor(this, dt);
+    }
+
+    @Override
+    public void updateBBox(Pair<Double, Double> newPos) {
+        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
+        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void damageSuffer(final int dm) {
-        this.live = this.live-dm;
+    public void setVelocity(final Pair<Double, Double> vel) {
+        this.vel = vel; 
+    }
+    
+    @Override
+    public void setPosition(Pair<Double, Double> pos) {
+        this.pos = pos;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setState(final SurvivorState newState) {
+        this.state = newState;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getLive() {
+        return this.live;
+    }
+
+
+    @Override
+    public int getWidth() {
+        return this.width;
+    }
+    
+    @Override
+    public int getHeight() {
+        return this.height;
+    }
 
     /**
      * {@inheritDoc}
@@ -92,14 +137,6 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public SurvivorState getState() {
-        return this.state;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Pair<Double, Double> getBaseSurvivorVel() {
         return this.velBase;
     }
@@ -108,34 +145,15 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public void setVelocity(final Pair<Double, Double> vel) {
-        this.vel = vel; 
+    public SurvivorState getState() {
+        return this.state;
     }
 
-    @Override
-    public void setPosition(Pair<Double, Double> pos) {
-        this.pos = pos;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setState(final SurvivorState newState) {
-        this.state = newState;
-    }
-    
     @Override
     public BoundingBox getBBox() {
         return this.bbox;
     }
 
-    @Override
-    public void updateBBox(Pair<Double, Double> newPos) {
-        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
-        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
-    }
-    
     /**
      * Generates a hash code based on survivor's health and attack.
      *
@@ -172,17 +190,4 @@ public class Common implements Survivor{
             return false;
         return true;
     }
-
-    public int getWidth() {
-        return Common.WIDTH;
-    }
-
-    public int getHeight() {
-        return Common.HEIGHT;
-    }
-
-    public void updatePhysics(final int dt){
-        physicComp.updateSurvivor(this, dt);
-    }
-
 }
