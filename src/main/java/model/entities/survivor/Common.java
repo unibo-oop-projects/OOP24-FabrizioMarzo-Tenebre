@@ -42,6 +42,8 @@ public class Common implements Survivor{
 
         this.live = health;
         this.attack = attack;
+        this.width = width;
+        this.height = height;
         this.pos = pos;
         this.vel = vel;
         this.velBase = vel;
