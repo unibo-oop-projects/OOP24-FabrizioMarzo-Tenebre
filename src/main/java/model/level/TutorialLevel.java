@@ -32,21 +32,32 @@ public class TutorialLevel implements Level {
     /**
      * Constructs the tutorial level with a preconfigured {@link IGameSurvivor}.
      */
-    public TutorialLevel(final Survivor surLv,final double lvlWidth,final double lvlHeight, final PhysicsLevelComponent physcLevel){
+    public TutorialLevel(final double lvlWidth,final double lvlHeight,
+                         final BoundingBox bbox,
+                        final PhysicsLevelComponent physcLevel,
+                        final Survivor surLv){
+
         this.lvlWidth = lvlWidth;
         this.lvlHeight = lvlHeight;
-        this.surLv = surLv;
+        this.bbox = bbox;
         this.physicLvComp = physcLevel;
-        this.bbox = new RectBoundingBox(Pair.of(0.0,this.lvlHeight), Pair.of(this.lvlWidth,0.0));
+        this.surLv = surLv;
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return the survivor entity present in this tutorial level
-     */
-    public Survivor getSurvivorOnLevel(){
-        return this.surLv;
+    @Override
+    public void updateLevelState(final int dt){
+        this.surLv.updatePhysics(dt);
+        physicLvComp.updateLevel(this, dt);
+    }
+
+    @Override
+    public double getTutorialLevelWidth() {
+        return this.lvlWidth;
+    }
+
+    @Override
+    public double getTutorialLevelHeight() {
+        return this.lvlHeight;
     }
 
     /**
@@ -57,21 +68,19 @@ public class TutorialLevel implements Level {
      * @param dt the time delta in milliseconds since the last update
      */
     @Override
-    public void updateState(final int dt){
-        this.surLv.updatePhysics(dt);
-        physicLvComp.updateLevel(this, dt);
-    }
-
-    @Override
     public BoundingBox getLevelBBox() {
         return this.bbox;
     }
 
-    public double getTutorialLevelWidth() {
-        return this.lvlWidth;
+    /**
+     * {@inheritDoc}
+     * 
+     * @return the survivor entity present in this tutorial level
+     */
+    @Override
+    public Survivor getSurvivorOnLevel(){
+        return this.surLv;
     }
 
-    public double getTutorialLevelHeight() {
-        return this.lvlHeight;
-    }
+
 }

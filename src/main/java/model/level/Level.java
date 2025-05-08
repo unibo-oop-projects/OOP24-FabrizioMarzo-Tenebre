@@ -13,13 +13,6 @@ import model.entities.survivor.Survivor;
 public interface Level {
 
     /**
-     * Returns the survivor entity associated with this level.
-     *
-     * @return the {@link IGameSurvivor} present in the level
-     */
-    Survivor getSurvivorOnLevel(); 
-
-    /**
      * Updates the state of the level.
      * <p>
      * This method is typically called to update all entities
@@ -27,12 +20,22 @@ public interface Level {
      *
      * @param dt the time delta in milliseconds since the last update
      */
-    void updateState(final int dt);
-
-    BoundingBox getLevelBBox();
+    void updateLevelState(final int dt);
 
     double getTutorialLevelWidth();
    
     double getTutorialLevelHeight();
+
+    BoundingBox getLevelBBox();
+    
+    /**
+     * Returns the survivor entity associated with this level.
+     *
+     * @return the {@link IGameSurvivor} present in the level
+     */
+    Survivor getSurvivorOnLevel(); 
+
+
+
     
 }
