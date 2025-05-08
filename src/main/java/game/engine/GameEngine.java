@@ -85,7 +85,7 @@ public class GameEngine{
      * @param elapsed the time elapsed since the previous update (in milliseconds)
      */
     protected void updateGame(final int elapsed){
-        tutLevel.updateState(elapsed);
+        tutLevel.updateLevelState(elapsed);
     }
 
     /**
