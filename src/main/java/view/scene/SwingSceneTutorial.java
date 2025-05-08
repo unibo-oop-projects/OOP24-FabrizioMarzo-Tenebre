@@ -83,7 +83,6 @@ public class SwingSceneTutorial implements Scene {
 
         private int w,h;
         private int levelw,levelh;
-        private int centerX,centerY;
         private double ratioX,ratioY;
         BoundingBox bbox = tutLevel.getLevelBBox();
         int x0 = this.getXinPixel(bbox.getULcorner());
@@ -111,9 +110,6 @@ public class SwingSceneTutorial implements Scene {
             System.out.println("RatioX " + ratioX);
             System.out.println("RatioiY" + ratioY);
 
-            centerX = w /2 ;
-            centerY = h /2 ;
-
             this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
@@ -130,11 +126,11 @@ public class SwingSceneTutorial implements Scene {
             System.out.println("Grandezza panel scale " + Math.abs(y1-y0));
 
             Graphics2D g2d = (Graphics2D) g ;
-            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,this.h);
+            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,this.h,this.ratioX,this.ratioY);
             gamSur.updateGraphics(graphSur);
 
-            g2d.setColor(Color.black);
-            g2d.setStroke(new BasicStroke(30));
+            g2d.setColor(Color.blue);
+            g2d.setStroke(new BasicStroke(5));
             g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
 
         }
@@ -153,11 +149,11 @@ public class SwingSceneTutorial implements Scene {
         public void keyTyped(KeyEvent e) {}
 
         private int getXinPixel(Pair<Double,Double> pos){
-            return (int) Math.round(centerX + pos.getLeft() * ratioX);
+            return (int) Math.round(pos.getLeft() * ratioX);
         }
 
         private int getYinPixel(Pair<Double,Double> pos){
-            return (int) Math.round(centerY - pos.getRight() * ratioY);
+            return (int) Math.round(pos.getRight() * ratioY);
         }
  
 
