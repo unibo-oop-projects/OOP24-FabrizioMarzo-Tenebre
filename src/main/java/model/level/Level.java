@@ -17,7 +17,7 @@ public interface Level {
      *
      * @return the {@link IGameSurvivor} present in the level
      */
-    public Survivor getSurvivorOnLevel(); 
+    Survivor getSurvivorOnLevel(); 
 
     /**
      * Updates the state of the level.
@@ -27,8 +27,12 @@ public interface Level {
      *
      * @param dt the time delta in milliseconds since the last update
      */
-    public void updateState(final int dt);
+    void updateState(final int dt);
 
-    public BoundingBox getLevelBBox();
+    BoundingBox getLevelBBox();
+
+    double getTutorialLevelWidth();
+   
+    double getTutorialLevelHeight();
     
 }
