@@ -12,23 +12,6 @@ public class RectBoundingBox implements BoundingBox {
         this.cornerBR = cornerBR;
     }
 
-    public Pair<Double, Double> getULcorner(){
-        return this.cornerUl;
-    }
-
-    public Pair<Double, Double> getBRcorner(){
-        return this.cornerBR;
-    }
-
-    
-    public void setUlcorner(Pair<Double, Double> cornerUl) {
-        this.cornerUl = cornerUl;
-    }
-    
-    public void setBRcorner(Pair<Double, Double> cornerBR) {
-        this.cornerBR = cornerBR;
-    }
-
     @Override
     public boolean isColliding(final Pair<Double, Double> otherUL,final Pair<Double, Double> otherBR) {
         final double tux = this.cornerUl.getLeft();
@@ -41,13 +24,35 @@ public class RectBoundingBox implements BoundingBox {
         final double obx = otherBR.getLeft();
         final double oby = otherBR.getRight();
 
-    
         boolean overlapY = tuy > oby && tby < ouy ;
         boolean overlapX = tux < obx && tbx > oux ; 
 
         System.out.println("overlapX " + overlapX + " overlapY " + overlapY);
         return overlapX && overlapY;
     }
+
+    @Override
+    public void setUlcorner(Pair<Double, Double> cornerUl) {
+        this.cornerUl = cornerUl;
+    }
+    
+    @Override
+    public void setBRcorner(Pair<Double, Double> cornerBR) {
+        this.cornerBR = cornerBR;
+    }
+
+    @Override
+    public Pair<Double, Double> getULcorner(){
+        return this.cornerUl;
+    }
+
+    @Override
+    public Pair<Double, Double> getBRcorner(){
+        return this.cornerBR;
+    }
+
+    
+
 
     
 }
