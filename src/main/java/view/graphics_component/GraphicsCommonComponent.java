@@ -16,13 +16,13 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent{
 
     private GraphicsEntities graphEnti = new GraphicsEntities();
     //private BufferedImage shadow;
-    private List<List<BufferedImage>> annimations;
+    private List<List<BufferedImage>> animations;
     private int aniIndex,aniTick,aniSpeed = 5;
 
     
     public GraphicsCommonComponent(final String nameClass) {
         System.err.println("Import the Image, and set all Animations");
-        this.annimations = graphEnti.loadSurvivorAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
+        this.animations = graphEnti.loadSurvivorAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
         //this.shadow = graphEnti.loadEntitiesShadow("Shadow");
     }
 
@@ -31,7 +31,7 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent{
         if(aniTick >= aniSpeed){
             aniTick = 0;
             aniIndex++;
-            int currentStateSize = annimations.get(surState).size();
+            int currentStateSize = animations.get(surState).size();
             if (aniIndex >= currentStateSize){
                 aniIndex = 0;
             }
@@ -42,7 +42,7 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent{
     public void update(Survivor sur, GraphicsSurvivor grySur) {
         int surState = sur.getState().getIndex();
         updateAnimations(surState);
-        grySur.drawSurvivor(sur, annimations.get(surState).get(aniIndex));
+        grySur.drawSurvivor(sur, animations.get(surState).get(aniIndex));
     }
     
 }
