@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 import input.input_component.InputSurvivorComponent;
 import input.input_controller.InputController;
 import model.entities.survivor.Survivor;
-import view.graphics_component.GraphicsSurvivor;
 import view.graphics_component.GraphicsSurvivorComponent;
+import view.graphics_entities.GraphicsSurvivor;
 
 /**
  * Implementation of the {@link IGameSurvivor} interface.

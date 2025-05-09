@@ -23,8 +23,8 @@ import java.awt.event.WindowEvent;
 import input.input_controller.InputController;
 import model.bounding_box.BoundingBox;
 import model.level.Level;
-import view.graphics_component.GraphicsSurvivor;
-import view.graphics_component.SwingGraphicsSurvivor;
+import view.graphics_entities.GraphicsSurvivor;
+import view.graphics_entities.SwingGraphicsSurvivor;
 
 
 public class SwingSceneTutorial implements Scene {
