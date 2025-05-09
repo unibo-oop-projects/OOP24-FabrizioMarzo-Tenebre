@@ -1,7 +1,5 @@
 package view.scene;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import game.entities_game.FactorySurvivorGame;
 import game.entities_game.IGameSurvivor;
+import game.level_game.FactoryLevelGame;
+import game.level_game.IGameLevel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,32 +19,42 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import input.input_controller.InputController;
-import model.bounding_box.BoundingBox;
 import model.level.Level;
 import view.graphics_entities.GraphicsSurvivor;
 import view.graphics_entities.SwingGraphicsSurvivor;
+import view.graphics_level.GraphicsLevel;
+import view.graphics_level.SwingGraphicsLevel;
+import view.graphics_util.IViewScale;
+import view.graphics_util.ViewScale;
 
 
 public class SwingSceneTutorial implements Scene {
 
     private JFrame frame;
     private SceneTutorialPanel panel;
-    private Level tutLevel;
+    private IGameLevel gamLvl;
     private IGameSurvivor gamSur;
     private InputController inputContrl;
     private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
+    private FactoryLevelGame factLvlGam = new FactoryLevelGame();
+    private IViewScale viewScale;
+    private int w,h;
 
     public SwingSceneTutorial(final Level tutlevel,final int w, final int h){
 
         frame = new JFrame("L'armata delle Tenebre");
-        frame.setSize(w,h);
         frame.setMinimumSize(new Dimension(w,h));
-        frame.setResizable(false);
+        frame.setResizable(true);
 
-        this.tutLevel = tutlevel;
-        gamSur = setGameSurvivor();
+        gamLvl = setGameLevel(tutlevel);
+        gamSur = setGameSurvivor(tutlevel);
 
-        panel = new SceneTutorialPanel(w,h);
+        this.w = w;
+        this.h = h;
+        this.viewScale = new ViewScale((int) tutlevel.getLevelHeight(), (int) tutlevel.getLevelWidth(), h, w);
+
+        panel = new SceneTutorialPanel();
+
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev){
@@ -64,14 +72,19 @@ public class SwingSceneTutorial implements Scene {
         try {
             SwingUtilities.invokeAndWait(()->{
                 frame.repaint();
+                viewScale.setNewRatio(panel.getHeight(), panel.getWidth());
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private IGameSurvivor setGameSurvivor(){
-        return factSurGam.gameSurvivorCommon(tutLevel.getSurvivorOnLevel());
+    private IGameSurvivor setGameSurvivor(final Level lvl){
+        return factSurGam.gameSurvivorCommon(lvl.getSurvivorOnLevel());
+    }
+
+    private IGameLevel setGameLevel(final Level lvl){
+        return factLvlGam.gameLevelTutorial(lvl);
     }
 
     public void setInputController(InputController inputContl){
@@ -81,58 +94,27 @@ public class SwingSceneTutorial implements Scene {
 
     public class SceneTutorialPanel extends JPanel implements KeyListener {
 
-        private int w,h;
-        private int levelw,levelh;
-        private double ratioX,ratioY;
-        BoundingBox bbox = tutLevel.getLevelBBox();
-        int x0 = this.getXinPixel(bbox.getULcorner());
-        int y0 = this.getYinPixel(bbox.getULcorner());
-        int x1 = this.getXinPixel(bbox.getBRcorner());
-        int y1 = this.getYinPixel(bbox.getBRcorner());
-
-        public SceneTutorialPanel(final int w, final int h){
-
-            this.h = h;
-            this.w = w;
-
-            System.out.println("Height panel " + h);
-            System.out.println("Width panel " + w);
-
-            this.levelh = (int) tutLevel.getTutorialLevelHeight();
-            this.levelw = (int) tutLevel.getTutorialLevelWidth();
-            
-            System.out.println("Height level " + levelh);
-            System.out.println("Width level " + levelw);
-
-            this.ratioX = (double) w / levelw;
-            this.ratioY = (double) h / levelh;
-
-            System.out.println("RatioX " + ratioX);
-            System.out.println("RatioiY" + ratioY);
-
+        public SceneTutorialPanel(){
+            setPanelSize();
             this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
         }
 
+        public void setPanelSize(){
+            Dimension size = new Dimension(w,h);
+            setPreferredSize(size);
+        }
+
         public void paintComponent(Graphics g){
         
-            int x0 = this.getXinPixel(bbox.getULcorner());
-            int y0 = this.getYinPixel(bbox.getULcorner());
-            int x1 = this.getXinPixel(bbox.getBRcorner());
-            int y1 = this.getYinPixel(bbox.getBRcorner());
-    
-            System.out.println("Altezza panel scale  " + (x1-x0));
-            System.out.println("Grandezza panel scale " + Math.abs(y1-y0));
-
             Graphics2D g2d = (Graphics2D) g ;
-            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,this.h,this.ratioX,this.ratioY);
+
+            GraphicsLevel graphLvl = new SwingGraphicsLevel(g2d, viewScale);
+            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,h,viewScale);
             gamSur.updateGraphics(graphSur);
-
-            g2d.setColor(Color.blue);
-            g2d.setStroke(new BasicStroke(5));
-            g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
-
+            gamLvl.updateGraphics(graphLvl);
+            System.out.println("New mode to Painting");
         }
 
         @Override
@@ -147,16 +129,6 @@ public class SwingSceneTutorial implements Scene {
 
         @Override
         public void keyTyped(KeyEvent e) {}
-
-        private int getXinPixel(Pair<Double,Double> pos){
-            return (int) Math.round(pos.getLeft() * ratioX);
-        }
-
-        private int getYinPixel(Pair<Double,Double> pos){
-            return (int) Math.round(pos.getRight() * ratioY);
-        }
- 
-
     }
 
 }
