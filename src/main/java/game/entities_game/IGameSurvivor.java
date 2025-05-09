@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import input.input_controller.InputController;
 import model.entities.survivor.Survivor;
-import view.graphics_entities.GraphicsSurvivor;
+import view.graphics.GraphicsSurvivor;
 
 /**
  * Interface that defines the behavior of a game survivor in the game.

@@ -1,7 +1,7 @@
 package game.level_game;
 
 import model.level.Level;
-import view.graphics_level.GraphicsLevel;
+import view.graphics.GraphicsLevel;
 
 public interface IGameLevel {
     

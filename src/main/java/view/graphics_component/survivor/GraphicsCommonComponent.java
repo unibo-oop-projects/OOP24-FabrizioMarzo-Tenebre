@@ -6,7 +6,7 @@ import model.entities.survivor.Survivor;
 
 import java.awt.image.BufferedImage;
 
-import view.graphics_entities.GraphicsSurvivor;
+import view.graphics.GraphicsSurvivor;
 import view.graphics_util.GraphicsEntities;
 
 public class GraphicsCommonComponent implements GraphicsSurvivorComponent{

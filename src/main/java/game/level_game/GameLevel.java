@@ -1,8 +1,8 @@
 package game.level_game;
 
 import model.level.Level;
+import view.graphics.GraphicsLevel;
 import view.graphics_component.level.GraphicsLevelComponent;
-import view.graphics_level.GraphicsLevel;
 
 public class GameLevel implements IGameLevel {
 

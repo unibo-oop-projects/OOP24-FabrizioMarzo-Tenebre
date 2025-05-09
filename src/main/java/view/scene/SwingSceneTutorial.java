@@ -20,10 +20,10 @@ import java.awt.event.WindowEvent;
 
 import input.input_controller.InputController;
 import model.level.Level;
-import view.graphics_entities.GraphicsSurvivor;
-import view.graphics_entities.SwingGraphicsSurvivor;
-import view.graphics_level.GraphicsLevel;
-import view.graphics_level.SwingGraphicsLevel;
+import view.graphics.GraphicsLevel;
+import view.graphics.GraphicsSurvivor;
+import view.graphics.SwingGraphicsLevel;
+import view.graphics.SwingGraphicsSurvivor;
 import view.graphics_util.IViewScale;
 import view.graphics_util.ViewScale;
 
