@@ -1,4 +1,4 @@
-package view.graphics_component;
+package view.graphics_component.survivor;
 
 import java.util.List;
 

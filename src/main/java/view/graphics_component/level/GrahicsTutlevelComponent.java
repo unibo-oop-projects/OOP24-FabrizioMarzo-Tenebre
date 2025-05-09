@@ -1,4 +1,4 @@
-package view.graphics_component;
+package view.graphics_component.level;
 
 import model.level.Level;
 import view.graphics_level.GraphicsLevel;

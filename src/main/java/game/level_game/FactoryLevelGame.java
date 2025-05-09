@@ -1,7 +1,7 @@
 package game.level_game;
 
 import model.level.Level;
-import view.graphics_component.GrahicsTutlevelComponent;
+import view.graphics_component.level.GrahicsTutlevelComponent;
 
 public class FactoryLevelGame {
     
