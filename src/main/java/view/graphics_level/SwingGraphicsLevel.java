@@ -3,27 +3,25 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import model.level.Level;
+import view.graphics_util.IViewScale;
 
 public class SwingGraphicsLevel implements GraphicsLevel {
 
     private Graphics2D g2d;
-    private double ratioX,ratioY;
+    private IViewScale viewScale;
 
-    public SwingGraphicsLevel(final Graphics2D g2d,final double ratioX, double ratioY) {
+    public SwingGraphicsLevel(final Graphics2D g2d,final IViewScale viewScale) {
         this.g2d = g2d;
-        this.ratioX = ratioX;
-        this.ratioY = ratioY;
+        this.viewScale = viewScale;
     }
 
     @Override
     public void drawLevel(final Level lvl) {
-       int x0 = getXinPixel(lvl.getLevelBBox().getULcorner());
-       int y0 = getYinPixel(lvl.getLevelBBox().getULcorner());
-       int x1 = getXinPixel(lvl.getLevelBBox().getBRcorner());
-       int y1 = getYinPixel(lvl.getLevelBBox().getBRcorner());
+       int x0 = viewScale.getXinPixel(lvl.getLevelBBox().getULcorner());
+       int y0 = viewScale.getYinPixel(lvl.getLevelBBox().getULcorner());
+       int x1 = viewScale.getXinPixel(lvl.getLevelBBox().getBRcorner());
+       int y1 = viewScale.getYinPixel(lvl.getLevelBBox().getBRcorner());
 
        g2d.setColor(Color.blue);
        g2d.setStroke(new BasicStroke(5));
@@ -31,12 +29,4 @@ public class SwingGraphicsLevel implements GraphicsLevel {
 
     }
 
-    private int getXinPixel(Pair<Double,Double> pos){
-        return (int) Math.round(pos.getLeft() * this.ratioX);
-    }
-
-    private int getYinPixel(Pair<Double,Double> pos){
-        return (int) Math.round(pos.getRight() * this.ratioY);
-    }
-    
 }

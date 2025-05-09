@@ -4,9 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import model.entities.survivor.Survivor;
+import view.graphics_util.IViewScale;
 
 public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 
@@ -14,28 +13,27 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
     private static final int WIDTH_IMAGE = 80; // Pixel 
     private static final int HEIGHT_IMAGE = 128; // Pixel 
     private int heightPixelPanel;
-    private double ratioX,ratioY;
+    private IViewScale viewScale;
 
     public SwingGraphicsSurvivor(final Graphics2D g2d, final int heightPixelPanel,
-                                final double ratioX ,final double ratioY) {
+                                final IViewScale viewScale) {
         this.g2d = g2d;
         this.heightPixelPanel = heightPixelPanel ;
-        this.ratioX = ratioX;
-        this.ratioY = ratioY;
+        this.viewScale = viewScale;
     }
 
     @Override
     public void drawSurvivor(final Survivor sur, final BufferedImage image) {
 
-        int scaleSurPosX = getXinPixel(sur.getCurrentPos());
-        int scaleSurPosY = heightPixelPanel-getYinPixel(sur.getCurrentPos());
+        int scaleSurPosX = viewScale.getXinPixel(sur.getCurrentPos());
+        int scaleSurPosY = heightPixelPanel-viewScale.getYinPixel(sur.getCurrentPos());
 
 
         System.out.println("Scale Width " + sur.getWidth());
         System.out.println("Scale Heigth" + sur.getHeight());
 
-        int scaleSurWidth = (int) Math.round(sur.getWidth() * this.ratioX);
-        int scaleSurHeight = (int) Math.round(sur.getHeight()* this.ratioY);
+        int scaleSurWidth = (int) Math.round(sur.getWidth() * viewScale.getRatioX());
+        int scaleSurHeight = (int) Math.round(sur.getHeight()* viewScale.getRatioY());
 
         System.out.println("Scale Width " + scaleSurWidth);
         System.out.println("Scale Heigth" + scaleSurHeight);
@@ -51,8 +49,8 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         g2d.setColor(Color.red);
         g2d.drawOval(scaleSurPosX, scaleSurPosY, 5, 5);
         
-        int scaleBboxUx = getXinPixel(sur.getBBox().getULcorner());
-        int scaleBboxUy = heightPixelPanel - getYinPixel(sur.getBBox().getULcorner());
+        int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
+        int scaleBboxUy = heightPixelPanel - viewScale.getYinPixel(sur.getBBox().getULcorner());
 
         g2d.setColor(Color.blue);
         g2d.drawOval(scaleBboxUx, scaleBboxUy, 5, 5);
@@ -62,12 +60,4 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 
     }
 
-    private int getXinPixel(Pair<Double,Double> pos){
-        return (int) Math.round(pos.getLeft() * this.ratioX);
-    }
-
-    private int getYinPixel(Pair<Double,Double> pos){
-        return (int) Math.round(pos.getRight() * this.ratioY);
-    }
-    
 }
