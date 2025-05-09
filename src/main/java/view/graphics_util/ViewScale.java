@@ -16,6 +16,8 @@ public class ViewScale implements IViewScale {
         this.levelW = levelW;
         this.panelH = panelH;
         this.panleW = panleW;
+        this.ratioX = (double) panleW / levelW;
+        this.ratioY = (double) panelH / levelH;
     }
 
     public void setNewRatio(final int newPanelH, final int newPanelW){
@@ -30,5 +32,17 @@ public class ViewScale implements IViewScale {
     public int getYinPixel(Pair<Double,Double> pos){
         return (int) Math.round(pos.getRight() * ratioY);
     }
+
+    @Override
+    public double getRatioX() {
+        return this.ratioX;
+    }
+
+    @Override
+    public double getRatioY() {
+        return this.ratioY;
+    }
+
+    
 
 }

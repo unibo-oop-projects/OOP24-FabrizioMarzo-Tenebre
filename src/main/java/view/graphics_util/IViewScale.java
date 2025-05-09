@@ -10,4 +10,8 @@ public interface IViewScale {
 
     int getYinPixel(final Pair<Double,Double> pos);
 
+    double getRatioX();
+
+    double getRatioY();
+
 }
