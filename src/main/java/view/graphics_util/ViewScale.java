@@ -6,23 +6,19 @@ public class ViewScale implements IViewScale {
 
     private int levelH; 
     private int levelW;
-    private int panelH;
-    private int panleW;
     private double ratioX;
     private double ratioY;
 
     public ViewScale(final int levelH, final int levelW, final int panelH, final int panleW) {
         this.levelH = levelH;
         this.levelW = levelW;
-        this.panelH = panelH;
-        this.panleW = panleW;
         this.ratioX = (double) panleW / levelW;
         this.ratioY = (double) panelH / levelH;
     }
 
     public void setNewRatio(final int newPanelH, final int newPanelW){
-        this.ratioX = (double) panleW / levelW;
-        this.ratioY = (double) panelH / levelH;
+        this.ratioX = (double) newPanelW / levelW;
+        this.ratioY = (double) newPanelH / levelH;
     }
 
     public int getXinPixel(final Pair<Double,Double> pos){
