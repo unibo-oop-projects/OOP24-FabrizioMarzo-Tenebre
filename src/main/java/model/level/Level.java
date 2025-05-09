@@ -22,9 +22,9 @@ public interface Level {
      */
     void updateLevelState(final int dt);
 
-    double getTutorialLevelWidth();
+    double getLevelWidth();
    
-    double getTutorialLevelHeight();
+    double getLevelHeight();
 
     BoundingBox getLevelBBox();
     

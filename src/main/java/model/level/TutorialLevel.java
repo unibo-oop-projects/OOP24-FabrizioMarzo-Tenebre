@@ -48,12 +48,12 @@ public class TutorialLevel implements Level {
     }
 
     @Override
-    public double getTutorialLevelWidth() {
+    public double getLevelWidth() {
         return this.lvlWidth;
     }
 
     @Override
-    public double getTutorialLevelHeight() {
+    public double getLevelHeight() {
         return this.lvlHeight;
     }
 
