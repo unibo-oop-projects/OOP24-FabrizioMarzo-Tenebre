@@ -118,8 +118,12 @@ public class GraphicsEntities {
                     height_frame
                 );
                 aniRow.add(frame);
+                //System.out.println(frame.getColorModel().toString());
+                // for (int x = 0; x < frame.getWidth(); x++)
+                //     for (int y = 0; y < frame.getHeight(); y++)
+                //         System.out.println(frame.getRGB(x, y));
             }
-    
+            
             allAnimations.add(aniRow); 
         }
         return allAnimations;
