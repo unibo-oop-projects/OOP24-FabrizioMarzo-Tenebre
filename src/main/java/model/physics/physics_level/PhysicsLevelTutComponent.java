@@ -32,7 +32,6 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         
             // Applica la posizione corretta
             lv.getSurvivorOnLevel().setPosition(Pair.of(posX, posY));
-            lv.getSurvivorOnLevel().updateBBox(Pair.of(posX, posY));
 
             // Ferma il movimento (facoltativo)
             lv.getSurvivorOnLevel().setVelocity(Pair.of(0.0, 0.0));
