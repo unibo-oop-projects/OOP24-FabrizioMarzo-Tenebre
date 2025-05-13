@@ -3,6 +3,7 @@ package view.graphics_util;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -102,13 +103,14 @@ public class LoadAnimations {
     }
 
     private List<List<BufferedImage>> loadBox(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img){
+        
         List<List<BufferedImage>> allAnimations = new ArrayList<>();
         var numCol = numColRow.getLeft();
         var numRow = numColRow.getRight();
 
-        // I Begin of the first row 
+        // Begin of the first row 
         for (int j = 0; j < numRow; j++) {
-            List<BufferedImage> aniRow = new ArrayList<>(); // Create the first lis of image 
+            List<BufferedImage> aniRow = new ArrayList<>(); // Create the first list of image 
     
             for (int i = 0; i < numCol; i++) {
                 BufferedImage frame = img.getSubimage(
@@ -117,7 +119,12 @@ public class LoadAnimations {
                     width_frame,
                     height_frame
                 );
-                aniRow.add(getBBoxImage(frame));
+
+                Optional<BufferedImage> subImage = getBBoxImage(frame);
+                if (subImage.isEmpty())
+                    break;
+
+                aniRow.add(subImage.get());
             }
             allAnimations.add(aniRow); 
         }
@@ -125,7 +132,8 @@ public class LoadAnimations {
     }
 
 
-    private BufferedImage getBBoxImage(final BufferedImage img){
+    private Optional<BufferedImage> getBBoxImage(final BufferedImage img){
+
         int width = img.getWidth();
         int height = img.getHeight();
         int top = height, bottom = 0, left = width, right = 0;
@@ -142,8 +150,12 @@ public class LoadAnimations {
                 }
             }
         }
-        return img.getSubimage(left, top, right - left + 1, bottom - top + 1);
-    }
 
+        if (top == height && bottom == 0 && left == width && right == 0 )
+            return Optional.empty();
+
+        BufferedImage frame = img.getSubimage(left, top, right - left + 1, bottom - top + 1);
+        return Optional.of(frame);
+    }
 
 }
