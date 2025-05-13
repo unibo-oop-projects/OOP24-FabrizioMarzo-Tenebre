@@ -111,7 +111,7 @@ public class SwingSceneTutorial implements Scene {
             Graphics2D g2d = (Graphics2D) g ;
 
             GraphicsLevel graphLvl = new SwingGraphicsLevel(g2d, viewScale);
-            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,h,viewScale);
+            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,viewScale);
             gamSur.updateGraphics(graphSur);
             gamLvl.updateGraphics(graphLvl);
             System.out.println("New mode to Painting");
