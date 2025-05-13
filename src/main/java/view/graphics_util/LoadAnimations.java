@@ -72,7 +72,8 @@ public class LoadAnimations {
      *         if the image could not be loaded.
      */
     public BufferedImage loadEntitiesShadow(final String nameObject) {
-        return impImgPNG.imp(LEVEL_OBJECT_PATH + nameObject);
+        Optional<BufferedImage> subImage = getBBoxImage(impImgPNG.imp(LEVEL_OBJECT_PATH + nameObject));
+        return subImage.get();
     }
 
     private Pair<Integer, Integer> numColRow(final int width_frame, final int height_frame, final BufferedImage img) {
