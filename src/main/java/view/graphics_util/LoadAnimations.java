@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
  * shadows for level objects.
  * 
  */
-public class GraphicsEntities {
+public class LoadAnimations {
 
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
