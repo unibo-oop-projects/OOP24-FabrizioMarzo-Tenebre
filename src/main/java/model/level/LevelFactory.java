@@ -13,15 +13,13 @@ public class LevelFactory {
 
     public Level createTutorialLevel(){
         Survivor sur  = surFact.createCommonSurvivor(1000,20, Pair.of(1000.0,1000.0),Pair.of(200.0,0.0));
-        final Double lvlWidth = 8000d;
-        final Double lvlHeight = 4500d;
+        final Double lvlWidth = 4000d;
+        final Double lvlHeight = 2500d;
         return new TutorialLevel(lvlWidth,
                                 lvlHeight,
                                 new RectBoundingBox(Pair.of(0.0,lvlHeight), Pair.of(lvlWidth,0.0)),
                                 new PhysicsLevelTutComponent(),
                                 sur);
     }
-
-
 
 }
