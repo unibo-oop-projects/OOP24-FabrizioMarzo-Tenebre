@@ -20,7 +20,7 @@ public class GraphicsEntities {
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
-    private final ImportImage impImg = new ImportImagePNG() ;
+    private final ImportImage impImgPNG = new ImportImagePNG() ;
 
     /**
      * Loads the animation frames for a survivor character.
@@ -71,44 +71,44 @@ public class GraphicsEntities {
      *         if the image could not be loaded.
      */
     public BufferedImage loadEntitiesShadow(final String nameObject) {
-        return impImg.imp(LEVEL_OBJECT_PATH + nameObject);
+        return impImgPNG.imp(LEVEL_OBJECT_PATH + nameObject);
     }
 
     private Pair<Integer, Integer> numColRow(final int width_frame, final int height_frame, final BufferedImage img) {
         int columns = img.getWidth() / width_frame;
         int rows = img.getHeight() / height_frame;
 
-        // Verifica che l'immagine sia divisibile esattamente in frame
+        // Check if the image is visible secondly the frame 
         if (img.getWidth() % width_frame != 0 || img.getHeight() % height_frame != 0) {
             System.err.println("Image dimensions are not divisible by the frame size.");
-            return Pair.of(0, 0); // Restituisce una coppia vuota per evitare problemi successivi
+            return Pair.of(0, 0); // Return empty Pair 
         }
 
         return Pair.of(columns, rows);
     }
 
     private List<List<BufferedImage>> loadAnimations(final String pathPrefix, final String name, final int width_frame, final int height_frame) {
-        var img = impImg.imp(pathPrefix + name);
+        var img = impImgPNG.imp(pathPrefix + name);
         
-        if (img == null) {
+        // Check if the sprite image is load corretly 
+        if (img == null) { 
             System.err.println("Image not found: " + pathPrefix + name);
-            return new ArrayList<>(); // Restituisce una lista vuota in caso di errore
+            return new ArrayList<>(); // Return the list empty of animations
         }
         
+        // If the image is load corretly found his col and row 
         var numCR = this.numColRow(width_frame, height_frame, img);
-        return this.load(numCR, width_frame, height_frame, img);
+        return this.loadBox(numCR, width_frame, height_frame, img);
     }
 
-
-
-
-    private List<List<BufferedImage>> load(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img){
+    private List<List<BufferedImage>> loadBox(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img){
         List<List<BufferedImage>> allAnimations = new ArrayList<>();
         var numCol = numColRow.getLeft();
         var numRow = numColRow.getRight();
 
+        // I Begin of the first row 
         for (int j = 0; j < numRow; j++) {
-            List<BufferedImage> aniRow = new ArrayList<>();
+            List<BufferedImage> aniRow = new ArrayList<>(); // Create the first lis of image 
     
             for (int i = 0; i < numCol; i++) {
                 BufferedImage frame = img.getSubimage(
@@ -117,15 +117,33 @@ public class GraphicsEntities {
                     width_frame,
                     height_frame
                 );
-                aniRow.add(frame);
-                //System.out.println(frame.getColorModel().toString());
-                // for (int x = 0; x < frame.getWidth(); x++)
-                //     for (int y = 0; y < frame.getHeight(); y++)
-                //         System.out.println(frame.getRGB(x, y));
+                aniRow.add(getBBoxImage(frame));
             }
-            
             allAnimations.add(aniRow); 
         }
         return allAnimations;
     }
+
+
+    private BufferedImage getBBoxImage(final BufferedImage img){
+        int width = img.getWidth();
+        int height = img.getHeight();
+        int top = height, bottom = 0, left = width, right = 0;
+
+        for (int y = 0; y < height ; y++ ){
+            for ( int x = 0 ; x < width ; x++){
+                int rgb = img.getRGB(x, y);
+
+                if (rgb != 0) { 
+                    if (x < left) left = x;
+                    if (x > right) right = x;
+                    if (y < top) top = y;
+                    if (y > bottom) bottom = y;
+                }
+            }
+        }
+        return img.getSubimage(left, top, right - left + 1, bottom - top + 1);
+    }
+
+
 }
