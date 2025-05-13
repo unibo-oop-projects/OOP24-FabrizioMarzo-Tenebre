@@ -26,8 +26,6 @@ public interface Survivor {
     
     void updatePhysics(final int dt);
     
-    void updateBBox(final Pair<Double,Double> newPos);
-
     /**
      * Sets the survivor's velocity.
      *

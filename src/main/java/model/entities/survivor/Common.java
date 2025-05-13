@@ -73,12 +73,6 @@ public class Common implements Survivor{
         physicComp.updateSurvivor(this, dt);
     }
 
-    @Override
-    public void updateBBox(Pair<Double, Double> newPos) {
-        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
-        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -90,8 +84,14 @@ public class Common implements Survivor{
     @Override
     public void setPosition(Pair<Double, Double> pos) {
         this.pos = pos;
+        this.updateBBox(pos);
     }
     
+    private void updateBBox(Pair<Double, Double> newPos) {
+        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
+        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
+    }
+
     /**
      * {@inheritDoc}
      */
