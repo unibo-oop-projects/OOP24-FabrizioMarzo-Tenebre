@@ -4,21 +4,21 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ViewScale implements IViewScale {
 
-    private int levelH; 
-    private int levelW;
+    private int modelH; 
+    private int modelW;
     private double ratioX;
     private double ratioY;
 
-    public ViewScale(final int levelH, final int levelW, final int panelH, final int panleW) {
-        this.levelH = levelH;
-        this.levelW = levelW;
-        this.ratioX = (double) panleW / levelW;
-        this.ratioY = (double) panelH / levelH;
+    public ViewScale(final int modelH, final int modelW, final int viewH, final int viewW) {
+        this.modelH = modelH;
+        this.modelW = modelW;
+        this.ratioX = (double) viewW / modelW;
+        this.ratioY = (double) viewH / modelH;
     }
 
     public void setNewRatio(final int newPanelH, final int newPanelW){
-        this.ratioX = (double) newPanelW / levelW;
-        this.ratioY = (double) newPanelH / levelH;
+        this.ratioX = (double) newPanelW / modelW;
+        this.ratioY = (double) newPanelH / modelH;
     }
 
     public int getXinPixel(final Pair<Double,Double> pos){
