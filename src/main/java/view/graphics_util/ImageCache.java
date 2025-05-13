@@ -19,7 +19,7 @@ import java.util.Map;
  * </p>
  */
 public class ImageCache {
-    private static final Map<String, BufferedImage> imageCache = new HashMap<>();
+    private final Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /**
      * Checks if the image is already cached.
