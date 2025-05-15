@@ -8,9 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import game.game_entities.FactorySurvivorGame;
-import game.game_entities.IGameSurvivor;
-import game.game_level.FactoryLevelGame;
 import game.game_level.IGameLevel;
 
 import java.awt.event.KeyEvent;
@@ -19,7 +16,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import input.input_controller.InputController;
-import model.level.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics.GraphicsSurvivor;
 import view.graphics.SwingGraphicsLevel;
@@ -32,26 +28,22 @@ public class SwingSceneTutorial implements Scene {
 
     private JFrame frame;
     private SceneTutorialPanel panel;
-    private IGameLevel gamLvl;
-    private IGameSurvivor gamSur;
+    private IGameLevel tutLevel;
     private InputController inputContrl;
-    private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
-    private FactoryLevelGame factLvlGam = new FactoryLevelGame();
     private IViewScale viewScale;
     private int w,h;
 
-    public SwingSceneTutorial(final Level tutlevel,final int w, final int h){
+    public SwingSceneTutorial(final IGameLevel tutLevel,final InputController inputContrl ,final int w, final int h){
 
         frame = new JFrame("L'armata delle Tenebre");
         frame.setMinimumSize(new Dimension(w,h));
         frame.setResizable(true);
 
-        gamLvl = setGameLevel(tutlevel);
-        gamSur = setGameSurvivor(tutlevel);
-
+        this.tutLevel = tutLevel;
+        this.inputContrl = inputContrl;
         this.w = w;
         this.h = h;
-        this.viewScale = new ViewScale((int) tutlevel.getLevelHeight(), (int) tutlevel.getLevelWidth(), h, w);
+        this.viewScale = new ViewScale((int) tutLevel.getLevel().getLevelHeight(), (int) tutLevel.getLevel().getLevelWidth(), h, w);
 
         panel = new SceneTutorialPanel();
 
@@ -79,19 +71,6 @@ public class SwingSceneTutorial implements Scene {
         }
     }
 
-    private IGameSurvivor setGameSurvivor(final Level lvl){
-        return factSurGam.gameSurvivorCommon(lvl.getSurvivorOnLevel());
-    }
-
-    private IGameLevel setGameLevel(final Level lvl){
-        return factLvlGam.gameLevelTutorial(lvl);
-    }
-
-    public void setInputController(InputController inputContl){
-        gamSur.updateInput(inputContl);
-        this.inputContrl = inputContl;
-    }
-
     public class SceneTutorialPanel extends JPanel implements KeyListener {
 
         public SceneTutorialPanel(){
@@ -112,8 +91,8 @@ public class SwingSceneTutorial implements Scene {
 
             GraphicsLevel graphLvl = new SwingGraphicsLevel(g2d, viewScale);
             GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,viewScale);
-            gamSur.updateGraphics(graphSur);
-            gamLvl.updateGraphics(graphLvl);
+            tutLevel.getGameSurvivor().updateGraphics(graphSur);
+            tutLevel.updateGraphics(graphLvl);
             System.out.println("New mode to Painting");
         }
 
