@@ -28,7 +28,7 @@ public class ViewScale implements IViewScale {
         return (int) Math.round(pos.getLeft() * ratioX);
     }
 
-    public int getYinPixel(Pair<Double,Double> pos){
+    public int getYinPixel(final Pair<Double,Double> pos){
         return (int) Math.round(pos.getRight() * ratioY);
     }
 

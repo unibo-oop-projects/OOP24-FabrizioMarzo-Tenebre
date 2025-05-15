@@ -39,7 +39,7 @@ public class GraphicsCommonComponent implements GraphicsSurvivorComponent{
     }
 
     @Override
-    public void update(Survivor sur, GraphicsSurvivor grySur) {
+    public void update(final Survivor sur,final GraphicsSurvivor grySur) {
         int surState = sur.getState().getIndex();
         updateAnimations(surState);
         grySur.drawSurvivor(sur, animations.get(surState).get(aniIndex));

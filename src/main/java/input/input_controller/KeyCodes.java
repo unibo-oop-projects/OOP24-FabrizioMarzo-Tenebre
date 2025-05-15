@@ -30,7 +30,7 @@ public enum KeyCodes {
      *
      * @param keyCode the key code associated with this direction
      */
-    KeyCodes(int keyCode) {
+    KeyCodes(final int keyCode) {
         this.keyCode = keyCode;
     }
     

@@ -82,12 +82,12 @@ public class Common implements Survivor{
     }
     
     @Override
-    public void setPosition(Pair<Double, Double> pos) {
+    public void setPosition(final Pair<Double, Double> pos) {
         this.pos = pos;
         this.updateBBox(pos);
     }
     
-    private void updateBBox(Pair<Double, Double> newPos) {
+    private void updateBBox(final Pair<Double, Double> newPos) {
         this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
         this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
     }
@@ -178,7 +178,7 @@ public class Common implements Survivor{
      * @return true if the two survivors are equal, false otherwise
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)

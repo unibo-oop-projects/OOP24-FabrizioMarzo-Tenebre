@@ -29,7 +29,7 @@ public class TutorialState implements GameState{
     }
 
     @Override
-    public void updateGame(int elapsed) {
+    public void updateGame(final int elapsed) {
         tutLevel.getLevel().updateLevelState(elapsed);
     }
 

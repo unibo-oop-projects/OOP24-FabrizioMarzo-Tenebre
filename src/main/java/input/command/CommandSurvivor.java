@@ -20,7 +20,7 @@ public class CommandSurvivor {
      * 
      * <p>The command is executed by invoking {@code accept} on the provided Consumer.</p>
      */
-    public static void issue(final Survivor sur, Consumer<Survivor> command){
+    public static void issue(final Survivor sur,final Consumer<Survivor> command){
         command.accept(sur);
     }
     

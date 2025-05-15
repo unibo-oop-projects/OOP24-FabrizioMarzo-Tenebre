@@ -53,7 +53,7 @@ public enum SurvivorState {
      *
      * @param index the unique index associated with the state
      */
-    SurvivorState(int index) {
+    SurvivorState(final int index) {
         this.index = index;
     }
 

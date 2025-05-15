@@ -13,7 +13,7 @@ public class GameLevel implements IGameLevel {
     private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
     private IGameSurvivor gamSur;
     
-    public GameLevel(Level lvl, GraphicsLevelComponent imgLvl) {
+    public GameLevel(final Level lvl,final GraphicsLevelComponent imgLvl) {
         this.lvl = lvl;
         this.imgLvl = imgLvl;
         this.gamSur = setGameSurvivor();

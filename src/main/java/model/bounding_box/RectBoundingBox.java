@@ -32,12 +32,12 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     @Override
-    public void setUlcorner(Pair<Double, Double> cornerUl) {
+    public void setUlcorner(final Pair<Double, Double> cornerUl) {
         this.cornerUl = cornerUl;
     }
     
     @Override
-    public void setBRcorner(Pair<Double, Double> cornerBR) {
+    public void setBRcorner(final Pair<Double, Double> cornerBR) {
         this.cornerBR = cornerBR;
     }
 

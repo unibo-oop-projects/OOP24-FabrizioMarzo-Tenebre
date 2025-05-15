@@ -6,9 +6,9 @@ public interface BoundingBox {
 
     boolean isColliding(final Pair<Double,Double> cornerUL,final Pair<Double,Double> cornerBR );
     
-    void setUlcorner(Pair<Double, Double> cornerUl);
+    void setUlcorner(final Pair<Double, Double> cornerUl);
         
-    void setBRcorner(Pair<Double, Double> cornerBR);
+    void setBRcorner(final Pair<Double, Double> cornerBR);
 
     Pair<Double, Double> getULcorner();
 

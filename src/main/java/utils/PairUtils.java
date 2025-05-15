@@ -17,7 +17,7 @@ public class PairUtils {
      * @param pair2 the second pair of values (x2, y2)
      * @return a new {@link Pair} representing the sum (x1 + x2, y1 + y2)
      */
-    public static Pair<Double, Double> sum(Pair<Double, Double> pair1, Pair<Double, Double> pair2) {
+    public static Pair<Double, Double> sum(final Pair<Double, Double> pair1,final Pair<Double, Double> pair2) {
         double x = pair1.getLeft() + pair2.getLeft();
         double y = pair1.getRight() + pair2.getRight();
         return Pair.of(x, y);
@@ -30,7 +30,7 @@ public class PairUtils {
      * @param value the scalar to multiply by
      * @return a new {@link Pair} representing the scaled vector (x * value, y * value)
      */
-    public static Pair<Double, Double> mul(Pair<Double, Double> pair, double value) {
+    public static Pair<Double, Double> mul(final Pair<Double, Double> pair,final double value) {
         double x = pair.getLeft() * value;
         double y = pair.getRight() * value;
         return Pair.of(x, y);

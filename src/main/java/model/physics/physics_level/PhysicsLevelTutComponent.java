@@ -7,7 +7,7 @@ import model.level.Level;
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
     @Override
-    public void updateLevel(Level lv, int dt) {
+    public void updateLevel(final Level lv,final int dt) {
         Pair<Double,Double> checkUL = Pair.of(lv.getSurvivorOnLevel().getBBox().getULcorner().getLeft() +  lv.getSurvivorOnLevel().getWidth()
                                              ,lv.getSurvivorOnLevel().getBBox().getULcorner().getRight() - lv.getSurvivorOnLevel().getHeight());
 

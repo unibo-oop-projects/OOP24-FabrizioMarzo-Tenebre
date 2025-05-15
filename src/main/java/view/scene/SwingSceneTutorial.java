@@ -85,7 +85,7 @@ public class SwingSceneTutorial implements Scene {
             setPreferredSize(size);
         }
 
-        public void paintComponent(Graphics g){
+        public void paintComponent(final Graphics g){
         
             Graphics2D g2d = (Graphics2D) g ;
 
