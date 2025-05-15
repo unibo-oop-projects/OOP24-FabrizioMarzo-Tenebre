@@ -1,6 +1,5 @@
 package view.graphics;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -24,8 +23,8 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         int scaleSurPosX = viewScale.getXinPixel(sur.getCurrentPos());
         int scaleSurPosY = viewScale.getViewHeight()-viewScale.getYinPixel(sur.getCurrentPos());
 
-        System.out.println("Scale Width " + sur.getWidth());
-        System.out.println("Scale Heigth" + sur.getHeight());
+        System.out.println("Not Scale Width " + sur.getWidth());
+        System.out.println("Not Scale Heigth" + sur.getHeight());
 
         int scaleSurWidth = (int) Math.round(sur.getWidth() * viewScale.getRatioX());
         int scaleSurHeight = (int) Math.round(sur.getHeight()* viewScale.getRatioY());
@@ -35,20 +34,9 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         
         // Draw the Survivor
         g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, scaleSurWidth, scaleSurHeight, null);
-
-        // Draw the Image BoundingBox
-        g2d.setColor(Color.red);
-        g2d.drawRect(scaleSurPosX, scaleSurPosY-scaleSurHeight,scaleSurWidth, scaleSurHeight);
-
-        // // Draw the position of the Survivor
-        g2d.setColor(Color.red);
-        g2d.drawOval(scaleSurPosX, scaleSurPosY, 5, 5);
-        
+            
         int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
         int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(sur.getBBox().getULcorner());
-
-        g2d.setColor(Color.blue);
-        g2d.drawOval(scaleBboxUx, scaleBboxUy, 5, 5);
 
         g2d.setColor(Color.blue);
         g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
