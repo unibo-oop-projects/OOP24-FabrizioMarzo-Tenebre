@@ -6,9 +6,9 @@ public class GameEngine{
     private long period = 25;
     private GameState gameState;
 
-    public void setup(final GameState gState){
-        this.gameState = gState;
-        gState.setUp();
+    public void setup(final GameState gameState){
+        this.gameState = gameState;
+        this.gameState.setUp();
     }
 
     public void mainLoop(){
@@ -24,7 +24,7 @@ public class GameEngine{
         }
     }
 
-    protected void waitForNextFrame(long current){
+    protected void waitForNextFrame(final long current){
         long dt = System.currentTimeMillis() - current;
         if (dt < period){
                 try {
