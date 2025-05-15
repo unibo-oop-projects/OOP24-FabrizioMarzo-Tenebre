@@ -24,13 +24,13 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         int scaleSurPosY = viewScale.getViewHeight()-viewScale.getYinPixel(sur.getCurrentPos());
 
         System.out.println("Not Scale Width " + sur.getWidth());
-        System.out.println("Not Scale Heigth" + sur.getHeight());
+        System.out.println("Not Scale Heigth " + sur.getHeight());
 
         int scaleSurWidth = (int) Math.round(sur.getWidth() * viewScale.getRatioX());
         int scaleSurHeight = (int) Math.round(sur.getHeight()* viewScale.getRatioY());
 
         System.out.println("Scale Width " + scaleSurWidth);
-        System.out.println("Scale Heigth" + scaleSurHeight);
+        System.out.println("Scale Heigth " + scaleSurHeight);
         
         // Draw the Survivor
         g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, scaleSurWidth, scaleSurHeight, null);
@@ -38,6 +38,7 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
         int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(sur.getBBox().getULcorner());
 
+        // Draw the Survivor BoundingBox
         g2d.setColor(Color.blue);
         g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
 
