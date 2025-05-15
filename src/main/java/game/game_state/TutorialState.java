@@ -1,36 +1,36 @@
 package game.game_state;
 
+import game.game_level.FactoryLevelGame;
+import game.game_level.IGameLevel;
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
-import model.level.Level;
-import model.level.LevelFactory;
 import view.scene.Scene;
 import view.scene.SwingSceneTutorial;
 
 public class TutorialState implements GameState{
 
     private Scene view ;
-    private Level tutLevel;
-    private LevelFactory lvlFact= new LevelFactory();
+    private IGameLevel tutLevel;
+    private FactoryLevelGame lvlGameFct = new FactoryLevelGame();
     private InputController contrl;
 
 
     @Override
     public void setUp() {
         this.contrl = new KeyboardInputController();
-        tutLevel = lvlFact.createTutorialLevel();
-        view = new SwingSceneTutorial(tutLevel,1200, 800);
+        this.tutLevel = lvlGameFct.gameLevelTutorial();
+        this.view = new SwingSceneTutorial(tutLevel,contrl,1200, 800);
     }
 
     @Override
     public void processInput() {
-        view.setInputController(contrl);
+        tutLevel.getGameSurvivor().updateInput(contrl);
         System.out.println("New controller");
     }
 
     @Override
     public void updateGame(int elapsed) {
-        tutLevel.updateLevelState(elapsed);
+        tutLevel.getLevel().updateLevelState(elapsed);
     }
 
     @Override
