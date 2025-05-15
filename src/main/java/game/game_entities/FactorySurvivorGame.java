@@ -1,4 +1,4 @@
-package game.entities_game;
+package game.game_entities;
 
 import input.input_component.InputCommonComponent;
 import model.entities.survivor.Survivor;

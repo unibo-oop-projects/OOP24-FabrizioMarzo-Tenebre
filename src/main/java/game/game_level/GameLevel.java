@@ -1,4 +1,4 @@
-package game.level_game;
+package game.game_level;
 
 import model.level.Level;
 import view.graphics.GraphicsLevel;

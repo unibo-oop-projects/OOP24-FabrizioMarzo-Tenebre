@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import game.entities_game.FactorySurvivorGame;
-import game.entities_game.IGameSurvivor;
-import game.level_game.FactoryLevelGame;
-import game.level_game.IGameLevel;
+import game.game_entities.FactorySurvivorGame;
+import game.game_entities.IGameSurvivor;
+import game.game_level.FactoryLevelGame;
+import game.game_level.IGameLevel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

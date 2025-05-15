@@ -1,6 +1,6 @@
 package model.level;
 
-import game.entities_game.IGameSurvivor;
+import game.game_entities.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.physics.physics_level.PhysicsLevelComponent;

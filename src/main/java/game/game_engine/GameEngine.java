@@ -1,4 +1,4 @@
-package game.engine;
+package game.game_engine;
 
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
