@@ -1,12 +1,14 @@
 package game.game_level;
 
-import model.level.Level;
+import model.level.LevelFactory;
 import view.graphics_component.level.GrahicsTutlevelComponent;
 
 public class FactoryLevelGame {
     
-    public IGameLevel gameLevelTutorial(final Level lvl){
-        return new GameLevel(lvl,
+    private LevelFactory lvlFactory = new LevelFactory();
+
+    public IGameLevel gameLevelTutorial(){
+        return new GameLevel(lvlFactory.createTutorialLevel(),
                              new GrahicsTutlevelComponent());
 
     }
