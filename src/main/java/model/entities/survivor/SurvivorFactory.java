@@ -22,7 +22,7 @@ public class SurvivorFactory {
      * @return a new {@link Survivor} instance of type {@link Common}
      */
     public Survivor createCommonSurvivor(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-        final int width = 50;
+        final int width = 70;
         final int height = 175;
        return new Common(live,attack,
                          width,height,
