@@ -7,7 +7,7 @@ import input.input_controller.KeyboardInputController;
 import view.scene.Scene;
 import view.scene.SwingSceneTutorial;
 
-public class TutorialState implements GameState{
+public class PlayState implements GameState{
 
     private Scene view ;
     private IGameLevel tutLevel;

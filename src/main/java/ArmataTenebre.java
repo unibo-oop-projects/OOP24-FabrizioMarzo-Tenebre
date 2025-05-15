@@ -1,5 +1,5 @@
 import game.game_engine.GameEngine;
-import game.game_state.TutorialState;
+import game.game_state.PlayState;
 
 /**
  * Main class that launches the game.
@@ -20,7 +20,7 @@ public class ArmataTenebre {
      */
     public static void main(String[] args) {
         GameEngine engine = new GameEngine();
-        engine.setup(new TutorialState());
+        engine.setup(new PlayState());
         engine.mainLoop();
     }
 }
