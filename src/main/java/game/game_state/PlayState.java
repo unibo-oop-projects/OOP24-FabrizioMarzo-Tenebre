@@ -10,7 +10,7 @@ import view.scene.SwingSceneTutorial;
 public class PlayState implements GameState{
 
     private Scene view ;
-    private IGameLevel tutLevel;
+    private IGameLevel level;
     private FactoryLevelGame lvlGameFct = new FactoryLevelGame();
     private InputController contrl;
 
@@ -18,19 +18,19 @@ public class PlayState implements GameState{
     @Override
     public void setUp() {
         this.contrl = new KeyboardInputController();
-        this.tutLevel = lvlGameFct.gameLevelTutorial();
-        this.view = new SwingSceneTutorial(tutLevel,contrl,1200, 800);
+        this.level = lvlGameFct.gameLevelTutorial();
+        this.view = new SwingSceneTutorial(level,contrl,1200, 800);
     }
 
     @Override
     public void processInput() {
-        tutLevel.getGameSurvivor().updateInput(contrl);
+        level.getGameSurvivor().updateInput(contrl);
         System.out.println("New controller");
     }
 
     @Override
     public void updateGame(final int elapsed) {
-        tutLevel.getLevel().updateLevelState(elapsed);
+        level.getLevel().updateLevelState(elapsed);
     }
 
     @Override
