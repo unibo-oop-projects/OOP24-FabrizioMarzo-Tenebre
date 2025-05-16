@@ -12,9 +12,6 @@ import model.physics.physics_entities.PhysicsSurvivorComponent;
  */
 public class Common implements Survivor{
 
-    private final static int WIDTH=50;
-    private final static int HEIGHT=175;
-
     private int width;
     private int height;
     private int live;
@@ -22,7 +19,7 @@ public class Common implements Survivor{
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
-    private SurvivorState state;
+    private EntitieState state;
     private BoundingBox bbox;
     private PhysicsSurvivorComponent physicComp;
 
@@ -47,7 +44,7 @@ public class Common implements Survivor{
         this.pos = pos;
         this.vel = vel;
         this.velBase = vel;
-        this.state = SurvivorState.IDLE;
+        this.state = EntitieState.IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp; 
     }
@@ -88,15 +85,15 @@ public class Common implements Survivor{
     }
     
     private void updateBBox(final Pair<Double, Double> newPos) {
-        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+HEIGHT));
-        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+WIDTH ,newPos.getRight()));
+        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+this.height));
+        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+this.width ,newPos.getRight()));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setState(final SurvivorState newState) {
+    public void setState(final EntitieState newState) {
         this.state = newState;
     }
 
@@ -147,7 +144,7 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public SurvivorState getState() {
+    public EntitieState getState() {
         return this.state;
     }
 

@@ -4,7 +4,7 @@ package model.entities.survivor;
  * Enum representing the possible states of a survivor.
  * Each state corresponds to a particular action or condition that a survivor can be in during gameplay.
  */
-public enum SurvivorState {
+public enum EntitieState {
 
     /**
      * Represents the idle state where the survivor is not performing any action.
@@ -49,11 +49,11 @@ public enum SurvivorState {
     private final int index;
 
     /**
-     * Constructor for initializing the {@link SurvivorState} with a specific index.
+     * Constructor for initializing the {@link EntitieState} with a specific index.
      *
      * @param index the unique index associated with the state
      */
-    SurvivorState(final int index) {
+    EntitieState(final int index) {
         this.index = index;
     }
 

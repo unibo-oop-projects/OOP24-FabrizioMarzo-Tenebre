@@ -40,7 +40,7 @@ public interface Survivor {
      *
      * @param newState The new state to apply
      */
-    void setState(final SurvivorState newState);
+    void setState(final EntitieState newState);
 
     /**
      * Returns the number of remaining health of the survivor.
@@ -79,7 +79,7 @@ public interface Survivor {
      *
      * @return The current state
      */    
-    SurvivorState getState();
+    EntitieState getState();
 
     BoundingBox getBBox();
 
