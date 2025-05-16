@@ -6,8 +6,8 @@ import utils.PairUtils;
 import input.command.CommandSurvivor;
 import input.input_controller.KeyCodes;
 import input.input_controller.InputController;
+import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
-import model.entities.survivor.EntitieState;
 
 /**
  * Common implementation of {@link InputSurvivorComponent} that updates a {@link Survivor}'s

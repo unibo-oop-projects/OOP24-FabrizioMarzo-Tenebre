@@ -3,7 +3,7 @@ package model.entities.zombie;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
-import model.entities.survivor.EntitieState;
+import model.entities.EntitieState;
 import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class Clicker implements Zombie{

@@ -3,6 +3,7 @@ package model.entities.survivor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
+import model.entities.EntitieState;
 
 /**
  * Survivor interface representing a survivor in the game.
