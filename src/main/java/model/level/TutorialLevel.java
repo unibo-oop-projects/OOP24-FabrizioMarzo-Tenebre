@@ -96,5 +96,9 @@ public class TutorialLevel implements Level {
         return this.surLv;
     }
 
+    @Override
+    public Zombie getZombieOnLevel(){
+        return this.zobLv;
+    }
 
 }

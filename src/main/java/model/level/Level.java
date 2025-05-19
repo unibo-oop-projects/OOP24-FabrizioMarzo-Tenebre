@@ -3,6 +3,7 @@ package model.level;
 import game.game_entities.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
+import model.entities.zombie.Zombie;
 
 /**
  * Interface representing a game level.
@@ -35,7 +36,7 @@ public interface Level {
      */
     Survivor getSurvivorOnLevel(); 
 
-
+    Zombie getZombieOnLevel();
 
     
 }
