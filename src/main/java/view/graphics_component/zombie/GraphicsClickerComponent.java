@@ -1,14 +1,43 @@
 package view.graphics_component.zombie;
 
+import java.awt.image.BufferedImage;
+import java.util.List;
+
 import model.entities.zombie.Zombie;
 import view.graphics.GraphicsZombie;
+import view.graphics_util.LoadAnimations;
 
 public class GraphicsClickerComponent implements GraphicsZombieComponent{
 
+    private static final int WIDTH_FRAME = 64;
+    private static final int HEIGHT_FRAME = 32;
+
+    private LoadAnimations graphEnti = new LoadAnimations();
+    private List<List<BufferedImage>> animations;
+    private int aniIndex,aniTick,aniSpeed = 8;
+
+    public GraphicsClickerComponent(final String nameClass){
+        this.animations = graphEnti.loadZombieAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
+    }
+
+    private void updateAnimations(final int surState){
+        aniTick++;
+        if(aniTick >= aniSpeed){
+            aniTick = 0;
+            aniIndex++;
+            int currentStateSize = animations.get(surState).size();
+            if (aniIndex >= currentStateSize){
+                aniIndex = 0;
+            }
+        }
+    }
+
+
     @Override
     public void update(final Zombie zob, final GraphicsZombie graphZob ) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        int zobState = zob.getState().getIndex();
+        updateAnimations(zobState);
+        graphZob.drawZombie(zob, animations.get(0).get(aniIndex));
     }
     
 }
