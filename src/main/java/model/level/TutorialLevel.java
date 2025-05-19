@@ -1,8 +1,13 @@
 package model.level;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import game.game_entities.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
+import model.entities.survivor.SurvivorFactory;
+import model.entities.zombie.Zombie;
+import model.entities.zombie.ZombieFactory;
 import model.physics.physics_level.PhysicsLevelComponent;
 
 /**
@@ -20,30 +25,42 @@ public class TutorialLevel implements Level {
 
     // Level Bouding Box
     private BoundingBox bbox;
-    
-    // THe only Survivor on the Game
-    private Survivor surLv;
+    // The Survivor Factory
+    private SurvivorFactory surFact = new SurvivorFactory();
+    // The only Zombie on the game
+    private ZombieFactory zobFact = new ZombieFactory();
     // The physic on lthe level 
     private PhysicsLevelComponent physicLvComp;
+
+    private Survivor surLv;
+    private Zombie zobLv;
 
     /**
      * Constructs the tutorial level with a preconfigured {@link IGameSurvivor}.
      */
     public TutorialLevel(final double lvlWidth,final double lvlHeight,
                          final BoundingBox bbox,
-                        final PhysicsLevelComponent physcLevel,
-                        final Survivor surLv){
-
+                        final PhysicsLevelComponent physcLevel){
         this.lvlWidth = lvlWidth;
         this.lvlHeight = lvlHeight;
         this.bbox = bbox;
         this.physicLvComp = physcLevel;
-        this.surLv = surLv;
+        this.setSurvivorOnLevel();
+        this.setZombieOnLevel();
+    }
+    
+    private void setSurvivorOnLevel(){
+        this.surLv = surFact.createCommonSurvivor(1000,20, Pair.of(1000.0,1000.0),Pair.of(200.0,0.0));
+    }
+
+    private void setZombieOnLevel(){
+        this.zobLv = zobFact.createClickerZombie(1000,20, Pair.of(500.0,500.0),Pair.of(150.0,0.0));
     }
 
     @Override
     public void updateLevelState(final int dt){
         this.surLv.updatePhysics(dt);
+        this.zobLv.updatePhysics(dt);
         physicLvComp.updateLevel(this, dt);
     }
 
