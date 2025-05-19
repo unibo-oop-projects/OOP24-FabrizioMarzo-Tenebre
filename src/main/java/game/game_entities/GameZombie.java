@@ -9,6 +9,11 @@ public class GameZombie implements IGameZombie{
     private Zombie zob;
     private GraphicsZombieComponent imgZob;
 
+    public GameZombie(final Zombie zob, final GraphicsZombieComponent imgZob){
+        this.zob = zob;
+        this.imgZob = imgZob;
+    }
+
     @Override
     public Zombie getZombie() {
         return this.zob;
