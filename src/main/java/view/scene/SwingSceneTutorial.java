@@ -18,8 +18,10 @@ import java.awt.event.WindowEvent;
 import input.input_controller.InputController;
 import view.graphics.GraphicsLevel;
 import view.graphics.GraphicsSurvivor;
+import view.graphics.GraphicsZombie;
 import view.graphics.SwingGraphicsLevel;
 import view.graphics.SwingGraphicsSurvivor;
+import view.graphics.SwingGraphicsZombie;
 import view.graphics_util.IViewScale;
 import view.graphics_util.ViewScale;
 
@@ -91,7 +93,9 @@ public class SwingSceneTutorial implements Scene {
 
             GraphicsLevel graphLvl = new SwingGraphicsLevel(g2d, viewScale);
             GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,viewScale);
+            GraphicsZombie graphZob = new SwingGraphicsZombie(g2d, viewScale);
             tutLevel.getGameSurvivor().updateGraphics(graphSur);
+            tutLevel.getGameZombie().updateGraphics(graphZob);
             tutLevel.updateGraphics(graphLvl);
             System.out.println("New mode to Painting");
         }
