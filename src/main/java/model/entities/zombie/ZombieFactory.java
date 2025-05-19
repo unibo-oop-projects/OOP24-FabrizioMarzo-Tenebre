@@ -9,8 +9,8 @@ import model.physics.physics_entities.PhysicsClickerComponent;
 public class ZombieFactory {
 
     public Zombie createClickerZombie(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
-        final int width = 70;
-        final int height = 175;
+        final int width = 90;
+        final int height = 230;
         return new Clicker(live, attack, 
                             width, height, 
                             new MutablePair<>(pos.getLeft(),pos.getRight()),
@@ -20,3 +20,4 @@ public class ZombieFactory {
                                                 Pair.of(pos.getLeft()+width ,pos.getRight())));
     }
 }
+    
