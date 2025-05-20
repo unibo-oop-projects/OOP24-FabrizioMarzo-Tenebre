@@ -1,8 +1,11 @@
 package model.level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
-import game.game_entities.IGameSurvivor;
+import java.util.concurrent.ThreadLocalRandom;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
@@ -34,10 +37,9 @@ public class TutorialLevel implements Level {
 
     private Survivor surLv;
     private Zombie zobLv;
+    private List<Zombie> listZombie = new ArrayList<>();
 
-    /**
-     * Constructs the tutorial level with a preconfigured {@link IGameSurvivor}.
-     */
+    
     public TutorialLevel(final double lvlWidth,final double lvlHeight,
                          final BoundingBox bbox,
                         final PhysicsLevelComponent physcLevel){
@@ -54,12 +56,18 @@ public class TutorialLevel implements Level {
     }
 
     private void setZombieOnLevel(){
-        this.zobLv = zobFact.createClickerZombie(1000,20, Pair.of(500.0,500.0),Pair.of(150.0,0.0));
+        for (int i=0 ; i < 4 ; i++){
+            double randomNumW = ThreadLocalRandom.current().nextDouble(0.0, this.lvlWidth);
+            double randomNumH = ThreadLocalRandom.current().nextDouble(0.0, this.lvlHeight);
+            listZombie.add(zobFact.createClickerZombie(1000,20, Pair.of(randomNumW,randomNumH),Pair.of(150.0,0.0)));
+        }
     }
 
     @Override
     public void updateLevelState(final int dt){
         this.surLv.updatePhysics(dt);
+        this.listZombie.stream()
+                        .forEach(zombie -> zombie.updatePhysics( dt, this.getSurvivorOnLevel()));
         this.zobLv.updatePhysics(dt,this.getSurvivorOnLevel());
         physicLvComp.updateLevel(this, dt);
     }
@@ -97,8 +105,8 @@ public class TutorialLevel implements Level {
     }
 
     @Override
-    public Zombie getZombieOnLevel(){
-        return this.zobLv;
+    public List<Zombie> getZombieOnLevel(){
+        return this.listZombie;
     }
 
 }

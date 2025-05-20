@@ -1,5 +1,7 @@
 package model.level;
 
+import java.util.List;
+
 import game.game_entities.IGameSurvivor;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
@@ -36,7 +38,7 @@ public interface Level {
      */
     Survivor getSurvivorOnLevel(); 
 
-    Zombie getZombieOnLevel();
+    List<Zombie> getZombieOnLevel();
 
     
 }
