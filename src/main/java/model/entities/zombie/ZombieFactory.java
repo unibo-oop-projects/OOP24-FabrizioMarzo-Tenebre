@@ -8,7 +8,9 @@ import model.physics.physics_entities.PhysicsClickerComponent;
 
 public class ZombieFactory {
 
-    public Zombie createClickerZombie(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
+    public Zombie createClickerZombie(final Pair<Double,Double> pos, final Pair<Double,Double> vel){
+        final int live = 1000;
+        final int attack = 20;
         final int width = 90;
         final int height = 230;
         return new Clicker(live, attack, 
