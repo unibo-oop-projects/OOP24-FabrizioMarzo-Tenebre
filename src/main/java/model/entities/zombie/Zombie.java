@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
+import model.entities.survivor.Survivor;
 
 /**
  * Zombie interface representing a zombie in the game.
@@ -15,7 +16,7 @@ public interface Zombie {
 
     void damageSuffer(final int dm);
 
-    void updatePhysics(final int dt);
+    void updatePhysics(final int dt, final Survivor sur);
 
     void setPosition(final Pair<Double, Double> pos);
 

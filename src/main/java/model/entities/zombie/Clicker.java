@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
+import model.entities.survivor.Survivor;
 import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class Clicker implements Zombie{
@@ -47,8 +48,8 @@ public class Clicker implements Zombie{
     }
 
     @Override
-    public void updatePhysics(final int dt) {
-        physicComp.updateZombie(this, dt);
+    public void updatePhysics(final int dt, final Survivor sur) {
+        physicComp.updateZombie(this, sur, dt);
     }
 
     @Override

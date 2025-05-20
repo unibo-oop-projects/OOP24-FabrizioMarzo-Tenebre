@@ -60,7 +60,7 @@ public class TutorialLevel implements Level {
     @Override
     public void updateLevelState(final int dt){
         this.surLv.updatePhysics(dt);
-        this.zobLv.updatePhysics(dt);
+        this.zobLv.updatePhysics(dt,this.getSurvivorOnLevel());
         physicLvComp.updateLevel(this, dt);
     }
 
