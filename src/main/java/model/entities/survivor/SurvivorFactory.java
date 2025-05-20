@@ -21,7 +21,9 @@ public class SurvivorFactory {
      * @param vel    the initial velocity of the survivor, represented as a pair of velocity components (vx, vy)
      * @return a new {@link Survivor} instance of type {@link Common}
      */
-    public Survivor createCommonSurvivor(final int live,final int attack, final Pair<Double,Double> pos, final Pair<Double,Double> vel){
+    public Survivor createCommonSurvivor(final Pair<Double,Double> pos, final Pair<Double,Double> vel){
+        final int live = 1000;
+        final int attack = 20;
         final int width = 70;
         final int height = 175;
        return new Common(live,attack,
