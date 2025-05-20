@@ -12,20 +12,12 @@ import model.physics.physics_entities.PhysicsCommonComponent;
  */
 public class SurvivorFactory {
 
-    /**
-     * Creates a new instance of a {@link Common} survivor.
-     *
-     * @param live   the initial health of the survivor
-     * @param attack the attack strength of the survivor
-     * @param pos    the initial position of the survivor, represented as a pair of coordinates (x, y)
-     * @param vel    the initial velocity of the survivor, represented as a pair of velocity components (vx, vy)
-     * @return a new {@link Survivor} instance of type {@link Common}
-     */
-    public Survivor createCommonSurvivor(final Pair<Double,Double> pos, final Pair<Double,Double> vel){
+    public Survivor createCommonSurvivor(final Pair<Double,Double> pos){
         final int live = 1000;
         final int attack = 20;
         final int width = 70;
         final int height = 175;
+        final Pair<Double, Double> vel = Pair.of(200.0, 0.0);
        return new Common(live,attack,
                          width,height,
                          new MutablePair<>(pos.getLeft(),pos.getRight()),
