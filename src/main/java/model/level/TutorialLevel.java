@@ -1,11 +1,13 @@
 package model.level;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
@@ -22,6 +24,8 @@ import model.physics.physics_level.PhysicsLevelComponent;
  */
 public class TutorialLevel implements Level {
 
+    private static final int ZOMBIES_LEVEL = 10;
+    
     // Size of the Level
     private double lvlWidth;   
     private double lvlHeight;  
@@ -36,13 +40,12 @@ public class TutorialLevel implements Level {
     private PhysicsLevelComponent physicLvComp;
 
     private Survivor surLv;
-    private Zombie zobLv;
-    private List<Zombie> listZombie = new ArrayList<>();
+    private List<Zombie> listZombie;
 
     
     public TutorialLevel(final double lvlWidth,final double lvlHeight,
                          final BoundingBox bbox,
-                        final PhysicsLevelComponent physcLevel){
+                         final PhysicsLevelComponent physcLevel){
         this.lvlWidth = lvlWidth;
         this.lvlHeight = lvlHeight;
         this.bbox = bbox;
@@ -52,23 +55,26 @@ public class TutorialLevel implements Level {
     }
     
     private void setSurvivorOnLevel(){
-        this.surLv = surFact.createCommonSurvivor(1000,20, Pair.of(1000.0,1000.0),Pair.of(200.0,0.0));
+        this.surLv = surFact.createCommonSurvivor(Pair.of(1000.0,1000.0));
+    }
+
+    private Pair<Double,Double> posZombie(){
+        double randomNumW = ThreadLocalRandom.current().nextDouble(-this.lvlWidth, 2 * this.lvlWidth);
+        double randomNumH = ThreadLocalRandom.current().nextDouble(-this.lvlHeight, 2 * this.lvlHeight);
+        return Pair.of(randomNumW, randomNumH);
     }
 
     private void setZombieOnLevel(){
-        for (int i=0 ; i < 4 ; i++){
-            double randomNumW = ThreadLocalRandom.current().nextDouble(0.0, this.lvlWidth);
-            double randomNumH = ThreadLocalRandom.current().nextDouble(0.0, this.lvlHeight);
-            listZombie.add(zobFact.createClickerZombie(1000,20, Pair.of(randomNumW,randomNumH),Pair.of(150.0,0.0)));
-        }
+        this.listZombie = IntStream.range(0, ZOMBIES_LEVEL)
+                            .mapToObj(i -> zobFact.createClickerZombie(posZombie()))
+                            .collect(Collectors.toList());
     }
 
     @Override
     public void updateLevelState(final int dt){
         this.surLv.updatePhysics(dt);
         this.listZombie.stream()
-                        .forEach(zombie -> zombie.updatePhysics( dt, this.getSurvivorOnLevel()));
-        this.zobLv.updatePhysics(dt,this.getSurvivorOnLevel());
+                        .forEach(zombie -> zombie.updatePhysics(dt, this.getSurvivorOnLevel()));
         physicLvComp.updateLevel(this, dt);
     }
 
@@ -82,13 +88,6 @@ public class TutorialLevel implements Level {
         return this.lvlHeight;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Updates the survivor's internal state based on the elapsed time.
-     *
-     * @param dt the time delta in milliseconds since the last update
-     */
     @Override
     public BoundingBox getLevelBBox() {
         return this.bbox;

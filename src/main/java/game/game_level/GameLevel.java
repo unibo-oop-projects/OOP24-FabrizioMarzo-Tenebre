@@ -1,5 +1,9 @@
 package game.game_level;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import game.game_entities.FactorySurvivorGame;
 import game.game_entities.FactoryZombieGame;
 import game.game_entities.IGameSurvivor;
@@ -15,22 +19,25 @@ public class GameLevel implements IGameLevel {
     private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
     private FactoryZombieGame factZobGam = new FactoryZombieGame();
     private IGameSurvivor gamSur;
-    private IGameZombie gamZob;
+    private List<IGameZombie> listGameZombie = new ArrayList<>();
 
 
     public GameLevel(final Level lvl,final GraphicsLevelComponent imgLvl) {
         this.lvl = lvl;
         this.imgLvl = imgLvl;
         this.gamSur = setGameSurvivor();
-        this.gamZob = setGameZombie();
+        this.setGameZombie();
     }
 
     private IGameSurvivor setGameSurvivor(){
         return factSurGam.gameSurvivorCommon(this.lvl.getSurvivorOnLevel());
     }
 
-    private IGameZombie setGameZombie(){
-        return factZobGam.gameSurvivorClicker(this.lvl.getZombieOnLevel());
+    private void setGameZombie(){  
+         this.listGameZombie = this.lvl.getZombieOnLevel().stream()
+                                    .map(zombie -> this.factZobGam.gameSurvivorClicker(zombie))
+                                    .collect(Collectors.toList());
+        
     }
 
     @Override
@@ -49,7 +56,7 @@ public class GameLevel implements IGameLevel {
     }
     
     @Override
-    public IGameZombie getGameZombie() {
-        return this.gamZob;
+    public List<IGameZombie> getGameZombie() {
+        return this.listGameZombie;
     }
 }

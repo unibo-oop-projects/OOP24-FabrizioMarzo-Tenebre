@@ -95,7 +95,8 @@ public class SwingSceneTutorial implements Scene {
             GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,viewScale);
             GraphicsZombie graphZob = new SwingGraphicsZombie(g2d, viewScale);
             tutLevel.getGameSurvivor().updateGraphics(graphSur);
-            tutLevel.getGameZombie().updateGraphics(graphZob);
+            tutLevel.getGameZombie().stream()
+                                    .forEach( gameZombie -> gameZombie.updateGraphics(graphZob));
             tutLevel.updateGraphics(graphLvl);
             System.out.println("New mode to Painting");
         }

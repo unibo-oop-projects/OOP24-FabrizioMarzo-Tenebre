@@ -1,5 +1,7 @@
 package game.game_level;
 
+import java.util.List;
+
 import game.game_entities.IGameSurvivor;
 import game.game_entities.IGameZombie;
 import model.level.Level;
@@ -11,7 +13,7 @@ public interface IGameLevel {
 
     IGameSurvivor getGameSurvivor();
 
-    IGameZombie getGameZombie();
+    List<IGameZombie> getGameZombie();
 
     void updateGraphics(final GraphicsLevel graphicLvl);
 }
