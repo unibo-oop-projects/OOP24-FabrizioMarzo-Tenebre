@@ -23,6 +23,16 @@ public class PairUtils {
         return Pair.of(x, y);
     }
 
+    public static Pair<Double,Double> diff(final Pair<Double,Double> v1,final Pair<Double,Double> v2){
+        return Pair.of(v1.getLeft()-v2.getLeft(),v1.getRight()-v2.getRight());
+    }
+
+    public static double norm2(final Pair<Double, Double> v) {
+        double x = v.getLeft();
+        double y = v.getRight();
+        return Math.sqrt(x * x + y * y);
+    }
+
     /**
      * Multiplies each component of the pair by a scalar value.
      *
