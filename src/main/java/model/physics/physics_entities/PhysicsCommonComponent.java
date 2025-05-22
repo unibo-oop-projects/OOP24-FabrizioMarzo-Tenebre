@@ -16,7 +16,7 @@ public class PhysicsCommonComponent implements PhysicsSurvivorComponent {
     }
     
     private Pair<Double,Double> nextPos(final int dt, final Pair<Double,Double> vel){
-        return PairUtils.mul(vel,0.001*dt);
+        return PairUtils.mulScale(vel,0.001*dt);
     }
 
 }

@@ -38,22 +38,22 @@ public class InputCommonComponent implements InputSurvivorComponent{
 
         if (ctrl.getInputCode() == KeyCodes.UP.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mulScale(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_UP);
             });
         } else if (ctrl.getInputCode() == KeyCodes.DOWN.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mulScale(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_DOWN);
             });
         } else if (ctrl.getInputCode() == KeyCodes.LEFT.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mulScale(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_LEFT);
             });
         } else if (ctrl.getInputCode() == KeyCodes.RIGHT.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
-                s.setVelocity(PairUtils.mul(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
+                s.setVelocity(PairUtils.mulScale(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_RIGHT);
             });
         } else if (ctrl.getInputCode() == KeyCodes.NONE.getKeyCode()){
