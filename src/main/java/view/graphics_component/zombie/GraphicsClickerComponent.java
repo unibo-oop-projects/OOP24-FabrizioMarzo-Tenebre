@@ -32,12 +32,11 @@ public class GraphicsClickerComponent implements GraphicsZombieComponent{
         }
     }
 
-
     @Override
     public void update(final Zombie zob, final GraphicsZombie graphZob ) {
         int zobState = zob.getState().getIndex();
         updateAnimations(zobState);
-        graphZob.drawZombie(zob, animations.get(0).get(aniIndex));
+        graphZob.drawZombie(zob, animations.get(zobState).get(aniIndex));
     }
     
 }
