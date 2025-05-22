@@ -20,23 +20,23 @@ public class GraphicsClickerComponent implements GraphicsZombieComponent{
         this.animations = graphEnti.loadZombieAnimations(nameClass, WIDTH_FRAME, HEIGHT_FRAME);
     }
 
-    private void updateAnimations(final int surState){
+    private int updateAnimations(final int zobState){
         aniTick++;
         if(aniTick >= aniSpeed){
             aniTick = 0;
             aniIndex++;
-            int currentStateSize = animations.get(surState).size();
+            final int currentStateSize = animations.get(zobState).size();
             if (aniIndex >= currentStateSize){
                 aniIndex = 0;
             }
         }
+        return aniIndex;
     }
 
     @Override
     public void update(final Zombie zob, final GraphicsZombie graphZob ) {
-        int zobState = zob.getState().getIndex();
-        updateAnimations(zobState);
-        graphZob.drawZombie(zob, animations.get(zobState).get(aniIndex));
+        final int zobState = zob.getState().getIndex();
+        graphZob.drawZombie(zob, animations.get(zobState).get(updateAnimations(zobState)));
     }
     
 }
