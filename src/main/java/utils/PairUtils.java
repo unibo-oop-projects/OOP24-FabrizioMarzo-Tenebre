@@ -30,11 +30,17 @@ public class PairUtils {
      * @param value the scalar to multiply by
      * @return a new {@link Pair} representing the scaled vector (x * value, y * value)
      */
-    public static Pair<Double, Double> mul(final Pair<Double, Double> pair,final double value) {
+    public static Pair<Double, Double> mulScale(final Pair<Double, Double> pair,final double value) {
         double x = pair.getLeft() * value;
         double y = pair.getRight() * value;
         return Pair.of(x, y);
     } 
+
+    public static Pair<Double, Double> mul(final Pair<Double, Double> pair1, final Pair<Double, Double> pair2) {
+        double x = pair1.getLeft() * pair2.getLeft();
+        double y = pair1.getRight() * pair2.getRight();
+        return Pair.of(x, y);
+    }
 
     /**
      * Computes the module of the vector represented by the pair.
@@ -61,4 +67,18 @@ public class PairUtils {
             doublePair.getRight().intValue()
         );
     }
+
+    public static Pair<Double, Double> normalize(final Pair<Double, Double> pair) {
+        double x = pair.getLeft();
+        double y = pair.getRight();
+        
+        double module = Math.sqrt(x * x + y * y);
+        
+        if (module > 0) {
+            return Pair.of(x / module, y / module);
+        } else {
+            return pair;
+        }
+    }
+
 }
