@@ -30,6 +30,8 @@ public interface Zombie {
 
     Pair<Double,Double> getCurrentVel();
 
+    Pair<Double,Double> getBaseZombieVel();
+
     EntitieState getState();
 
     BoundingBox getBBox();

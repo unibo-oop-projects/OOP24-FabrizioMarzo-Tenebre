@@ -15,6 +15,7 @@ public class Clicker implements Zombie{
     private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
+    private final Pair<Double,Double> velBase;
     private EntitieState state;
     private BoundingBox bbox;
     private PhysicsZombieComponent physicComp;
@@ -32,6 +33,7 @@ public class Clicker implements Zombie{
         this.height = height;
         this.pos = pos;
         this.vel = vel;
+        this.velBase = vel;
         this.state = EntitieState.IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp;
@@ -89,6 +91,11 @@ public class Clicker implements Zombie{
     }
 
     @Override
+    public Pair<Double, Double> getBaseZombieVel() {
+        return this.velBase;
+    }
+    
+    @Override
     public EntitieState getState() {
         return this.state;
     }
@@ -128,5 +135,6 @@ public class Clicker implements Zombie{
             return false;
         return true;
     }
+
     
 }
