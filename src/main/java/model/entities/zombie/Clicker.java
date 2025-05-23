@@ -49,8 +49,8 @@ public class Clicker implements Zombie{
     }
 
     @Override
-    public void updatePhysics(final int dt, final Pair<Double, Double> vel) {
-        physicComp.updateZombie(this, dt, vel);
+    public void updatePhysics(final int dt) {
+        physicComp.updateZombie(this, dt);
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface Zombie {
 
     void damageSuffer(final int dm);
 
-    void updatePhysics(final int dt, final Pair<Double, Double> vel);
+    void updatePhysics(final int dt);
 
     void setPosition(final Pair<Double, Double> pos);
 
