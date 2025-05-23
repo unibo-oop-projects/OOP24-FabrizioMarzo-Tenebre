@@ -4,7 +4,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
-import model.entities.survivor.Survivor;
 import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class Clicker implements Zombie{
@@ -50,8 +49,8 @@ public class Clicker implements Zombie{
     }
 
     @Override
-    public void updatePhysics(final int dt, final Survivor sur) {
-        physicComp.updateZombie(this, sur, dt);
+    public void updatePhysics(final int dt, final Pair<Double, Double> vel) {
+        physicComp.updateZombie(this, dt, vel);
     }
 
     @Override
@@ -59,6 +58,12 @@ public class Clicker implements Zombie{
         this.pos = pos;
         this.updateBBox(pos);
     }
+
+    @Override
+    public void setVelocity(final Pair<Double, Double> vel) {
+        this.vel = vel; 
+    }
+    
 
     private void updateBBox(final Pair<Double, Double> newPos) {
         this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+this.height));
