@@ -8,8 +8,8 @@ import utils.PairUtils;
 public class PhysicsClickerComponent implements PhysicsZombieComponent{
 
     @Override
-    public void updateZombie(final Zombie zob,final int dt, final Pair<Double, Double> vel) {
-        zob.setPosition(PairUtils.sum(zob.getCurrentPos(),nextPos(dt, vel)));
+    public void updateZombie(final Zombie zob,final int dt) {
+        zob.setPosition(PairUtils.sum(zob.getCurrentPos(),nextPos(dt, zob.getCurrentVel())));
     }
 
      private Pair<Double,Double> nextPos(final int dt, final Pair<Double,Double> vel){
