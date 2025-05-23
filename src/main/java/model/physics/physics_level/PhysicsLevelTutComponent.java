@@ -13,19 +13,31 @@ import utils.PairUtils;
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
     private static final double DESIRED_SEPARATION = 20.0;
-    private static final double MAX_FORCE = 0.05;
+    private static final double MAX_FORCE = 0.5;
 
     @Override
     public void updateLevel(final Level lv,final int dt) {
         lv.getSurvivorOnLevel().updatePhysics(dt);
-        lv.getZombieOnLevel().stream()
-                             .forEach(zombie -> zombie.updatePhysics(dt, this.moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel())));
+        // lv.getZombieOnLevel().stream()
+        //                      .forEach(zombie -> {
+        //                         this.moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel());
+        //                         zombie.updatePhysics(dt);
+        //                      });
+
+        for (Zombie z : lv.getZombieOnLevel()) {
+            Pair<Double, Double> newVel = computeZombieVelocity(lv, z);
+            z.setVelocity(newVel);
+            z.updatePhysics(dt);
+            System.out.println("Change the Physics");
+        }
+
+
         if (isOutsideLevelBounds(lv)) {
             resetSurvivorToValidPosition(lv);
         }
 
         for (Zombie z : lv.getZombieOnLevel()) {
-            updateZombieAI(lv, z);
+            computeSeparationForce(lv, z);
         }
     }
 
@@ -62,12 +74,11 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         lv.getSurvivorOnLevel().setVelocity(Pair.of(0.0, 0.0));
     }
 
-    private void updateZombieAI(Level lv, Zombie zombie) {
+    private Pair<Double,Double> computeSeparationForce(Level lv, Zombie zombie) {
         List<Zombie> allZombie = lv.getZombieOnLevel();
 
-        // Create the vector separation force
         Pair<Double,Double> separationForce = Pair.of(0.0,0.0);
-        int count = 0;
+         int count = 0;
 
         for (Zombie other : allZombie){
             if (other != zombie) {
@@ -75,31 +86,26 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
                 double distance = PairUtils.norm2(diff);
 
                 if (distance > 0 && distance < DESIRED_SEPARATION){
-                    var nomalizeDist = PairUtils.normalize(diff);
-                    separationForce = Pair.of(separationForce.getLeft()+nomalizeDist.getLeft(),
-                                              separationForce.getRight()+nomalizeDist.getRight());
+                    var normalizedDiff = PairUtils.normalize(diff);
+                    // Nota: la forza di separazione dovrebbe essere proporzionale a 1/distanza per allontanarsi di più se molto vicini
+                    separationForce = PairUtils.sum(separationForce, PairUtils.mulScale(normalizedDiff, 1.0/distance));
                     count++;
                 }
-
             }
         }
-                if (count > 0){
-                    separationForce = Pair.of(separationForce.getLeft()/count,
-                                              separationForce.getRight()/count);
-                }
+        if (count > 0){
+            separationForce = PairUtils.mulScale(separationForce, 1.0/count);
+        }
 
-                double mag = PairUtils.norm2(separationForce);
-                if (mag > 0){
-                    separationForce = Pair.of((separationForce.getLeft() / mag) * MAX_FORCE, (separationForce.getRight() / mag) * MAX_FORCE);
-                }
-
-                Pair<Double,Double> currentVel = zombie.getCurrentVel();
-                Pair<Double, Double> newVel = Pair.of(currentVel.getLeft() + separationForce.getLeft(), currentVel.getRight() + separationForce.getRight());
-                zombie.setVelocity(newVel);
-    }
+        double mag = PairUtils.norm2(separationForce);
+        if (mag > 0){
+            separationForce = PairUtils.mulScale(separationForce, MAX_FORCE / mag);
+        }   
+        return separationForce;
+        }
 
 
-    private Pair<Double,Double>  moveZombieTowardsSurvivor(final Zombie zob, final Survivor sur){
+    private Pair<Double,Double> moveZombieTowardsSurvivor(final Zombie zob, final Survivor sur){
         // Calcolate The difference between the Survivor Position and the Zombie Position
         Pair<Double,Double> difPos = PairUtils.diff(sur.getCurrentPos(), zob.getCurrentPos());
 
@@ -126,8 +132,16 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         // Compute movement velocity
         double speed = PairUtils.norm2(zob.getBaseZombieVel());
         Pair<Double,Double> velocity =  PairUtils.mulScale(direction, speed);
-
         return velocity;
     }
     
+    private Pair<Double, Double> computeZombieVelocity(Level lv, Zombie zombie) {
+        Pair<Double, Double> targetVel = moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel());
+        Pair<Double, Double> separationForce = computeSeparationForce(lv, zombie);
+    
+        Pair<Double, Double> finalVel = PairUtils.sum(targetVel, separationForce);
+        // Normalizza o limita la velocità qui se vuoi (ad esempio con MAX_SPEED)
+    
+        return finalVel;
+    }
 }
