@@ -13,24 +13,18 @@ import utils.PairUtils;
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
     private static final double DESIRED_SEPARATION = 20.0;
-    private static final double MAX_FORCE = 0.5;
+    private static final double MAX_FORCE = 0.05;
 
     @Override
     public void updateLevel(final Level lv,final int dt) {
         lv.getSurvivorOnLevel().updatePhysics(dt);
-        // lv.getZombieOnLevel().stream()
-        //                      .forEach(zombie -> {
-        //                         this.moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel());
-        //                         zombie.updatePhysics(dt);
-        //                      });
+        lv.getZombieOnLevel().stream()
+                             .forEach(zombie -> {
+                                this.updateZombieAI(lv, zombie);
+                                zombie.updatePhysics(dt);
+                                resolveZombieCollisions(lv, zombie);
 
-        for (Zombie z : lv.getZombieOnLevel()) {
-            Pair<Double, Double> newVel = computeZombieVelocity(lv, z);
-            z.setVelocity(newVel);
-            z.updatePhysics(dt);
-            System.out.println("Change the Physics");
-        }
-
+                             });
 
         if (isOutsideLevelBounds(lv)) {
             resetSurvivorToValidPosition(lv);
@@ -75,34 +69,43 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
     }
 
     private Pair<Double,Double> computeSeparationForce(Level lv, Zombie zombie) {
-        List<Zombie> allZombie = lv.getZombieOnLevel();
+        Pair<Double, Double> separationForce = Pair.of(0.0, 0.0);
+    int count = 0;
 
-        Pair<Double,Double> separationForce = Pair.of(0.0,0.0);
-         int count = 0;
+    for (Zombie other : lv.getZombieOnLevel()) {
+        if (other != zombie) {
+            // Prendi le bounding box di zombie e other
+            var bb1 = zombie.getBBox();
+            var bb2 = other.getBBox();
 
-        for (Zombie other : allZombie){
-            if (other != zombie) {
-                var diff  = PairUtils.diff(zombie.getCurrentPos(), other.getCurrentPos());
-                double distance = PairUtils.norm2(diff);
+            // Se le bounding box sono in collisione o troppo vicine (con una certa tolleranza)
+            if (bb1.isColliding(bb2.getULcorner(), bb2.getBRcorner())) {
+                // Calcola differenza di posizione (vettore direzione separazione)
+                Pair<Double, Double> diff = PairUtils.diff(zombie.getCurrentPos(), other.getCurrentPos());
 
-                if (distance > 0 && distance < DESIRED_SEPARATION){
-                    var normalizedDiff = PairUtils.normalize(diff);
-                    // Nota: la forza di separazione dovrebbe essere proporzionale a 1/distanza per allontanarsi di più se molto vicini
-                    separationForce = PairUtils.sum(separationForce, PairUtils.mulScale(normalizedDiff, 1.0/distance));
-                    count++;
+                // Se i due zombie sono esattamente sovrapposti (posizione uguale), usa una separazione arbitraria
+                if (PairUtils.norm2(diff) == 0) {
+                    diff = Pair.of(Math.random() - 0.5, Math.random() - 0.5);
                 }
+
+                Pair<Double, Double> normalizedDiff = PairUtils.normalize(diff);
+
+                // Forza separazione - qui puoi amplificare se vuoi, per esempio:
+                Pair<Double, Double> force = PairUtils.mulScale(normalizedDiff, MAX_FORCE);
+
+                separationForce = PairUtils.sum(separationForce, force);
+                count++;
             }
         }
-        if (count > 0){
-            separationForce = PairUtils.mulScale(separationForce, 1.0/count);
-        }
+    }
 
-        double mag = PairUtils.norm2(separationForce);
-        if (mag > 0){
-            separationForce = PairUtils.mulScale(separationForce, MAX_FORCE / mag);
-        }   
-        return separationForce;
-        }
+    if (count > 0) {
+        // Media della forza di separazione da tutti gli altri zombie vicini
+        separationForce = PairUtils.mulScale(separationForce, 1.0 / count);
+    }
+
+    return separationForce;
+    }
 
 
     private Pair<Double,Double> moveZombieTowardsSurvivor(final Zombie zob, final Survivor sur){
@@ -135,13 +138,66 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         return velocity;
     }
     
-    private Pair<Double, Double> computeZombieVelocity(Level lv, Zombie zombie) {
-        Pair<Double, Double> targetVel = moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel());
-        Pair<Double, Double> separationForce = computeSeparationForce(lv, zombie);
-    
-        Pair<Double, Double> finalVel = PairUtils.sum(targetVel, separationForce);
-        // Normalizza o limita la velocità qui se vuoi (ad esempio con MAX_SPEED)
-    
-        return finalVel;
+
+    private void updateZombieAI(Level lv, Zombie zombie) {
+     // Velocità verso il survivor (unità/secondo)
+     Pair<Double, Double> targetVel = moveZombieTowardsSurvivor(zombie, lv.getSurvivorOnLevel());
+
+     // Forza/velocità di separazione (unità/secondo)
+     Pair<Double, Double> separationForce = computeSeparationForce(lv, zombie);
+ 
+     double separationWeight = 2.0; // peso forze separation
+ 
+     // Combina velocità, scala la separation per il peso
+     Pair<Double, Double> combinedVel = PairUtils.sum(targetVel, PairUtils.mulScale(separationForce, separationWeight));
+ 
+     // Ora, aggiorniamo la posizione nel metodo updatePhysics usando dt:
+ 
+     // Qui limitiamo la velocità massima
+     double maxSpeed = PairUtils.norm2(zombie.getBaseZombieVel());
+     double speed = PairUtils.norm2(combinedVel);
+ 
+     if (speed > maxSpeed) {
+         combinedVel = PairUtils.mulScale(PairUtils.normalize(combinedVel), maxSpeed);
+     }
+ 
+     // Imposta la velocità combinata
+     zombie.setVelocity(combinedVel);
+ 
+     // NEL updatePhysics:
+     // posizione_nuova = posizione_corrente + velocità * dtSeconds
+
     }
+
+    private void resolveZombieCollisions(Level lv, Zombie zombie) {
+        for (Zombie other : lv.getZombieOnLevel()) {
+            if (other != zombie) {
+                var bb1 = zombie.getBBox();
+                var bb2 = other.getBBox();
+    
+                if (bb1.isColliding(bb2.getULcorner(), bb2.getBRcorner())) {
+                    // Calcola il vettore che separa i due zombie
+                    Pair<Double, Double> diff = PairUtils.diff(zombie.getCurrentPos(), other.getCurrentPos());
+    
+                    // Evita divisione per 0 se sono esattamente sovrapposti
+                    if (PairUtils.norm2(diff) == 0) {
+                        diff = Pair.of(Math.random() - 0.5, Math.random() - 0.5);
+                    }
+    
+                    // Normalizza e calcola quanto spostarli (metà e metà)
+                    Pair<Double, Double> dir = PairUtils.normalize(diff);
+                    double overlap = 1.0; // puoi calcolarlo precisamente se vuoi
+                    Pair<Double, Double> correction = PairUtils.mulScale(dir, overlap / 2.0);
+    
+                    // Sposta zombie A avanti e zombie B indietro
+                    Pair<Double, Double> newPosA = PairUtils.sum(zombie.getCurrentPos(), correction);
+                    Pair<Double, Double> newPosB = PairUtils.diff(other.getCurrentPos(), correction);
+    
+                    zombie.setPosition(newPosA);
+                    other.setPosition(newPosB);
+                }
+            }
+        }
+    }
+    
 }
