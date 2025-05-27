@@ -1,4 +1,4 @@
-package model.ai;
+package model.ai.separation;
 
 import java.util.List;
 

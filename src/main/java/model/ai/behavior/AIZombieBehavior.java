@@ -1,9 +1,12 @@
-package model.ai;
+package model.ai.behavior;
 
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.ai.collision.CollisionStrategy;
+import model.ai.movement.MovementStrategy;
+import model.ai.separation.SeparationStrategy;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import utils.PairUtils;

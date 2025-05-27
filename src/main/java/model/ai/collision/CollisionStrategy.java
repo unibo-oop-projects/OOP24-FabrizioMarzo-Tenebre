@@ -1,4 +1,4 @@
-package model.ai;
+package model.ai.collision;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package model.ai;
+package model.ai.movement;
 
 import org.apache.commons.lang3.tuple.Pair;
 

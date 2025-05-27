@@ -1,4 +1,4 @@
-package model.ai;
+package model.ai.behavior;
 
 import java.util.List;
 
