@@ -4,30 +4,22 @@ package model.physics.physics_level;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.ai.behavior.AINPCBehavior;
-import model.ai.behavior.AIZombieBehavior;
-import model.ai.collision.DefaultCollisionResolver;
-import model.ai.movement.DefaultMovementStrategy;
-import model.ai.separation.DefaultSeparationBehavior;
+import model.ai.behavior.FactoryAINPCBehavior;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.level.Level;
 
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
-    AINPCBehavior<Survivor,Zombie> smartAI;
+    FactoryAINPCBehavior factAINPC = new FactoryAINPCBehavior();
+    AINPCBehavior<Survivor,Zombie> baseAIZombie = factAINPC.createBaseNPCBehavior();
 
-    public PhysicsLevelTutComponent(){
-        this.smartAI = new AIZombieBehavior<>(new DefaultMovementStrategy<>(),
-                                              new DefaultSeparationBehavior<>(), 
-                                              new DefaultCollisionResolver<>());
-    }
-    
     @Override
     public void updateLevel(final Level lv,final int dt) {
         lv.getSurvivorOnLevel().updatePhysics(dt);
         lv.getZombieOnLevel().stream()
                              .forEach(zombie -> {
-                                this.smartAI.updateAINPC(lv.getSurvivorOnLevel(), zombie, lv.getZombieOnLevel());
+                                this.baseAIZombie.updateAINPC(lv.getSurvivorOnLevel(), zombie, lv.getZombieOnLevel());
                                 zombie.updatePhysics(dt);
                              });
 
