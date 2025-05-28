@@ -27,7 +27,7 @@ public class RectBoundingBox implements BoundingBox {
         boolean overlapY = tuy > oby && tby < ouy ;
         boolean overlapX = tux < obx && tbx > oux ; 
 
-        System.out.println("overlapX " + overlapX + " overlapY " + overlapY);
+        //System.out.println("overlapX " + overlapX + " overlapY " + overlapY);
         return overlapX && overlapY;
     }
 

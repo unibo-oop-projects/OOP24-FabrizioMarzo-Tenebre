@@ -1,7 +1,7 @@
 package view.graphics;
 
 import java.awt.image.BufferedImage;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics2D;
 
 import model.entities.zombie.Zombie;
@@ -28,12 +28,12 @@ public class SwingGraphicsZombie implements GraphicsZombie {
 
         g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, scaleSurWidth, scaleSurHeight, null);
 
-        int scaleBboxUx = viewScale.getXinPixel(zob.getBBox().getULcorner());
-        int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(zob.getBBox().getULcorner());
+        // int scaleBboxUx = viewScale.getXinPixel(zob.getBBox().getULcorner());
+        // int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(zob.getBBox().getULcorner());
 
-        // Draw the Survivor BoundingBox
-        g2d.setColor(Color.blue);
-        g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
+        // // Draw the Survivor BoundingBox
+        // g2d.setColor(Color.blue);
+        // g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
 
     }
     

@@ -127,11 +127,11 @@ public class LoadAnimations {
 
                 aniRow.add(subImage.get());
             }
-            System.out.println("The lenght of the animations is " + aniRow.size());
+            //System.out.println("The lenght of the animations is " + aniRow.size());
             allAnimations.add(aniRow); 
         }
-        System.out.println("Finish to Upload the Animation");
-        System.out.println("The annimations Array size is : " + allAnimations.size());
+        // System.out.println("Finish to Upload the Animation");
+        // System.out.println("The annimations Array size is : " + allAnimations.size());
         return allAnimations;
     }
 

@@ -1,6 +1,6 @@
 package view.graphics;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -35,12 +35,12 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
         // Draw the Survivor
         g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, scaleSurWidth, scaleSurHeight, null);
             
-        int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
-        int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(sur.getBBox().getULcorner());
+        // int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
+        // int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(sur.getBBox().getULcorner());
 
-        // Draw the Survivor BoundingBox
-        g2d.setColor(Color.blue);
-        g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
+        // // Draw the Survivor BoundingBox
+        // g2d.setColor(Color.blue);
+        // g2d.drawRect(scaleBboxUx, scaleBboxUy,scaleSurWidth,scaleSurHeight);
 
     }
 
