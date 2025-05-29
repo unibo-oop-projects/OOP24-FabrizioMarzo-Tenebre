@@ -40,5 +40,5 @@ public interface Level {
 
     List<Zombie> getZombieOnLevel();
 
-    
+    void setWeaponOnSurvivor();
 }

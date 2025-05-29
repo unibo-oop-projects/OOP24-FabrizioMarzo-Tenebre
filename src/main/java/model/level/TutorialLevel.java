@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import model.armory.weapon.FactoryWeapon;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
@@ -39,6 +40,8 @@ public class TutorialLevel implements Level {
     // The physic on lthe level 
     private PhysicsLevelComponent physicLvComp;
 
+    private FactoryWeapon factWeapon = new FactoryWeapon();
+
     private Survivor surLv;
     private List<Zombie> listZombie;
 
@@ -52,6 +55,7 @@ public class TutorialLevel implements Level {
         this.physicLvComp = physcLevel;
         this.setSurvivorOnLevel();
         this.setZombieOnLevel();
+        this.setWeaponOnSurvivor();
     }
     
     private void setSurvivorOnLevel(){
@@ -103,6 +107,11 @@ public class TutorialLevel implements Level {
     @Override
     public List<Zombie> getZombieOnLevel(){
         return this.listZombie;
+    }
+
+    @Override
+    public void setWeaponOnSurvivor() {
+        this.getSurvivorOnLevel().setWeapon(factWeapon.createPistol(this.getSurvivorOnLevel().getCurrentPos()));
     }
 
 }
