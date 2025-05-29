@@ -1,6 +1,11 @@
 package model.entities.survivor;
 
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
+
+import model.armory.munition.Munition;
+import model.armory.weapon.Weapon;
 import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
 import model.physics.physics_entities.PhysicsSurvivorComponent;
@@ -23,6 +28,7 @@ public class Common implements Survivor{
     private EntitieState state;
     private BoundingBox bbox;
     private PhysicsSurvivorComponent physicComp;
+    private Weapon weapon;
 
     /**
      * Constructs a new {@code Common} survivor with specified attributes.
@@ -98,6 +104,11 @@ public class Common implements Survivor{
         this.state = newState;
     }
 
+    @Override
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -150,9 +161,20 @@ public class Common implements Survivor{
     }
 
     @Override
+    public Weapon getWeapon() {
+        return this.weapon;
+    }
+
+
+    @Override
     public BoundingBox getBBox() {
         return this.bbox;
     }
+
+    @Override
+    public List<Munition> shoot(Pair<Double, Double> dirShoot, double deltaTime) {
+        return this.weapon != null ? this.weapon.shoot(dirShoot, deltaTime) : List.of();
+}
 
     /**
      * Generates a hash code based on survivor's health and attack.
@@ -190,4 +212,6 @@ public class Common implements Survivor{
             return false;
         return true;
     }
+
+
 }

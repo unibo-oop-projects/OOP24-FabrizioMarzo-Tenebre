@@ -1,7 +1,11 @@
 package model.entities.survivor;
 
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.armory.munition.Munition;
+import model.armory.weapon.Weapon;
 import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
 
@@ -43,6 +47,8 @@ public interface Survivor {
      */
     void setState(final EntitieState newState);
 
+    void setWeapon(final Weapon weapon);
+
     /**
      * Returns the number of remaining health of the survivor.
      *
@@ -82,6 +88,10 @@ public interface Survivor {
      */    
     EntitieState getState();
 
+    Weapon getWeapon();
+
     BoundingBox getBBox();
+
+    List<Munition> shoot(final Pair<Double, Double> dirShoot,final double deltaTime);
 
 }
