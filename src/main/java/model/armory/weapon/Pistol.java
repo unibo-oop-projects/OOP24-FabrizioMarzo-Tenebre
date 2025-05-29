@@ -1,5 +1,7 @@
 package model.armory.weapon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -13,28 +15,34 @@ public class Pistol implements Weapon{
     private FactoryCharger factCharge = new FactoryCharger();
     private Charger charger;
     private final double cooldownMillis;
+    private final int shotsPerFire;
     private double timeSinceLastShot = 0;
 
 
-    public Pistol(final Pair<Double,Double> posWeapon, final double cooldownMillis) {
+    public Pistol(final Pair<Double,Double> posWeapon, final double cooldownMillis, final int shotsPerFire) {
         this.charger = factCharge.createDrumCharger(posWeapon);
         this.cooldownMillis = cooldownMillis;
+        this.shotsPerFire = shotsPerFire;
     }
 
 
     @Override
-    public Optional<Munition> shoot(Pair<Double, Double> dirShoot, double deltaTime) {
+    public List<Munition> shoot(final Pair<Double, Double> dirShoot,final double deltaTime) {
         timeSinceLastShot += deltaTime;
 
-        if (timeSinceLastShot < cooldownMillis) {
-            return Optional.empty();
+        if (timeSinceLastShot < cooldownMillis || charger.getCurrentLoad() == 0) {
+            return List.of(); // in cooldown o senza munizioni
         }
 
-        Munition munition = charger.extractAmmunition();
-        munition.setShot(dirShoot);
+        List<Munition> result = new ArrayList<>();
+        for (int i = 0; i < shotsPerFire && charger.getCurrentLoad() > 0; i++) {
+            Munition m = charger.extractAmmunition();
+            m.setShot(dirShoot);
+            result.add(m);
+        }
+
         timeSinceLastShot = 0;
-        return Optional.of(munition);
-        
+        return result;
     }
 
 

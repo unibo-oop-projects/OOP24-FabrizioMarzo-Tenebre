@@ -6,7 +6,8 @@ public class FactoryWeapon {
     
     public Weapon createPistol(final Pair<Double,Double> posWeapon){
         final double cooldownMillis = 450; 
-        return new Pistol(posWeapon, cooldownMillis);
+        final int shotsPerFire = 1;
+        return new Pistol(posWeapon, cooldownMillis, shotsPerFire);
     }
 
 }
