@@ -12,6 +12,7 @@ public class Parabellum implements Munition{
     private int damage;
     private int width;
     private int velocity;
+    private Boolean isShot = false;
     private Pair<Double,Double> pos;
     private Optional<Pair<Double, Double>> dir;
     private BoundingBox bbox;
@@ -36,13 +37,13 @@ public class Parabellum implements Munition{
     }
 
     @Override
-    public void setDir(final Pair<Double,Double> dirShoot) {
+    public void setShot(final Pair<Double,Double> dirShoot) {
         this.dir = Optional.ofNullable(PairUtils.normalize(dirShoot));
+        this.isShot = true;
     }
 
     @Override
-    public void moveOn(final int dt) {
-
+    public void moveShoot(final int dt) {
         Pair<Double, Double> direction = dir.orElseThrow(() -> 
         new IllegalStateException("Direction not inizialize"));
 
@@ -51,7 +52,13 @@ public class Parabellum implements Munition{
         this.updateBBox(this.pos);
     }
 
-    private void setPos(final Pair<Double,Double> nextPos){
+    @Override
+    public Boolean isShot() {
+        return this.isShot;
+    }
+
+    @Override
+    public void setPos(final Pair<Double,Double> nextPos){
         this.pos = nextPos;
     }
 
@@ -63,5 +70,6 @@ public class Parabellum implements Munition{
         this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+this.width));
         this.bbox.setBRcorner(Pair.of(newPos.getLeft()+this.width ,newPos.getRight()));
     }
+
     
 }

@@ -12,8 +12,8 @@ public class FactoryMunition {
         final int width=3;
         final int velocity=50;
         return new Parabellum(damage, 
-                              width, 
                               velocity,
+                              width, 
                               new MutablePair<>(initPos.getLeft(),initPos.getRight()), 
                               new RectBoundingBox(Pair.of(initPos.getLeft(),initPos.getRight()+width),
                                              Pair.of(initPos.getLeft()+width ,initPos.getRight())));
