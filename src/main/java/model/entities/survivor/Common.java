@@ -172,8 +172,8 @@ public class Common implements Survivor{
     }
 
     @Override
-    public List<Munition> shoot(Pair<Double, Double> dirShoot, double deltaTime) {
-        return this.weapon != null ? this.weapon.shoot(dirShoot, deltaTime) : List.of();
+    public List<Munition> shoot(final double deltaTime) {
+        return this.weapon != null ? this.weapon.shoot(deltaTime) : List.of();
 }
 
     /**

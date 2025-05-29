@@ -92,6 +92,6 @@ public interface Survivor {
 
     BoundingBox getBBox();
 
-    List<Munition> shoot(final Pair<Double, Double> dirShoot,final double deltaTime);
+    List<Munition> shoot(final double deltaTime);
 
 }
