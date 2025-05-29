@@ -40,27 +40,34 @@ public class InputCommonComponent implements InputSurvivorComponent{
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mulScale(Pair.of(0d,1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_UP);
+                s.getWeapon().aim(Pair.of(0d,1d), s.getCurrentPos());
             });
         } else if (ctrl.getInputCode() == KeyCodes.DOWN.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mulScale(Pair.of(0d,-1d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_DOWN);
+                s.getWeapon().aim(Pair.of(0d,-1d), s.getCurrentPos());
             });
         } else if (ctrl.getInputCode() == KeyCodes.LEFT.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mulScale(Pair.of(-1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_LEFT);
+                s.getWeapon().aim(Pair.of(-1d,0d), s.getCurrentPos());
             });
         } else if (ctrl.getInputCode() == KeyCodes.RIGHT.getKeyCode()) {
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(PairUtils.mulScale(Pair.of(1d,0d), PairUtils.module(s.getCurrentVel())));
                 s.setState(EntitieState.MOVE_RIGHT);
+                s.getWeapon().aim(Pair.of(1d,0d), s.getCurrentPos());
             });
         } else if (ctrl.getInputCode() == KeyCodes.NONE.getKeyCode()){
             CommandSurvivor.issue(sur, (s)-> {
                 s.setVelocity(Pair.of(0d,0d));
                 s.setState(EntitieState.IDLE);
+                s.getWeapon().aim(Pair.of(0d,-1d), s.getCurrentPos());
             });
+        } else if (ctrl.getInputCode() == KeyCodes.SPACE.getKeyCode()) {
+            CommandSurvivor.issue(sur, (s) -> s.setState(EntitieState.ATTACK));
         }
     }
 
