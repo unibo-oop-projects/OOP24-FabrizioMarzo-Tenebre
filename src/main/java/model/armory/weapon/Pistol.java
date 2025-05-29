@@ -56,17 +56,10 @@ public class Pistol implements Weapon{
         return this.charger.getCurrentLoad();
     }
 
-
-    @Override
-    public void setDir(final Pair<Double, Double> dirWeapon) {
+    public void aim(final Pair<Double,Double> dirWeapon, final Pair<Double,Double> posWeapon ){
         this.dirWeapon = dirWeapon;
-    }
-
-
-    @Override
-    public void setPos(final Pair<Double, Double> posWeapon) {
         this.posWeapon = posWeapon;
     }
-    
+
 
 }

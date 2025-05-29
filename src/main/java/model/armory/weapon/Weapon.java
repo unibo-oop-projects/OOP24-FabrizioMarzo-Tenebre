@@ -12,8 +12,6 @@ public interface Weapon {
     
     int getAmmoCount();
 
-    void setDir(final Pair<Double,Double> dirWeapon);
-
-    void setPos(final Pair<Double,Double> posWeapon);
+    void aim(final Pair<Double,Double> dirWeapon, final Pair<Double,Double> posWeapon );
 
 }
