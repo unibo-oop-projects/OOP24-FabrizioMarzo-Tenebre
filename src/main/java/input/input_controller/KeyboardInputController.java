@@ -47,6 +47,13 @@ public class KeyboardInputController implements InputController {
 	}
 
 	/**
+     * Sets the SPACE.
+     */
+	private void isPresSpace(){
+		this.keyCode = KeyCodes.SPACE;
+	}
+
+	/**
      * Returns the current movement direction.
      *
      * @return the current {@link KeyCodes} value representing the movement direction
@@ -55,6 +62,7 @@ public class KeyboardInputController implements InputController {
 	public int getInputCode(){
 		return this.keyCode.getKeyCode();
 	}
+
 	
 	/**
      * Notifies the controller of a new movement input based on the given key code.
@@ -84,6 +92,9 @@ public class KeyboardInputController implements InputController {
 				break;
 			case 40: 
 				isMoveDown();
+				break;
+			case 32:
+				isPresSpace();
 				break;
 			default:
 				isMoveNone(); 

@@ -20,6 +20,9 @@ public enum KeyCodes {
     /** Represents the down arrow key (key code 40). */
     DOWN(40),
 
+    /** Represents the space arrow key (key code 32) */
+    SPACE(32),
+
     /** Represents the absence of any directional input (key code -1). */
     NONE(-1);
 
