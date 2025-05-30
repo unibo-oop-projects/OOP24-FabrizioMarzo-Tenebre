@@ -21,16 +21,17 @@ public class Drum implements Charger{
         this.fillMagazine();
     }
 
+    
     private void fillMagazine(){
-        while (munitions.size() < capacity) {
-        Munition newMunition = factory.createParabellum(this.pos); 
-        munitions.add(newMunition);
+        while (this.munitions.size() < capacity) {
+            Munition newMunition = factory.createParabellum(this.pos); 
+            this.munitions.add(newMunition);
         }        
     }
     
     @Override
     public Munition extractAmmunition() {
-        if (munitions.isEmpty()){
+        if (this.munitions.isEmpty()){
             this.fillMagazine();
         } 
         return munitions.remove(munitions.size()-1);
@@ -48,7 +49,7 @@ public class Drum implements Charger{
 
     @Override
     public int getCurrentLoad() {
-        return munitions.size();
+        return this.munitions.size();
     }
     
 }

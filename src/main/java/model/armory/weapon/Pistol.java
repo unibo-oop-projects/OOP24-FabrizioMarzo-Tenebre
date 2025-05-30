@@ -34,22 +34,20 @@ public class Pistol implements Weapon{
     public List<Munition> shoot(final double deltaTime) {
         timeSinceLastShot += deltaTime;
 
-        if (timeSinceLastShot < cooldownMillis || charger.getCurrentLoad() == 0) {
+        if (timeSinceLastShot < cooldownMillis) {
             return List.of(); 
+        } else {
+            List<Munition> result = new ArrayList<>();
+    
+            for (int i = 0; i < shotsPerFire ; i++) {
+                Munition m = charger.extractAmmunition();
+                m.setShoot(this.dirWeapon, this.posWeapon);
+                result.add(m);
+            }
+    
+            timeSinceLastShot = 0;    
+            return result;
         }
-
-        List<Munition> result = new ArrayList<>();
-        for (int i = 0; i < shotsPerFire && charger.getCurrentLoad() > 0; i++) {
-            Munition m = charger.extractAmmunition();
-            m.setShoot(this.dirWeapon, this.posWeapon);
-            System.out.println("VA VIA UN PROIETTILE ");
-            result.add(m);
-        }
-
-        timeSinceLastShot = 0;
-
-        System.out.println("TUTTI I PROIETTILI SPARATI SONO " + result.size() + " NON CI POSSO CREDERE");
-        return result;
     }
 
 
@@ -58,6 +56,7 @@ public class Pistol implements Weapon{
         return this.charger.getCurrentLoad();
     }
 
+    @Override
     public void aim(final Pair<Double,Double> dirWeapon, final Pair<Double,Double> posWeapon ){
         this.dirWeapon = dirWeapon;
         this.posWeapon = posWeapon;
