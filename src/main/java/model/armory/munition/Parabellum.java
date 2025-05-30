@@ -72,5 +72,57 @@ public class Parabellum implements Munition{
         this.bbox.setBRcorner(Pair.of(newPos.getLeft()+this.width ,newPos.getRight()));
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + damage;
+        result = prime * result + width;
+        result = prime * result + velocity;
+        result = prime * result + ((isShoot == null) ? 0 : isShoot.hashCode());
+        result = prime * result + ((pos == null) ? 0 : pos.hashCode());
+        result = prime * result + ((dir == null) ? 0 : dir.hashCode());
+        result = prime * result + ((bbox == null) ? 0 : bbox.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Parabellum other = (Parabellum) obj;
+        if (damage != other.damage)
+            return false;
+        if (width != other.width)
+            return false;
+        if (velocity != other.velocity)
+            return false;
+        if (isShoot == null) {
+            if (other.isShoot != null)
+                return false;
+        } else if (!isShoot.equals(other.isShoot))
+            return false;
+        if (pos == null) {
+            if (other.pos != null)
+                return false;
+        } else if (!pos.equals(other.pos))
+            return false;
+        if (dir == null) {
+            if (other.dir != null)
+                return false;
+        } else if (!dir.equals(other.dir))
+            return false;
+        if (bbox == null) {
+            if (other.bbox != null)
+                return false;
+        } else if (!bbox.equals(other.bbox))
+            return false;
+        return true;
+    }
+
     
 }
