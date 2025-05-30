@@ -98,7 +98,7 @@ public class SwingSceneTutorial implements Scene {
             tutLevel.getGameZombie().stream()
                                     .forEach( gameZombie -> gameZombie.updateGraphics(graphZob));
             tutLevel.updateGraphics(graphLvl);
-            System.out.println("New mode to Painting");
+            //System.out.println("New mode to Painting");
         }
 
         @Override
