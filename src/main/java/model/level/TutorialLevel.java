@@ -25,7 +25,7 @@ import model.physics.physics_level.PhysicsLevelComponent;
  */
 public class TutorialLevel implements Level {
 
-    private static final int ZOMBIES_LEVEL = 10;
+    private static final int ZOMBIES_LEVEL = 0;
     
     // Size of the Level
     private double lvlWidth;   
