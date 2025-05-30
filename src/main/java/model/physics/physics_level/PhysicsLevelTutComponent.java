@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.ai.behavior.AINPCBehavior;
 import model.ai.behavior.FactoryAINPCBehavior;
 import model.armory.munition.Munition;
+import model.bounding_box.BoundingBox;
 import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
@@ -28,7 +29,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         
         System.out.println("Number of Munitions on level: " + this.activeMunitions.size());
         
-        this.updateMunitions(dt);
+        this.updateMunitions(dt,lv);
 
         lv.getSurvivorOnLevel().updatePhysics(dt);
         lv.getZombieOnLevel().stream()
@@ -89,13 +90,29 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         }
     }
 
-    private void updateMunitions(final int dt) {
+    private Boolean checkIfMunitionIsOut(final Munition munition, final Level lv) {
+        BoundingBox levelBox = lv.getLevelBBox();
+        BoundingBox munBox = munition.getBBox();
+
+        boolean isInside = levelBox.isColliding(
+            munBox.getULcorner(),
+            munBox.getBRcorner()
+        );
+
+        return !isInside;
+    }
+
+    private void updateMunitions(final int dt, final Level lv) {
         this.activeMunitions.stream()
                             .forEach(munition -> {
                                 munition.moveShoot(dt);
                                 System.out.println(munition.getBBox().getULcorner());
                             });
+                            
+        this.activeMunitions.removeIf(munition -> this.checkIfMunitionIsOut(munition, lv));
     }
+
+    
 
 
 }
