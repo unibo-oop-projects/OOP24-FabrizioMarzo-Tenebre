@@ -12,4 +12,4 @@ public interface Charger {
 
     int getCurrentLoad();
     
-    }
+}
