@@ -40,7 +40,7 @@ public class Drum implements Charger{
     public void setPos(final Pair<Double, Double> pos) {
         this.pos = pos;
         for (Munition m : munitions) {
-            if (!m.isShot()) {
+            if (!m.isShoot()) {
                 m.setPos(pos);
             }
         }

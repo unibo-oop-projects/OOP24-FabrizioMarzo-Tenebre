@@ -12,7 +12,7 @@ public class Parabellum implements Munition{
     private int damage;
     private int width;
     private int velocity;
-    private Boolean isShot = false;
+    private Boolean isShoot = false;
     private Pair<Double,Double> pos;
     private Optional<Pair<Double, Double>> dir;
     private BoundingBox bbox;
@@ -37,9 +37,10 @@ public class Parabellum implements Munition{
     }
 
     @Override
-    public void setShot(final Pair<Double,Double> dirShoot) {
+    public void setShoot(final Pair<Double,Double> dirShoot, final Pair<Double,Double> posShoot) {
         this.dir = Optional.ofNullable(PairUtils.normalize(dirShoot));
-        this.isShot = true;
+        this.pos = posShoot;
+        this.isShoot = true;
     }
 
     @Override
@@ -53,8 +54,8 @@ public class Parabellum implements Munition{
     }
 
     @Override
-    public Boolean isShot() {
-        return this.isShot;
+    public Boolean isShoot() {
+        return this.isShoot;
     }
 
     @Override

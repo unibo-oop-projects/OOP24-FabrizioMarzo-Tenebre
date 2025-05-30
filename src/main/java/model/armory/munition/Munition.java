@@ -10,11 +10,11 @@ public interface Munition {
 
     BoundingBox getBBox();
 
-    void setShot(final Pair<Double,Double> dirShoot);
+    void setShoot(final Pair<Double,Double> dirShoot, final Pair<Double,Double> posShoot);
 
     void moveShoot(final int dt);
 
-    Boolean isShot();
+    Boolean isShoot();
 
-    void setPos(final Pair<Double,Double> pos);
+    void setPos(final Pair<Double,Double> nextPos);
 }

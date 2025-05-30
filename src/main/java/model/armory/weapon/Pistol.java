@@ -41,8 +41,7 @@ public class Pistol implements Weapon{
         List<Munition> result = new ArrayList<>();
         for (int i = 0; i < shotsPerFire && charger.getCurrentLoad() > 0; i++) {
             Munition m = charger.extractAmmunition();
-            m.setShot(this.dirWeapon);
-            m.setPos(this.posWeapon);
+            m.setShoot(this.dirWeapon, this.posWeapon);
             result.add(m);
         }
 
