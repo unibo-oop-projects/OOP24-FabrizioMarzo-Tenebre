@@ -42,10 +42,13 @@ public class Pistol implements Weapon{
         for (int i = 0; i < shotsPerFire && charger.getCurrentLoad() > 0; i++) {
             Munition m = charger.extractAmmunition();
             m.setShoot(this.dirWeapon, this.posWeapon);
+            System.out.println("VA VIA UN PROIETTILE ");
             result.add(m);
         }
 
         timeSinceLastShot = 0;
+
+        System.out.println("TUTTI I PROIETTILI SPARATI SONO " + result.size() + " NON CI POSSO CREDERE");
         return result;
     }
 

@@ -174,7 +174,7 @@ public class Common implements Survivor{
     @Override
     public List<Munition> shoot(final double deltaTime) {
         return this.weapon != null ? this.weapon.shoot(deltaTime) : List.of();
-}
+    }
 
     /**
      * Generates a hash code based on survivor's health and attack.
