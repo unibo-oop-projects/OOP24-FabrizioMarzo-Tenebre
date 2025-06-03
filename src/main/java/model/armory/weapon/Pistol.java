@@ -20,7 +20,7 @@ public class Pistol implements Weapon{
 
 
     public Pistol(final Pair<Double,Double> posWeapon, final double cooldownMillis, final int shotsPerFire, final Charger charger) {
-        this.posWeapon = posWeapon;
+        this.posWeapon = this.setPositionWeapon(posWeapon);
         this.charger = charger;
         this.cooldownMillis = cooldownMillis;
         this.shotsPerFire = shotsPerFire;
@@ -48,6 +48,11 @@ public class Pistol implements Weapon{
         }
     }
 
+     private Pair<Double,Double> setPositionWeapon(final Pair<Double,Double> pos){
+        double x = pos.getLeft() + 20;                  
+        double y = pos.getRight() + 70 ;       
+        return Pair.of(x, y);
+    }
 
     @Override
     public int getAmmoCount() {
@@ -57,7 +62,7 @@ public class Pistol implements Weapon{
     @Override
     public void aim(final Pair<Double,Double> dirWeapon, final Pair<Double,Double> posWeapon ){
         this.dirWeapon = dirWeapon;
-        this.posWeapon = posWeapon;
+        this.posWeapon = this.setPositionWeapon(posWeapon);
     }
 
 
