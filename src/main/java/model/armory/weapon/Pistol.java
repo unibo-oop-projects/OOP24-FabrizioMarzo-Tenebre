@@ -11,9 +11,12 @@ import model.armory.munition.Munition;
 
 public class Pistol implements Weapon{
 
-    private Charger charger;
+
+    private static final double ARM_POSITION_OFFSET_X = 20.0;  
+    private static final double ARM_POSITION_OFFSET_Y = 70.0;  
     private final double cooldownMillis;
     private final int shotsPerFire;
+    private Charger charger;
     private double timeSinceLastShot = 0;
     private Pair<Double,Double> dirWeapon;
     private Pair<Double,Double> posWeapon;
@@ -49,8 +52,8 @@ public class Pistol implements Weapon{
     }
 
      private Pair<Double,Double> setPositionWeapon(final Pair<Double,Double> pos){
-        double x = pos.getLeft() + 20;                  
-        double y = pos.getRight() + 70 ;       
+        double x = pos.getLeft() + ARM_POSITION_OFFSET_X;                  
+        double y = pos.getRight() + ARM_POSITION_OFFSET_Y ;       
         return Pair.of(x, y);
     }
 
