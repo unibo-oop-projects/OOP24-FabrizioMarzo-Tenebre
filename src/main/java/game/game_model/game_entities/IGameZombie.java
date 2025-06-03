@@ -1,4 +1,4 @@
-package game.game_entities;
+package game.game_model.game_entities;
 
 import model.entities.zombie.Zombie;
 import view.graphics.GraphicsZombie;

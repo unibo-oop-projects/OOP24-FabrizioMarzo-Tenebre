@@ -1,13 +1,13 @@
-package game.game_level;
+package game.game_model.game_level;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import game.game_entities.FactorySurvivorGame;
-import game.game_entities.FactoryZombieGame;
-import game.game_entities.IGameSurvivor;
-import game.game_entities.IGameZombie;
+import game.game_model.game_entities.FactorySurvivorGame;
+import game.game_model.game_entities.FactoryZombieGame;
+import game.game_model.game_entities.IGameSurvivor;
+import game.game_model.game_entities.IGameZombie;
 import model.level.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics_component.level.GraphicsLevelComponent;

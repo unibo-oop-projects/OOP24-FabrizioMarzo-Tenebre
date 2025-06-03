@@ -1,7 +1,7 @@
 package game.game_state;
 
-import game.game_level.FactoryLevelGame;
-import game.game_level.IGameLevel;
+import game.game_model.game_level.FactoryLevelGame;
+import game.game_model.game_level.IGameLevel;
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
 import view.scene.Scene;

@@ -1,9 +1,9 @@
-package game.game_level;
+package game.game_model.game_level;
 
 import java.util.List;
 
-import game.game_entities.IGameSurvivor;
-import game.game_entities.IGameZombie;
+import game.game_model.game_entities.IGameSurvivor;
+import game.game_model.game_entities.IGameZombie;
 import model.level.Level;
 import view.graphics.GraphicsLevel;
 

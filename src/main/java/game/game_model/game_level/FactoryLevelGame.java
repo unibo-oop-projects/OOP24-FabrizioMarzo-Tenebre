@@ -1,4 +1,4 @@
-package game.game_level;
+package game.game_model.game_level;
 
 import model.level.LevelFactory;
 import view.graphics_component.level.GrahicsTutlevelComponent;

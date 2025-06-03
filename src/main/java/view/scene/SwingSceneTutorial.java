@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import game.game_level.IGameLevel;
+import game.game_model.game_level.IGameLevel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

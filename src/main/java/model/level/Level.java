@@ -2,7 +2,6 @@ package model.level;
 
 import java.util.List;
 
-import game.game_entities.IGameSurvivor;
 import model.armory.munition.Munition;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
@@ -32,11 +31,6 @@ public interface Level {
 
     BoundingBox getLevelBBox();
     
-    /**
-     * Returns the survivor entity associated with this level.
-     *
-     * @return the {@link IGameSurvivor} present in the level
-     */
     Survivor getSurvivorOnLevel(); 
 
     List<Zombie> getZombieOnLevel();
