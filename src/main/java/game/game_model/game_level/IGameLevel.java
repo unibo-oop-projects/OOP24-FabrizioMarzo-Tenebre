@@ -2,6 +2,7 @@ package game.game_model.game_level;
 
 import java.util.List;
 
+import game.game_model.game_armory.IGameMunition;
 import game.game_model.game_entities.IGameSurvivor;
 import game.game_model.game_entities.IGameZombie;
 import model.level.Level;
@@ -15,5 +16,9 @@ public interface IGameLevel {
 
     List<IGameZombie> getGameZombie();
 
+    List<IGameMunition> getGameMunitions();
+
     void updateGraphics(final GraphicsLevel graphicLvl);
+
+    void updateStateGameLevel();
 }
