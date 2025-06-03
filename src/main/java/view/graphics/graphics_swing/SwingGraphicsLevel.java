@@ -1,9 +1,10 @@
-package view.graphics;
+package view.graphics.graphics_swing;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import model.level.Level;
+import view.graphics.GraphicsLevel;
 import view.graphics_util.IViewScale;
 
 public class SwingGraphicsLevel implements GraphicsLevel {

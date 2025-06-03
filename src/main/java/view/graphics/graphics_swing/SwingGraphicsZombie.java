@@ -1,10 +1,11 @@
-package view.graphics;
+package view.graphics.graphics_swing;
 
 import java.awt.image.BufferedImage;
 //import java.awt.Color;
 import java.awt.Graphics2D;
 
 import model.entities.zombie.Zombie;
+import view.graphics.GraphicsZombie;
 import view.graphics_util.IViewScale;
 
 public class SwingGraphicsZombie implements GraphicsZombie {

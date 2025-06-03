@@ -19,9 +19,9 @@ import input.input_controller.InputController;
 import view.graphics.GraphicsLevel;
 import view.graphics.GraphicsSurvivor;
 import view.graphics.GraphicsZombie;
-import view.graphics.SwingGraphicsLevel;
-import view.graphics.SwingGraphicsSurvivor;
-import view.graphics.SwingGraphicsZombie;
+import view.graphics.graphics_swing.SwingGraphicsLevel;
+import view.graphics.graphics_swing.SwingGraphicsSurvivor;
+import view.graphics.graphics_swing.SwingGraphicsZombie;
 import view.graphics_util.IViewScale;
 import view.graphics_util.ViewScale;
 

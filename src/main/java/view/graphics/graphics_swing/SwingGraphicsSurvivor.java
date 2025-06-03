@@ -1,10 +1,11 @@
-package view.graphics;
+package view.graphics.graphics_swing;
 
 //import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import model.entities.survivor.Survivor;
+import view.graphics.GraphicsSurvivor;
 import view.graphics_util.IViewScale;
 
 public class SwingGraphicsSurvivor implements GraphicsSurvivor{
