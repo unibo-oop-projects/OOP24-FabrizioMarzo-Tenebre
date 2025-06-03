@@ -17,4 +17,8 @@ public interface Munition {
     boolean isShoot();
 
     void setPos(final Pair<Double,Double> nextPos);
+
+    Pair<Double, Double> getCurrentPos();
+
+    int getWidth();
 }

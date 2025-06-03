@@ -73,6 +73,16 @@ public class Parabellum implements Munition{
     }
 
     @Override
+    public Pair<Double, Double> getCurrentPos() {
+        return this.pos;
+    }
+    
+    @Override
+    public int getWidth() {
+        return this.width;
+    }
+    
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
