@@ -27,6 +27,8 @@ public interface Zombie {
 
     int getHeight();
 
+    int getLive();
+
     Pair<Double,Double> getCurrentPos();
 
     Pair<Double,Double> getCurrentVel();

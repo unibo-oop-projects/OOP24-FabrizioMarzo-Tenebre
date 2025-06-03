@@ -79,6 +79,7 @@ public class GameLevel implements IGameLevel {
     @Override
     public void updateStateGameLevel() {
         this.setGameMunition();
+        this.setGameZombie();
     }
 
 }
