@@ -2,12 +2,16 @@ package model.physics.physics_level;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.ai.behavior.AINPCBehavior;
 import model.ai.behavior.FactoryAINPCBehavior;
 import model.armory.munition.Munition;
 import model.bounding_box.BoundingBox;
+import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.level.Level;
@@ -24,6 +28,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         System.out.println("Number of Munitions on level: " + lv.getProjectilesOnLevel().size());
         
         this.updateMunitions(dt,lv);
+        this.checkCollisionsProjectilesZombies(lv);
 
         lv.getSurvivorOnLevel().updatePhysics(dt);
         lv.getZombieOnLevel().stream()
@@ -91,6 +96,38 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
                             
         lv.getProjectilesOnLevel().removeIf(munition -> this.checkIfMunitionIsOut(munition, lv));
     }
+
+    private void checkCollisionsProjectilesZombies(final Level lv) {
+        var projectiles = lv.getProjectilesOnLevel();
+        var zombies = lv.getZombieOnLevel();
+
+        List<Zombie> toRemove = new ArrayList<>();
+
+        var projectileIterator = projectiles.iterator();
+        while (projectileIterator.hasNext()) {
+            Munition munition = projectileIterator.next();
+
+            for (Zombie zombie : zombies) {
+                if (munition.getBBox().isColliding(zombie.getBBox().getULcorner(), zombie.getBBox().getBRcorner())) {
+                    
+                    zombie.damageSuffer(munition.getDamage());
+                    zombie.setState(EntitieState.DAMAGE);
+
+
+                    projectileIterator.remove();
+
+                    
+                    if (zombie.getLive() <= 0) {
+                        toRemove.add(zombie);
+                    }
+                    break;
+                }   
+            }
+        }
+
+        zombies.removeAll(toRemove);
+    }
+
 
     
 
