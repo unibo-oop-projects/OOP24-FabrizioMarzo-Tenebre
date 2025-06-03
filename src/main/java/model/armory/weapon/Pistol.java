@@ -27,7 +27,7 @@ public class Pistol implements Weapon{
         this.charger = charger;
         this.cooldownMillis = cooldownMillis;
         this.shotsPerFire = shotsPerFire;
-        this.dirWeapon = new MutablePair<>(0.0,0.0);
+        this.dirWeapon = new MutablePair<>();
     }
 
 
@@ -51,7 +51,7 @@ public class Pistol implements Weapon{
         }
     }
 
-     private Pair<Double,Double> setPositionWeapon(final Pair<Double,Double> pos){
+    private Pair<Double,Double> setPositionWeapon(final Pair<Double,Double> pos){
         double x = pos.getLeft() + ARM_POSITION_OFFSET_X;                  
         double y = pos.getRight() + ARM_POSITION_OFFSET_Y ;       
         return Pair.of(x, y);
@@ -67,6 +67,5 @@ public class Pistol implements Weapon{
         this.dirWeapon = dirWeapon;
         this.posWeapon = this.setPositionWeapon(posWeapon);
     }
-
 
 }
