@@ -110,36 +110,6 @@ public class Clicker implements Zombie{
         return this.bbox;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + width;
-        result = prime * result + height;
-        result = prime * result + live;
-        result = prime * result + attack;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Clicker other = (Clicker) obj;
-        if (width != other.width)
-            return false;
-        if (height != other.height)
-            return false;
-        if (live != other.live)
-            return false;
-        if (attack != other.attack)
-            return false;
-        return true;
-    }
 
     @Override
     public int getLive() {
