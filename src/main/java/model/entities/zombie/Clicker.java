@@ -141,5 +141,10 @@ public class Clicker implements Zombie{
         return true;
     }
 
+    @Override
+    public int getLive() {
+        return this.live;
+    }
+
     
 }
