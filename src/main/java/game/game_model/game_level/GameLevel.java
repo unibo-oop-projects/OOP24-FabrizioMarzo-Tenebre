@@ -1,7 +1,8 @@
 package game.game_model.game_level;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import game.game_model.game_armory.FactoryMunitionGame;
@@ -10,6 +11,8 @@ import game.game_model.game_entities.FactorySurvivorGame;
 import game.game_model.game_entities.FactoryZombieGame;
 import game.game_model.game_entities.IGameSurvivor;
 import game.game_model.game_entities.IGameZombie;
+import model.armory.munition.Munition;
+import model.entities.zombie.Zombie;
 import model.level.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics_component.level.GraphicsLevelComponent;
@@ -18,39 +21,52 @@ public class GameLevel implements IGameLevel {
 
     private Level lvl;
     private GraphicsLevelComponent imgLvl;
+
     private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
     private FactoryZombieGame factZobGam = new FactoryZombieGame();
     private FactoryMunitionGame factMunGam = new FactoryMunitionGame();
+
+    private final Map<Zombie, IGameZombie> gameZombieMap = new  LinkedHashMap<>();
+    private final Map<Munition, IGameMunition> gameMunitionMap = new LinkedHashMap<>();
     private IGameSurvivor gamSur;
-    private List<IGameZombie> listGameZombie = new ArrayList<>();
-    private List<IGameMunition> listMunitions = new ArrayList<>();
 
 
     public GameLevel(final Level lvl,final GraphicsLevelComponent imgLvl) {
         this.lvl = lvl;
         this.imgLvl = imgLvl;
         this.gamSur = setGameSurvivor();
-        this.setGameZombie();
+        this.syncGameZombies();
     }
 
     private IGameSurvivor setGameSurvivor(){
         return factSurGam.gameSurvivorCommon(this.lvl.getSurvivorOnLevel());
     }
 
-    private void setGameZombie(){  
-         this.listGameZombie = this.lvl.getZombieOnLevel().stream()
-                                    .map(zombie -> this.factZobGam.gameSurvivorClicker(zombie))
-                                    .collect(Collectors.toList());
-        
+    private void syncGameZombies() {
+        List<Zombie> currentZombies = this.lvl.getZombieOnLevel();
+
+        // Remove Zombie if there are dead 
+        gameZombieMap.keySet().removeIf(z -> !currentZombies.contains(z));
+
+        // Add new Zombie if there are born
+        for (Zombie z : currentZombies) {
+            gameZombieMap.computeIfAbsent(z, factZobGam::gameSurvivorClicker);
+        }
+    }    
+
+    private void syncGameMunitions() {
+        List<Munition> currentMunitions = lvl.getProjectilesOnLevel();
+    
+        // Rimuovi quelli spariti
+        gameMunitionMap.keySet().removeIf(m -> !currentMunitions.contains(m));
+    
+        // Aggiungi i nuovi proiettili
+        for (Munition m : currentMunitions) {
+            gameMunitionMap.computeIfAbsent(m, factMunGam::gameMunition);
+        }
     }
-
-    private void setGameMunition(){
-        this.listMunitions = this.lvl.getProjectilesOnLevel().stream()
-                                                            .map(munition -> this.factMunGam.gameMunition(munition))
-                                                            .collect(Collectors.toList());
-    }
-
-
+    
+    
     @Override
     public Level getLevel() {
         return this.lvl;
@@ -68,18 +84,22 @@ public class GameLevel implements IGameLevel {
     
     @Override
     public List<IGameZombie> getGameZombie() {
-        return this.listGameZombie;
+        return  this.lvl.getZombieOnLevel().stream()
+                                            .map(gameZombieMap::get)
+                                            .collect(Collectors.toList());
     }
     
     @Override
     public List<IGameMunition> getGameMunitions() {
-       return this.listMunitions;
+       return lvl.getProjectilesOnLevel().stream()
+                                          .map(gameMunitionMap::get)
+                                          .collect(Collectors.toList());
     }
 
     @Override
     public void updateStateGameLevel() {
-        this.setGameMunition();
-        this.setGameZombie();
+        this.syncGameMunitions();
+        this.syncGameZombies();
     }
 
 }
