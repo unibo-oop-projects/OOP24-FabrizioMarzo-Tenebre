@@ -25,12 +25,12 @@ public class PlayState implements GameState{
     @Override
     public void processInput() {
         gameLevel.getGameSurvivor().updateInput(contrl);
-        //System.out.println("New controller");
     }
 
     @Override
     public void updateGame(final int elapsed) {
         gameLevel.getLevel().updateLevelState(elapsed);
+        gameLevel.updateStateGameLevel();
     }
 
     @Override
