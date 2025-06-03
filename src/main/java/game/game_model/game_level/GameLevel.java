@@ -59,10 +59,10 @@ public class GameLevel implements IGameLevel {
     private void syncGameMunitions() {
         List<Munition> currentMunitions = lvl.getProjectilesOnLevel();
     
-        // Rimuovi quelli spariti
+        // Remove all Munitions deleted 
         gameMunitionMap.keySet().removeIf(m -> !currentMunitions.contains(m));
     
-        // Aggiungi i nuovi proiettili
+        // Add new Munitions
         for (Munition m : currentMunitions) {
             gameMunitionMap.computeIfAbsent(m, factMunGam::gameMunition);
         }
@@ -86,20 +86,20 @@ public class GameLevel implements IGameLevel {
     
     @Override
     public List<IGameZombie> getGameZombie() {
-        return Collections.unmodifiableList(
-        lvl.getZombieOnLevel().stream()
-            .map(gameZombieMap::get)
-            .filter(Objects::nonNull)
-            .collect(Collectors.toList())
-    );
+        return Collections.unmodifiableList(lvl.getZombieOnLevel().stream()
+                                                                .map(gameZombieMap::get)
+                                                                .filter(Objects::nonNull)
+                                                                .collect(Collectors.toList()));
     }
     
     @Override
     public List<IGameMunition> getGameMunitions() {
-       return lvl.getProjectilesOnLevel().stream()
-                                          .map(gameMunitionMap::get)
-                                          .collect(Collectors.toList());
+        return Collections.unmodifiableList(lvl.getProjectilesOnLevel().stream()
+                                                                .map(gameMunitionMap::get)
+                                                                .filter(Objects::nonNull)
+                                                                .collect(Collectors.toList()));
     }
+    
 
     @Override
     public void updateStateGameLevel() {
