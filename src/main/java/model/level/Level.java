@@ -3,6 +3,7 @@ package model.level;
 import java.util.List;
 
 import game.game_entities.IGameSurvivor;
+import model.armory.munition.Munition;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
@@ -41,4 +42,6 @@ public interface Level {
     List<Zombie> getZombieOnLevel();
 
     void setWeaponOnSurvivor();
+
+    List<Munition> getProjectilesOnLevel();
 }

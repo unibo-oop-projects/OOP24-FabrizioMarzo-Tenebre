@@ -1,5 +1,6 @@
 package model.level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -8,8 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import model.armory.munition.Munition;
 import model.armory.weapon.FactoryWeapon;
 import model.bounding_box.BoundingBox;
+import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.zombie.Zombie;
@@ -39,6 +42,10 @@ public class TutorialLevel implements Level {
     private ZombieFactory zobFact = new ZombieFactory();
     // The physic on lthe level 
     private PhysicsLevelComponent physicLvComp;
+
+    private List<Munition> activeMunitions = new ArrayList<>();
+    private List<Munition> newMunitions = new ArrayList<>();
+
 
     private FactoryWeapon factWeapon = new FactoryWeapon();
 
@@ -74,8 +81,22 @@ public class TutorialLevel implements Level {
                             .collect(Collectors.toList());
     }
 
+    private void checkSurvivorAttack(final Survivor sur, final int dt){
+        if (sur.getState() == EntitieState.ATTACK) {
+            System.out.println("The Survivor is Shooting");
+            this.newMunitions.addAll(sur.getWeapon().shoot(dt));
+            System.out.println("!!!!!!!!!!!!!!!!!!" + this.newMunitions);
+            if (!newMunitions.isEmpty()) {
+                this.activeMunitions.addAll(newMunitions);
+                System.out.println("New Munitions are: " + newMunitions.size());
+            }
+            this.newMunitions.clear();
+        }
+    }
+
     @Override
     public void updateLevelState(final int dt){
+        this.checkSurvivorAttack(surLv, dt);
         physicLvComp.updateLevel(this, dt);
     }
 
@@ -112,6 +133,11 @@ public class TutorialLevel implements Level {
     @Override
     public void setWeaponOnSurvivor() {
         this.getSurvivorOnLevel().setWeapon(factWeapon.createPistol(this.getSurvivorOnLevel().getCurrentPos()));
+    }
+
+    @Override
+    public List<Munition> getProjectilesOnLevel(){
+        return this.activeMunitions;
     }
 
 }
