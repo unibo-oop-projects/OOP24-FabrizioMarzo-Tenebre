@@ -25,7 +25,8 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
     public void updateLevel(final Level lv,final int dt) {
 
         
-        System.out.println("Number of Munitions on level: " + lv.getProjectilesOnLevel().size());
+        System.out.println("Numbers of Munitions on level: " + lv.getProjectilesOnLevel().size());
+        System.out.println("Numbers of ZOmbies on Level: " + lv.getZombieOnLevel().size());
         
         this.updateMunitions(dt,lv);
         this.checkCollisionsProjectilesZombies(lv);
