@@ -5,7 +5,7 @@ import view.graphics_component.zombie.GraphicsClickerComponent;
 
 public class FactoryZombieGame {
     
-    public IGameZombie gameSurvivorClicker(final Zombie clicker){
+    public IGameZombie gameZombieClicker(final Zombie clicker){
         return new GameZombie(clicker,
                             new GraphicsClickerComponent(clicker.getClass().getSimpleName()));
     }

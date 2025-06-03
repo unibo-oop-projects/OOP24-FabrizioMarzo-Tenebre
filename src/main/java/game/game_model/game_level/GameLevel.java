@@ -1,8 +1,10 @@
 package game.game_model.game_level;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import game.game_model.game_armory.FactoryMunitionGame;
@@ -50,7 +52,7 @@ public class GameLevel implements IGameLevel {
 
         // Add new Zombie if there are born
         for (Zombie z : currentZombies) {
-            gameZombieMap.computeIfAbsent(z, factZobGam::gameSurvivorClicker);
+            gameZombieMap.computeIfAbsent(z, factZobGam::gameZombieClicker);
         }
     }    
 
@@ -84,9 +86,12 @@ public class GameLevel implements IGameLevel {
     
     @Override
     public List<IGameZombie> getGameZombie() {
-        return  this.lvl.getZombieOnLevel().stream()
-                                            .map(gameZombieMap::get)
-                                            .collect(Collectors.toList());
+        return Collections.unmodifiableList(
+        lvl.getZombieOnLevel().stream()
+            .map(gameZombieMap::get)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList())
+    );
     }
     
     @Override
