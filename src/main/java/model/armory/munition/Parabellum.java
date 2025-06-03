@@ -54,7 +54,7 @@ public class Parabellum implements Munition{
     }
 
     @Override
-    public Boolean isShoot() {
+    public boolean isShoot() {
         return this.isShoot;
     }
 

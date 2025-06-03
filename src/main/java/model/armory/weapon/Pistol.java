@@ -7,12 +7,10 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.armory.charger.Charger;
-import model.armory.charger.FactoryCharger;
 import model.armory.munition.Munition;
 
 public class Pistol implements Weapon{
 
-    private FactoryCharger factCharge = new FactoryCharger();
     private Charger charger;
     private final double cooldownMillis;
     private final int shotsPerFire;
@@ -21,9 +19,9 @@ public class Pistol implements Weapon{
     private Pair<Double,Double> posWeapon;
 
 
-    public Pistol(final Pair<Double,Double> posWeapon, final double cooldownMillis, final int shotsPerFire) {
+    public Pistol(final Pair<Double,Double> posWeapon, final double cooldownMillis, final int shotsPerFire, final Charger charger) {
         this.posWeapon = posWeapon;
-        this.charger = factCharge.createDrumCharger(posWeapon);
+        this.charger = charger;
         this.cooldownMillis = cooldownMillis;
         this.shotsPerFire = shotsPerFire;
         this.dirWeapon = new MutablePair<>(0.0,0.0);

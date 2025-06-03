@@ -14,7 +14,7 @@ public interface Munition {
 
     void moveShoot(final int dt);
 
-    Boolean isShoot();
+    boolean isShoot();
 
     void setPos(final Pair<Double,Double> nextPos);
 }
