@@ -20,6 +20,8 @@ public class LoadAnimations {
 
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
+    private static final String MUNITION_PATH = "/sprite_sheet/armory/";
+
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
     private final ImportImage impImgPNG = new ImportImagePNG() ;
 
@@ -75,6 +77,13 @@ public class LoadAnimations {
         Optional<BufferedImage> subImage = getBBoxImage(impImgPNG.imp(LEVEL_OBJECT_PATH + nameObject));
         return subImage.get();
     }
+
+
+    public BufferedImage loadMunition(final String nameMunition) {
+        Optional<BufferedImage> subImage = getBBoxImage(impImgPNG.imp(MUNITION_PATH + nameMunition));
+        return subImage.get();
+    }
+
 
     private Pair<Integer, Integer> numColRow(final int width_frame, final int height_frame, final BufferedImage img) {
         int columns = img.getWidth() / width_frame;
