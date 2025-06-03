@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 import input.input_controller.InputController;
 import view.graphics.GraphicsLevel;
@@ -89,22 +90,26 @@ public class SwingSceneTutorial implements Scene {
             setPreferredSize(size);
         }
 
-        public void paintComponent(final Graphics g){
-        
-            Graphics2D g2d = (Graphics2D) g ;
+        public void paintComponent(final Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
 
             GraphicsLevel graphLvl = new SwingGraphicsLevel(g2d, viewScale);
-            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d,viewScale);
+            GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d, viewScale);
             GraphicsZombie graphZob = new SwingGraphicsZombie(g2d, viewScale);
             GraphicsMunition graphMun = new SwingGraphicsMunition(g2d, viewScale);
 
             tutLevel.getGameZombie().stream()
-                                    .forEach( gameZombie -> gameZombie.updateGraphics(graphZob));
+                .filter(Objects::nonNull)
+                .forEach(gameZombie -> gameZombie.updateGraphics(graphZob));
+
             tutLevel.getGameMunitions().stream()
-                                       .forEach(gameMunitions -> gameMunitions.updateGraphics(graphMun));
+                .filter(Objects::nonNull)
+                .forEach(gameMunition -> gameMunition.updateGraphics(graphMun));
+
             tutLevel.getGameSurvivor().updateGraphics(graphSur);
             tutLevel.updateGraphics(graphLvl);
         }
+
 
         @Override
 	    public void keyPressed(KeyEvent e) {
