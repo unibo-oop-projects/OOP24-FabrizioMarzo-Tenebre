@@ -32,7 +32,7 @@ public class Clicker implements Zombie{
         this.height = height;
         this.pos = pos;
         this.vel = vel;
-        this.velBase = vel;
+        this.velBase = Pair.of(vel.getLeft(), vel.getRight());
         this.state = EntitieState.IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp;
@@ -45,7 +45,7 @@ public class Clicker implements Zombie{
 
     @Override
     public void damageSuffer(final int dm) {
-        this.live = this.live - dm;
+        this.live = Math.max(0, this.live - dm);
     }
 
     @Override

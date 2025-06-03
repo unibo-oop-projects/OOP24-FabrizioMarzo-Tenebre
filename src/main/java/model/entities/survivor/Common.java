@@ -69,7 +69,7 @@ public class Common implements Survivor{
      */
     @Override
     public void damageSuffer(final int dm) {
-        this.live = this.live-dm;
+        this.live = Math.max(0, this.live - dm);
     }
     
     @Override
