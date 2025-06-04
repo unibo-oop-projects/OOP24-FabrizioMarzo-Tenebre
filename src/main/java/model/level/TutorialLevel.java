@@ -83,12 +83,9 @@ public class TutorialLevel implements Level {
 
     private void checkSurvivorAttack(final Survivor sur, final int dt){
         if (sur.getState() == EntitieState.ATTACK) {
-            System.out.println("The Survivor is Shooting");
             this.newMunitions.addAll(sur.getWeapon().shoot(dt));
-            System.out.println("!!!!!!!!!!!!!!!!!!" + this.newMunitions);
             if (!newMunitions.isEmpty()) {
                 this.activeMunitions.addAll(newMunitions);
-                System.out.println("New Munitions are: " + newMunitions.size());
             }
             this.newMunitions.clear();
         }

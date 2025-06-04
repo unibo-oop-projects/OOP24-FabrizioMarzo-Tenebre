@@ -11,7 +11,6 @@ public class GraphicsParabellumComponent implements GraphicsMunitionComponent{
     private BufferedImage munition;
 
     public GraphicsParabellumComponent(final String nameClass){
-        System.err.println("Import the Image");
         this.munition = graphEnti.loadMunition(nameClass);
 
     }
