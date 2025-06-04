@@ -26,7 +26,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
         
         System.out.println("Numbers of Munitions on level: " + lv.getProjectilesOnLevel().size());
-        System.out.println("Numbers of ZOmbies on Level: " + lv.getZombieOnLevel().size());
+        System.out.println("Numbers of Zombies on Level: " + lv.getZombieOnLevel().size());
         
         this.updateMunitions(dt,lv);
         this.checkCollisionsProjectilesZombies(lv);
@@ -128,9 +128,4 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
         zombies.removeAll(toRemove);
     }
-
-
-    
-
-
 }
