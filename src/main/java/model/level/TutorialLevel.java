@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import model.armory.munition.Munition;
 import model.armory.weapon.FactoryWeapon;
@@ -16,32 +13,21 @@ import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.zombie.Zombie;
-import model.entities.zombie.ZombieFactory;
+import model.level.manager.LevelManager;
+import model.level.manager.LevelManagerBase;
 import model.physics.physics_level.PhysicsLevelComponent;
 
-/**
- * Represents the tutorial level of the game.
- * <p>
- * This level contains a single common survivor and initializes it with
- * predefined attributes such as health, attack power, position, and velocity.
- * It also handles updating the survivor's internal state over time.
- */
+
 public class TutorialLevel implements Level {
 
-    private static final int ZOMBIES_LEVEL = 10;
     
-    // Size of the Level
     private double lvlWidth;   
     private double lvlHeight;  
-
-    // Level Bouding Box
     private BoundingBox bbox;
-    // The Survivor Factory
-    private SurvivorFactory surFact = new SurvivorFactory();
-    // The only Zombie on the game
-    private ZombieFactory zobFact = new ZombieFactory();
-    // The physic on lthe level 
     private PhysicsLevelComponent physicLvComp;
+    private LevelManager levelManager;
+
+    private SurvivorFactory surFact = new SurvivorFactory();
 
     private List<Munition> activeMunitions = new ArrayList<>();
     private List<Munition> newMunitions = new ArrayList<>();
@@ -60,25 +46,14 @@ public class TutorialLevel implements Level {
         this.lvlHeight = lvlHeight;
         this.bbox = bbox;
         this.physicLvComp = physcLevel;
+        this.listZombie = new ArrayList<>();
         this.setSurvivorOnLevel();
-        this.setZombieOnLevel();
         this.setWeaponOnSurvivor();
+        this.levelManager = new LevelManagerBase(this);
     }
     
     private void setSurvivorOnLevel(){
         this.surLv = surFact.createCommonSurvivor(Pair.of(1000.0,1000.0));
-    }
-
-    private Pair<Double,Double> posZombie(){
-        double randomNumW = ThreadLocalRandom.current().nextDouble(-this.lvlWidth, 2 * this.lvlWidth);
-        double randomNumH = ThreadLocalRandom.current().nextDouble(-this.lvlHeight, 2 * this.lvlHeight);
-        return Pair.of(randomNumW, randomNumH);
-    }
-
-    private void setZombieOnLevel(){
-        this.listZombie = IntStream.range(0, ZOMBIES_LEVEL)
-                            .mapToObj(i -> zobFact.createClickerZombie(posZombie()))
-                            .collect(Collectors.toList());
     }
 
     private void checkSurvivorAttack(final Survivor sur, final int dt){
@@ -94,7 +69,8 @@ public class TutorialLevel implements Level {
     @Override
     public void updateLevelState(final int dt){
         this.checkSurvivorAttack(surLv, dt);
-        physicLvComp.updateLevel(this, dt);
+        this.physicLvComp.updateLevel(this, dt);
+        this.levelManager.update(dt);
     }
 
     @Override
@@ -112,11 +88,6 @@ public class TutorialLevel implements Level {
         return this.bbox;
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return the survivor entity present in this tutorial level
-     */
     @Override
     public Survivor getSurvivorOnLevel(){
         return this.surLv;
