@@ -2,9 +2,9 @@ package model.ai.movement;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
+import model.entities.zombie.ZombieState;
 import utils.PairUtils;
 
 public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> implements MovementStrategy<Z,S> {
@@ -15,7 +15,7 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
     @Override
     public Pair<Double,Double> computeVelocity(final Zombie zombie,final Survivor target) {
 
-        if (zombie.getState() == EntitieState.DAMAGE) {
+        if (zombie.getState() == ZombieState.ZOMBIE_SUFFER_DAMAGE) {
             return ZERO_VELOCITY;
         }
 
@@ -23,7 +23,7 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
         double distance = PairUtils.norm2(direction);
 
         if (distance == 0) {
-            zombie.setState(EntitieState.IDLE);
+            zombie.setState(ZombieState.ZOMBIE_IDLE);
             return ZERO_VELOCITY;
         }
 
@@ -33,9 +33,9 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
         double dy = direction.getRight();
 
         if (Math.abs(dx) > Math.abs(dy)) {
-            zombie.setState(dx < 0 ? EntitieState.MOVE_RIGHT : EntitieState.MOVE_LEFT);
+            zombie.setState(dx < 0 ? ZombieState.ZOMBIE_MOVE_RIGHT : ZombieState.ZOMBIE_MOVE_LEFT);
         } else {
-            zombie.setState(dy < 0 ? EntitieState.MOVE_DOWN : EntitieState.MOVE_UP);
+            zombie.setState(dy < 0 ? ZombieState.ZOMBIE_MOVE_DOWN : ZombieState.ZOMBIE_MOVE_UP);
         }
 
         double speed = PairUtils.norm2(zombie.getBaseZombieVel());
