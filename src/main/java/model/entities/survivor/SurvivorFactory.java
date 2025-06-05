@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.RectBoundingBox;
-import model.physics.physics_entities.PhysicsCommonComponent;
+import model.physics.physics_entities.PhysicsBaseSurvivor;
 
 /**
  * Factory class responsible for creating instances of {@link Survivor} entities.
@@ -22,7 +22,7 @@ public class SurvivorFactory {
                          width,height,
                          new MutablePair<>(pos.getLeft(),pos.getRight()),
                          new MutablePair<>(vel.getLeft(),vel.getRight()),
-                         new PhysicsCommonComponent(),
+                         new PhysicsBaseSurvivor(),
                          new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+height),
                                              Pair.of(pos.getLeft()+width ,pos.getRight())));
     }

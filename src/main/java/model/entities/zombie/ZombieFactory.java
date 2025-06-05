@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.RectBoundingBox;
-import model.physics.physics_entities.PhysicsClickerComponent;
+import model.physics.physics_entities.PhysicsBaseZombie;
 
 public class ZombieFactory {
 
@@ -18,7 +18,7 @@ public class ZombieFactory {
                             width, height, 
                             new MutablePair<>(pos.getLeft(),pos.getRight()),
                             new MutablePair<>(vel.getLeft(),vel.getRight()), 
-                            new PhysicsClickerComponent(), 
+                            new PhysicsBaseZombie(), 
                             new RectBoundingBox(Pair.of(pos.getLeft(),pos.getRight()+height),
                                                 Pair.of(pos.getLeft()+width ,pos.getRight())));
     }
