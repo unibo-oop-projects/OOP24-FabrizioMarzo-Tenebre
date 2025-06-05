@@ -1,5 +1,6 @@
 package model.level.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
@@ -8,6 +9,9 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import model.armory.munition.Munition;
+import model.entities.EntitieState;
+import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
 import model.level.Level;
@@ -24,6 +28,8 @@ public class LevelManagerBase implements LevelManager{
     private final Level level;
     private final ZombieFactory zombieFactory = new ZombieFactory();
     private final AtomicLong elapsedTime = new AtomicLong(0);
+    private List<Munition> newMunitions = new ArrayList<>();
+
     private int currentWave;
 
     public LevelManagerBase(final Level level) {
@@ -34,6 +40,7 @@ public class LevelManagerBase implements LevelManager{
 
     @Override
     public void update(final int dt) {
+        this.checkSurvivorAttack(level.getSurvivorOnLevel(), dt);
         elapsedTime.addAndGet(dt);
 
         final int seconds = (int) (elapsedTime.get() / MILLIS_IN_SECOND);
@@ -62,5 +69,15 @@ public class LevelManagerBase implements LevelManager{
             SPAWN_POS_MAX_MULTIPLIER * level.getLevelHeight());
     
         return Pair.of(w, h);
+    }
+
+    private void checkSurvivorAttack(final Survivor sur, final int dt){
+        if (sur.getState() == EntitieState.ATTACK) {
+            this.newMunitions.addAll(sur.getWeapon().shoot(dt));
+            if (!newMunitions.isEmpty()) {
+                this.level.getProjectilesOnLevel().addAll(newMunitions);
+            }
+            this.newMunitions.clear();
+        }
     }
 }
