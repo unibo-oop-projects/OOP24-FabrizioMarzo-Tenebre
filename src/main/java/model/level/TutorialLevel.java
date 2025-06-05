@@ -26,10 +26,9 @@ public class TutorialLevel implements Level {
     private LevelManager levelManager;
 
     private SurvivorFactory surFact = new SurvivorFactory();
-    private List<Munition> activeMunitions = new ArrayList<>();
-    private FactoryWeapon factWeapon = new FactoryWeapon();
-
     private Survivor surLv;
+    private FactoryWeapon factWeapon = new FactoryWeapon();
+    private List<Munition> activeMunitions = new ArrayList<>();
     private List<Zombie> listZombie;
 
     public TutorialLevel(final double lvlWidth,final double lvlHeight,
@@ -41,12 +40,12 @@ public class TutorialLevel implements Level {
         this.physicLvComp = physcLevel;
         this.listZombie = new ArrayList<>();
         this.setSurvivorOnLevel();
-        this.setWeaponOnSurvivor();
         this.levelManager = new LevelManagerBase(this);
     }
     
     private void setSurvivorOnLevel(){
         this.surLv = surFact.createCommonSurvivor(Pair.of(1000.0,1000.0));
+        this.surLv.setWeapon(factWeapon.createPistol(this.surLv.getCurrentPos()));
     }
 
     @Override
@@ -81,13 +80,7 @@ public class TutorialLevel implements Level {
     }
 
     @Override
-    public void setWeaponOnSurvivor() {
-        this.getSurvivorOnLevel().setWeapon(factWeapon.createPistol(this.getSurvivorOnLevel().getCurrentPos()));
-    }
-
-    @Override
     public List<Munition> getProjectilesOnLevel(){
         return this.activeMunitions;
     }
-
 }
