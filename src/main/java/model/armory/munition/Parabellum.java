@@ -9,6 +9,8 @@ import utils.PairUtils;
 
 public class Parabellum implements Munition{
 
+    private static final double MILLISECONDS_TO_SECONDS = 0.001;
+
     private int damage;
     private int width;
     private int velocity;
@@ -48,7 +50,8 @@ public class Parabellum implements Munition{
         Pair<Double, Double> direction = dir.orElseThrow(() -> 
         new IllegalStateException("Direction not inizialize"));
 
-        Pair<Double, Double> displacement = nextPos(dt, PairUtils.mulScale(direction, this.velocity));
+        Pair<Double, Double> displacement = PairUtils.mulScale(PairUtils.mulScale(direction, this.velocity),MILLISECONDS_TO_SECONDS*dt);
+
         this.setPos(PairUtils.sum(this.pos, displacement));
         this.bbox.updateBBox(this.pos);
     }
@@ -61,10 +64,6 @@ public class Parabellum implements Munition{
     @Override
     public void setPos(final Pair<Double,Double> nextPos){
         this.pos = nextPos;
-    }
-
-    private Pair<Double,Double> nextPos(final int dt, final Pair<Double,Double> vel){
-        return PairUtils.mulScale(vel,0.001*dt);
     }
 
     @Override
