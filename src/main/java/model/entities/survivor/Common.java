@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.armory.munition.Munition;
 import model.armory.weapon.Weapon;
 import model.bounding_box.BoundingBox;
-import model.entities.EntitieState;
 import model.physics.physics_entities.PhysicsSurvivorComponent;
 
 /**
@@ -26,7 +25,7 @@ public class Common implements Survivor{
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
-    private EntitieState state;
+    private SurvivorState state;
     private BoundingBox bbox;
     private PhysicsSurvivorComponent physicComp;
     private Weapon weapon;
@@ -51,7 +50,7 @@ public class Common implements Survivor{
         this.pos = pos;
         this.vel = vel;
         this.velBase = vel;
-        this.state = EntitieState.IDLE;
+        this.state = SurvivorState.SURVIVOR_IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp; 
     }
@@ -87,7 +86,7 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public void setState(final EntitieState newState) {
+    public void setState(final SurvivorState newState) {
         this.state = newState;
     }
 
@@ -143,7 +142,7 @@ public class Common implements Survivor{
      * {@inheritDoc}
      */
     @Override
-    public EntitieState getState() {
+    public SurvivorState getState() {
         return this.state;
     }
 

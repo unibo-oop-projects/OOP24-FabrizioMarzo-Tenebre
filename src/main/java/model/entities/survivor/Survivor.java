@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.armory.munition.Munition;
 import model.armory.weapon.Weapon;
 import model.bounding_box.BoundingBox;
-import model.entities.EntitieState;
 
 /**
  * Survivor interface representing a survivor in the game.
@@ -38,7 +37,7 @@ public interface Survivor {
      *
      * @param newState The new state to apply
      */
-    void setState(final EntitieState newState);
+    void setState(final SurvivorState newState);
 
     void setWeapon(final Weapon weapon);
 
@@ -79,7 +78,7 @@ public interface Survivor {
      *
      * @return The current state
      */    
-    EntitieState getState();
+    SurvivorState getState();
 
     Weapon getWeapon();
 
