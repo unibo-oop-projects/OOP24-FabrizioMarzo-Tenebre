@@ -14,11 +14,10 @@ public class SurvivorFactory {
 
     public Survivor createCommonSurvivor(final Pair<Double,Double> pos){
         final int live = 1000;
-        final int attack = 20;
         final int width = 70;
         final int height = 175;
         final Pair<Double, Double> vel = Pair.of(200.0, 0.0);
-       return new Common(live,attack,
+       return new Common(live,
                          width,height,
                          new MutablePair<>(pos.getLeft(),pos.getRight()),
                          new MutablePair<>(vel.getLeft(),vel.getRight()),

@@ -16,13 +16,6 @@ import model.entities.EntitieState;
 public interface Survivor {
 
     /**
-     * Performs an attack and returns the damage dealt.
-     *
-     * @return The amount of damage inflicted by the attack
-     */
-    int attack();
-
-    /**
      * Applies damage to the survivor.
      *
      * @param dm The amount of damage taken

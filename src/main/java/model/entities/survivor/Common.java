@@ -23,7 +23,6 @@ public class Common implements Survivor{
     private int width;
     private int height;
     private int live;
-    private int attack;
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
@@ -40,14 +39,13 @@ public class Common implements Survivor{
      * @param pos    initial position (x, y)
      * @param vel    initial velocity (vx, vy); also used as base velocity
      */
-    public Common(final int health,final int attack, 
+    public Common(final int health, 
                  final int width, final int height,
                  final Pair<Double,Double> pos,final Pair<Double,Double> vel,
                  final PhysicsSurvivorComponent physicComp,
                  final BoundingBox bbox) {
 
         this.live = health;
-        this.attack = attack;
         this.width = width;
         this.height = height;
         this.pos = pos;
@@ -56,14 +54,6 @@ public class Common implements Survivor{
         this.state = EntitieState.IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp; 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int attack() {
-        return this.attack;
     }
 
     /**
@@ -183,7 +173,6 @@ public class Common implements Survivor{
         final int prime = 31;
         int result = 1;
         result = prime * result + live;
-        result = prime * result + attack;
         return result;
     }
 
@@ -204,8 +193,6 @@ public class Common implements Survivor{
             return false;
         Common other = (Common) obj;
         if (live != other.live)
-            return false;
-        if (attack != other.attack)
             return false;
         return true;
     }
