@@ -15,6 +15,10 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
     @Override
     public Pair<Double,Double> computeVelocity(final Zombie zombie,final Survivor target) {
 
+        if (zombie.getState() == EntitieState.DAMAGE) {
+            return ZERO_VELOCITY;
+        }
+
         Pair<Double, Double> direction = PairUtils.diff(target.getCurrentPos(), zombie.getCurrentPos());
         double distance = PairUtils.norm2(direction);
 
