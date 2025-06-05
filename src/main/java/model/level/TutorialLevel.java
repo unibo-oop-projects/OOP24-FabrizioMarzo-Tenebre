@@ -19,6 +19,8 @@ import model.physics.physics_level.PhysicsLevelComponent;
 
 public class TutorialLevel implements Level {
 
+    private static final Pair<Double, Double> SURVIVOR_START_POS = Pair.of(1000.0, 1000.0);
+
     private double lvlWidth;   
     private double lvlHeight;  
     private BoundingBox bbox;
@@ -44,7 +46,7 @@ public class TutorialLevel implements Level {
     }
     
     private void setSurvivorOnLevel(){
-        this.surLv = surFact.createCommonSurvivor(Pair.of(1000.0,1000.0));
+        this.surLv = surFact.createCommonSurvivor(Pair.of(SURVIVOR_START_POS));
         this.surLv.setWeapon(factWeapon.createPistol(this.surLv.getCurrentPos()));
     }
 
