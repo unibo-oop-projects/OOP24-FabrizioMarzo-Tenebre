@@ -50,7 +50,7 @@ public class Parabellum implements Munition{
 
         Pair<Double, Double> displacement = nextPos(dt, PairUtils.mulScale(direction, this.velocity));
         this.setPos(PairUtils.sum(this.pos, displacement));
-        this.updateBBox(this.pos);
+        this.bbox.updateBBox(this.pos);
     }
 
     @Override
@@ -65,11 +65,6 @@ public class Parabellum implements Munition{
 
     private Pair<Double,Double> nextPos(final int dt, final Pair<Double,Double> vel){
         return PairUtils.mulScale(vel,0.001*dt);
-    }
-
-    private void updateBBox(final Pair<Double, Double> newPos) {
-        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+this.width));
-        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+this.width ,newPos.getRight()));
     }
 
     @Override

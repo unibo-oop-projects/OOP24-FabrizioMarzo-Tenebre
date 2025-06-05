@@ -6,10 +6,14 @@ public class RectBoundingBox implements BoundingBox {
 
     private Pair<Double,Double> cornerUl;
     private Pair<Double,Double> cornerBR;
+    private final Double bboxHeight;
+    private final Double bboxWidth;
     
     public RectBoundingBox(final Pair<Double, Double> cornerUl,final Pair<Double, Double> cornerBR) {
         this.cornerUl = cornerUl;
         this.cornerBR = cornerBR;
+        this.bboxWidth = (this.cornerBR.getLeft() - this.cornerUl.getLeft());
+        this.bboxHeight = (this.cornerUl.getRight() - this.cornerBR.getRight());
     }
 
     @Override
@@ -32,16 +36,6 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     @Override
-    public void setUlcorner(final Pair<Double, Double> cornerUl) {
-        this.cornerUl = cornerUl;
-    }
-    
-    @Override
-    public void setBRcorner(final Pair<Double, Double> cornerBR) {
-        this.cornerBR = cornerBR;
-    }
-
-    @Override
     public Pair<Double, Double> getULcorner(){
         return this.cornerUl;
     }
@@ -51,8 +45,9 @@ public class RectBoundingBox implements BoundingBox {
         return this.cornerBR;
     }
 
-    
-
-
-    
+    @Override
+    public void updateBBox(final Pair<Double, Double> newPos) {
+        this.cornerUl = Pair.of(newPos.getLeft(),newPos.getRight()+this.bboxHeight);
+        this.cornerBR = Pair.of(newPos.getLeft()+this.bboxWidth, newPos.getRight());
+    }    
 }

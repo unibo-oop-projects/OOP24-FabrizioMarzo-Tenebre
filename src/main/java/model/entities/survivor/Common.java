@@ -88,14 +88,9 @@ public class Common implements Survivor{
     @Override
     public void setPosition(final Pair<Double, Double> pos) {
         this.pos = pos;
-        this.updateBBox(pos);
+        this.bbox.updateBBox(pos);
     }
     
-    private void updateBBox(final Pair<Double, Double> newPos) {
-        this.bbox.setUlcorner(Pair.of(newPos.getLeft(),newPos.getRight()+this.height));
-        this.bbox.setBRcorner(Pair.of(newPos.getLeft()+this.width ,newPos.getRight()));
-    }
-
     /**
      * {@inheritDoc}
      */
