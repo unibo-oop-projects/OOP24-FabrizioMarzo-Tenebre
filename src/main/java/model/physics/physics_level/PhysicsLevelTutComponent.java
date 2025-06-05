@@ -18,6 +18,8 @@ import model.level.Level;
 
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
+    private static final Pair<Double, Double> ZERO_VELOCITY = Pair.of(0.0, 0.0);
+
     FactoryAINPCBehavior factAINPC = new FactoryAINPCBehavior();
     AINPCBehavior<Survivor,Zombie> baseAIZombie = factAINPC.createBaseNPCBehavior();
 
@@ -73,7 +75,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         posY = Math.max(0, Math.min(posY, levelHeight - survivorHeight));
     
         lv.getSurvivorOnLevel().setPosition(Pair.of(posX, posY));
-        lv.getSurvivorOnLevel().setVelocity(Pair.of(0.0, 0.0));
+        lv.getSurvivorOnLevel().setVelocity(ZERO_VELOCITY);
     }
   
     private Boolean checkIfMunitionIsOut(final Munition munition, final Level lv) {

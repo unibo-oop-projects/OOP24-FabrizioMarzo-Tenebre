@@ -9,6 +9,9 @@ import utils.PairUtils;
 
 public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> implements MovementStrategy<Z,S> {
 
+    private static final Pair<Double, Double> ZERO_VELOCITY = Pair.of(0.0, 0.0);
+
+
     @Override
     public Pair<Double,Double> computeVelocity(final Zombie zombie,final Survivor target) {
 
@@ -17,7 +20,7 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
 
         if (distance == 0) {
             zombie.setState(EntitieState.IDLE);
-            return Pair.of(0.0, 0.0);
+            return ZERO_VELOCITY;
         }
 
         Pair<Double, Double> normalizedDirection = PairUtils.normalize(direction);
