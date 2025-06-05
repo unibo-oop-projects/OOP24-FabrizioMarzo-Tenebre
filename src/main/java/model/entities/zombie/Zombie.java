@@ -3,7 +3,6 @@ package model.entities.zombie;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
-import model.entities.EntitieState;
 
 /**
  * Zombie interface representing a zombie in the game.
@@ -21,7 +20,7 @@ public interface Zombie {
 
     void setVelocity(final Pair<Double,Double> vel);
 
-    void setState(final EntitieState newState);
+    void setState(final ZombieState newState);
 
     int getWidth();
 
@@ -35,7 +34,7 @@ public interface Zombie {
 
     Pair<Double,Double> getBaseZombieVel();
 
-    EntitieState getState();
+    ZombieState getState();
 
     BoundingBox getBBox();
 }

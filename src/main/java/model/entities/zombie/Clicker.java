@@ -3,7 +3,6 @@ package model.entities.zombie;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.bounding_box.BoundingBox;
-import model.entities.EntitieState;
 import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class Clicker implements Zombie{
@@ -21,7 +20,7 @@ public class Clicker implements Zombie{
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
-    private EntitieState state;
+    private ZombieState state;
     private BoundingBox bbox;
     private PhysicsZombieComponent physicComp;
 
@@ -39,7 +38,7 @@ public class Clicker implements Zombie{
         this.pos = pos;
         this.vel = vel;
         this.velBase = Pair.of(vel.getLeft(), vel.getRight());
-        this.state = EntitieState.IDLE;
+        this.state = ZombieState.ZOMBIE_IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp;
     }
@@ -55,7 +54,7 @@ public class Clicker implements Zombie{
 
         // Entry on Damage state only when im not on state Damage
         if (!inDamage) {
-            this.state = EntitieState.DAMAGE;
+            this.state = ZombieState.ZOMBIE_SUFFER_DAMAGE;
             this.damageStartTime = System.currentTimeMillis();
             this.inDamage = true;
         }
@@ -69,7 +68,7 @@ public class Clicker implements Zombie{
                 inDamage = false;
     
                 // Return on IDLE state
-                this.state = EntitieState.IDLE;
+                this.state = ZombieState.ZOMBIE_IDLE;
     
                 // Reset the velocity base if he become to move
                 this.vel = this.velBase;
@@ -93,7 +92,7 @@ public class Clicker implements Zombie{
     }
     
     @Override
-    public void setState(final EntitieState newState) {
+    public void setState(final ZombieState newState) {
         this.state = newState;
     }
 
@@ -123,7 +122,7 @@ public class Clicker implements Zombie{
     }
     
     @Override
-    public EntitieState getState() {
+    public ZombieState getState() {
         return this.state;
     }
 

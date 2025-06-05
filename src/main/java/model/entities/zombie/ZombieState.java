@@ -15,7 +15,7 @@ public enum ZombieState {
 
     ZOMBIE_ATTACK(5),
 
-    ZOMBIE_DAMAGE(6),
+    ZOMBIE_SUFFER_DAMAGE(6),
 
     ZOMBIE_DEAD(7);
 
