@@ -114,12 +114,9 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
                 if (munition.getBBox().isColliding(zombie.getBBox().getULcorner(), zombie.getBBox().getBRcorner())) {
                     
                     zombie.damageSuffer(munition.getDamage());
-                    zombie.setState(EntitieState.DAMAGE);
-
 
                     projectileIterator.remove();
 
-                    
                     if (zombie.getLive() <= 0) {
                         toRemove.add(zombie);
                     }
