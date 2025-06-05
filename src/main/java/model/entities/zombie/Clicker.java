@@ -10,6 +10,10 @@ public class Clicker implements Zombie{
 
     private static final int MIN_HEALTH = 0;
 
+    private long damageStartTime = 0;
+    private static final long DAMAGE_DURATION_MS = 500;  // tempo di durata animazione in millisecondi
+    private boolean inDamage = false;
+
     private int width;
     private int height;
     private int live;
@@ -48,10 +52,32 @@ public class Clicker implements Zombie{
     @Override
     public void damageSuffer(final int dm) {
         this.live = Math.max(MIN_HEALTH, this.live - dm);
+
+        // Entry on Damage state only when im not on state Damage
+        if (!inDamage) {
+            this.state = EntitieState.DAMAGE;
+            this.damageStartTime = System.currentTimeMillis();
+            this.inDamage = true;
+        }
     }
 
     @Override
     public void updatePhysics(final int dt) {
+        if (inDamage) {
+            long now = System.currentTimeMillis();
+            if (now - damageStartTime >= DAMAGE_DURATION_MS) {
+                inDamage = false;
+    
+                // Return on IDLE state
+                this.state = EntitieState.IDLE;
+    
+                // Reset the velocity base if he become to move
+                this.vel = this.velBase;
+            }
+            return; // Don't do updatePhysics if im on damage state 
+        }
+    
+        // If im not on damage state do the update
         physicComp.updateZombie(this, dt);
     }
 

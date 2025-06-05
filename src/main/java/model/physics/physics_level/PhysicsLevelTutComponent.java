@@ -11,7 +11,6 @@ import model.ai.behavior.AINPCBehavior;
 import model.ai.behavior.FactoryAINPCBehavior;
 import model.armory.munition.Munition;
 import model.bounding_box.BoundingBox;
-import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.level.Level;
