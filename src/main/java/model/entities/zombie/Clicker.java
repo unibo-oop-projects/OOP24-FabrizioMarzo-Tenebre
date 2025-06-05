@@ -8,6 +8,8 @@ import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class Clicker implements Zombie{
 
+    private static final int MIN_HEALTH = 0;
+
     private int width;
     private int height;
     private int live;
@@ -45,7 +47,7 @@ public class Clicker implements Zombie{
 
     @Override
     public void damageSuffer(final int dm) {
-        this.live = Math.max(0, this.live - dm);
+        this.live = Math.max(MIN_HEALTH, this.live - dm);
     }
 
     @Override

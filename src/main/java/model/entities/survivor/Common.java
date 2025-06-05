@@ -18,6 +18,8 @@ import model.physics.physics_entities.PhysicsSurvivorComponent;
  */
 public class Common implements Survivor{
 
+    private static final int MIN_HEALTH = 0;
+
     private int width;
     private int height;
     private int live;
@@ -69,7 +71,7 @@ public class Common implements Survivor{
      */
     @Override
     public void damageSuffer(final int dm) {
-        this.live = Math.max(0, this.live - dm);
+        this.live = Math.max(MIN_HEALTH, this.live - dm);
     }
     
     @Override
