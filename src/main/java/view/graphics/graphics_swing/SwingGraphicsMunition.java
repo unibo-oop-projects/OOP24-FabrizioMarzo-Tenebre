@@ -28,7 +28,7 @@ public class SwingGraphicsMunition implements GraphicsMunition{
        // int scaleSurWidth = (int) Math.round(mun.getWidth() * viewScale.getRatioX());
         int scaleSurHeight = (int) Math.round(mun.getWidth()* viewScale.getRatioY());
         
-        g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, 10, 10, null);
+        g2d.drawImage(image, scaleSurPosX, scaleSurPosY-scaleSurHeight, 6, 6, null);
 
     }
     
