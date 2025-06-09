@@ -140,7 +140,7 @@ public class Clicker implements Zombie{
     }
 
     @Override
-    public int getMaxZombieLive() {
+    public int getMaxZombieHealth() {
        return this.maxLife;
     }
 

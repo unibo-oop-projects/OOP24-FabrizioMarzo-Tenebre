@@ -28,7 +28,7 @@ public interface Zombie {
 
     int getLive();
 
-    int getMaxZombieLive();
+    int getMaxZombieHealth();
 
     Pair<Double,Double> getCurrentPos();
 
