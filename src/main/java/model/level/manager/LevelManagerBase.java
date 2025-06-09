@@ -17,10 +17,10 @@ import model.level.Level;
 
 public class LevelManagerBase implements LevelManager{
 
-    private static final int INIT_ZOMBIES_LEVEL = 10;
+    private static final int INIT_ZOMBIES_LEVEL = 5;
     private static final int MILLIS_IN_SECOND = 1000;
-    private static final int SECONDS_BETWEEN_WAVES = 5;
-    private static final int ZOMBIES_FOR_WAVE = 5;
+    private static final int SECONDS_BETWEEN_WAVES = 25;
+    private static final int ZOMBIES_FOR_WAVE = 1;
     private static final double SPAWN_POS_MIN_MULTIPLIER = -1.0;
     private static final double SPAWN_POS_MAX_MULTIPLIER = 2.0;
 
