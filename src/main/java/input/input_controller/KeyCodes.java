@@ -8,22 +8,17 @@ package input.input_controller;
  */
 public enum KeyCodes {
 
-    /** Represents the left arrow key (key code 37). */
-    LEFT(37),
-
-    /** Represents the up arrow key (key code 38). */
-    UP(38),
-
-    /** Represents the right arrow key (key code 39). */
-    RIGHT(39),
-
-    /** Represents the down arrow key (key code 40). */
-    DOWN(40),
-
-    /** Represents the space arrow key (key code 32) */
+    ARROW_UP(38),
+    ARROW_DOWN(40),
+    ARROW_LEFT(37),
+    ARROW_RIGHT(39),
+    
+    KEY_W(87),
+    KEY_A(65),
+    KEY_S(83),
+    KEY_D(68),
+    
     SPACE(32),
-
-    /** Represents the absence of any directional input (key code -1). */
     NONE(-1);
 
     private final int keyCode;
