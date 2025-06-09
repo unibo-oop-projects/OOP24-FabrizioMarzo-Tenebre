@@ -10,7 +10,7 @@ public class FactoryMunition {
     public Munition createParabellum(final Pair<Double,Double> initPos){
         final int damage=500;
         final int width=3;
-        final int velocity=300;
+        final int velocity=500;
         return new Parabellum(damage, 
                               velocity,
                               width, 
