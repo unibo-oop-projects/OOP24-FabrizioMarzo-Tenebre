@@ -6,8 +6,8 @@ import utils.PairUtils;
 import input.command.CommandSurvivor;
 import input.input_controller.KeyCodes;
 import input.input_controller.InputController;
-import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
+import model.entities.survivor.SurvivorState;
 
 public class InputCommonComponent implements InputSurvivorComponent{
     
@@ -22,41 +22,53 @@ public class InputCommonComponent implements InputSurvivorComponent{
             lastAimDirection = Pair.of(0d, 1d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(PairUtils.mulScale(lastAimDirection, PairUtils.module(s.getBaseSurvivorVel())));
-                s.setState(EntitieState.MOVE_UP);
+                s.setState(SurvivorState.SURVIVOR_MOVE_UP);
                 s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.DOWN.getKeyCode()) {
             lastAimDirection = Pair.of(0d, -1d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(PairUtils.mulScale(lastAimDirection, PairUtils.module(s.getBaseSurvivorVel())));
-                s.setState(EntitieState.MOVE_DOWN);
+                s.setState(SurvivorState.SURVIOR_SHOOT_DOWN);
                 s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.LEFT.getKeyCode()) {
             lastAimDirection = Pair.of(-1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(PairUtils.mulScale(lastAimDirection, PairUtils.module(s.getBaseSurvivorVel())));
-                s.setState(EntitieState.MOVE_LEFT);
+                s.setState(SurvivorState.SURVIVOR_MOVE_LEFT);
                 s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.RIGHT.getKeyCode()) {
             lastAimDirection = Pair.of(1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(PairUtils.mulScale(lastAimDirection, PairUtils.module(s.getBaseSurvivorVel())));
-                s.setState(EntitieState.MOVE_RIGHT);
+                s.setState(SurvivorState.SURVIOR_SHOOT_RIGHT);
                 s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.NONE.getKeyCode()) {
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(Pair.of(0d, 0d));
-                s.setState(EntitieState.IDLE);
+                s.setState(SurvivorState.SURVIVOR_IDLE);
                 s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
 
             });
         } else if (inputCode == KeyCodes.SPACE.getKeyCode()) {
             CommandSurvivor.issue(sur, (s) -> {
-                s.setState(EntitieState.ATTACK);
-                s.setVelocity(Pair.of(0d, 0d));
+                Pair<Double,Double> direction = PairUtils.normalize(s.getCurrentVel());
+                if (direction.equals(Pair.of(1d,0d))){
+                    s.setState(SurvivorState.SURVIOR_SHOOT_RIGHT);
+                    s.setVelocity(Pair.of(0d, 0d));
+                } else if(direction.equals(Pair.of(-1d,0d))) {
+                    s.setState(SurvivorState.SURVIOR_SHOOT_LEFT);
+                    s.setVelocity(Pair.of(0d, 0d));
+                } else if(direction.equals(Pair.of(0d,1d))) {
+                    s.setState(SurvivorState.SURVIOR_SHOOT_UP);
+                    s.setVelocity(Pair.of(0d, 0d));
+                } else {
+                    s.setState(SurvivorState.SURVIOR_SHOOT_DOWN);
+                    s.setVelocity(Pair.of(0d, 0d));
+                }
             });
         }
     }

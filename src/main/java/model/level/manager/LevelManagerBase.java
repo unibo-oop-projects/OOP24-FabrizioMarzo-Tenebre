@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.armory.munition.Munition;
-import model.entities.EntitieState;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
@@ -72,7 +71,7 @@ public class LevelManagerBase implements LevelManager{
     }
 
     private void checkSurvivorAttack(final Survivor sur, final int dt){
-        if (sur.getState() == EntitieState.ATTACK) {
+        if (sur.getState().getIndex() >=5 && sur.getState().getIndex() <=8) {
             this.newMunitions.addAll(sur.getWeapon().shoot(dt));
             if (!newMunitions.isEmpty()) {
                 this.level.getProjectilesOnLevel().addAll(newMunitions);
