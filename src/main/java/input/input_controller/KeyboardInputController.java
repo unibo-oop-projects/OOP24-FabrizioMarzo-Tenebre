@@ -14,31 +14,48 @@ public class KeyboardInputController implements InputController {
 	/**
      * Sets the current direction to UP.
      */
-	private void isMoveUp() {
-		this.keyCode = KeyCodes.UP;
+	private void isShootUp() {
+		this.keyCode = KeyCodes.ARROW_UP;
 	}
 
 	/**
      * Sets the current direction to DOWN.
      */
-	private void isMoveDown() {
-		this.keyCode = KeyCodes.DOWN;
+	private void isShootDown() {
+		this.keyCode = KeyCodes.ARROW_DOWN;
 	}
 
 	/**
      * Sets the current direction to LEFT.
      */
+	private void isShootLeft() {
+		this.keyCode = KeyCodes.ARROW_LEFT;
+	}
+
+	private void isMoveUp() {
+		this.keyCode = KeyCodes.KEY_W;
+	}
+
+	private void isMoveDown() {
+		this.keyCode = KeyCodes.KEY_S;
+	}
+
 	private void isMoveLeft() {
-		this.keyCode = KeyCodes.LEFT;
+		this.keyCode = KeyCodes.KEY_A;
+	}
+
+	private void isMoveRight() {
+		this.keyCode = KeyCodes.KEY_D;
 	}
 
 	/**
      * Sets the current direction to RIGHT.
      */
-	private void isMoveRight() {
-		this.keyCode = KeyCodes.RIGHT;
+	private void isShootRight() {
+		this.keyCode = KeyCodes.ARROW_RIGHT;
 	}
 
+	
 	/**
      * Sets the current direction to NONE (no input).
      */
@@ -82,19 +99,31 @@ public class KeyboardInputController implements InputController {
 	public void notifyInput(final int keyCode){
 		switch (keyCode) {
 			case 37: 
-				isMoveLeft();
+				isShootLeft();
 				break;
 			case 38: 
-				isMoveUp();
+				isShootUp();
 				break;
 			case 39: 
-				isMoveRight();
+				isShootRight();
 				break;
 			case 40: 
-				isMoveDown();
+				isShootDown();
 				break;
 			case 32:
 				isPresSpace();
+				break;
+			case 87:
+				isMoveUp();;
+				break;
+			case 65:
+				isMoveLeft();
+				break;
+			case 83:
+				isMoveDown();
+				break;
+			case 68:
+				isMoveRight();
 				break;
 			default:
 				isMoveNone(); 
