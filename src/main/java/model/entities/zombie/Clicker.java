@@ -20,6 +20,7 @@ public class Clicker implements Zombie{
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
+    private final int maxLife;
     private ZombieState state;
     private BoundingBox bbox;
     private PhysicsZombieComponent physicComp;
@@ -32,6 +33,7 @@ public class Clicker implements Zombie{
                    final BoundingBox bbox) {
 
         this.live = health;
+        this.maxLife = health;
         this.attack = attack;
         this.width = width;
         this.height = height;
@@ -135,6 +137,11 @@ public class Clicker implements Zombie{
     @Override
     public int getLive() {
         return this.live;
+    }
+
+    @Override
+    public int getMaxZombieLive() {
+       return this.maxLife;
     }
 
     

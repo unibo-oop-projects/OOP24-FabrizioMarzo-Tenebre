@@ -28,6 +28,8 @@ public interface Zombie {
 
     int getLive();
 
+    int getMaxZombieLive();
+
     Pair<Double,Double> getCurrentPos();
 
     Pair<Double,Double> getCurrentVel();
