@@ -14,8 +14,8 @@ public class SurvivorFactory {
 
     public Survivor createCommonSurvivor(final Pair<Double,Double> pos){
         final int live = 1000;
-        final int width = 70;
-        final int height = 175;
+        final int width = 80;
+        final int height = 185;
         final Pair<Double, Double> vel = Pair.of(200.0, 0.0);
        return new Common(live,
                          width,height,

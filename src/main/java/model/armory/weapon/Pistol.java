@@ -13,7 +13,7 @@ public class Pistol implements Weapon{
 
 
     private static final double ARM_POSITION_OFFSET_X = 20.0;  
-    private static final double ARM_POSITION_OFFSET_Y = 70.0;  
+    private static final double ARM_POSITION_OFFSET_Y = 95.0;  
     private final double cooldownMillis;
     private final int shotsPerFire;
     private Charger charger;
