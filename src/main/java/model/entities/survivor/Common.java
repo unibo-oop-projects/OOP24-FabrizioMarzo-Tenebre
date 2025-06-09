@@ -25,6 +25,7 @@ public class Common implements Survivor{
     private Pair<Double,Double> pos;
     private Pair<Double,Double> vel;
     private final Pair<Double,Double> velBase;
+    private final int maxLife;
     private SurvivorState state;
     private BoundingBox bbox;
     private PhysicsSurvivorComponent physicComp;
@@ -50,6 +51,7 @@ public class Common implements Survivor{
         this.pos = pos;
         this.vel = vel;
         this.velBase = vel;
+        this.maxLife = health;
         this.state = SurvivorState.SURVIVOR_IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp; 
@@ -194,6 +196,11 @@ public class Common implements Survivor{
         if (live != other.live)
             return false;
         return true;
+    }
+
+    @Override
+    public int getMaxSurvivorHealth() {
+        return this.maxLife;
     }
 
 

@@ -47,6 +47,8 @@ public interface Survivor {
      * @return The current health value
      */
     int getLive();
+
+    int getMaxSurvivorHealth();
     
     int getWidth();
 
