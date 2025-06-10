@@ -16,6 +16,7 @@ import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
+import model.entities.zombie.IZombieFactory;
 import model.level.Level;
 
 public class LevelManagerBase implements LevelManager{
@@ -31,7 +32,7 @@ public class LevelManagerBase implements LevelManager{
     private static final int MAX_WAVE = 6;
 
     private final Level level;
-    private final ZombieFactory zombieFactory = new ZombieFactory();
+    private final IZombieFactory zombieFactory = new ZombieFactory();
     private final ISurvivorFactory surFact = new SurvivorFactory();
     private final FactoryWeapon weapFact = new FactoryWeapon();
     private final AtomicLong elapsedTime = new AtomicLong(0);

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.RectBoundingBox;
 import model.physics.physics_entities.PhysicsBaseZombie;
 
-public class ZombieFactory {
+public class ZombieFactory implements IZombieFactory{
 
     public Zombie createClickerZombie(final Pair<Double,Double> pos){
         final int live = 1000;
