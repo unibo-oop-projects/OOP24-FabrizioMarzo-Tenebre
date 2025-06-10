@@ -8,9 +8,9 @@ import model.bounding_box.RectBoundingBox;
 public class FactoryMunition {
 
     public Munition createParabellum(final Pair<Double,Double> initPos){
-        final int damage=100;
+        final int damage=400;
         final int width=3;
-        final int velocity=500;
+        final int velocity=900;
         return new Parabellum(damage, 
                               velocity,
                               width, 
