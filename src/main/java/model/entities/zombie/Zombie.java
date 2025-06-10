@@ -39,4 +39,6 @@ public interface Zombie {
     ZombieState getState();
 
     BoundingBox getBBox();
+
+    boolean isZombieDead();
 }
