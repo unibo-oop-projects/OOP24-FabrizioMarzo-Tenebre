@@ -1,5 +1,8 @@
 package model.physics.physics_level;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.ai.behavior.AINPCBehavior;
@@ -94,16 +97,21 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
     private void checkCollisionsProjectilesZombies(final Level lv) {
 
         var zombies = lv.getZombieOnLevel();
-        var projectileIterator = lv.getProjectilesOnLevel().iterator();
+        var projectiles = lv.getProjectilesOnLevel();
 
-        while (projectileIterator.hasNext()) {
-            Munition munition = projectileIterator.next();
+        Set<Munition> toRemoveProjectiles = new HashSet<>();
 
-            zombies.stream().filter(zob -> munition.getBBox().isColliding(zob.getBBox().getULcorner(), zob.getBBox().getBRcorner()))
-                            .forEach(zob -> {
-                                zob.damageSuffer(munition.getDamage());
-                                projectileIterator.remove();});
-        }
-        zombies.removeIf(zob -> zob.getLive() <= 0);
+        projectiles.stream().forEach(munition -> 
+            zombies.stream()
+                .filter(zob -> munition.getBBox().isColliding(zob.getBBox().getULcorner(), zob.getBBox().getBRcorner()))
+                .forEach(zob -> {
+                    zob.damageSuffer(munition.getDamage());
+                    toRemoveProjectiles.add(munition); 
+                })   
+        );
+
+        projectiles.removeIf(toRemoveProjectiles::contains);
+
+        zombies.removeIf(Zombie::isZombieDead);
     }
 }
