@@ -11,6 +11,7 @@ import model.armory.weapon.FactoryWeapon;
 import model.bounding_box.BoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
+import model.entities.survivor.ISurvivorFactory;
 import model.entities.zombie.Zombie;
 import model.level.manager.LevelManager;
 import model.level.manager.LevelManagerBase;
@@ -27,7 +28,7 @@ public class TutorialLevel implements Level {
     private PhysicsLevelComponent physicLvComp;
     private LevelManager levelManager;
 
-    private SurvivorFactory surFact = new SurvivorFactory();
+    private ISurvivorFactory surFact = new SurvivorFactory();
     private Survivor surLv;
     private FactoryWeapon factWeapon = new FactoryWeapon();
     private List<Munition> activeMunitions = new ArrayList<>();

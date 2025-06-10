@@ -10,7 +10,7 @@ import model.physics.physics_entities.PhysicsBaseSurvivor;
  * Factory class responsible for creating instances of {@link Survivor} entities.
  * This class provides methods to create different types of survivors.
  */
-public class SurvivorFactory {
+public class SurvivorFactory implements ISurvivorFactory{
 
     public Survivor createCommonSurvivor(final Pair<Double,Double> pos){
         final int live = 1000;
