@@ -86,34 +86,24 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
     private void updateMunitions(final int dt, final Level lv) {
         lv.getProjectilesOnLevel().stream()
-                            .forEach(munition -> {
-                                munition.moveShoot(dt);
-                                System.out.println(munition.getBBox().getULcorner());
-                            });
+                            .forEach(munition -> munition.moveShoot(dt));
                             
         lv.getProjectilesOnLevel().removeIf(munition -> this.checkIfMunitionIsOut(munition, lv));
     }
 
     private void checkCollisionsProjectilesZombies(final Level lv) {
-        var projectiles = lv.getProjectilesOnLevel();
-        var zombies = lv.getZombieOnLevel();
 
-        var projectileIterator = projectiles.iterator();
+        var zombies = lv.getZombieOnLevel();
+        var projectileIterator = lv.getProjectilesOnLevel().iterator();
+
         while (projectileIterator.hasNext()) {
             Munition munition = projectileIterator.next();
 
-            for (Zombie zombie : zombies) {
-                if (munition.getBBox().isColliding(zombie.getBBox().getULcorner(), zombie.getBBox().getBRcorner())) {
-                    
-                    zombie.damageSuffer(munition.getDamage());
-
-                    projectileIterator.remove();
-
-                    zombies.removeIf(zob -> zob.getLive() <= 0);
-                    break;
-                }   
-            }
+            zombies.stream().filter(zob -> munition.getBBox().isColliding(zob.getBBox().getULcorner(), zob.getBBox().getBRcorner()))
+                            .forEach(zob -> {
+                                zob.damageSuffer(munition.getDamage());
+                                projectileIterator.remove();});
         }
-
+        zombies.removeIf(zob -> zob.getLive() <= 0);
     }
 }
