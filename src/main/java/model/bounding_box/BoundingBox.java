@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public interface BoundingBox {
 
-    boolean isColliding(final Pair<Double,Double> cornerUL,final Pair<Double,Double> cornerBR );
+    boolean isColliding(final BoundingBox otherBBox);
     
     Pair<Double, Double> getULcorner();
 

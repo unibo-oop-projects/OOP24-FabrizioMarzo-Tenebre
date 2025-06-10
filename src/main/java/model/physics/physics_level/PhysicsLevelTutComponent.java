@@ -9,6 +9,7 @@ import model.ai.behavior.AINPCBehavior;
 import model.ai.behavior.FactoryAINPCBehavior;
 import model.armory.munition.Munition;
 import model.bounding_box.BoundingBox;
+import model.bounding_box.RectBoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 import model.level.Level;
@@ -43,6 +44,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
     }
 
     private boolean isOutsideLevelBounds(final Level lv) {
+
         Pair<Double, Double> checkUL = Pair.of(
             lv.getSurvivorOnLevel().getBBox().getULcorner().getLeft() + lv.getSurvivorOnLevel().getWidth(),
             lv.getSurvivorOnLevel().getBBox().getULcorner().getRight() - lv.getSurvivorOnLevel().getHeight()
@@ -52,8 +54,10 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
             lv.getSurvivorOnLevel().getBBox().getBRcorner().getLeft() - lv.getSurvivorOnLevel().getWidth(),
             lv.getSurvivorOnLevel().getBBox().getBRcorner().getRight() + lv.getSurvivorOnLevel().getHeight()
         );
+
+        var bbox = new RectBoundingBox(checkUL, checkBR);
     
-        return !lv.getLevelBBox().isColliding(checkUL, checkBR);
+        return !lv.getLevelBBox().isColliding(bbox);
     }
 
     private void resetSurvivorToValidPosition(final Level lv) {
@@ -79,10 +83,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         BoundingBox levelBox = lv.getLevelBBox();
         BoundingBox munBox = munition.getBBox();
 
-        boolean isInside = levelBox.isColliding(
-            munBox.getULcorner(),
-            munBox.getBRcorner()
-        );
+        boolean isInside = levelBox.isColliding(munBox);
 
         return !isInside;
     }
@@ -103,7 +104,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
         projectiles.stream().forEach(munition -> 
             zombies.stream()
-                .filter(zob -> munition.getBBox().isColliding(zob.getBBox().getULcorner(), zob.getBBox().getBRcorner()))
+                .filter(zob -> munition.getBBox().isColliding(zob.getBBox()))
                 .forEach(zob -> {
                     zob.damageSuffer(munition.getDamage());
                     toRemoveProjectiles.add(munition); 

@@ -18,7 +18,7 @@ public class DefaultCollisionResolver< Z extends Zombie> implements CollisionStr
                 var bb1 = zombie.getBBox();
                 var bb2 = other.getBBox();
 
-                if (bb1.isColliding(bb2.getULcorner(), bb2.getBRcorner())) {
+                if (bb1.isColliding(bb2)) {
                     Pair<Double, Double> diff = PairUtils.diff(zombie.getCurrentPos(), other.getCurrentPos());
 
                     if (PairUtils.norm2(diff) == 0) {

@@ -17,16 +17,18 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     @Override
-    public boolean isColliding(final Pair<Double, Double> otherUL,final Pair<Double, Double> otherBR) {
+    public boolean isColliding(final BoundingBox otherBBox) {
+
+
         final double tux = this.cornerUl.getLeft();
         final double tuy = this.cornerUl.getRight();
         final double tbx = this.cornerBR.getLeft();
         final double tby = this.cornerBR.getRight();
 
-        final double oux = otherUL.getLeft();
-        final double ouy = otherUL.getRight();
-        final double obx = otherBR.getLeft();
-        final double oby = otherBR.getRight();
+        final double oux = otherBBox.getULcorner().getLeft();
+        final double ouy = otherBBox.getULcorner().getRight();
+        final double obx = otherBBox.getBRcorner().getLeft();
+        final double oby = otherBBox.getBRcorner().getRight();
 
         boolean overlapY = tuy > oby && tby < ouy ;
         boolean overlapX = tux < obx && tbx > oux ; 
