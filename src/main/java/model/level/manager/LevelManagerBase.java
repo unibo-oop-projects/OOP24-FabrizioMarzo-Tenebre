@@ -10,22 +10,30 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.armory.munition.Munition;
+import model.armory.weapon.FactoryWeapon;
+import model.entities.survivor.ISurvivorFactory;
 import model.entities.survivor.Survivor;
+import model.entities.survivor.SurvivorFactory;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
 import model.level.Level;
 
 public class LevelManagerBase implements LevelManager{
 
+    private static final Pair<Double, Double> SURVIVOR_START_POS = Pair.of(1000.0, 1000.0);
+
     private static final int INIT_ZOMBIES_LEVEL = 5;
     private static final int MILLIS_IN_SECOND = 1000;
-    private static final int SECONDS_BETWEEN_WAVES = 25;
-    private static final int ZOMBIES_FOR_WAVE = 1;
+    private static final int SECONDS_BETWEEN_WAVES = 10;
+    private static final int ZOMBIES_FOR_WAVE = 7;
     private static final double SPAWN_POS_MIN_MULTIPLIER = -1.0;
     private static final double SPAWN_POS_MAX_MULTIPLIER = 2.0;
+    private static final int MAX_WAVE = 6;
 
     private final Level level;
     private final ZombieFactory zombieFactory = new ZombieFactory();
+    private final ISurvivorFactory surFact = new SurvivorFactory();
+    private final FactoryWeapon weapFact = new FactoryWeapon();
     private final AtomicLong elapsedTime = new AtomicLong(0);
     private List<Munition> newMunitions = new ArrayList<>();
 
@@ -35,6 +43,7 @@ public class LevelManagerBase implements LevelManager{
         this.level = level;
         this.currentWave = 1;
         this.spawnZombies(INIT_ZOMBIES_LEVEL);
+        this.setSurvivorOnLevel();
     }
 
     @Override
@@ -44,7 +53,7 @@ public class LevelManagerBase implements LevelManager{
 
         final int seconds = (int) (elapsedTime.get() / MILLIS_IN_SECOND);
 
-        if (seconds >= (currentWave) * SECONDS_BETWEEN_WAVES) {
+        if (seconds >= (currentWave) * SECONDS_BETWEEN_WAVES && currentWave <= MAX_WAVE) {
             spawnZombies(ZOMBIES_FOR_WAVE);
             currentWave++; 
         }
@@ -78,5 +87,11 @@ public class LevelManagerBase implements LevelManager{
             }
             this.newMunitions.clear();
         }
+    }
+
+    private void setSurvivorOnLevel(){
+        var sur =  surFact.createCommonSurvivor(SURVIVOR_START_POS);
+        sur.setWeapon(weapFact.createPistol(SURVIVOR_START_POS));
+        this.level.setSurvivorOnLevel(sur);
     }
 }

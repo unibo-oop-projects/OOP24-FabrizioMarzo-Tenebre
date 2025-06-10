@@ -31,7 +31,9 @@ public interface Level {
 
     BoundingBox getLevelBBox();
     
-    Survivor getSurvivorOnLevel(); 
+    Survivor getSurvivorOnLevel();
+
+    void setSurvivorOnLevel(final Survivor sur);
 
     List<Zombie> getZombieOnLevel();
     
