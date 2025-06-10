@@ -1,10 +1,5 @@
 package model.physics.physics_level;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import model.ai.behavior.AINPCBehavior;
@@ -103,8 +98,6 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
         var projectiles = lv.getProjectilesOnLevel();
         var zombies = lv.getZombieOnLevel();
 
-        List<Zombie> toRemove = new ArrayList<>();
-
         var projectileIterator = projectiles.iterator();
         while (projectileIterator.hasNext()) {
             Munition munition = projectileIterator.next();
@@ -116,14 +109,11 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
                     projectileIterator.remove();
 
-                    if (zombie.getLive() <= 0) {
-                        toRemove.add(zombie);
-                    }
+                    zombies.removeIf(zob -> zob.getLive() <= 0);
                     break;
                 }   
             }
         }
 
-        zombies.removeAll(toRemove);
     }
 }
