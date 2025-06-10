@@ -11,81 +11,66 @@ import model.entities.survivor.SurvivorState;
 
 public class InputCommonComponent implements InputSurvivorComponent{
     
-    private Pair<Double, Double> lastAimDirection;
-    private Pair<Double, Double> lastSurviorDirection;
-
-
+    private static final Pair<Double, Double> LEFT_DIRECTION = Pair.of(-1d, 0d);
+    private static final Pair<Double, Double> RIGHT_DIRECTION = Pair.of(1d, 0d);
+    private static final Pair<Double, Double> UP_DIRECTION = Pair.of(0d, 1d);
+    private static final Pair<Double, Double> DOWN_DIRECTION = Pair.of(0d, -1d);
+    
     @Override
     public void update(final Survivor sur, final InputController ctrl) {
 
         int inputCode = ctrl.getInputCode();
 
         if (inputCode == KeyCodes.KEY_W.getKeyCode()) {
-            lastSurviorDirection = Pair.of(0d, 1d);
             CommandSurvivor.issue(sur, (s) -> {
-                s.setVelocity(PairUtils.mulScale(lastSurviorDirection, PairUtils.module(s.getBaseSurvivorVel())));
+                s.setVelocity(PairUtils.mulScale(UP_DIRECTION, PairUtils.module(s.getBaseSurvivorVel())));
                 s.setState(SurvivorState.SURVIVOR_MOVE_UP);
             });
         } else if (inputCode == KeyCodes.KEY_S.getKeyCode()) {
-            lastSurviorDirection = Pair.of(0d, -1d);
             CommandSurvivor.issue(sur, (s) -> {
-                s.setVelocity(PairUtils.mulScale(lastSurviorDirection, PairUtils.module(s.getBaseSurvivorVel())));
+                s.setVelocity(PairUtils.mulScale(DOWN_DIRECTION, PairUtils.module(s.getBaseSurvivorVel())));
                 s.setState(SurvivorState.SURVIVOR_MOVE_DOWN);
             });
         } else if (inputCode == KeyCodes.KEY_A.getKeyCode()) {
-            lastSurviorDirection = Pair.of(-1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
-                s.setVelocity(PairUtils.mulScale(lastSurviorDirection, PairUtils.module(s.getBaseSurvivorVel())));
+                s.setVelocity(PairUtils.mulScale(LEFT_DIRECTION, PairUtils.module(s.getBaseSurvivorVel())));
                 s.setState(SurvivorState.SURVIVOR_MOVE_LEFT);
             });
         } else if (inputCode == KeyCodes.KEY_D.getKeyCode()) {
-            lastSurviorDirection = Pair.of(1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
-                s.setVelocity(PairUtils.mulScale(lastSurviorDirection, PairUtils.module(s.getBaseSurvivorVel())));
+                s.setVelocity(PairUtils.mulScale(RIGHT_DIRECTION, PairUtils.module(s.getBaseSurvivorVel())));
                 s.setState(SurvivorState.SURVIVOR_MOVE_RIGHT);
             });
-
-
         } else if (inputCode == KeyCodes.NONE.getKeyCode()) {
             CommandSurvivor.issue(sur, (s) -> {
                 s.setVelocity(Pair.of(0d, 0d));
                 s.setState(SurvivorState.SURVIVOR_IDLE);
-                s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
-
             });
-
-
-
         } else if (inputCode == KeyCodes.ARROW_UP.getKeyCode()) {
-            lastAimDirection = Pair.of(0d, 1d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setState(SurvivorState.SURVIOR_SHOOT_UP);
                 s.setVelocity(Pair.of(0d, 0d));
-                s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
+                s.getWeapon().aim(UP_DIRECTION, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.ARROW_DOWN.getKeyCode()) {
-            lastAimDirection = Pair.of(0d, -1d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setState(SurvivorState.SURVIOR_SHOOT_DOWN);
                 s.setVelocity(Pair.of(0d, 0d));
-                s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
+                s.getWeapon().aim(DOWN_DIRECTION, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.ARROW_LEFT.getKeyCode()) {
-            lastAimDirection = Pair.of(-1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setState(SurvivorState.SURVIOR_SHOOT_LEFT);
                 s.setVelocity(Pair.of(0d, 0d));
-                s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
+                s.getWeapon().aim(LEFT_DIRECTION, s.getCurrentPos());
             });
         } else if (inputCode == KeyCodes.ARROW_RIGHT.getKeyCode()) {
-            lastAimDirection = Pair.of(1d, 0d);
             CommandSurvivor.issue(sur, (s) -> {
                 s.setState(SurvivorState.SURVIOR_SHOOT_RIGHT);
                 s.setVelocity(Pair.of(0d, 0d));
-                s.getWeapon().aim(lastAimDirection, s.getCurrentPos());
+                s.getWeapon().aim(RIGHT_DIRECTION, s.getCurrentPos());
             });
+        }
     }
-
-}
 }
     
