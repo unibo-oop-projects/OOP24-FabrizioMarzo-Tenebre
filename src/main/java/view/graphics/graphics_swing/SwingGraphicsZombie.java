@@ -10,6 +10,10 @@ import view.graphics_util.IViewScale;
 
 public class SwingGraphicsZombie implements GraphicsZombie {
 
+    private static final Color COLOR_RED = new Color(255, 0, 0);
+    private static final Color COLOR_ORANGE = new Color(255, 140, 0);
+    private static final Color COLOR_DARK_GRAY = new Color(255, 140, 0);
+
     private Graphics2D g2d;
     private IViewScale viewScale;
 
@@ -53,11 +57,11 @@ public class SwingGraphicsZombie implements GraphicsZombie {
         float healthRatio = (float) currentLife / maxLife;
                                 
         if (healthRatio > 0.5) {
-            g2d.setColor(new Color(255, 0, 0));  // Red
+            g2d.setColor(COLOR_RED);  // Red
         } else if (healthRatio > 0.25) {
-            g2d.setColor(new Color(255, 140, 0));  // Orange
+            g2d.setColor(COLOR_ORANGE);  // Orange
         } else {
-            g2d.setColor(new Color(105, 105, 105));  // Dark Gray (almost dead)
+            g2d.setColor(COLOR_DARK_GRAY);  // Dark Gray (almost dead)
         }
         g2d.fillRect(rectX, rectY, currentWidth, rectHeight);
     }
