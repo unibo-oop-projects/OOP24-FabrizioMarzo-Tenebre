@@ -21,6 +21,8 @@ public class SpriteSheetLoader implements ISpriteLoader{
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
     private static final String MUNITION_PATH = "/sprite_sheet/armory/";
+    private static final String CITY_PATH = "/sprite_sheet/level/";
+
 
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
     private final ImportImage impImgPNG = new ImportImagePNG() ;
@@ -31,6 +33,10 @@ public class SpriteSheetLoader implements ISpriteLoader{
 
     public List<List<BufferedImage>> loadZombieAnimations(final String nameZombie,final int width_frame , final int height_frame){
         return loadAnimations(ZOMBIE_PATH, nameZombie, width_frame, height_frame);
+    }
+
+    public List<BufferedImage> loadCitySprite(final String cityname,final int width_frame , final int height_frame){
+        return loadSprite(CITY_PATH, cityname, width_frame, height_frame);
     }
 
     public BufferedImage loadEntitiesShadow(final String nameObject) {
@@ -44,15 +50,17 @@ public class SpriteSheetLoader implements ISpriteLoader{
     }
 
     private Pair<Integer, Integer> numColRow(final int width_frame, final int height_frame, final BufferedImage img) {
+
         int columns = img.getWidth() / width_frame;
         int rows = img.getHeight() / height_frame;
 
-        // Check if the image is visible secondly the frame 
-        if (img.getWidth() % width_frame != 0 || img.getHeight() % height_frame != 0) {
-            System.err.println("Image dimensions are not divisible by the frame size.");
-            return Pair.of(0, 0); // Return empty Pair 
-        }
-
+        // // Check if the image is visible secondly the frame 
+        // if (img.getWidth() % width_frame != 0 || img.getHeight() % height_frame != 0) {
+        //     System.err.println("Image dimensions are not divisible by the frame size.");
+        //     return Pair.of(0, 0); // Return empty Pair 
+        // }
+    
+        System.out.println("\n\n" + columns + " " + rows );
         return Pair.of(columns, rows);
     }
 
@@ -67,10 +75,50 @@ public class SpriteSheetLoader implements ISpriteLoader{
         
         // If the image is load corretly found his col and row 
         var numCR = this.numColRow(width_frame, height_frame, img);
-        return this.loadBox(numCR, width_frame, height_frame, img);
+        return this.loadSpriteSets(numCR, width_frame, height_frame, img);
     }
 
-    private List<List<BufferedImage>> loadBox(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img){
+
+    private List<BufferedImage> loadSprite(final String pathPrefix, final String name, final int width_frame, final int height_frame){
+        var imgcity = impImgPNG.imp(pathPrefix + name);
+
+        if (imgcity == null) { 
+            System.err.println("Image not found: " + pathPrefix + name);
+            return new ArrayList<>(); // Return the list empty of animations
+        }
+        
+        var numCR = this.numColRow(width_frame, height_frame, imgcity);
+        return this.loadSprites(numCR, width_frame, height_frame, imgcity);
+    }
+
+
+    private List<BufferedImage> loadSprites(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img ){
+
+        List<BufferedImage> allSprites = new ArrayList<>();
+        var numCol = numColRow.getLeft();
+        var numRow = numColRow.getRight();
+
+        for (int j = 0; j < numRow; j++){
+            for (int i = 0; i < numCol; i++){
+                BufferedImage frame = img.getSubimage(
+                    i * width_frame,     
+                    j * height_frame,  
+                    width_frame,
+                    height_frame
+                );
+
+                Optional<BufferedImage> subImage = getBBoxImage(frame);
+                if (subImage.isEmpty())
+                    break;
+
+                allSprites.add(subImage.get());
+            }
+        }
+
+        return allSprites;
+    }
+
+    private List<List<BufferedImage>> loadSpriteSets(final Pair<Integer,Integer> numColRow,final int width_frame , final int height_frame,final BufferedImage img){
         
         List<List<BufferedImage>> allAnimations = new ArrayList<>();
         var numCol = numColRow.getLeft();
@@ -94,11 +142,8 @@ public class SpriteSheetLoader implements ISpriteLoader{
 
                 aniRow.add(subImage.get());
             }
-            //System.out.println("The lenght of the animations is " + aniRow.size());
             allAnimations.add(aniRow); 
         }
-        // System.out.println("Finish to Upload the Animation");
-        // System.out.println("The annimations Array size is : " + allAnimations.size());
         return allAnimations;
     }
 

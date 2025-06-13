@@ -13,4 +13,6 @@ public interface ISpriteLoader {
     BufferedImage loadEntitiesShadow(final String nameObject);
 
     BufferedImage loadMunition(final String nameMunition);
+
+    List<BufferedImage> loadCitySprite(final String cityname,final int width_frame , final int height_frame);
 }
