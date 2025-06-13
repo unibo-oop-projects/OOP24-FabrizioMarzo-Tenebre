@@ -20,7 +20,6 @@ public class SwingGraphicsMunition implements GraphicsMunition{
     @Override
     public void drawMunition(final Munition mun,final BufferedImage image) {
 
-        System.out.println("I'M PAITTING THE MUNITION ");
 
         int scaleSurPosX = viewScale.getXinPixel(mun.getCurrentPos());
         int scaleSurPosY = viewScale.getViewHeight()-viewScale.getYinPixel(mun.getCurrentPos());
