@@ -1,31 +1,29 @@
 package view.graphics_component.level;
 
 import java.awt.image.BufferedImage;
-
+import java.util.List;
 
 import model.level.Level;
 import view.graphics.GraphicsLevel;
-import view.graphics_util.ImportImage;
-import view.graphics_util.ImportImagePNG;
+import view.graphics_util.ISpriteLoader;
+import view.graphics_util.SpriteSheetLoader;
 
 public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
     private static final int WIDTH_FRAME = 32;
     private static final int HEIGHT_FRAME = 33;
-    private static final String CITY_PATH = "/sprite_sheet/level/city";
 
-    private BufferedImage img;
-    private ImportImage importImg = new ImportImagePNG();
 
+    private ISpriteLoader loader = new SpriteSheetLoader();
+    private List<BufferedImage> listImg;
+    
     public GrahicsTutlevelComponent(){
-        this.img = importImg.imp(CITY_PATH);
-        //System.out.println(img);
+        this.listImg = this.loader.loadCitySprite("city", WIDTH_FRAME, HEIGHT_FRAME);
     }
-
 
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
-        gryLvl.drawLevel(lvl,this.img);
+        gryLvl.drawLevel(lvl,listImg.get(0));
     }
 
     
