@@ -97,7 +97,8 @@ public class SwingSceneTutorial implements Scene {
             GraphicsSurvivor graphSur = new SwingGraphicsSurvivor(g2d, viewScale);
             GraphicsZombie graphZob = new SwingGraphicsZombie(g2d, viewScale);
             GraphicsMunition graphMun = new SwingGraphicsMunition(g2d, viewScale);
-
+            
+            tutLevel.updateGraphics(graphLvl);
             tutLevel.getGameZombie().stream()
                 .filter(Objects::nonNull)
                 .forEach(gameZombie -> gameZombie.updateGraphics(graphZob));
@@ -107,7 +108,6 @@ public class SwingSceneTutorial implements Scene {
                 .forEach(gameMunition -> gameMunition.updateGraphics(graphMun));
 
             tutLevel.getGameSurvivor().updateGraphics(graphSur);
-            tutLevel.updateGraphics(graphLvl);
         }
 
 
