@@ -2,6 +2,7 @@ package view.graphics.graphics_swing;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import model.level.Level;
 import view.graphics.GraphicsLevel;
@@ -18,7 +19,7 @@ public class SwingGraphicsLevel implements GraphicsLevel {
     }
 
     @Override
-    public void drawLevel(final Level lvl) {
+    public void drawLevel(final Level lvl,final BufferedImage img) {
        int x0 = viewScale.getXinPixel(lvl.getLevelBBox().getULcorner());
        int y0 = viewScale.getYinPixel(lvl.getLevelBBox().getULcorner());
        int x1 = viewScale.getXinPixel(lvl.getLevelBBox().getBRcorner());
@@ -27,6 +28,9 @@ public class SwingGraphicsLevel implements GraphicsLevel {
        g2d.setColor(Color.blue);
        g2d.setStroke(new BasicStroke(5));
        g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
+
+
+       g2d.drawImage(img,0, 0,50 ,50,null);
 
     }
 
