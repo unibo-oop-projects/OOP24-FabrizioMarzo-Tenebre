@@ -23,10 +23,10 @@ public class LevelManagerBase implements LevelManager{
 
     private static final Pair<Double, Double> SURVIVOR_START_POS = Pair.of(1000.0, 1000.0);
 
-    private static final int INIT_ZOMBIES_LEVEL = 5;
+    private static final int INIT_ZOMBIES_LEVEL = 0;
     private static final int MILLIS_IN_SECOND = 1000;
     private static final int SECONDS_BETWEEN_WAVES = 10;
-    private static final int ZOMBIES_FOR_WAVE = 7;
+    private static final int ZOMBIES_FOR_WAVE = 0;
     private static final double SPAWN_POS_MIN_MULTIPLIER = -1.0;
     private static final double SPAWN_POS_MAX_MULTIPLIER = 2.0;
     private static final int MAX_WAVE = 6;
