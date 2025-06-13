@@ -23,10 +23,6 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
     @Override
     public void updateLevel(final Level lv,final int dt) {
-
-        
-        System.out.println("Numbers of Munitions on level: " + lv.getProjectilesOnLevel().size());
-        System.out.println("Numbers of Zombies on Level: " + lv.getZombieOnLevel().size());
         
         this.updateMunitions(dt,lv);
         this.checkCollisionsProjectilesZombies(lv);
