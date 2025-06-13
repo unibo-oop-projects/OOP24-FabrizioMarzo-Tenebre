@@ -7,14 +7,14 @@ import model.entities.survivor.Survivor;
 import java.awt.image.BufferedImage;
 
 import view.graphics.GraphicsSurvivor;
-import view.graphics_util.LoadAnimations;
+import view.graphics_util.SpriteSheetLoader;
 
 public class GraphicsCommonComponent implements GraphicsSurvivorComponent{
 
     private static final int WIDTH_FRAME = 48;
     private static final int HEIGHT_FRAME = 64;
 
-    private LoadAnimations graphEnti = new LoadAnimations();
+    private SpriteSheetLoader graphEnti = new SpriteSheetLoader();
     //private BufferedImage shadow;
     private List<List<BufferedImage>> animations;
     private int aniIndex,aniTick,aniSpeed = 5;

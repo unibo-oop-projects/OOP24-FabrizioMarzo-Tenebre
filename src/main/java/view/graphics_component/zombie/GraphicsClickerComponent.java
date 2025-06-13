@@ -5,14 +5,14 @@ import java.util.List;
 
 import model.entities.zombie.Zombie;
 import view.graphics.GraphicsZombie;
-import view.graphics_util.LoadAnimations;
+import view.graphics_util.SpriteSheetLoader;
 
 public class GraphicsClickerComponent implements GraphicsZombieComponent{
 
     private static final int WIDTH_FRAME = 64;
     private static final int HEIGHT_FRAME = 32;
 
-    private LoadAnimations graphEnti = new LoadAnimations();
+    private SpriteSheetLoader graphEnti = new SpriteSheetLoader();
     private List<List<BufferedImage>> animations;
     private int aniIndex,aniTick,aniSpeed = 8;
 
