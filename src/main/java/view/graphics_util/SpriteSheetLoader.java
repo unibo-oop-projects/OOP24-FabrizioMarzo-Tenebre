@@ -62,7 +62,6 @@ public class SpriteSheetLoader implements ISpriteLoader{
         //     return Pair.of(0, 0); // Return empty Pair 
         // }
     
-        System.out.println("\n\n" + columns + " " + rows );
         return Pair.of(columns, rows);
     }
 
