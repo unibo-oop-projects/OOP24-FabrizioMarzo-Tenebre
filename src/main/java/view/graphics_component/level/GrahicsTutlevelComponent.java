@@ -15,15 +15,21 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
 
     private ISpriteLoader loader = new SpriteSheetLoader();
-    private List<BufferedImage> listImg;
+    private List<BufferedImage> listLevelSprite;
+    private List<List<Integer>> listLevelData;
     
     public GrahicsTutlevelComponent(){
-        this.listImg = this.loader.loadCitySprite("city", WIDTH_FRAME, HEIGHT_FRAME);
+        this.listLevelSprite = this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME);
+        this.listLevelData = this.loader.getLevelData("levelData");
+        for (int i = 0 ; i <14 ; i++ ){
+
+            System.out.println(listLevelData.get(i));
+        }
     }
 
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
-        gryLvl.drawLevel(lvl,listImg.get(0));
+        gryLvl.drawLevel(lvl, this.listLevelSprite, this.listLevelData);
     }
 
     
