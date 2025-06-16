@@ -6,6 +6,5 @@ import java.util.List;
 import model.level.Level;
 
 public interface GraphicsLevel {
-    void drawLevel(final Level lvl, final List<BufferedImage> listLevelSprite, final
-    List<List<Integer>> listLevelData);
+    void drawLevel(final Level lvl, final List<List<BufferedImage>> allImage);
 }

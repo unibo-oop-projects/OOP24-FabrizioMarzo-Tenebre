@@ -20,7 +20,7 @@ public class SwingGraphicsLevel implements GraphicsLevel {
     }
 
     @Override
-    public void drawLevel(final Level lvl,final List<BufferedImage> listLevelSprite, final List<List<Integer>> listLevelData) {
+    public void drawLevel(final Level lvl,final List<List<BufferedImage>> allImage) {
        int x0 = viewScale.getXinPixel(lvl.getLevelBBox().getULcorner());
        int y0 = viewScale.getYinPixel(lvl.getLevelBBox().getULcorner());
        int x1 = viewScale.getXinPixel(lvl.getLevelBBox().getBRcorner());
@@ -30,28 +30,30 @@ public class SwingGraphicsLevel implements GraphicsLevel {
        g2d.setStroke(new BasicStroke(5));
        g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
 
-       int totalWidth_px = (int) Math.round(lvl.getLevelWidth() * viewScale.getRatioX());
-       int totalHeight_px = (int) Math.round(lvl.getLevelHeight() * viewScale.getRatioY());
        
-       int tileW_px = totalWidth_px / 26;
-       int tileH_px = totalHeight_px / 14;
-       
-       for (int j = 0; j < 14; j++) {
-           for (int i = 0; i < 26; i++) {
-               int index = listLevelData.get(j).get(i);
-               BufferedImage tileImg = listLevelSprite.get(index);
-       
-               int x = tileW_px * i;
-               int y = tileH_px * j;
-       
-               int drawWidth = (i == 25) ? totalWidth_px - tileW_px * i : tileW_px;
-               int drawHeight = (j == 13) ? totalHeight_px - tileH_px * j : tileH_px;
-       
-               g2d.drawImage(tileImg, x, y, drawWidth, drawHeight, null);
-           }
-       }
-       
+        int totalWidth_px = (int) Math.round(lvl.getLevelWidth() * viewScale.getRatioX());
+        int totalHeight_px = (int) Math.round(lvl.getLevelHeight() * viewScale.getRatioY());
 
+        int tileW_px = totalWidth_px / 26;
+        int tileH_px = totalHeight_px / 14;
+
+        for (int j = 0; j < allImage.size(); j++) {
+            List<BufferedImage> row = allImage.get(j);
+            for (int i = 0; i < row.size(); i++) {
+                BufferedImage tileImg = row.get(i);
+
+                int x = tileW_px * i;
+                int y = tileH_px * j;
+
+                int drawWidth = (i == 25) ? totalWidth_px - tileW_px * i : tileW_px;
+                int drawHeight = (j == 13) ? totalHeight_px - tileH_px * j : tileH_px;
+
+                if (tileImg != null) {
+                    g2d.drawImage(tileImg, x, y, drawWidth, drawHeight, null);
+                }
+            }
+        }
+    
     }
 
 }
