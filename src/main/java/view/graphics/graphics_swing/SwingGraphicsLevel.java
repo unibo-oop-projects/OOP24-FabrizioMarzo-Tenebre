@@ -30,12 +30,26 @@ public class SwingGraphicsLevel implements GraphicsLevel {
        g2d.setStroke(new BasicStroke(5));
        g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
 
-        for (int j = 0 ; j < 14 ; j ++  ){
-            for (int i=0 ; i<26 ; i++ ){
-                int index = listLevelData.get(j).get(i);
-                g2d.drawImage(listLevelSprite.get(index), 50 *i, 50*j , 50,50,null);
-            }
-        }
+       int totalWidth_px = (int) Math.round(lvl.getLevelWidth() * viewScale.getRatioX());
+       int totalHeight_px = (int) Math.round(lvl.getLevelHeight() * viewScale.getRatioY());
+       
+       int tileW_px = totalWidth_px / 26;
+       int tileH_px = totalHeight_px / 14;
+       
+       for (int j = 0; j < 14; j++) {
+           for (int i = 0; i < 26; i++) {
+               int index = listLevelData.get(j).get(i);
+               BufferedImage tileImg = listLevelSprite.get(index);
+       
+               int x = tileW_px * i;
+               int y = tileH_px * j;
+       
+               int drawWidth = (i == 25) ? totalWidth_px - tileW_px * i : tileW_px;
+               int drawHeight = (j == 13) ? totalHeight_px - tileH_px * j : tileH_px;
+       
+               g2d.drawImage(tileImg, x, y, drawWidth, drawHeight, null);
+           }
+       }
        
 
     }
