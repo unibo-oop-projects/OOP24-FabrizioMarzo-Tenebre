@@ -35,7 +35,7 @@ public class SpriteSheetLoader implements ISpriteLoader{
         return loadAnimations(ZOMBIE_PATH, nameZombie, width_frame, height_frame);
     }
 
-    public List<BufferedImage> loadCitySprite(final String cityname,final int width_frame , final int height_frame){
+    public List<BufferedImage> loadLevelSprite(final String cityname,final int width_frame , final int height_frame){
         return loadSprite(CITY_PATH, cityname, width_frame, height_frame);
     }
 
