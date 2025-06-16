@@ -1,10 +1,11 @@
 package view.graphics_util;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.awt.image.Raster;
+
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -180,17 +181,23 @@ public class SpriteSheetLoader implements ISpriteLoader{
         BufferedImage img = impImgPNG.imp(LEVEL_PATH + nameLevelData);
         List<List<Integer>> levelData = new ArrayList<>();
     
+        Raster raster = img.getRaster();  // ottieni il raster dell'immagine
+        int numBands = raster.getNumBands(); // numero di canali (RGB, o RGBA)
+    
         for (int j = 0; j < img.getHeight(); j++) {
             List<Integer> row = new ArrayList<>();
             for (int i = 0; i < img.getWidth(); i++) {
-                Color color = new Color(img.getRGB(i, j));
-                Integer valueRed = color.getRed();
-                row.add(valueRed); 
+                int[] pixel = new int[numBands];
+                raster.getPixel(i, j, pixel);  // legge tutti i canali del pixel
+    
+                int valueRed = pixel[0];  // il canale rosso è sempre al primo indice
+                row.add(valueRed);
             }
-            levelData.add(row); 
+            levelData.add(row);
         }
     
         return levelData;
     }
+    
     
 }
