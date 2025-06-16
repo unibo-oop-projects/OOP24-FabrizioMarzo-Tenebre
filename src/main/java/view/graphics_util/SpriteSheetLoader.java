@@ -1,5 +1,6 @@
 package view.graphics_util;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class SpriteSheetLoader implements ISpriteLoader{
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
     private static final String MUNITION_PATH = "/sprite_sheet/armory/";
-    private static final String CITY_PATH = "/sprite_sheet/level/";
+    private static final String LEVEL_PATH = "/sprite_sheet/level/";
 
 
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
@@ -35,8 +36,8 @@ public class SpriteSheetLoader implements ISpriteLoader{
         return loadAnimations(ZOMBIE_PATH, nameZombie, width_frame, height_frame);
     }
 
-    public List<BufferedImage> loadLevelSprite(final String cityname,final int width_frame , final int height_frame){
-        return loadSprite(CITY_PATH, cityname, width_frame, height_frame);
+    public List<BufferedImage> loadLevelSprite(final String nameLevelSprite,final int width_frame , final int height_frame){
+        return loadSprite(LEVEL_PATH, nameLevelSprite, width_frame, height_frame);
     }
 
     public BufferedImage loadEntitiesShadow(final String nameObject) {
@@ -174,4 +175,22 @@ public class SpriteSheetLoader implements ISpriteLoader{
         return Optional.of(frame);
     }
 
+    @Override
+    public List<List<Integer>> getLevelData(final String nameLevelData) {
+        BufferedImage img = impImgPNG.imp(LEVEL_PATH + nameLevelData);
+        List<List<Integer>> levelData = new ArrayList<>();
+    
+        for (int j = 0; j < img.getHeight(); j++) {
+            List<Integer> row = new ArrayList<>();
+            for (int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color(img.getRGB(i, j));
+                Integer valueRed = color.getRed();
+                row.add(valueRed); 
+            }
+            levelData.add(row); 
+        }
+    
+        return levelData;
+    }
+    
 }

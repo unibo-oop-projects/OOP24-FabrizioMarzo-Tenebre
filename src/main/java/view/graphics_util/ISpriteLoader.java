@@ -14,5 +14,7 @@ public interface ISpriteLoader {
 
     BufferedImage loadMunition(final String nameMunition);
 
-    List<BufferedImage> loadLevelSprite(final String cityname,final int width_frame , final int height_frame);
+    List<BufferedImage> loadLevelSprite(final String nameLevelSprite,final int width_frame , final int height_frame);
+
+    List<List<Integer>> getLevelData(final String nameLevelData);
 }
