@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 
 import game.game_model.game_level.IGameLevel;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -51,6 +53,11 @@ public class SwingSceneTutorial implements Scene {
         this.viewScale = new ViewScale((int) tutLevel.getLevel().getLevelHeight(), (int) tutLevel.getLevel().getLevelWidth(), h, w);
 
         panel = new SceneTutorialPanel();
+        panel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                viewScale.setNewRatio(panel.getHeight(), panel.getWidth());
+            }
+        });
 
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
@@ -69,7 +76,6 @@ public class SwingSceneTutorial implements Scene {
         try {
             SwingUtilities.invokeAndWait(()->{
                 frame.repaint();
-                viewScale.setNewRatio(panel.getHeight(), panel.getWidth());
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,6 +105,7 @@ public class SwingSceneTutorial implements Scene {
             GraphicsMunition graphMun = new SwingGraphicsMunition(g2d, viewScale);
             
             tutLevel.updateGraphics(graphLvl);
+            tutLevel.getGameSurvivor().updateGraphics(graphSur);
             tutLevel.getGameZombie().stream()
                 .filter(Objects::nonNull)
                 .forEach(gameZombie -> gameZombie.updateGraphics(graphZob));
@@ -107,7 +114,6 @@ public class SwingSceneTutorial implements Scene {
                 .filter(Objects::nonNull)
                 .forEach(gameMunition -> gameMunition.updateGraphics(graphMun));
 
-            tutLevel.getGameSurvivor().updateGraphics(graphSur);
         }
 
 
