@@ -1,6 +1,7 @@
 package view.graphics_component.level;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.level.Level;
@@ -15,21 +16,33 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
 
     private ISpriteLoader loader = new SpriteSheetLoader();
-    private List<BufferedImage> listLevelSprite;
-    private List<List<Integer>> listLevelData;
+    private List<List<BufferedImage>> allImageLevel;
     
     public GrahicsTutlevelComponent(){
-        this.listLevelSprite = this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME);
-        this.listLevelData = this.loader.getLevelData("levelData");
-        for (int i = 0 ; i <14 ; i++ ){
+        allImageLevel = this.mapLevelDataToImages(this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME)
+                                          ,this.loader.getLevelData("levelData"));
+    }
 
-            System.out.println(listLevelData.get(i));
+    private List<List<BufferedImage>> mapLevelDataToImages(List<BufferedImage> levelSprites,List<List<Integer>> levelData) {
+        List<List<BufferedImage>> result = new ArrayList<>();
+
+        for (List<Integer> row : levelData) {
+            List<BufferedImage> imageRow = new ArrayList<>();
+            for (Integer tileIndex : row) {
+                if (tileIndex >= 0 && tileIndex < levelSprites.size()) {
+                    imageRow.add(levelSprites.get(tileIndex));
+                } else {
+                    imageRow.add(null); 
+                }
+            }
+            result.add(imageRow);
         }
+        return result;
     }
 
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
-        gryLvl.drawLevel(lvl, this.listLevelSprite, this.listLevelData);
+        gryLvl.drawLevel(lvl, allImageLevel);
     }
 
     
