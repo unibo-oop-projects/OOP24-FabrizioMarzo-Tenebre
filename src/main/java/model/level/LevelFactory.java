@@ -13,7 +13,7 @@ public class LevelFactory {
     public Level createTutorialLevel(){
         final Double lvlWidth = 4000d;
         final Double lvlHeight = 2500d;
-        return new TutorialLevel(lvlWidth,
+        return new LevelTutorial(lvlWidth,
                                 lvlHeight,
                                 new RectBoundingBox(Pair.of(LEVEL_MIN_X,lvlHeight), Pair.of(lvlWidth,LEVEL_MIN_Y)),
                                 new PhysicsLevelTutComponent());

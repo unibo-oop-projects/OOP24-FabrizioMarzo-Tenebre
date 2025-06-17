@@ -12,7 +12,7 @@ import model.level.manager.LevelManagerBase;
 import model.physics.physics_level.PhysicsLevelComponent;
 
 
-public class TutorialLevel implements Level {
+public class LevelTutorial implements Level {
 
     private double lvlWidth;   
     private double lvlHeight;  
@@ -24,7 +24,7 @@ public class TutorialLevel implements Level {
     private List<Munition> activeMunitions = new ArrayList<>();
     private List<Zombie> listZombie;
 
-    public TutorialLevel(final double lvlWidth,final double lvlHeight,
+    public LevelTutorial(final double lvlWidth,final double lvlHeight,
                          final BoundingBox bbox,
                          final PhysicsLevelComponent physcLevel){
         this.lvlWidth = lvlWidth;
