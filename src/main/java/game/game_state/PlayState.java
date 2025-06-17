@@ -4,6 +4,7 @@ import game.game_model.game_level.FactoryLevelGame;
 import game.game_model.game_level.IGameLevel;
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
+import model.level.types.LevelType;
 import view.scene.Scene;
 import view.scene.SwingSceneTutorial;
 
@@ -14,11 +15,10 @@ public class PlayState implements GameState{
     private FactoryLevelGame lvlGameFct = new FactoryLevelGame();
     private InputController contrl;
 
-
     @Override
     public void setUp() {
         this.contrl = new KeyboardInputController();
-        this.gameLevel = lvlGameFct.gameLevelTutorial();
+        this.gameLevel = lvlGameFct.createLevelGame(LevelType.LEVEL_TUTORIAL);
         this.view = new SwingSceneTutorial(gameLevel,contrl,1200, 800);
     }
 
