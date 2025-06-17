@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public enum LevelType {
-    LEVEL_TUTORIAL("LevelTutorial"),
-    LEVEL_ONE("Level1"),
-    BOSS("LevelBoss");
+    LEVEL_TUTORIAL("LevelTutorial");
+    //LEVEL_ONE("Level1"),
+    //BOSS("LevelBoss");
 
     private final String displayName;
 
