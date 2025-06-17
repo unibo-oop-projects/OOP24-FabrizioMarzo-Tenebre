@@ -19,6 +19,7 @@ public class LevelTutorial implements Level {
     private BoundingBox bbox;
     private PhysicsLevelComponent physicLvComp;
     private LevelManager levelManager;
+    private boolean isLevelCompleted;
 
     private Survivor surLv;
     private List<Munition> activeMunitions = new ArrayList<>();
@@ -31,6 +32,7 @@ public class LevelTutorial implements Level {
         this.lvlHeight = lvlHeight;
         this.bbox = bbox;
         this.physicLvComp = physcLevel;
+        this.isLevelCompleted = false;
         this.listZombie = new ArrayList<>();
         this.levelManager = new LevelManagerBase(this);
     }
@@ -74,5 +76,16 @@ public class LevelTutorial implements Level {
     @Override
     public void setSurvivorOnLevel(final Survivor sur) {
         this.surLv = sur;
+    }
+
+    @Override
+    public boolean isLevelCompleted() {
+        return this.isLevelCompleted;
+    }
+
+    @Override
+    public void setLevelCompleted(final boolean completed) {
+        this.isLevelCompleted = completed;
+        
     }
 }

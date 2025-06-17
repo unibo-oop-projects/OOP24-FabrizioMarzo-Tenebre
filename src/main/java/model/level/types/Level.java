@@ -38,4 +38,9 @@ public interface Level {
     List<Zombie> getZombieOnLevel();
     
     List<Munition> getProjectilesOnLevel();
+
+    boolean isLevelCompleted();
+
+    void setLevelCompleted(final boolean completed);
+
 }
