@@ -1,4 +1,4 @@
-package model.level;
+package model.level.types;
 
 import org.apache.commons.lang3.tuple.Pair;
 

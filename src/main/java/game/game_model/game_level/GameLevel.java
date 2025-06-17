@@ -15,7 +15,7 @@ import game.game_model.game_entities.IGameSurvivor;
 import game.game_model.game_entities.IGameZombie;
 import model.armory.munition.Munition;
 import model.entities.zombie.Zombie;
-import model.level.Level;
+import model.level.types.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics_component.level.GraphicsLevelComponent;
 

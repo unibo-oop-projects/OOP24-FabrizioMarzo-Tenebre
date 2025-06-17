@@ -1,6 +1,6 @@
 package game.game_model.game_level;
 
-import model.level.LevelFactory;
+import model.level.types.LevelFactory;
 import view.graphics_component.level.GrahicsTutlevelComponent;
 
 public class FactoryLevelGame {

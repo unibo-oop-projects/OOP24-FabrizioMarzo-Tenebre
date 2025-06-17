@@ -12,7 +12,7 @@ import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
 import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
-import model.level.Level;
+import model.level.types.Level;
 
 public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 

@@ -1,4 +1,4 @@
-package model.level;
+package model.level.types;
 
 import java.util.Arrays;
 import java.util.List;

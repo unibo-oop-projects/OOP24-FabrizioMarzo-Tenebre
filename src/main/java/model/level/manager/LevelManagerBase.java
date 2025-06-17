@@ -16,8 +16,8 @@ import model.entities.survivor.Survivor;
 import model.entities.survivor.SurvivorFactory;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
+import model.level.types.Level;
 import model.entities.zombie.IZombieFactory;
-import model.level.Level;
 
 public class LevelManagerBase implements LevelManager{
 

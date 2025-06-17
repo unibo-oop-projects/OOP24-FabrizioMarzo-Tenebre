@@ -5,7 +5,7 @@ import java.util.List;
 import game.game_model.game_armory.IGameMunition;
 import game.game_model.game_entities.IGameSurvivor;
 import game.game_model.game_entities.IGameZombie;
-import model.level.Level;
+import model.level.types.Level;
 import view.graphics.GraphicsLevel;
 
 public interface IGameLevel {

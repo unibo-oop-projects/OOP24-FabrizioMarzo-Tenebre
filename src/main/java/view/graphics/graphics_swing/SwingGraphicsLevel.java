@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import model.level.Level;
+import model.level.types.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics_util.IViewScale;
 
