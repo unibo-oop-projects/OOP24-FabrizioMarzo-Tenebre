@@ -29,7 +29,7 @@ public class LevelManagerBase implements LevelManager{
     private static final int ZOMBIES_FOR_WAVE = 2;
     private static final double SPAWN_POS_MIN_MULTIPLIER = -1.0;
     private static final double SPAWN_POS_MAX_MULTIPLIER = 2.0;
-    private static final int MAX_WAVE = 6;
+    private static final int MAX_WAVE = 3;
 
     private final Level level;
     private final IZombieFactory zombieFactory = new ZombieFactory();
@@ -57,6 +57,10 @@ public class LevelManagerBase implements LevelManager{
         if (seconds >= (currentWave) * SECONDS_BETWEEN_WAVES && currentWave <= MAX_WAVE) {
             spawnZombies(ZOMBIES_FOR_WAVE);
             currentWave++; 
+        }
+
+        if (currentWave >= MAX_WAVE && level.getZombieOnLevel().isEmpty()){
+            level.setLevelCompleted(true);
         }
     }
 
