@@ -42,7 +42,7 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
-        gryLvl.drawLevel(lvl, allImageLevel);
+        gryLvl.drawLevel(lvl, this.allImageLevel);
     }
 
     
