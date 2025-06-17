@@ -1,10 +1,8 @@
 package game.game_state;
 
-import game.game_model.game_level.FactoryLevelGame;
 import game.game_model.game_level.IGameLevel;
 import input.input_controller.InputController;
 import input.input_controller.KeyboardInputController;
-import model.level.types.LevelType;
 import view.scene.Scene;
 import view.scene.SwingSceneTutorial;
 
@@ -12,14 +10,12 @@ public class PlayState implements GameState{
 
     private Scene view ;
     private IGameLevel gameLevel;
-    private FactoryLevelGame lvlGameFct = new FactoryLevelGame();
-    private InputController contrl;
+    private InputController contrl = new KeyboardInputController();
+    private PlayStateManager managerPlayGame = new PlayStateManager();
 
     @Override
     public void setUp() {
-        this.contrl = new KeyboardInputController();
-        this.gameLevel = lvlGameFct.createLevelGame(LevelType.LEVEL_TUTORIAL);
-        this.view = new SwingSceneTutorial(gameLevel,contrl,1200, 800);
+        loadLevel(managerPlayGame.loadCurrentLevel());
     }
 
     @Override
@@ -31,11 +27,25 @@ public class PlayState implements GameState{
     public void updateGame(final int elapsed) {
         gameLevel.getLevel().updateLevelState(elapsed);
         gameLevel.updateStateGameLevel();
+
+        if (gameLevel.getLevel().isLevelCompleted()) {
+            managerPlayGame.loadNextLevel().ifPresentOrElse(
+                this::loadLevel,
+                () -> {
+                    System.out.println("All levels are completed");
+                }
+            );
+        }
     }
 
     @Override
     public void render() {
         view.render();
+    }
+
+    private void loadLevel(final IGameLevel level) {
+        this.gameLevel = level;
+        this.view = new SwingSceneTutorial(gameLevel, contrl, 1200, 800);
     }
     
 }
