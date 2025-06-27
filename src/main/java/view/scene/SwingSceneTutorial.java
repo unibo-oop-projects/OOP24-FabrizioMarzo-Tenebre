@@ -27,8 +27,9 @@ import view.graphics.graphics_swing.SwingGraphicsLevel;
 import view.graphics.graphics_swing.SwingGraphicsMunition;
 import view.graphics.graphics_swing.SwingGraphicsSurvivor;
 import view.graphics.graphics_swing.SwingGraphicsZombie;
-import view.graphics_util.IViewScale;
-import view.graphics_util.ViewScale;
+import view.graphics_util.Scaler;
+import view.graphics_util.ScalerFactory;
+import view.graphics_util.ScalerFactoryImpl;
 
 
 public class SwingSceneTutorial implements Scene {
@@ -37,7 +38,8 @@ public class SwingSceneTutorial implements Scene {
     private SceneTutorialPanel panel;
     private IGameLevel tutLevel;
     private InputController inputContrl;
-    private IViewScale viewScale;
+    private Scaler viewScale;
+    private ScalerFactory scaleFactory;
     private int w,h;
 
     public SwingSceneTutorial(final IGameLevel tutLevel,final InputController inputContrl ,final int w, final int h){
@@ -50,12 +52,13 @@ public class SwingSceneTutorial implements Scene {
         this.inputContrl = inputContrl;
         this.w = w;
         this.h = h;
-        this.viewScale = new ViewScale((int) tutLevel.getLevel().getLevelHeight(), (int) tutLevel.getLevel().getLevelWidth(), h, w);
+        this.scaleFactory = new ScalerFactoryImpl();
+        this.viewScale = scaleFactory.viewScaler((int) tutLevel.getLevel().getLevelHeight(), (int) tutLevel.getLevel().getLevelWidth(), h, w);
 
         panel = new SceneTutorialPanel();
         panel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                viewScale.setNewRatio(panel.getHeight(), panel.getWidth());
+                viewScale.setScaleDimensions(panel.getHeight(), panel.getWidth());
             }
         });
 

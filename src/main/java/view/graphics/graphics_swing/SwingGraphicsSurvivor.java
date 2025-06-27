@@ -7,14 +7,14 @@ import java.awt.image.BufferedImage;
 
 import model.entities.survivor.Survivor;
 import view.graphics.GraphicsSurvivor;
-import view.graphics_util.IViewScale;
+import view.graphics_util.Scaler;
 
 public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 
     private Graphics2D g2d;
-    private IViewScale viewScale;
+    private Scaler viewScale;
 
-    public SwingGraphicsSurvivor(final Graphics2D g2d, final IViewScale viewScale) {
+    public SwingGraphicsSurvivor(final Graphics2D g2d, final Scaler viewScale) {
         this.g2d = g2d;
         this.viewScale = viewScale;
     }
@@ -22,8 +22,8 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
     @Override
     public void drawSurvivor(final Survivor sur, final BufferedImage image) {
 
-        int scaleSurPosX = viewScale.getXinPixel(sur.getCurrentPos());
-        int scaleSurPosY = viewScale.getViewHeight()-viewScale.getYinPixel(sur.getCurrentPos());
+        int scaleSurPosX = viewScale.scaleX(sur.getCurrentPos());
+        int scaleSurPosY = viewScale.getScaledHeight()-viewScale.scaleY(sur.getCurrentPos());
 
         int scaleSurWidth = (int) Math.round(sur.getWidth() * viewScale.getRatioX());
         int scaleSurHeight = (int) Math.round(sur.getHeight()* viewScale.getRatioY());
@@ -69,8 +69,8 @@ public class SwingGraphicsSurvivor implements GraphicsSurvivor{
 
     @SuppressWarnings("unused")
     private void drawBoundingBox(final Survivor sur, final int scaleSurHeight, final int scaleSurWidth){
-        int scaleBboxUx = viewScale.getXinPixel(sur.getBBox().getULcorner());
-        int scaleBboxUy = viewScale.getViewHeight() - viewScale.getYinPixel(sur.getBBox().getULcorner());
+        int scaleBboxUx = viewScale.scaleX(sur.getBBox().getULcorner());
+        int scaleBboxUy = viewScale.getScaledHeight() - viewScale.scaleY(sur.getBBox().getULcorner());
     
         // Draw the Survivor BoundingBox
         g2d.setColor(Color.blue);

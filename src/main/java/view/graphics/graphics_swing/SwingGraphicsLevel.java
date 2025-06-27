@@ -7,24 +7,24 @@ import java.util.List;
 
 import model.level.types.Level;
 import view.graphics.GraphicsLevel;
-import view.graphics_util.IViewScale;
+import view.graphics_util.Scaler;
 
 public class SwingGraphicsLevel implements GraphicsLevel {
 
     private Graphics2D g2d;
-    private IViewScale viewScale;
+    private Scaler viewScale;
 
-    public SwingGraphicsLevel(final Graphics2D g2d,final IViewScale viewScale) {
+    public SwingGraphicsLevel(final Graphics2D g2d,final Scaler viewScale) {
         this.g2d = g2d;
         this.viewScale = viewScale;
     }
 
     @Override
     public void drawLevel(final Level lvl,final List<List<BufferedImage>> allImage) {
-       int x0 = viewScale.getXinPixel(lvl.getLevelBBox().getULcorner());
-       int y0 = viewScale.getYinPixel(lvl.getLevelBBox().getULcorner());
-       int x1 = viewScale.getXinPixel(lvl.getLevelBBox().getBRcorner());
-       int y1 = viewScale.getYinPixel(lvl.getLevelBBox().getBRcorner());
+       int x0 = viewScale.scaleX(lvl.getLevelBBox().getULcorner());
+       int y0 = viewScale.scaleY(lvl.getLevelBBox().getULcorner());
+       int x1 = viewScale.scaleX(lvl.getLevelBBox().getBRcorner());
+       int y1 = viewScale.scaleY(lvl.getLevelBBox().getBRcorner());
 
        g2d.setColor(Color.blue);
        g2d.setStroke(new BasicStroke(5));

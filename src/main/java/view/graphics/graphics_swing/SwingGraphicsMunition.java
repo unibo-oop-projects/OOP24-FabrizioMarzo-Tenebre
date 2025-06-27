@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 
 import model.armory.munition.Munition;
 import view.graphics.GraphicsMunition;
-import view.graphics_util.IViewScale;
+import view.graphics_util.Scaler;
 
 public class SwingGraphicsMunition implements GraphicsMunition{
 
     private Graphics2D g2d;
-    private IViewScale viewScale;
+    private Scaler viewScale;
 
-    public SwingGraphicsMunition(final Graphics2D g2d, final IViewScale viewScale){
+    public SwingGraphicsMunition(final Graphics2D g2d, final Scaler viewScale){
         this.g2d = g2d;
         this.viewScale = viewScale;
     }
@@ -21,8 +21,8 @@ public class SwingGraphicsMunition implements GraphicsMunition{
     public void drawMunition(final Munition mun,final BufferedImage image) {
 
 
-        int scaleSurPosX = viewScale.getXinPixel(mun.getCurrentPos());
-        int scaleSurPosY = viewScale.getViewHeight()-viewScale.getYinPixel(mun.getCurrentPos());
+        int scaleSurPosX = viewScale.scaleX(mun.getCurrentPos());
+        int scaleSurPosY = viewScale.getScaledHeight()-viewScale.scaleY(mun.getCurrentPos());
 
        // int scaleSurWidth = (int) Math.round(mun.getWidth() * viewScale.getRatioX());
         int scaleSurHeight = (int) Math.round(mun.getWidth()* viewScale.getRatioY());
