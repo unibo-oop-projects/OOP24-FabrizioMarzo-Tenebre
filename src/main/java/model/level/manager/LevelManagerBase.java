@@ -65,7 +65,7 @@ public class LevelManagerBase implements LevelManager{
     }
 
     private void spawnZombies(final int count) {
-        List<Zombie> newZombies = IntStream.range(0, count)
+        List<Zombie> newZombies = IntStream.rangeClosed(0, count)
             .mapToObj(i -> zombieFactory.createClickerZombie(randomPos()))
             .collect(Collectors.toList());
 
