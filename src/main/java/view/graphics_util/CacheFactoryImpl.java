@@ -34,7 +34,7 @@ public class CacheFactoryImpl implements CacheFactory{
    }
 
     @Override
-    public Cache<String,BufferedImage> stringImageCache() {
+    public Cache<String,BufferedImage> imageCache() {
         return new CacheTemplate<>(HashMap::new);
     }
     
