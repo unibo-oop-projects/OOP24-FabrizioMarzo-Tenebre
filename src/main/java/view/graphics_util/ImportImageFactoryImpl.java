@@ -1,6 +1,7 @@
 package view.graphics_util;
 
 import java.io.InputStream;
+import java.util.Optional;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,9 @@ public class ImportImageFactoryImpl implements ImportImageFactory{
             private Cache<String,BufferedImage> cache = cacheFactory.imageCache();
 
             @Override
-            public BufferedImage imp(final String path) {
+            public Optional<BufferedImage> imp(final String path) {
                 if (cache.contains(path)) {
-                    return cache.get(path);
+                    return Optional.of(cache.get(path));
                 }
                 try (InputStream is = getClass().getResourceAsStream(path + extension)) {
                     if (is == null) {
@@ -25,11 +26,11 @@ public class ImportImageFactoryImpl implements ImportImageFactory{
                     }
                     BufferedImage img = ImageIO.read(is);
                     cache.put(path, img);
-                    return img;
+                    return Optional.of(img);
                 } catch (Exception e) {
                     System.err.println("Error loading image: " + path + extension);
                     e.printStackTrace();
-                    return null;
+                    return Optional.empty();
                 }
             }
         };
