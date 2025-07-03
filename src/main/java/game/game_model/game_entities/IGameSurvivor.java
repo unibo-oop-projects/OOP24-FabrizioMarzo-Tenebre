@@ -1,38 +1,42 @@
 package game.game_model.game_entities;
 
-import java.awt.Graphics2D;
-
 import input.input_controller.InputController;
 import model.entities.survivor.Survivor;
 import view.graphics.GraphicsSurvivor;
 
 /**
- * Interface that defines the behavior of a game survivor in the game.
- * This interface provides methods for retrieving the survivor, updating the survivor based on user input,
- * and rendering the survivor's graphics.
+ * Interface defining the behavior of a game survivor entity.
+ * <p>
+ * Provides methods for accessing the survivor, updating it based on input,
+ * and rendering its graphical representation.
+ * </p>
  */
 public interface IGameSurvivor {
 
     /**
-     * Gets the survivor associated with this game entity.
+     * Returns the survivor associated with this game entity.
      *
-     * @return the {@link Survivor} object representing the game survivor
+     * @return the {@link Survivor} instance representing the game survivor
      */
     Survivor getSurvivor();
 
     /**
-     * Updates the survivor based on input from the controller.
-     * This method processes the input and modifies the survivor's state accordingly.
+     * Updates the survivor's state based on the provided input controller.
+     * <p>
+     * This method processes user input and modifies the survivor accordingly.
+     * </p>
      *
-     * @param controller the {@link InputController} that handles user input
+     * @param controller the {@link InputController} used to capture user input
      */
     void updateInput(final InputController controller);
 
     /**
-     * Updates the graphics of the survivor.
-     * This method is used to render the survivor's visual representation on the screen.
+     * Updates the graphical representation of the survivor.
+     * <p>
+     * This method is responsible for rendering the survivor on screen.
+     * </p>
      *
-     * @param g2d the {@link Graphics2D} object used for drawing the survivor's graphics
+     * @param graphicsSur the {@link GraphicsSurvivor} used for drawing the survivor
      */
     void updateGraphics(final GraphicsSurvivor grapSur);
 
