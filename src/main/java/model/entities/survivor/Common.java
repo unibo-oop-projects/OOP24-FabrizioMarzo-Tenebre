@@ -10,10 +10,11 @@ import model.bounding_box.BoundingBox;
 import model.physics.physics_entities.PhysicsSurvivorComponent;
 
 /**
- * Implementation of the {@link Survivor} interface.
+ * Implementation of the {@link Survivor} interface representing a common survivor in the model.
  * <p>
- * This class represents a common type of survivor in the game with
- * basic movement, attack capabilities, and state management.
+ * This class encapsulates the state and behavior of a survivor including health,
+ * position, velocity, weapon, and state management. It also interacts with the
+ * physics component to update movement.
  */
 public class Common implements Survivor{
 
@@ -32,12 +33,15 @@ public class Common implements Survivor{
     private Weapon weapon;
 
     /**
-     * Constructs a new {@code Common} survivor with specified attributes.
+     * Constructs a new {@code Common} survivor with the specified attributes.
      *
-     * @param health   initial health
-     * @param attack attack strength of the survivor
-     * @param pos    initial position (x, y)
-     * @param vel    initial velocity (vx, vy); also used as base velocity
+     * @param health    initial health points
+     * @param width     width dimension in model units
+     * @param height    height dimension in model units
+     * @param pos       initial position as a pair (x, y)
+     * @param vel       initial velocity as a pair (vx, vy), also used as base velocity
+     * @param physicComp physics component handling survivor's physical behavior
+     * @param bbox      bounding box used for collision detection
      */
     public Common(final int health, 
                  final int width, final int height,
@@ -59,12 +63,21 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * <p>
+     * Applies damage to the survivor, ensuring health does not fall below zero.
      */
     @Override
     public void damageSuffer(final int dm) {
         this.live = Math.max(MIN_HEALTH, this.live - dm);
     }
     
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Updates the survivor's physics state through the associated physics component.
+     *
+     * @param dt elapsed time since last update
+     */
     @Override
     public void updatePhysics(final int dt){
         physicComp.updateSurvivor(this, dt);
@@ -72,12 +85,17 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Sets the survivor's velocity.
      */
     @Override
     public void setVelocity(final Pair<Double, Double> vel) {
         this.vel = vel; 
     }
     
+    /**
+     * {@inheritDoc}
+     * Sets the survivor's position and updates the bounding box accordingly.
+     */
     @Override
     public void setPosition(final Pair<Double, Double> pos) {
         this.pos = pos;
@@ -86,12 +104,17 @@ public class Common implements Survivor{
     
     /**
      * {@inheritDoc}
+     * Sets the survivor's current state.
      */
     @Override
     public void setState(final SurvivorState newState) {
         this.state = newState;
     }
 
+    /**
+     * {@inheritDoc}
+     * Sets the survivor's equipped weapon.
+     */
     @Override
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
@@ -99,18 +122,26 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Returns the survivor's current health.
      */
     @Override
     public int getLive() {
         return this.live;
     }
 
-
+    /**
+     * {@inheritDoc}
+     * Returns the survivor's width.
+     */
     @Override
     public int getWidth() {
         return this.width;
     }
     
+    /**
+     * {@inheritDoc}
+     * Returns the survivor's height.
+     */
     @Override
     public int getHeight() {
         return this.height;
@@ -118,6 +149,7 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Returns the survivor's current position.
      */
     @Override
     public Pair<Double, Double> getCurrentPos() {
@@ -126,6 +158,7 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Returns the survivor's current velocity.
      */
     @Override
     public Pair<Double, Double> getCurrentVel() {
@@ -134,6 +167,7 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Returns the base velocity of the survivor.
      */
     @Override
     public Pair<Double, Double> getBaseSurvivorVel() {
@@ -142,32 +176,56 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
+     * Returns the survivor's current state.
      */
     @Override
     public SurvivorState getState() {
         return this.state;
     }
 
+    /**
+     * {@inheritDoc}
+     * Returns the survivor's equipped weapon.
+     */
     @Override
     public Weapon getWeapon() {
         return this.weapon;
     }
 
-
+    /**
+     * {@inheritDoc}
+     * Returns the survivor's bounding box.
+     */
     @Override
     public BoundingBox getBBox() {
         return this.bbox;
     }
 
+    /**
+     * {@inheritDoc}
+     * Returns the maximum health of the survivor.
+     */
+    @Override
+    public int getMaxSurvivorHealth() {
+        return this.maxLife;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Triggers the weapon shooting mechanism and returns the list of projectiles fired.
+     *
+     * @param deltaTime time elapsed since last shot
+     * @return a list of {@link Munition} fired; empty if no weapon equipped
+     */
     @Override
     public List<Munition> shoot(final double deltaTime) {
         return this.weapon != null ? this.weapon.shoot(deltaTime) : List.of();
     }
 
     /**
-     * Generates a hash code based on survivor's health and attack.
+     * Computes the hash code based on the survivor's current health.
      *
-     * @return a hash code value for the object
+     * @return hash code value
      */
     @Override
     public int hashCode() {
@@ -178,11 +236,12 @@ public class Common implements Survivor{
     }
 
     /**
-     * Compares this survivor with another for equality.
-     * Survivors are considered equal if they have the same health and attack values.
+     * Checks equality based on the survivor's health.
+     * <p>
+     * Two {@code Common} survivors are considered equal if they have the same health.
      *
-     * @param obj the object to compare with
-     * @return true if the two survivors are equal, false otherwise
+     * @param obj the object to compare to
+     * @return {@code true} if equal, {@code false} otherwise
      */
     @Override
     public boolean equals(final Object obj) {
@@ -197,11 +256,5 @@ public class Common implements Survivor{
             return false;
         return true;
     }
-
-    @Override
-    public int getMaxSurvivorHealth() {
-        return this.maxLife;
-    }
-
 
 }
