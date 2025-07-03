@@ -9,21 +9,42 @@ import view.graphics.GraphicsLevel;
 import view.graphics_util.ISpriteLoader;
 import view.graphics_util.SpriteSheetLoader;
 
+/**
+ * Implementation of {@link GraphicsLevelComponent} for tutorial levels.
+ * 
+ * This component handles loading the level sprite sheet and level data,
+ * mapping the tile indices to their corresponding images, and updating
+ * the graphical representation of the level.
+ */
 public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
     private static final int WIDTH_FRAME = 32;
     private static final int HEIGHT_FRAME = 33;
 
-
     private ISpriteLoader loader = new SpriteSheetLoader();
     private List<List<BufferedImage>> allImageLevel;
-    
-    public GrahicsTutlevelComponent(){
-        allImageLevel = this.mapLevelDataToImages(this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME)
-                                          ,this.loader.getLevelData("levelData"));
+
+    /**
+     * Constructs a new GrahicsTutlevelComponent.
+     * 
+     * It loads the level sprite sheet and level data, and maps tile indices
+     * to their respective images for efficient rendering.
+     */
+    public GrahicsTutlevelComponent() {
+        allImageLevel = this.mapLevelDataToImages(this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME),
+                this.loader.getLevelData("levelData"));
     }
 
-    private List<List<BufferedImage>> mapLevelDataToImages(List<BufferedImage> levelSprites,List<List<Integer>> levelData) {
+    /**
+     * Maps the 2D list of tile indices to a 2D list of corresponding images.
+     * 
+     * @param levelSprites the list of available tile images from the sprite sheet
+     * @param levelData    a 2D list representing the layout of tile indices for the
+     *                     level
+     * @return a 2D list of BufferedImages corresponding to the tiles of the level
+     */
+    private List<List<BufferedImage>> mapLevelDataToImages(List<BufferedImage> levelSprites,
+            List<List<Integer>> levelData) {
         List<List<BufferedImage>> result = new ArrayList<>();
 
         for (List<Integer> row : levelData) {
@@ -32,7 +53,7 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
                 if (tileIndex >= 0 && tileIndex < levelSprites.size()) {
                     imageRow.add(levelSprites.get(tileIndex));
                 } else {
-                    imageRow.add(null); 
+                    imageRow.add(null);
                 }
             }
             result.add(imageRow);
@@ -40,10 +61,16 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
         return result;
     }
 
+    /**
+     * Updates the graphical representation of the level by drawing it
+     * using the provided {@link GraphicsLevel} interface.
+     * 
+     * @param lvl    the level to render
+     * @param gryLvl the graphics interface responsible for drawing the level
+     */
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
         gryLvl.drawLevel(lvl, this.allImageLevel);
     }
 
-    
 }
