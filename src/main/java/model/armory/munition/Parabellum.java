@@ -7,7 +7,16 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.bounding_box.BoundingBox;
 import utils.PairUtils;
 
-public class Parabellum implements Munition{
+/**
+ * Implementation of the {@link Munition} interface representing a Parabellum
+ * bullet.
+ * <p>
+ * This munition has properties like damage, velocity, width, position,
+ * direction, and bounding box.
+ * It supports being shot, moving over time, and updating its position and
+ * bounding box accordingly.
+ */
+public class Parabellum implements Munition {
 
     private static final double MILLISECONDS_TO_SECONDS = 0.001;
 
@@ -15,12 +24,21 @@ public class Parabellum implements Munition{
     private int width;
     private int velocity;
     private Boolean isShoot = false;
-    private Pair<Double,Double> pos;
+    private Pair<Double, Double> pos;
     private Optional<Pair<Double, Double>> dir;
     private BoundingBox bbox;
 
-
-    public Parabellum(final int damage, final int velocity ,final int width,final Pair<Double, Double> pos,final BoundingBox bbox) {
+    /**
+     * Constructs a new Parabellum munition.
+     * 
+     * @param damage   the damage inflicted by this munition
+     * @param velocity the speed of the munition (units per second)
+     * @param width    the width of the munition (for collision and rendering)
+     * @param pos      the initial position of the munition (x, y)
+     * @param bbox     the bounding box associated with the munition
+     */
+    public Parabellum(final int damage, final int velocity, final int width, final Pair<Double, Double> pos,
+            final BoundingBox bbox) {
         this.damage = damage;
         this.width = width;
         this.velocity = velocity;
@@ -28,54 +46,92 @@ public class Parabellum implements Munition{
         this.bbox = bbox;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getDamage() {
         return this.damage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BoundingBox getBBox() {
         return this.bbox;
     }
 
+    /**
+     * Sets the munition as shot with the specified shooting direction and starting
+     * position.
+     * The direction vector is normalized internally.
+     * 
+     * @param dirShoot the shooting direction vector (x, y)
+     * @param posShoot the starting position of the munition (x, y)
+     */
     @Override
-    public void setShoot(final Pair<Double,Double> dirShoot, final Pair<Double,Double> posShoot) {
+    public void setShoot(final Pair<Double, Double> dirShoot, final Pair<Double, Double> posShoot) {
         this.dir = Optional.ofNullable(PairUtils.normalize(dirShoot));
         this.pos = posShoot;
         this.isShoot = true;
     }
 
+    /**
+     * Moves the munition based on its velocity and the elapsed time in
+     * milliseconds.
+     * Updates the position and bounding box accordingly.
+     * 
+     * @param dt the elapsed time in milliseconds since last update
+     * @throws IllegalStateException if the shooting direction was not initialized
+     *                               before moving
+     */
     @Override
     public void moveShoot(final int dt) {
-        Pair<Double, Double> direction = dir.orElseThrow(() -> 
-        new IllegalStateException("Direction not inizialize"));
+        Pair<Double, Double> direction = dir.orElseThrow(() -> new IllegalStateException("Direction not inizialize"));
 
-        Pair<Double, Double> displacement = PairUtils.mulScale(PairUtils.mulScale(direction, this.velocity),MILLISECONDS_TO_SECONDS*dt);
+        Pair<Double, Double> displacement = PairUtils.mulScale(PairUtils.mulScale(direction, this.velocity),
+                MILLISECONDS_TO_SECONDS * dt);
 
         this.setPos(PairUtils.sum(this.pos, displacement));
         this.bbox.updateBBox(this.pos);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isShoot() {
         return this.isShoot;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setPos(final Pair<Double,Double> nextPos){
+    public void setPos(final Pair<Double, Double> nextPos) {
         this.pos = nextPos;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Double, Double> getCurrentPos() {
         return this.pos;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getWidth() {
         return this.width;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -90,6 +146,9 @@ public class Parabellum implements Munition{
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -128,5 +187,4 @@ public class Parabellum implements Munition{
         return true;
     }
 
-    
 }
