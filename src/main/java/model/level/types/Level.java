@@ -8,39 +8,90 @@ import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
 
 /**
- * Interface representing a game level.
+ * Interface representing an abstract level in the domain model.
  * <p>
- * A level manages the game survivor and is responsible for updating the game state
- * over time.
+ * A level contains and manages domain entities such as the survivor, zombies,
+ * and projectiles. It provides methods for updating its internal state over
+ * time
+ * and querying structural or logical properties (e.g., dimensions, completion
+ * state).
+ * </p>
  */
 public interface Level {
 
     /**
-     * Updates the state of the level.
+     * Updates the internal state of the level based on the time elapsed.
      * <p>
-     * This method is typically called to update all entities
-     * within the level based on the time elapsed.
+     * This includes advancing positions, handling interactions, and updating entity
+     * states.
+     * </p>
      *
-     * @param dt the time delta in milliseconds since the last update
+     * @param dt the time delta in milliseconds
      */
     void updateLevelState(final int dt);
 
+    /**
+     * Returns the width of the level in model units.
+     *
+     * @return the width
+     */
     double getLevelWidth();
-   
+
+    /**
+     * Returns the height of the level in model units.
+     *
+     * @return the height
+     */
     double getLevelHeight();
 
+    /**
+     * Returns the bounding box representing the spatial boundaries of the level.
+     *
+     * @return the {@link BoundingBox} for the level
+     */
     BoundingBox getLevelBBox();
-    
+
+    /**
+     * Returns the survivor entity currently associated with the level.
+     *
+     * @return the {@link Survivor} instance
+     */
     Survivor getSurvivorOnLevel();
 
+    /**
+     * Assigns a survivor to this level.
+     *
+     * @param sur the {@link Survivor} to set
+     */
     void setSurvivorOnLevel(final Survivor sur);
 
+    /**
+     * Returns the list of zombies currently present within the level.
+     *
+     * @return a list of {@link Zombie} entities
+     */
     List<Zombie> getZombieOnLevel();
-    
+
+    /**
+     * Returns the list of active projectiles (munitions) in the level.
+     *
+     * @return a list of {@link Munition} instances
+     */
     List<Munition> getProjectilesOnLevel();
 
+    /**
+     * Returns whether this level has been marked as completed.
+     *
+     * @return {@code true} if completed, {@code false} otherwise
+     */
     boolean isLevelCompleted();
 
+    /**
+     * Sets the completion state of the level.
+     *
+     * @param completed {@code true} to mark the level as completed; {@code false}
+     *                  otherwise
+     */
     void setLevelCompleted(final boolean completed);
 
 }
