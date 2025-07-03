@@ -6,13 +6,25 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class ImportImageFactoryImpl implements ImportImageFactory{
+/**
+ * Implementation of ImportImageFactory that provides image loaders
+ * for PNG, JPNG, and JPEG formats with caching support.
+ */
+public class ImportImageFactoryImpl implements ImportImageFactory {
 
+    /**
+     * Creates an image loader for the given file extension.
+     * The loader caches loaded images to improve performance.
+     *
+     * @param extension the file extension of the image format (e.g., ".png")
+     * @return an ImportImage instance that loads images with the specified
+     *         extension
+     */
     private ImportImage createLoader(final String extension) {
         return new ImportImage() {
 
             private final CacheFactory cacheFactory = new CacheFactoryImpl();
-            private Cache<String,BufferedImage> cache = cacheFactory.imageCache();
+            private Cache<String, BufferedImage> cache = cacheFactory.imageCache();
 
             @Override
             public Optional<BufferedImage> imp(final String path) {
@@ -43,12 +55,12 @@ public class ImportImageFactoryImpl implements ImportImageFactory{
 
     @Override
     public ImportImage loaderJPNG() {
-       return this.createLoader(".jpng");
+        return this.createLoader(".jpng");
     }
 
     @Override
     public ImportImage loaderJPEG() {
-       return this.createLoader(".jpeg");
+        return this.createLoader(".jpeg");
     }
-    
+
 }
