@@ -1,4 +1,5 @@
 package view.graphics.graphics_swing;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -9,34 +10,55 @@ import model.level.types.Level;
 import view.graphics.GraphicsLevel;
 import view.graphics_util.Scaler;
 
+/**
+ * Swing implementation for rendering the game level.
+ * Draws the bounding box of the level and the tile grid.
+ */
 public class SwingGraphicsLevel implements GraphicsLevel {
 
     private Graphics2D g2d;
     private Scaler viewScale;
 
-    public SwingGraphicsLevel(final Graphics2D g2d,final Scaler viewScale) {
+    /**
+     * Constructor with graphics context and scaler.
+     *
+     * @param g2d       the Graphics2D object to draw on
+     * @param viewScale the scaler object that converts game coordinates to view
+     *                  coordinates
+     */
+    public SwingGraphicsLevel(final Graphics2D g2d, final Scaler viewScale) {
         this.g2d = g2d;
         this.viewScale = viewScale;
     }
 
+    /**
+     * Draws the level based on the model data and tile images.
+     *
+     * @param lvl      the level to be drawn
+     * @param allImage the matrix of tile images to render
+     */
     @Override
-    public void drawLevel(final Level lvl,final List<List<BufferedImage>> allImage) {
-       int x0 = viewScale.scaleX(lvl.getLevelBBox().getULcorner());
-       int y0 = viewScale.scaleY(lvl.getLevelBBox().getULcorner());
-       int x1 = viewScale.scaleX(lvl.getLevelBBox().getBRcorner());
-       int y1 = viewScale.scaleY(lvl.getLevelBBox().getBRcorner());
+    public void drawLevel(final Level lvl, final List<List<BufferedImage>> allImage) {
+        // Scaled coordinates of the level's bounding box corners
+        int x0 = viewScale.scaleX(lvl.getLevelBBox().getULcorner());
+        int y0 = viewScale.scaleY(lvl.getLevelBBox().getULcorner());
+        int x1 = viewScale.scaleX(lvl.getLevelBBox().getBRcorner());
+        int y1 = viewScale.scaleY(lvl.getLevelBBox().getBRcorner());
 
-       g2d.setColor(Color.blue);
-       g2d.setStroke(new BasicStroke(5));
-       g2d.drawRect(0, 0, x1-x0, Math.abs(y1-y0));
+        // Draw the level bounding box in blue with stroke width 5
+        g2d.setColor(Color.blue);
+        g2d.setStroke(new BasicStroke(5));
+        g2d.drawRect(0, 0, x1 - x0, Math.abs(y1 - y0));
 
-       
+        // Calculate total level size in pixels
         int totalWidth_px = (int) Math.round(lvl.getLevelWidth() * viewScale.getRatioX());
         int totalHeight_px = (int) Math.round(lvl.getLevelHeight() * viewScale.getRatioY());
 
+        // Tile dimensions (based on fixed grid 26x14)
         int tileW_px = totalWidth_px / 26;
         int tileH_px = totalHeight_px / 14;
 
+        // Iterate over all rows and columns of the tile image matrix
         for (int j = 0; j < allImage.size(); j++) {
             List<BufferedImage> row = allImage.get(j);
             for (int i = 0; i < row.size(); i++) {
@@ -45,6 +67,7 @@ public class SwingGraphicsLevel implements GraphicsLevel {
                 int x = tileW_px * i;
                 int y = tileH_px * j;
 
+                // Correction for the last column/row to avoid uncovered pixels
                 int drawWidth = (i == 25) ? totalWidth_px - tileW_px * i : tileW_px;
                 int drawHeight = (j == 13) ? totalHeight_px - tileH_px * j : tileH_px;
 
@@ -53,7 +76,7 @@ public class SwingGraphicsLevel implements GraphicsLevel {
                 }
             }
         }
-    
+
     }
 
 }
