@@ -26,10 +26,10 @@ public class GameSurvivor implements IGameSurvivor {
      *               the survivor
      * @param inpSur the {@link InputSurvivorComponent} handling survivor input
      */
-    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgS,
+    public GameSurvivor(final Survivor sur, final GraphicsSurvivorComponent imgSur,
             final InputSurvivorComponent inpSur) {
         this.sur = sur;
-        this.imgSur = imgS;
+        this.imgSur = imgSur;
         this.inpSur = inpSur;
     }
 

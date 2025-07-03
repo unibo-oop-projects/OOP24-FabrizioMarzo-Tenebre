@@ -89,7 +89,7 @@ public class PairUtils {
     }
 
     /**
-     * Converte un Pair<Double, Double> in un Pair<Integer, Integer>
+     * Converte un {@code Pair<Double, Double>} in un {@code Pair<Integer, Integer>}
      * troncando i decimali.
      *
      * @param doublePair il pair con valori double

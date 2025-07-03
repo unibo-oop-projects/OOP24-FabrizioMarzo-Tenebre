@@ -36,7 +36,7 @@ public interface IGameSurvivor {
      * This method is responsible for rendering the survivor on screen.
      * </p>
      *
-     * @param graphicsSur the {@link GraphicsSurvivor} used for drawing the survivor
+     * @param grapSur the {@link GraphicsSurvivor} used for drawing the survivor
      */
     void updateGraphics(final GraphicsSurvivor grapSur);
 

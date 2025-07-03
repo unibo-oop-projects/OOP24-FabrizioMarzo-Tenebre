@@ -100,8 +100,7 @@ public class KeyboardInputController implements InputController {
 	/**
 	 * Notifies the controller of a new key input and updates the internal state
 	 * accordingly.
-	 * 
-	 * <p>
+	 *
 	 * Maps the following key codes:
 	 * <ul>
 	 * <li>37 - Shoot Left</li>
@@ -115,10 +114,10 @@ public class KeyboardInputController implements InputController {
 	 * <li>68 (D) - Move Right</li>
 	 * <li>Any other key - No Input</li>
 	 * </ul>
-	 * </p>
 	 *
 	 * @param keyCode the key code received from keyboard input
 	 */
+
 	@Override
 	public void notifyInput(final int keyCode) {
 		switch (keyCode) {

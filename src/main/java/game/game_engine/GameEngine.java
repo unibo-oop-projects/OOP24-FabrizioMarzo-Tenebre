@@ -38,18 +38,19 @@ public class GameEngine {
      * 
      * <p>
      * This method repeatedly:
+     * </p>
      * <ul>
      * <li>Processes input</li>
      * <li>Updates the game state based on elapsed time</li>
      * <li>Renders the game</li>
      * <li>Waits to maintain a consistent frame rate</li>
      * </ul>
-     * </p>
      * 
      * <p>
      * This loop runs indefinitely until the application is terminated.
      * </p>
      */
+
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
         while (true) {
@@ -75,6 +76,7 @@ public class GameEngine {
      * @param current the timestamp (in milliseconds) when the frame processing
      *                started
      */
+
     protected void waitForNextFrame(final long current) {
         long dt = System.currentTimeMillis() - current;
         if (dt < period) {

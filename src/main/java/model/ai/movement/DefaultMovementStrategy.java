@@ -38,8 +38,7 @@ public class DefaultMovementStrategy<Z extends Zombie, S extends Survivor> imple
      *
      * @param zombie the Zombie whose velocity is being computed
      * @param target the Survivor target that the Zombie is moving towards
-     * @return a Pair<Double, Double> representing the velocity vector (x and y
-     *         components)
+     * @return a {@code Pair<Double, Double>} representing the velocity vector (x and y components)
      */
     @Override
     public Pair<Double, Double> computeVelocity(final Zombie zombie, final Survivor target) {

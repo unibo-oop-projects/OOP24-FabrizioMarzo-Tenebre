@@ -33,7 +33,7 @@ public class DefaultSeparationBehavior<Z extends Zombie> implements SeparationSt
      *
      * @param zombie the zombie for which to compute the separation force
      * @param others the list of other zombies to consider
-     * @return a Pair<Double, Double> representing the separation force vector
+     * @return a {@code Pair<Double, Double>} representing the separation force vector
      */
     @Override
     public Pair<Double, Double> computeForce(Z zombie, List<Z> others) {

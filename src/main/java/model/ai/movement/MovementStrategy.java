@@ -20,8 +20,7 @@ public interface MovementStrategy<Z extends Zombie, S extends Survivor> {
      *
      * @param zombie the Zombie whose velocity is being computed
      * @param target the Survivor target that the Zombie is interacting with
-     * @return a Pair<Double, Double> representing the velocity vector (x and y
-     *         components)
+     * @return a {@code Pair<Double, Double>} representing the velocity vector (x and y components)
      */
     Pair<Double, Double> computeVelocity(final Z zombie, final S target);
 

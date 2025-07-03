@@ -27,8 +27,7 @@ public interface SeparationStrategy<Z extends Zombie> {
      *
      * @param zombie the zombie for which to compute the separation force
      * @param others the list of other zombies to consider for separation
-     * @return a Pair<Double, Double> representing the force vector (x and y
-     *         components)
+     * @return a {@code Pair<Double, Double>} representing the force vector (x and y components)
      */
     Pair<Double, Double> computeForce(final Z zombie, final List<Z> others);
 

@@ -17,7 +17,6 @@ public class ZombieFactory implements IZombieFactory {
 
     /**
      * Creates a new Clicker-type zombie at the specified position.
-     * <p>
      * The Clicker is initialized with:
      * <ul>
      * <li>Health: 1000</li>
@@ -27,7 +26,6 @@ public class ZombieFactory implements IZombieFactory {
      * <li>Velocity: (100.0, 0.0)</li>
      * </ul>
      * The bounding box is constructed based on the zombie's position and size.
-     * </p>
      *
      * @param pos the initial position of the zombie as a pair (x, y)
      * @return a new instance of {@link Clicker}
