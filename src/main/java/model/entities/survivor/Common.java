@@ -10,22 +10,24 @@ import model.bounding_box.BoundingBox;
 import model.physics.physics_entities.PhysicsSurvivorComponent;
 
 /**
- * Implementation of the {@link Survivor} interface representing a common survivor in the model.
+ * Implementation of the {@link Survivor} interface representing a common
+ * survivor in the model.
  * <p>
- * This class encapsulates the state and behavior of a survivor including health,
+ * This class encapsulates the state and behavior of a survivor including
+ * health,
  * position, velocity, weapon, and state management. It also interacts with the
  * physics component to update movement.
  */
-public class Common implements Survivor{
+public class Common implements Survivor {
 
     private static final int MIN_HEALTH = 0;
 
     private int width;
     private int height;
     private int live;
-    private Pair<Double,Double> pos;
-    private Pair<Double,Double> vel;
-    private final Pair<Double,Double> velBase;
+    private Pair<Double, Double> pos;
+    private Pair<Double, Double> vel;
+    private final Pair<Double, Double> velBase;
     private final int maxLife;
     private SurvivorState state;
     private BoundingBox bbox;
@@ -35,19 +37,20 @@ public class Common implements Survivor{
     /**
      * Constructs a new {@code Common} survivor with the specified attributes.
      *
-     * @param health    initial health points
-     * @param width     width dimension in model units
-     * @param height    height dimension in model units
-     * @param pos       initial position as a pair (x, y)
-     * @param vel       initial velocity as a pair (vx, vy), also used as base velocity
+     * @param health     initial health points
+     * @param width      width dimension in model units
+     * @param height     height dimension in model units
+     * @param pos        initial position as a pair (x, y)
+     * @param vel        initial velocity as a pair (vx, vy), also used as base
+     *                   velocity
      * @param physicComp physics component handling survivor's physical behavior
-     * @param bbox      bounding box used for collision detection
+     * @param bbox       bounding box used for collision detection
      */
-    public Common(final int health, 
-                 final int width, final int height,
-                 final Pair<Double,Double> pos,final Pair<Double,Double> vel,
-                 final PhysicsSurvivorComponent physicComp,
-                 final BoundingBox bbox) {
+    public Common(final int health,
+            final int width, final int height,
+            final Pair<Double, Double> pos, final Pair<Double, Double> vel,
+            final PhysicsSurvivorComponent physicComp,
+            final BoundingBox bbox) {
 
         this.live = health;
         this.width = width;
@@ -58,7 +61,7 @@ public class Common implements Survivor{
         this.maxLife = health;
         this.state = SurvivorState.SURVIVOR_IDLE;
         this.bbox = bbox;
-        this.physicComp = physicComp; 
+        this.physicComp = physicComp;
     }
 
     /**
@@ -70,16 +73,17 @@ public class Common implements Survivor{
     public void damageSuffer(final int dm) {
         this.live = Math.max(MIN_HEALTH, this.live - dm);
     }
-    
+
     /**
      * {@inheritDoc}
      * <p>
-     * Updates the survivor's physics state through the associated physics component.
+     * Updates the survivor's physics state through the associated physics
+     * component.
      *
      * @param dt elapsed time since last update
      */
     @Override
-    public void updatePhysics(final int dt){
+    public void updatePhysics(final int dt) {
         physicComp.updateSurvivor(this, dt);
     }
 
@@ -89,9 +93,9 @@ public class Common implements Survivor{
      */
     @Override
     public void setVelocity(final Pair<Double, Double> vel) {
-        this.vel = vel; 
+        this.vel = vel;
     }
-    
+
     /**
      * {@inheritDoc}
      * Sets the survivor's position and updates the bounding box accordingly.
@@ -101,7 +105,7 @@ public class Common implements Survivor{
         this.pos = pos;
         this.bbox.updateBBox(pos);
     }
-    
+
     /**
      * {@inheritDoc}
      * Sets the survivor's current state.
@@ -137,7 +141,7 @@ public class Common implements Survivor{
     public int getWidth() {
         return this.width;
     }
-    
+
     /**
      * {@inheritDoc}
      * Returns the survivor's height.
@@ -212,7 +216,8 @@ public class Common implements Survivor{
 
     /**
      * {@inheritDoc}
-     * Triggers the weapon shooting mechanism and returns the list of projectiles fired.
+     * Triggers the weapon shooting mechanism and returns the list of projectiles
+     * fired.
      *
      * @param deltaTime time elapsed since last shot
      * @return a list of {@link Munition} fired; empty if no weapon equipped
@@ -238,7 +243,8 @@ public class Common implements Survivor{
     /**
      * Checks equality based on the survivor's health.
      * <p>
-     * Two {@code Common} survivors are considered equal if they have the same health.
+     * Two {@code Common} survivors are considered equal if they have the same
+     * health.
      *
      * @param obj the object to compare to
      * @return {@code true} if equal, {@code false} otherwise

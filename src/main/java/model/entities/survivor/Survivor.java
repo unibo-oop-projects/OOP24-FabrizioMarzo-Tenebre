@@ -20,20 +20,20 @@ public interface Survivor {
      * @param dm The amount of damage to apply
      */
     void damageSuffer(final int dm);
-    
+
     /**
      * Updates the survivor's physics state based on the elapsed time.
      *
      * @param dt The time delta (e.g., in milliseconds)
      */
     void updatePhysics(final int dt);
-    
+
     /**
      * Sets the survivor's velocity.
      *
      * @param vel A pair (vx, vy) representing the new velocity vector
      */
-    void setVelocity(final Pair<Double,Double> vel);
+    void setVelocity(final Pair<Double, Double> vel);
 
     /**
      * Sets the survivor's position.
@@ -69,7 +69,7 @@ public interface Survivor {
      * @return The maximum health value
      */
     int getMaxSurvivorHealth();
-    
+
     /**
      * Returns the survivor's width in model units.
      *
@@ -89,27 +89,27 @@ public interface Survivor {
      *
      * @return A pair (x, y) representing the current position
      */
-    Pair<Double,Double> getCurrentPos();
+    Pair<Double, Double> getCurrentPos();
 
     /**
      * Returns the current velocity of the survivor.
      *
      * @return A pair (vx, vy) representing the current velocity
      */
-    Pair<Double,Double> getCurrentVel();
+    Pair<Double, Double> getCurrentVel();
 
     /**
      * Returns the base velocity of the survivor (e.g., default movement speed).
      *
      * @return A pair (vx, vy) representing the base velocity vector
-     */     
-    Pair<Double,Double> getBaseSurvivorVel();
+     */
+    Pair<Double, Double> getBaseSurvivorVel();
 
     /**
      * Returns the current state of the survivor.
      *
      * @return The current state
-     */    
+     */
     SurvivorState getState();
 
     /**
