@@ -7,12 +7,32 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.entities.zombie.Zombie;
 import utils.PairUtils;
 
-public class DefaultCollisionResolver< Z extends Zombie> implements CollisionStrategy<Z>{
+/**
+ * Default implementation of {@link CollisionStrategy} that resolves collisions
+ * between zombies by adjusting their positions to eliminate overlap.
+ *
+ * @param <Z> the type of Zombie
+ */
+public class DefaultCollisionResolver<Z extends Zombie> implements CollisionStrategy<Z> {
 
+    /**
+     * The amount by which to separate overlapping zombies.
+     */
     private static final double OVERLAP = 1.0;
 
+    /**
+     * Resolves collisions between the given zombie and other zombies by moving
+     * them apart along the vector connecting their positions.
+     * <p>
+     * If two zombies overlap (their bounding boxes collide), this method moves them
+     * away from each other equally by half the overlap amount.
+     * </p>
+     *
+     * @param zombie the zombie to resolve collisions for
+     * @param others the list of other zombies to check collisions against
+     */
     @Override
-    public void resolveCollisions(final Z zombie,final List<Z> others) {
+    public void resolveCollisions(final Z zombie, final List<Z> others) {
         for (Z other : others) {
             if (other != zombie) {
                 var bb1 = zombie.getBBox();
@@ -37,5 +57,5 @@ public class DefaultCollisionResolver< Z extends Zombie> implements CollisionStr
             }
         }
     }
-    
+
 }
