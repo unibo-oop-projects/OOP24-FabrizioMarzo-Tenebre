@@ -3,8 +3,10 @@ package input.input_controller;
 /**
  * Enumeration representing directional inputs mapped to specific key codes.
  * 
- * <p>Each direction corresponds to an arrow key or a "no input" state,
- * identified by its associated key code.</p>
+ * <p>
+ * Each direction corresponds to an arrow key or a "no input" state,
+ * identified by its associated key code.
+ * </p>
  */
 public enum KeyCodes {
 
@@ -12,12 +14,12 @@ public enum KeyCodes {
     ARROW_DOWN(40),
     ARROW_LEFT(37),
     ARROW_RIGHT(39),
-    
+
     KEY_W(87),
     KEY_A(65),
     KEY_S(83),
     KEY_D(68),
-    
+
     SPACE(32),
     NONE(-1);
 
@@ -31,7 +33,7 @@ public enum KeyCodes {
     KeyCodes(final int keyCode) {
         this.keyCode = keyCode;
     }
-    
+
     /**
      * Returns the key code associated with this direction.
      *

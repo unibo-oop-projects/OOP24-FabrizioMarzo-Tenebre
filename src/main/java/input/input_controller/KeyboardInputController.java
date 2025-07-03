@@ -3,118 +3,143 @@ package input.input_controller;
 /**
  * Implementation of {@link InputController} that interprets keyboard input.
  * 
- * <p>This controller maps specific key codes to movement directions using
- * the {@link KeyCodes} enum. It updates its internal state based on
- * the key code received through {@link #notifyInput(int)}.</p>
+ * <p>
+ * This controller maps specific keyboard key codes to movement and shooting
+ * directions,
+ * updating its internal state accordingly. It supports arrow keys for shooting
+ * directions,
+ * WASD keys for movement, space for actions, and a NONE state when no input is
+ * detected.
+ * </p>
  */
-public class KeyboardInputController implements InputController {    
-	
+public class KeyboardInputController implements InputController {
+
 	private KeyCodes keyCode = KeyCodes.NONE;
 
 	/**
-     * Sets the current direction to UP.
-     */
+	 * Sets the current input state to shooting upwards.
+	 */
 	private void isShootUp() {
 		this.keyCode = KeyCodes.ARROW_UP;
 	}
 
 	/**
-     * Sets the current direction to DOWN.
-     */
+	 * Sets the current input state to shooting downwards.
+	 */
 	private void isShootDown() {
 		this.keyCode = KeyCodes.ARROW_DOWN;
 	}
 
 	/**
-     * Sets the current direction to LEFT.
-     */
+	 * Sets the current input state to shooting left.
+	 */
 	private void isShootLeft() {
 		this.keyCode = KeyCodes.ARROW_LEFT;
 	}
 
+	/**
+	 * Sets the current input state to shooting right.
+	 */
+	private void isShootRight() {
+		this.keyCode = KeyCodes.ARROW_RIGHT;
+	}
+
+	/**
+	 * Sets the current input state to moving upwards.
+	 */
 	private void isMoveUp() {
 		this.keyCode = KeyCodes.KEY_W;
 	}
 
+	/**
+	 * Sets the current input state to moving downwards.
+	 */
 	private void isMoveDown() {
 		this.keyCode = KeyCodes.KEY_S;
 	}
 
+	/**
+	 * Sets the current input state to moving left.
+	 */
 	private void isMoveLeft() {
 		this.keyCode = KeyCodes.KEY_A;
 	}
 
+	/**
+	 * Sets the current input state to shooting right.
+	 */
 	private void isMoveRight() {
 		this.keyCode = KeyCodes.KEY_D;
 	}
 
 	/**
-     * Sets the current direction to RIGHT.
-     */
-	private void isShootRight() {
-		this.keyCode = KeyCodes.ARROW_RIGHT;
-	}
-
-	
-	/**
-     * Sets the current direction to NONE (no input).
-     */
+	 * Sets the current direction to NONE (no input).
+	 */
 	private void isMoveNone() {
 		this.keyCode = KeyCodes.NONE;
 	}
 
 	/**
-     * Sets the SPACE.
-     */
-	private void isPresSpace(){
+	 * Sets the current input state to the space key pressed.
+	 */
+	private void isPresSpace() {
 		this.keyCode = KeyCodes.SPACE;
 	}
 
 	/**
-     * Returns the current movement direction.
-     *
-     * @return the current {@link KeyCodes} value representing the movement direction
-     */
+	 * Returns the current input code representing the latest movement or shooting
+	 * direction.
+	 * 
+	 * @return the integer key code of the current input state
+	 */
 	@Override
-	public int getInputCode(){
+	public int getInputCode() {
 		return this.keyCode.getKeyCode();
 	}
 
-	
 	/**
-     * Notifies the controller of a new movement input based on the given key code.
-     *
-     * <p>The key codes are mapped as follows:</p>
-     * <ul>
-     *   <li>37 - LEFT</li>
-     *   <li>38 - UP</li>
-     *   <li>39 - RIGHT</li>
-     *   <li>40 - DOWN</li>
-     *   <li>Any other key - NONE</li>
-     * </ul>
-     *
-     * @param keyCode the keyboard code for the movement direction
-     */
+	 * Notifies the controller of a new key input and updates the internal state
+	 * accordingly.
+	 * 
+	 * <p>
+	 * Maps the following key codes:
+	 * <ul>
+	 * <li>37 - Shoot Left</li>
+	 * <li>38 - Shoot Up</li>
+	 * <li>39 - Shoot Right</li>
+	 * <li>40 - Shoot Down</li>
+	 * <li>32 - Space</li>
+	 * <li>87 (W) - Move Up</li>
+	 * <li>65 (A) - Move Left</li>
+	 * <li>83 (S) - Move Down</li>
+	 * <li>68 (D) - Move Right</li>
+	 * <li>Any other key - No Input</li>
+	 * </ul>
+	 * </p>
+	 *
+	 * @param keyCode the key code received from keyboard input
+	 */
 	@Override
-	public void notifyInput(final int keyCode){
+	public void notifyInput(final int keyCode) {
 		switch (keyCode) {
-			case 37: 
+			case 37:
 				isShootLeft();
 				break;
-			case 38: 
+			case 38:
 				isShootUp();
 				break;
-			case 39: 
+			case 39:
 				isShootRight();
 				break;
-			case 40: 
+			case 40:
 				isShootDown();
 				break;
 			case 32:
 				isPresSpace();
 				break;
 			case 87:
-				isMoveUp();;
+				isMoveUp();
+				;
 				break;
 			case 65:
 				isMoveLeft();
@@ -126,19 +151,19 @@ public class KeyboardInputController implements InputController {
 				isMoveRight();
 				break;
 			default:
-				isMoveNone(); 
+				isMoveNone();
 				break;
 		}
 
 	}
 
 	/**
-     * Notifies the controller that no movement input is currently active.
-     */
+	 * Notifies the controller that no input is currently active,
+	 * resetting the internal state to NONE.
+	 */
 	@Override
 	public void notifyNoInput() {
 		isMoveNone();
 	}
-
 
 }
