@@ -44,6 +44,7 @@ public class Parabellum implements Munition {
         this.velocity = velocity;
         this.pos = pos;
         this.bbox = bbox;
+        this.dir = Optional.empty();
     }
 
     /**
