@@ -6,6 +6,8 @@ import java.util.List;
 
 import model.level.types.Level;
 import view.graphics.GraphicsLevel;
+import view.graphics_util.Cache;
+import view.graphics_util.CacheFactoryImpl;
 import view.graphics_util.ISpriteLoader;
 import view.graphics_util.SpriteSheetLoader;
 
@@ -23,6 +25,8 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
 
     private ISpriteLoader loader = new SpriteSheetLoader();
     private List<List<BufferedImage>> allImageLevel;
+    private BufferedImage survivorWeapon;
+    private static Cache<String, BufferedImage> cacheWeapon = new CacheFactoryImpl().imageCache();
 
     /**
      * Constructs a new GrahicsTutlevelComponent.
@@ -33,6 +37,17 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
     public GrahicsTutlevelComponent() {
         allImageLevel = this.mapLevelDataToImages(this.loader.loadLevelSprite("levelSprite", WIDTH_FRAME, HEIGHT_FRAME),
                 this.loader.getLevelData("levelData"));
+    }
+
+    private BufferedImage loadImageWeapon(final String weapon) {
+        if (!cacheWeapon.contains(weapon)) {
+            BufferedImage loadedImage = loader.loadEntitiesWeapon(weapon);
+            cacheWeapon.put(weapon, loadedImage);
+            this.survivorWeapon = loadedImage;
+            return loadedImage;
+        }
+        this.survivorWeapon = cacheWeapon.get(weapon);
+        return this.survivorWeapon;
     }
 
     /**
@@ -70,7 +85,8 @@ public class GrahicsTutlevelComponent implements GraphicsLevelComponent {
      */
     @Override
     public void update(final Level lvl, final GraphicsLevel gryLvl) {
-        gryLvl.drawLevel(lvl, this.allImageLevel);
+        this.loadImageWeapon(lvl.getSurvivorOnLevel().getWeapon().getClass().getSimpleName());
+        gryLvl.drawLevel(lvl, this.allImageLevel,this.survivorWeapon);
     }
 
 }
