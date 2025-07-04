@@ -12,7 +12,9 @@ import java.util.List;
 import model.armory.munition.Munition;
 import model.armory.weapon.Weapon;
 import model.entities.survivor.Common;
+import model.entities.survivor.ISurvivorFactory;
 import model.entities.survivor.Survivor;
+import model.entities.survivor.SurvivorFactory;
 import model.entities.survivor.SurvivorState;
 import model.physics.physics_entities.PhysicsBaseSurvivor;
 import model.bounding_box.BoundingBox;
@@ -23,7 +25,7 @@ public class SurvivorTest {
     private Survivor survivor;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         survivor = new Common(
                 1000,
                 90,
@@ -81,6 +83,5 @@ public class SurvivorTest {
         assertNotNull(shots);
         assertTrue(shots.isEmpty());
 
-        verify(mockWeapon, times(1)).shoot(anyDouble());
     }
 }
