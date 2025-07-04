@@ -1,7 +1,5 @@
 package view.graphics.graphics_swing;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -16,6 +14,8 @@ import view.graphics_util.Scaler;
  */
 public class SwingGraphicsLevel implements GraphicsLevel {
 
+    private final static int WIDTH_WEAPON_IMAGE = 50;
+    private final static int HEIGHT__WEAPON_IMAGE = 50;
     private Graphics2D g2d;
     private Scaler viewScale;
 
@@ -34,27 +34,43 @@ public class SwingGraphicsLevel implements GraphicsLevel {
     /**
      * Draws the level based on the model data and tile images.
      *
-     * @param lvl      the level to be drawn
-     * @param allImage the matrix of tile images to render
+     * @param lvl        the level to be drawn
+     * @param allImage   the matrix of tile images to render
+     * @param otherImage the image to render
      */
     @Override
-    public void drawLevel(final Level lvl, final List<List<BufferedImage>> allImage) {
-        // Scaled coordinates of the level's bounding box corners
-        int x0 = viewScale.scaleX(lvl.getLevelBBox().getULcorner());
-        int y0 = viewScale.scaleY(lvl.getLevelBBox().getULcorner());
-        int x1 = viewScale.scaleX(lvl.getLevelBBox().getBRcorner());
-        int y1 = viewScale.scaleY(lvl.getLevelBBox().getBRcorner());
-
-        // Draw the level bounding box in blue with stroke width 5
-        g2d.setColor(Color.blue);
-        g2d.setStroke(new BasicStroke(5));
-        g2d.drawRect(0, 0, x1 - x0, Math.abs(y1 - y0));
-
+    public void drawLevel(final Level lvl, final List<List<BufferedImage>> allImage, final BufferedImage otherImage) {
         // Calculate total level size in pixels
         int totalWidth_px = (int) Math.round(lvl.getLevelWidth() * viewScale.getRatioX());
         int totalHeight_px = (int) Math.round(lvl.getLevelHeight() * viewScale.getRatioY());
 
-        // Tile dimensions (based on fixed grid 26x14)
+        drawTiles(totalWidth_px, totalHeight_px, allImage, g2d);
+
+        // Draw otherImage at bottom-right if present
+        if (otherImage != null) {
+            drawSurvivorWeapon(totalWidth_px, otherImage, g2d);
+        }
+
+    }
+
+    /**
+     * Draws the tile grid of the level.
+     * <p>
+     * Tiles are drawn on a fixed 26x14 grid scaled to fit the total width and
+     * height.
+     * The method handles correction for the last row and column to avoid uncovered
+     * pixels.
+     * </p>
+     *
+     * @param totalWidth_px  the total width of the level in pixels
+     * @param totalHeight_px the total height of the level in pixels
+     * @param allImage       the matrix of tile images to render
+     * @param g2d            the Graphics2D context on which to draw
+     */
+
+    private void drawTiles(final int totalWidth_px, final int totalHeight_px, final List<List<BufferedImage>> allImage,
+            Graphics2D g2d) {
+        // Tile dimensions based on fixed 26x14 grid
         int tileW_px = totalWidth_px / 26;
         int tileH_px = totalHeight_px / 14;
 
@@ -76,7 +92,25 @@ public class SwingGraphicsLevel implements GraphicsLevel {
                 }
             }
         }
+    }
 
+    /**
+     * Draws an additional image centered horizontally at the top of the level.
+     * <p>
+     * The image is drawn with a fixed size of 50x50 pixels.
+     * </p>
+     *
+     * @param totalWidth_px the total width of the level in pixels
+     * @param otherImage    the image to be drawn
+     * @param g2d           the Graphics2D context on which to draw
+     */
+    private void drawSurvivorWeapon(final int totalWidth_px, final BufferedImage otherImage, Graphics2D g2d) {
+        // Calculate horizontal center position
+        int x = (totalWidth_px - otherImage.getWidth()) / 2;
+        int y = 0;
+
+        // Draw otherImage at the top center
+        g2d.drawImage(otherImage, x, y,WIDTH_WEAPON_IMAGE, HEIGHT__WEAPON_IMAGE, null);
     }
 
 }
