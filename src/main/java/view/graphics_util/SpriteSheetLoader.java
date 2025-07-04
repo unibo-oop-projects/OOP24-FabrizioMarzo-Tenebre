@@ -17,7 +17,8 @@ public class SpriteSheetLoader implements ISpriteLoader {
     // Paths to sprite resources
     private static final String SURVIVOR_PATH = "/sprite_sheet/survivor/";
     private static final String ZOMBIE_PATH = "/sprite_sheet/zombie/";
-    private static final String MUNITION_PATH = "/sprite_sheet/armory/";
+    private static final String MUNITION_PATH = "/sprite_sheet/armory/munition/";
+    private static final String WEAPON_PATH = "/sprite_sheet/armory/weapon/";
     private static final String LEVEL_PATH = "/sprite_sheet/level/";
 
     private static final String LEVEL_OBJECT_PATH = "/level_object/";
@@ -69,12 +70,23 @@ public class SpriteSheetLoader implements ISpriteLoader {
     /**
      * Loads the shadow image for entities.
      * 
-     * @param nameObject the shadow image name
+     * @param nameShadow the shadow image name
      * @return shadow image
      */
     @Override
-    public BufferedImage loadEntitiesShadow(final String nameObject) {
-        Optional<BufferedImage> subImage = getBBoxImage(loaderPNG.imp(LEVEL_OBJECT_PATH + nameObject).get());
+    public BufferedImage loadEntitiesShadow(final String nameShadow) {
+        Optional<BufferedImage> subImage = getBBoxImage(loaderPNG.imp(LEVEL_OBJECT_PATH + nameShadow).get());
+        return subImage.get();
+    }
+
+    /**
+     * Loads the weapon image for entities.
+     * 
+     * @param nameWeapon the weapon image name
+     * @return weapon image
+     */
+    public BufferedImage loadEntitiesWeapon(final String nameWeapon) {
+        Optional<BufferedImage> subImage = getBBoxImage(loaderPNG.imp(WEAPON_PATH + nameWeapon).get());
         return subImage.get();
     }
 
