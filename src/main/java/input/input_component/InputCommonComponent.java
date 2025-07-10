@@ -30,10 +30,10 @@ import model.entities.survivor.SurvivorState;
  */
 public class InputCommonComponent implements InputSurvivorComponent {
 
-    private static final Pair<Double, Double> LEFT_DIRECTION = Pair.of(-1d, 0d);
-    private static final Pair<Double, Double> RIGHT_DIRECTION = Pair.of(1d, 0d);
-    private static final Pair<Double, Double> UP_DIRECTION = Pair.of(0d, 1d);
-    private static final Pair<Double, Double> DOWN_DIRECTION = Pair.of(0d, -1d);
+    private static final Pair<Double, Double> WORLD_LEFT_DIRECTION = Pair.of(-1d, 0d);
+    private static final Pair<Double, Double> WORLD_RIGHT_DIRECTION = Pair.of(1d, 0d);
+    private static final Pair<Double, Double> WORLD_UP_DIRECTION = Pair.of(0d, 1d);
+    private static final Pair<Double, Double> WORLD_DOWN_DIRECTION = Pair.of(0d, -1d);
 
     private final Map<Integer, Consumer<Survivor>> movementActions = new HashMap<>();
     private final Map<Integer, Consumer<Survivor>> shootingActions = new HashMap<>();
@@ -44,26 +44,26 @@ public class InputCommonComponent implements InputSurvivorComponent {
      */
     public InputCommonComponent() {
         movementActions.put(KeyCodes.KEY_W.getKeyCode(),
-                s -> moveSurvivor(s, UP_DIRECTION, SurvivorState.SURVIVOR_MOVE_UP));
+                s -> moveSurvivor(s, WORLD_UP_DIRECTION, SurvivorState.SURVIVOR_MOVE_UP));
         movementActions.put(KeyCodes.KEY_S.getKeyCode(),
-                s -> moveSurvivor(s, DOWN_DIRECTION, SurvivorState.SURVIVOR_MOVE_DOWN));
+                s -> moveSurvivor(s, WORLD_DOWN_DIRECTION, SurvivorState.SURVIVOR_MOVE_DOWN));
         movementActions.put(KeyCodes.KEY_A.getKeyCode(),
-                s -> moveSurvivor(s, LEFT_DIRECTION, SurvivorState.SURVIVOR_MOVE_LEFT));
+                s -> moveSurvivor(s, WORLD_LEFT_DIRECTION, SurvivorState.SURVIVOR_MOVE_LEFT));
         movementActions.put(KeyCodes.KEY_D.getKeyCode(),
-                s -> moveSurvivor(s, RIGHT_DIRECTION, SurvivorState.SURVIVOR_MOVE_RIGHT));
+                s -> moveSurvivor(s, WORLD_RIGHT_DIRECTION, SurvivorState.SURVIVOR_MOVE_RIGHT));
         movementActions.put(KeyCodes.NONE.getKeyCode(), s -> {
             s.setVelocity(Pair.of(0d, 0d));
             s.setState(SurvivorState.SURVIVOR_IDLE);
         });
 
         shootingActions.put(KeyCodes.ARROW_UP.getKeyCode(),
-                s -> shootInDirection(s, UP_DIRECTION, SurvivorState.SURVIOR_SHOOT_UP));
+                s -> shootInDirection(s, WORLD_UP_DIRECTION, SurvivorState.SURVIOR_SHOOT_UP));
         shootingActions.put(KeyCodes.ARROW_DOWN.getKeyCode(),
-                s -> shootInDirection(s, DOWN_DIRECTION, SurvivorState.SURVIOR_SHOOT_DOWN));
+                s -> shootInDirection(s, WORLD_DOWN_DIRECTION, SurvivorState.SURVIOR_SHOOT_DOWN));
         shootingActions.put(KeyCodes.ARROW_LEFT.getKeyCode(),
-                s -> shootInDirection(s, LEFT_DIRECTION, SurvivorState.SURVIOR_SHOOT_LEFT));
+                s -> shootInDirection(s, WORLD_LEFT_DIRECTION, SurvivorState.SURVIOR_SHOOT_LEFT));
         shootingActions.put(KeyCodes.ARROW_RIGHT.getKeyCode(),
-                s -> shootInDirection(s, RIGHT_DIRECTION, SurvivorState.SURVIOR_SHOOT_RIGHT));
+                s -> shootInDirection(s, WORLD_RIGHT_DIRECTION, SurvivorState.SURVIOR_SHOOT_RIGHT));
     }
 
     /**
