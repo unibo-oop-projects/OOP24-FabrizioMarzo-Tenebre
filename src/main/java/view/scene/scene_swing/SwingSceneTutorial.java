@@ -1,4 +1,4 @@
-package view.scene;
+package view.scene.scene_swing;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -30,6 +30,7 @@ import view.graphics.graphics_swing.SwingGraphicsZombie;
 import view.graphics_util.Scaler;
 import view.graphics_util.ScalerFactory;
 import view.graphics_util.ScalerFactoryImpl;
+import view.scene.Scene;
 
 /**
  * A Swing-based implementation of a tutorial scene.
