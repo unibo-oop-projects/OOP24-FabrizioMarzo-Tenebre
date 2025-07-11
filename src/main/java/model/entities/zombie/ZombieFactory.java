@@ -33,7 +33,7 @@ public class ZombieFactory implements IZombieFactory {
     @Override
     public Zombie createClickerZombie(final Pair<Double, Double> pos) {
         final int live = 1000;
-        final int attack = 20;
+        final int attack = 5;
         final int width = 90;
         final int height = 230;
         final Pair<Double, Double> vel = Pair.of(100.0, 0.0);

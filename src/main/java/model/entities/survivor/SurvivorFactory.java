@@ -34,7 +34,7 @@ public class SurvivorFactory implements ISurvivorFactory {
      * @return A fully initialized {@link Survivor} instance
      */
     public Survivor createCommonSurvivor(final Pair<Double, Double> pos) {
-        final int live = 1000;
+        final int live = 5000;
         final int width = 90;
         final int height = 185;
         final Pair<Double, Double> vel = Pair.of(200.0, 0.0);
