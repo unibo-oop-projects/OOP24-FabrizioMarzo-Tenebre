@@ -1,26 +1,33 @@
 import game.game_engine.GameEngine;
+import game.game_state.GameStateManager;
 import game.game_state.PlayState;
 
 /**
- * Main class that launches the game.
- * 
- * <p>{@code ArmataTenebre} is the entry point of the game. It creates and
- * initializes a new {@link GameEngine} instance, sets it up, and starts the
- * main game loop.</p>
+ * Entry point for launching the game.
+ * <p>
+ * {@code ArmataTenebre} initializes the game environment by setting up the
+ * {@link GameEngine} and the initial game state ({@link PlayState}),
+ * and then starts the main game loop.
+ * </p>
  */
 public class ArmataTenebre {
-    
+
     /**
-     * Main method that starts the game engine.
-     * 
-     * <p>This method creates an instance of {@link GameEngine}, sets it up,
-     * and then starts the main game loop. It is called when the program is executed.</p>
+     * Launches the game.
+     * <p>
+     * This method creates a {@link GameStateManager}, sets the initial state
+     * to a {@link PlayState}, sets up the {@link GameEngine}, and starts the game loop.
+     * </p>
      *
-     * @param args command-line arguments (not used in this implementation)
+     * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
+        GameStateManager gsm = new GameStateManager();
+        gsm.setState(new PlayState(gsm));
+
         GameEngine engine = new GameEngine();
-        engine.setup(new PlayState());
+        engine.setup(gsm);
+
         engine.mainLoop();
     }
 }
