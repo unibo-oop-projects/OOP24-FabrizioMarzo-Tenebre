@@ -50,6 +50,7 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
                     this.baseAIZombie.updateAINPC(lv.getSurvivorOnLevel(), zombie, lv.getZombieOnLevel());
                     zombie.updatePhysics(dt);
                 });
+        this.checkCollisionZombiesSurvivor(lv);
 
         if (isOutsideLevelBounds(lv)) {
             resetSurvivorToValidPosition(lv);
@@ -157,4 +158,30 @@ public class PhysicsLevelTutComponent implements PhysicsLevelComponent {
 
         zombies.removeIf(Zombie::isZombieDead);
     }
+
+    /**
+     * Checks for collisions between all zombies in the level and the survivor.
+     * <p>
+     * If a zombie collides with the survivor, the survivor takes damage
+     * equal to the value returned by the zombie's {@code attack()} method.
+     * </p>
+     * <p>
+     * This method should be called on every physics update of the level
+     * to properly handle damage to the survivor when in contact with zombies.
+     * </p>
+     *
+     * @param lv the current level containing the survivor and zombies
+     */
+    private void checkCollisionZombiesSurvivor(final Level lv) {
+        var survivor = lv.getSurvivorOnLevel();
+        var zombies = lv.getZombieOnLevel();
+
+        for (Zombie zombie : zombies) {
+            if (zombie.getBBox().isColliding(survivor.getBBox())) {
+                int damage = zombie.attack();
+                survivor.damageSuffer(damage);
+            }
+        }
+    }
+
 }
