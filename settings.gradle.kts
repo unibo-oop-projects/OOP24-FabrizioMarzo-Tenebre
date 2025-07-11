@@ -1,1 +1,1 @@
-rootProject.name = "L'Armata delle Tenebre"
+rootProject.name = "L_Armata_delle_Tenebre"
