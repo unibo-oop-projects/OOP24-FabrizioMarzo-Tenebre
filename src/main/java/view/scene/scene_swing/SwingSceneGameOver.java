@@ -68,9 +68,11 @@ public class SwingSceneGameOver implements Scene {
      */
     private class GameOverPanel extends JPanel implements KeyListener {
 
+        private final JButton exitButton;
+
         /**
-         * Initializes the panel with preferred size, background color,
-         * focus and keyboard listener.
+         * Initializes the panel with size, background, keyboard listener, and exit
+         * button.
          */
         public GameOverPanel() {
             setPreferredSize(new Dimension(width, height));
@@ -78,11 +80,24 @@ public class SwingSceneGameOver implements Scene {
             setFocusable(true);
             addKeyListener(this);
             setFocusTraversalKeysEnabled(false);
+            setLayout(null); // Absolute positioning
+
+            // Create the Exit button
+            exitButton = new JButton("Exit Game");
+            exitButton.setFocusPainted(false);
+            exitButton.setBackground(Color.DARK_GRAY);
+            exitButton.setForeground(Color.WHITE);
+            exitButton.setFont(new Font("Arial", Font.PLAIN, 16));
+            exitButton.setBounds((width - 150) / 2, height - 120, 150, 40); // Centered button
+
+            // Add action listener
+            exitButton.addActionListener(e -> System.exit(0));
+
+            add(exitButton);
         }
 
         /**
-         * Paints the Game Over message and the finish level message
-         * centered horizontally and vertically within the panel.
+         * Paints the Game Over message and finish message.
          *
          * @param g the Graphics context used for drawing
          */
@@ -109,10 +124,7 @@ public class SwingSceneGameOver implements Scene {
         }
 
         /**
-         * Handles key press events.
-         * Exits the application if the ESC key is pressed.
-         *
-         * @param e the KeyEvent triggered by a key press
+         * Exits the application if ESC key is pressed.
          */
         @Override
         public void keyPressed(KeyEvent e) {
@@ -121,24 +133,15 @@ public class SwingSceneGameOver implements Scene {
             }
         }
 
-        /**
-         * Unused but required method from KeyListener interface.
-         *
-         * @param e the KeyEvent triggered by a key release
-         */
         @Override
         public void keyReleased(KeyEvent e) {
             // No action needed
         }
 
-        /**
-         * Unused but required method from KeyListener interface.
-         *
-         * @param e the KeyEvent triggered by a key typed
-         */
         @Override
         public void keyTyped(KeyEvent e) {
             // No action needed
         }
     }
+
 }
