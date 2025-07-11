@@ -134,4 +134,10 @@ public interface Survivor {
      */
     List<Munition> shoot(final double deltaTime);
 
+    /**
+     * Returns whether the survivor is dead (health has reached zero).
+     *
+     * @return {@code true} if the survivor is dead, {@code false} otherwise
+     */
+    boolean isSurvivorDead();
 }

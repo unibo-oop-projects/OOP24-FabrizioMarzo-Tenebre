@@ -33,6 +33,7 @@ public class Common implements Survivor {
     private BoundingBox bbox;
     private PhysicsSurvivorComponent physicComp;
     private Weapon weapon;
+    private boolean isDead;
 
     /**
      * Constructs a new {@code Common} survivor with the specified attributes.
@@ -62,6 +63,7 @@ public class Common implements Survivor {
         this.state = SurvivorState.SURVIVOR_IDLE;
         this.bbox = bbox;
         this.physicComp = physicComp;
+        this.isDead = false;
     }
 
     /**
@@ -72,6 +74,11 @@ public class Common implements Survivor {
     @Override
     public void damageSuffer(final int dm) {
         this.live = Math.max(MIN_HEALTH, this.live - dm);
+
+        if (this.live == 0) {
+            this.isDead = true;
+        }
+
     }
 
     /**
@@ -225,6 +232,14 @@ public class Common implements Survivor {
     @Override
     public List<Munition> shoot(final double deltaTime) {
         return this.weapon != null ? this.weapon.shoot(deltaTime) : List.of();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSurvivorDead() {
+        return this.isDead;
     }
 
     /**
