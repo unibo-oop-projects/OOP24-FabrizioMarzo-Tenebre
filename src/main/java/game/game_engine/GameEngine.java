@@ -1,91 +1,70 @@
 package game.game_engine;
 
-import game.game_state.GameState;
+import game.game_state.GameStateManager;
 
 /**
- * Core game engine responsible for running the main game loop.
- * 
+ * Core engine that runs the main game loop and manages timing.
  * <p>
- * This engine controls the timing of the game updates and rendering,
- * delegating game-specific logic to the provided {@link GameState} instance.
+ * The {@code GameEngine} class is responsible for driving the game by repeatedly
+ * processing input, updating game logic, rendering frames, and enforcing a
+ * consistent frame rate.
+ * </p>
+ * <p>
+ * It relies on a {@link GameStateManager} to delegate game behavior to the current active state.
  * </p>
  */
 public class GameEngine {
 
-    /**
-     * The target period between frames in milliseconds.
-     * For example, a period of 25 ms corresponds to roughly 40 frames per second.
-     */
+    /** Frame duration in milliseconds (default: 25ms ~ 40 FPS). */
     private long period = 25;
 
-    /**
-     * The current game state, containing game logic and rendering.
-     */
-    private GameState gameState;
+    private GameStateManager stateManager;
 
     /**
-     * Initializes the engine with a given game state.
-     * 
-     * @param gameState the game state instance to manage and update
+     * Sets up the engine with the given GameStateManager.
+     *
+     * @param gsm the GameStateManager to be used by the engine
      */
-    public void setup(final GameState gameState) {
-        this.gameState = gameState;
-        this.gameState.setUp();
+    public void setup(final GameStateManager gsm) {
+        this.stateManager = gsm;
     }
 
     /**
-     * Runs the main game loop.
-     * 
+     * Starts and runs the main game loop.
      * <p>
-     * This method repeatedly:
-     * </p>
-     * <ul>
-     * <li>Processes input</li>
-     * <li>Updates the game state based on elapsed time</li>
-     * <li>Renders the game</li>
-     * <li>Waits to maintain a consistent frame rate</li>
-     * </ul>
-     * 
-     * <p>
-     * This loop runs indefinitely until the application is terminated.
+     * This loop continuously processes input, updates game state based on elapsed time,
+     * renders the current frame, and waits to maintain a fixed frame rate.
      * </p>
      */
-
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
+
         while (true) {
             long current = System.currentTimeMillis();
             int elapsed = (int) (current - lastTime);
-            gameState.processInput();
-            gameState.updateGame(elapsed);
-            gameState.render();
+
+            stateManager.processInput();
+            stateManager.updateGame(elapsed);
+            stateManager.render();
+
             waitForNextFrame(current);
             lastTime = current;
         }
     }
 
     /**
-     * Pauses the current thread to maintain the target frame period.
-     * 
-     * <p>
-     * This method calculates how much time has passed since the
-     * given timestamp and sleeps the thread for the remaining time
-     * needed to complete the target period.
-     * </p>
-     * 
-     * @param current the timestamp (in milliseconds) when the frame processing
-     *                started
+     * Sleeps the thread if needed to maintain the frame rate based on {@code period}.
+     *
+     * @param current the timestamp of the current frame in milliseconds
      */
-
     protected void waitForNextFrame(final long current) {
         long dt = System.currentTimeMillis() - current;
         if (dt < period) {
             try {
                 Thread.sleep(period - dt);
-            } catch (Exception e) {
-                e.fillInStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // You may want to handle this more gracefully
             }
         }
     }
-
 }
