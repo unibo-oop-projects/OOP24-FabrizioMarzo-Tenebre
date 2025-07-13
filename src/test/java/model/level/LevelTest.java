@@ -3,18 +3,14 @@ package model.level;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.bounding_box.BoundingBox;
 import model.bounding_box.RectBoundingBox;
-import model.entities.survivor.Survivor;
 import model.entities.zombie.Zombie;
-import model.level.types.LevelFactory;
 import model.level.types.LevelTutorial;
-import model.level.manager.LevelManagerBase;
 import model.level.types.Level;
 
 import model.physics.physics_level.PhysicsLevelComponent;

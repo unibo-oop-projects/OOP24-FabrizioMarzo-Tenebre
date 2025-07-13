@@ -3,16 +3,12 @@ package model.entities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import org.mockito.Mockito;
 import org.apache.commons.lang3.tuple.Pair;
 
-import model.bounding_box.BoundingBox;
 import model.entities.zombie.IZombieFactory;
 import model.entities.zombie.Zombie;
 import model.entities.zombie.ZombieFactory;
 import model.entities.zombie.ZombieState;
-import model.physics.physics_entities.PhysicsZombieComponent;
 
 public class ZombieTest {
     private Zombie clicker;
