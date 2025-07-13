@@ -6,17 +6,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import model.armory.charger.FactoryCharger;
 
 /**
- * Factory for creating weapon instances.
+ * {@inheritDoc}
  */
 public class FactoryWeapon {
 
     private FactoryCharger factCharge = new FactoryCharger();
 
     /**
-     * Creates a pistol weapon at the specified position.
-     * 
-     * @param posWeapon the initial position of the pistol
-     * @return a new Pistol instance
+     * {@inheritDoc}
      */
     public Weapon createPistol(final Pair<Double, Double> posWeapon) {
         final double cooldownMillis = 450;
