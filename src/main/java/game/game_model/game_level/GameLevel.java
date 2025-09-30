@@ -8,9 +8,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import game.game_model.game_armory.FactoryMunitionGame;
+import game.game_model.game_armory.IFactoryMunitionGame;
 import game.game_model.game_armory.IGameMunition;
+import game.game_model.game_entities.IFactorySurvivorGame;
 import game.game_model.game_entities.FactorySurvivorGame;
 import game.game_model.game_entities.FactoryZombieGame;
+import game.game_model.game_entities.IFactoryZombieGame;
 import game.game_model.game_entities.IGameSurvivor;
 import game.game_model.game_entities.IGameZombie;
 import model.armory.munition.Munition;
@@ -36,9 +39,9 @@ public class GameLevel implements IGameLevel {
     private Level lvl;
     private GraphicsLevelComponent imgLvl;
 
-    private FactorySurvivorGame factSurGam = new FactorySurvivorGame();
-    private FactoryZombieGame factZobGam = new FactoryZombieGame();
-    private FactoryMunitionGame factMunGam = new FactoryMunitionGame();
+    private IFactorySurvivorGame factSurGam;
+    private IFactoryZombieGame factZobGam;
+    private IFactoryMunitionGame factMunGam;
 
     private final Map<Zombie, IGameZombie> gameZombieMap = new LinkedHashMap<>();
     private final Map<Munition, IGameMunition> gameMunitionMap = new LinkedHashMap<>();
@@ -55,6 +58,9 @@ public class GameLevel implements IGameLevel {
     public GameLevel(final Level lvl, final GraphicsLevelComponent imgLvl) {
         this.lvl = lvl;
         this.imgLvl = imgLvl;
+        this.factSurGam = new FactorySurvivorGame();
+        this.factZobGam = new FactoryZombieGame();
+        this.factMunGam = new FactoryMunitionGame();
         this.gamSur = setGameSurvivor();
         this.syncGameZombies();
     }
