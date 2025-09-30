@@ -3,7 +3,6 @@ package game.game_model.game_entities;
 import model.entities.zombie.Zombie;
 
 /**
- * Factory class responsible for creating instances of {@link IGameZombie}.
  * <p>
  * Provides methods to create different types of game zombies with
  * their associated graphics.

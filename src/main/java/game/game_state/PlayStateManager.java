@@ -2,7 +2,9 @@ package game.game_state;
 
 import java.util.Optional;
 
+import game.game_model.game_level.IFactoryLevelGame;
 import game.game_model.game_level.FactoryLevelGame;
+
 import game.game_model.game_level.IGameLevel;
 import model.level.types.LevelType;
 
@@ -15,7 +17,7 @@ import model.level.types.LevelType;
  */
 public class PlayStateManager {
     private LevelType currentLevel;
-    private final FactoryLevelGame lvlFactoryGame;
+    private final IFactoryLevelGame lvlFactoryGame;
 
     /**
      * Constructs a new PlayStateManager with the initial level set to

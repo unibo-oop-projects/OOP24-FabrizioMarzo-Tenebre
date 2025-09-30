@@ -3,7 +3,6 @@ package game.game_model.game_entities;
 import model.entities.survivor.Survivor;
 
 /**
- * Factory class responsible for creating instances of {@link IGameSurvivor}.
  * <p>
  * Provides methods to create different types of game survivors with
  * their associated graphics and input components.
