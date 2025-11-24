@@ -4,20 +4,12 @@ import model.armory.munition.Munition;
 import view.graphics_component.armory.GraphicsParabellumComponent;
 
 /**
- * Factory class responsible for creating {@link IGameMunition} instances.
- * <p>
- * This factory produces game munition objects configured with appropriate
- * graphics components.
- * </p>
+ * {@inheritDoc}
  */
-public class FactoryMunitionGame {
+public class FactoryMunitionGame implements IFactoryMunitionGame {
 
     /**
-     * Creates a new {@link IGameMunition} instance for the given munition.
-     *
-     * @param munition the underlying {@link Munition} model to wrap
-     * @return a new {@link IGameMunition} configured with the appropriate graphics
-     *         component
+     * {@inheritDoc}
      */
     public IGameMunition gameMunition(final Munition munition) {
         return new GameMunition(munition,
